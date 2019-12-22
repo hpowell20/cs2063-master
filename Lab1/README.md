@@ -26,6 +26,7 @@ In order to get full marks for each lab you must:
 * → Start a new Android Studio Project
 * → Set Application name: _Lab 1 Hello World_
 * → Company Domain: _ca.unb.mobiledev_
+* → Ensure that the Language is set to Java
 * → Click Next
 
 Please take note of the Minimum SDK (Software Development Kit). This will be the SDK for which your apps will be compiled against. Android Studio will use this information to provide accurate auto-complete as well as provide warnings when your code is not appropriately targeting the set minimum SDK.
@@ -136,9 +137,7 @@ More information about the project structure can be found at [https://developer.
 
 ###### 7a. manifests directory
 
-This directory contains the AndroidManifest.xml file. This file contains information that pertains to how your application should run, what activities within your project it depends on, and of those which is to run when the application is first launched, as well as any device/account access permissions users must agree to before being able to download your application if placed on the Google Play Store.
-
-Additional AndroidManifest.xml information: [https://developer.android.com/guide/topics/manifest/manifest-intro.html](https://developer.android.com/guide/topics/manifest/manifest-intro.html)
+The _manifests_ directory contains the AndroidManifest.xml file which contains among other items information about the package name and components included in the app.  Additional information can be found at [https://developer.android.com/guide/topics/manifest/manifest-intro.html](https://developer.android.com/guide/topics/manifest/manifest-intro.html)
 
 **Deliverable 2** The application theme is also described in this AndroidManifest file; provide the attribute tag that describes this.
 
