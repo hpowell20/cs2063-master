@@ -180,7 +180,7 @@ Explore http://developer.android.com/guide/topics/ui/declaring-layout.html.
 
 **Deliverable 4** What are the three common layout types? Why is it important to define IDs for view objects, especially when using RelativeLayout?
 
-The mipmap directory contains icons used for launch deck icons for the application. Note how multiple files are supplied; this is to target devices with differing levels of pixel density screens.
+The mipmap directory contains icons used for launch deck icons for the application.  Note how multiple files are supplied; this is to target devices with differing levels of pixel density screens.
 
 Under the values directory there first is a colors.xml. Initially this file contains the ```Primary```, ```Primary Dark```, and ```Accent``` colors for your application. These are used to simply create a cohesive color scheme experience across the application by allowing the Android OS to allow existing Android View Object components to rely on these three initial colors for coloring common application components (```TaskBars```, etc.).
 
@@ -200,8 +200,7 @@ Now that we’re familiar with the strings.xml resource file, let’s take a loo
 
 Right click the app/src/main/res directory and select New → Android resource directory. Set the directory name to values-es. Repeat the same process and set the directory name to values-fr.
 
-Now right-click each of these folders and create a New → Values resource file and call each strings.xml.
-In the values-es/strings.xml file, add the following:
+Now right-click each of these folders and create a New → Values resource file and call each strings.xml.  In the values-es/strings.xml file, add the following:
 
 ```xml
 
