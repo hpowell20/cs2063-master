@@ -26,19 +26,18 @@ Have fun!
 
 ## Help
 
-[SoundPool]: http://developer.android.com/reference/android/media/SoundPool.html
+[SoundPool](http://developer.android.com/reference/android/media/SoundPool.html)
 Also see the ```SoundPool``` example in the course GitHub repository.
 
-[MotionEvent]: http://developer.android.com/reference/android/view/MotionEvent.html
+[MotionEvent](http://developer.android.com/reference/android/view/MotionEvent.html)
 
-See the ```GestureDetector``` examples here:
-http://developer.android.com/training/gestures/detector.html and in the course GitHub repository for how to delegate ```MotionEvent```s.
+See the ```GestureDetector``` examples [here](http://developer.android.com/training/gestures/detector.html) and in the course GitHub repository for how to delegate ```MotionEvent```s.
 
-See https://docs.oracle.com/javase/6/docs/api/java/util/Random.html for information on generating random numbers in Java.
+See the [Random](https://docs.oracle.com/javase/6/docs/api/java/util/Random.html) API details for information on generating random numbers in Java.
 
-[BitMap]:http://developer.android.com/reference/android/graphics/Bitmap.html (including how to create a scaled ```Bitmap```)
+[BitMap](http://developer.android.com/reference/android/graphics/Bitmap.html) - including how to create a scaled ```Bitmap```
 
-[Canvas]: http://developer.android.com/reference/android/graphics/Canvas.html
+[Canvas](http://developer.android.com/reference/android/graphics/Canvas.html)
 
 
 ## Deliverable
