@@ -1,54 +1,49 @@
-# Lab 5 - Scrolling lists
+# Lab 4 - AsyncTask
 
-## Pre-lab reading
+In lecture we've seen the importance of moving long-running operations off of the UI thread and into a worker thread. In this lab you will implement (portions of) this functionality using an ```AsyncTask```.
 
-If you haven't yet done so, read the following documentation on
-`RecyclerView`. This lab assumes you have read it.
+Start by downloading the skeleton code for the lab.  This app uses the master/detail flow (MDF) pattern, which we briefly saw in lecture 2. This app is similar in structure to an app created using the default MDF template available through Android Studio (and similar to the MDFDemo in the Examples directory). It presents a list of recent earthquakes downloaded from the United States Geological
+Survey.  Selecting an earthquake presents further details about it. On a small device, this is a separate activity; on a larger device, the details are presented alongside the scrolling list.
 
-https://developer.android.com/training/material/lists-cards.html (only
-the section "Create Lists")
-
-https://developer.android.com/guide/topics/ui/layout/recyclerview.html
-
-## Introduction
-
-Many mobile applications need to display a scrollable list of items, where the user can select an item to take some action specific to it. In this lab you will build an app that displays a scrolling list of UNB CS courses (including course numbers, titles and credit hours). Selecting a course from the list of courses in the main activity takes the user to a detail activity showing the description for the selected course. Here are screenshots of the app to show how it works. (Yes, the course information we're using in this lab is a bit out of date...)
-
-![Main Activity](https://i.imgur.com/8vQZmXf.png?1)
-
-![Detail Activity](https://i.imgur.com/qaqnSXb.png?1)
-
-There are two common ways to display a scrolling list of items in Android, a
-[`ListView`](https://developer.android.com/guide/topics/ui/layout/listview.html)
-and a [`RecyclerView`](https://developer.android.com/guide/topics/ui/layout/recyclerview.html). The `RecyclerView` offers greater flexibility, so we'll use it today.
-
-Start by importing the Lab's skeleton project.
+This [website](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php) describes a variety of [JSON](http://www.json.org/) feeds that provide information about recent earthquakes. We will use data from the feed that provides information about [all earthquakes in the past day](https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson).
 
 ## Understanding the skeleton code
 
-Note that there are four Java classes:
+The MDF pattern employs multiple default layout files to make the UI
+adapt to different screen sizes and orientations:
 
-* `Course` represents a course (!). It provides methods to get the course title and description.
+* activity_geodata_detail.xml
+* activity_geodata_list.xml
+* geodata_detail.xml
+* geodata_list.xml
+  * geodata_list.xml
+  * geodata_list.xml (w900dp)
+* geodata_list_content.xml
 
-* `DataModel` accesses a ```JSON``` asset file included in the project (in ```assets/CS.json```). This ```JSON``` file contains information about Computer Science courses available at UNB. The ```DataModel``` class processes the ```JSON``` to create ```Course``` items. Note in particular the ```DataModel``` constructor and the argument it takes, and the ```DataModel.getCourses()``` method.
 
-* `DetailActivity` will correspond to the second screenshot above, displaying information about a specific course. It doesn't do much yet. You will complete it during the lab.
+The best way to get your bearings in an existing project file is to navigate to the ```AndroidManifest.xml``` and determine which ```Activity``` (represented by your Java source code files) contains the ```<intent-filter>``` signifying it’s the ```MAIN``` ```Activity```. This ```Activity``` will be identified by the ```android:name``` field.  You can navigate to this Java file and see which layout file it instantiates using ```setContentView()```; this will be the first screen users are presented with when this application is run. Navigate to the layout file being utilized by ```setContentView()``` in your ```MAIN``` ```Activity```.
 
-* `MainActivity` presents the scrolling list of courses using a `RecyclerView`. It contains an inner class `MyAdapter` that extends `RecyclerView.Adapter`. The `RecyclerView.Adapter` class provides a layer of abstraction between the `RecyclerView`'s `LayoutManager` and the underlying data that is being displayed, in this case a list of `Course` objects. `MyAdapter` itself contains an inner class, `ViewHolder` which represents an individual item to display in the scrolling list. `onCreateViewHolder` creates `ViewHolder` objects by inflating the corresponding XML layout resource file; it's already implemented for you. `onBindViewHolder` will be called when a particular item in the dataset needs to be displayed in the scrolling list, i.e., the user has scrolled and a new item comes into view. This method sets up the `ViewHolder` to display the corresponding item in the dataset. It is incomplete. You will finish it below.
+Take a look at this and other layout files in both the Text and Design editors.  Recall that fragments must be hosted by an ```Activity```; here those ```Activity``` layouts are represented by ```activity_geodata_detail.xml``` and ```activity_geodata_list.xml```.
 
-Now take note of the layout files. `activity_detail.xml` and `activity_main.xml` are layouts for `ActivityDetail` and `ActivityMain`, respectively. (You can verify this by looking at the calls these classes make to `setContentView()`.) `activity_main.xml` includes a `RecyclerView`. Its `LayoutManager` has been set to a `LinearLayoutManager` to give a list of items (as opposed to, for example, a `GridLayoutManager` which would present the items in a grid).
+Investigating ```activity_geodata_list.xml``` we can see it contains ```framelayout``` which includes the layout ```geodata_list```(.xml). Given there are two ```geodata_list.xml``` files, the Android operating system must decide which layout to present. It does this based on screen size (which can be affected by orientation). Here, the layout file containing ```w900dp``` will be the one used for tablets in landscape mode, allowing both the list of earthquakes and the details of the selected earthquake to be displayed simultaneously side-by-side. The layout file without a screen size modifier is the one that will be used for phones.
 
-`item_layout.xml` will be used to display each item in the scrolling list in `ActivityMain`. It contains just a single `TextView`.
+Take a look at the phone ```geodata_list.xml``` layout. Inside it we see a single UI element, a ```RecyclerView```. The ```RecyclerView``` will be used as a scrolling list of earthquakes that, once selected, will present a detailed description about that particular earthquake. Now examine the other ```geodata_list.xml``` file. It contains a ```RecyclerView``` and a ```FrameLayout``` (with id ```geodata_detail_container```) that will be programmatically set to contain a ```Fragment``` representing earthquake details.
 
-## Implementation
+Going back to the ```GeoDataListActivity``` Java file we'll now explore how fragments get managed based on what screen size we are running on. Notice that ```GeoDataListActivity``` has a private boolean variable ```mTwoPane```. This member variable represents whether we are running on a screen size appropriate for displaying both the earthquake list and earthquake details simultaneously. If
+this variable is not ```true```, we assume we are running on a smaller screen device such as a phone and the Android OS will deliver the layout necessary to fit that screen size. If the variable is ```true``` the Android OS will deliver the layout details necessary to put that user experience into effect.
 
-Complete the TODOs in `MainActivity`
+The ```GeoDataListActivity``` class ```onCreate()``` method will instantiate the ```MAIN``` ```Activity```, provide it the described layout in ```setContentView()```, and handle managing ```Fragment``` attachments. Because we are designing our application for a positive user experience on both phone and tablet, there are some important details regarding how this is accomplished. First, notice we instantiate a ```FragmentManager```. This manager will control which fragments are active in the application based on the logic we provide
+(in this case, the logic implemented by the MDF template).
 
-Then complete the TODOs in `DetailActivity`. I've included some hints below.
+This template checks if the ```geodata_detail_container```, which is a ```NestedScrollView``` UI element in the ```activity_geodata_detail.xml```, is ```null```. If the ```geodata_detail_container``` is ```null```, we are in single pane layout (i.e., a phone or tablet in portrait mode); if the ```geodata_detail_container``` is not ```null```, we are in a dual pane layout (i.e., a tablet in landscape mode) utilizing fragments.
 
-**TODO 3:** On a smaller device, or for a very long course description, all of the text won't fit on the screen, so we need to be able to scroll the text. There are a variety of ways to make a `TextView` scrollable. Try to independently figure out how to do this. (Google is your friend and has the answer!) If you get stuck, let the instructor or TA know, and we'll try to point you in the right direction.
+## Todo
 
-**TODO 4:** The `ActionBar` corresponds to the text at the top of the detail activity in the screen shot above (i.e., "CS2063 Introduction to M..."). This might help you: [```getSupportActionBar()```](http://developer.android.com/reference/android/support/v7/app/AppCompatActivity.html#getSupportActionBar%28%29)
+Complete the TODOs in ```GeoDataListActivity``` and ```DataModel```.
+
+Make sure your app behaves as expected with and without a network connection. Make sure the floating action button (pink button in the bottom right corner) still works while the data is refreshing.
+
+If testing on a phone, it will be difficult to test that your app displays the tablet landscape view correctly (i.e., the list of earthquakes and selected earthquake details side-by-side). To see this behavior, add a third layout resource file for ```geodata_list``` corresponding to landscape layout. Make its contents the same as ```geodata_list.xml (w900dp)```.
 
 
 ## Deliverable
