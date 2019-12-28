@@ -1,15 +1,13 @@
 # Lab 6 - Broadcast Receivers
 
-Start by familiarizing yourself with the following documentation which
-you will be using during this lab:
+Start by familiarizing yourself with the following documentation which you will be using during this lab:
 
 [Notifications](https://web.archive.org/web/20160303170900/https://developer.android.com/guide/topics/ui/notifiers/notifications.html)
 * Read through the _*Creating a simple notification*_ section which should be sufficient for this lab
 * Please note this is an older version of this documentation
 * Android has introduced the concept of a ```NotificationChannel``` which will discuss in further detail in a later lecture and will not be used in this lab
 
-[Alarms](http://developer.android.com/training/scheduling/alarms.html)
-Up to the end of Cancel an Alarm
+[Alarms](http://developer.android.com/training/scheduling/alarms.html) - Up to the end of Cancel an Alarm
 
 [Monitoring battery state](http://developer.android.com/training/monitoring-device-state/battery-monitoring.html)
 
