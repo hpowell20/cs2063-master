@@ -1,5 +1,14 @@
 # Lab 7 - SQLite Database Storage
 
+## Pair Programming
+
+For the remainder of the labs we will complete the assignments using pair programming.  Additional details can be found at [Pair Programming](../docs/PAIR_PROGRAMMING.md).  For this activity you will need to work in pairs. You can work with anybody of your choosing, however, to obtain the most benefit from the activity it is recommended you work with someone other than your partner for the course project.  This is not a requirement and will not be strictly enforced.
+
+**To receive credit for this lab you must pair program.**
+
+**Switch between the roles of navigator and driver every 10 to 15
+minutes.**
+
 ## Introduction
 
 In this lab you will build a simple app that uses an [SQLite database](https://www.sqlite.org/).
@@ -32,7 +41,7 @@ https://github.com/cpaulcook/cs2063LabsWinter2018/tree/master/Examples/DBDemo
 
 Read the skeleton code and make sure you understand what it's doing.
 
-Complete the TODOs.
+Complete the TODOs **by pair programming**.
 
 ## Deliverables
 

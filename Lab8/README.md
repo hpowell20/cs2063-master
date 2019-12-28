@@ -1,5 +1,15 @@
 # Lab 8
 
+## Pair Programming
+
+We will again be doing pair programming for this lab.  Details on pair programming can be found at [Pair Programming](../docs/PAIR_PROGRAMMING.md).  You can again work with anybody of your choosing.
+
+**To receive credit for this lab you must pair program.**
+
+**Switch between the roles of navigator and driver every 10 to 15
+minutes.**
+
+## Introduction
 In lecture we've seen how to detect gestures, create animations, and play sounds. In this lab we'll put these pieces together to create a game-like app.
 
 The "game" begins with a blank screen.  Tapping on the screen will create a bubble at that location.  The bubble will have a random size, rotation, and direction of movement.  Tapping on a bubble will pop it and play a popping sound.  Starting a fling gesture on a bubble will fling that bubble off the screen, at a velocity determined by the fling gesture.  If left alone, a bubble will eventually move off the screen.  A counter at the bottom of the screen keeps track of the
@@ -7,20 +17,13 @@ number of bubbles on the screen.
 
 If you'd like to see the app in action, a sample solution has been installed on the tablet that the instructor has in the lab. Try it out!
 
-## Pair Programming
-
-Details on pair programming can be found at [Pair Programming](../docs/PAIR_PROGRAMMING.md)
-
-**To receive credit for this lab you must pair program.**
-
-Mohammed Seyam and D. Scott McCrickard. 2016. Teaching Mobile Application Development with Pair Programming. In *Proceedings of the 47th ACM Technical Symposium on Computer Science Education (SIGCSE 2016)*, pages 96-101. Memphis, USA.
 
 ## Todo
 
 Examine the code to get an understanding of what's already implemented. You don't need to understand every line, but should understand the overall structure of the app.
 This lab requires you to learn independently and read lots of documentation. The help section below gives you some pointers. Ask questions if you get stuck!
 
-Complete the TODOs in ```BubbleActivity``` by pair programming.
+Complete the TODOs in ```BubbleActivity``` **by pair programming**.
 
 Have fun!
 

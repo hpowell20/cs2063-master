@@ -2,7 +2,7 @@
 
 ## Pair Programming
 
-We will again be doing pair programming for this lab.  See details on pair programming can be found at [Pair Programming](../docs/PAIR_PROGRAMMING.md).  You can again work with anybody of your choosing.
+We will again be doing pair programming for this lab.  Details on pair programming can be found at [Pair Programming](../docs/PAIR_PROGRAMMING.md).  You can again work with anybody of your choosing.
 
 **To receive credit for this lab you must pair program.**
 
