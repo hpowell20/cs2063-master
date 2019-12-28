@@ -1,59 +1,45 @@
-# Lab 1
-The purpose of this lab is to introduce the Android Studio IDE and Android project structure through the creation of a simple _Hello World!_ application which can be run on emulated or simulated devices.
+# Introduction to Android Studio
+This lab will introduce the Android Studio IDE and Android project structure through the creation of a simple 'Hello World!' application that will run on emulated or physical devices.
 
-#### Lab Marking
+#### Lab marking
 
-In order to get full marks for each lab you must:
-1. Attend the lab and work on the lab during the lab time
-2. Show all deliverables to the instructor or TA preferably before the end of lab or while the instructor is taking attendance at the start of the next lab
+In order to get full marks for each lab you must 1.) attend the lab and work on the lab during the lab time, and 2.) show all deliverables to the instructor or TA before the end of lab (preferably), or while the instructor is taking attendance at the start of the next lab.
+
 
 #### Objectives
-
-* Familiarize yourself with IDE navigation
+* Familiarize IDE navigation
 * Introduce running apps on physical and emulated devices
-* Introduce the layout editor
+* Introduce layout editor
 * Project structure breakdown and highlights
 * Console log for debugging
 
 #### Procedure
-
 ###### 1. Open Android Studio
-
-* Due to technical limitations with the lab computers Android Studio is available through a Windows VM
-* → Log in to Linux, then choose
-  Applications → FCS VMs → Android Developer Studio VM
-* → Open AndroidStudio
+* On the lab computers Android Studio is available under Linux, in a Windows VM (this is frustrating, and due to some technical limitations of Android Studio) Log in to Linux, then choose Applications → FCS VMs → Android Developer Studio VM, and then open AndroidStudio
 * → Start a new Android Studio Project
-* → Set Application name: _Lab 1 Hello World_
-* → Company Domain: _ca.unb.mobiledev_
-* → Ensure that the Language is set to Java
-* → Click Next
+* → Set Application name: Lab 1 Hello World
+* → Company Domain: ca.unb.mobiledev, click Next
 
-Please take note of the Minimum SDK (Software Development Kit). This will be the SDK for which your apps will be compiled against. Android Studio will use this information to provide accurate auto-complete as well as provide warnings when your code is not appropriately targeting the set minimum SDK.
+Take note of the Minimum SDK (Software Development Kit). This will be the SDK for which your apps will be compiled against. Android Studio will use this information to provide accurate auto-complete as well as provide warnings when your code is not appropriately targeting the set minimum SDK.
 
-While you should target the most current version of the SDK, setting a minimum SDK allows you to get backward compatibility with devices running older versions, allowing your application to run on a larger percentage of devices.
+While you should target the most current version of the SDK setting a minimum SDK allows you to get backwards compatibility with devices running older versions.  This allows for your application to run on a larger percentage of devices.
 * → Select Basic Activity, click Next
 
 ###### 2. Customize the Activity
-
-Take note of the default values on this screen.
-1. Your _MainActivity_ will be the first activity to run when your application is launched
-2. The **Layout Name**: field is the name associated with this main activity’s layout style
-3. The **activity_main.xml** file will describe _how_ the activity should look in terms of global design; toolbars, floating icons, dropdowns, etc.
-4. The layout file **content_main.xml (not shown in the defaults)** will provide components specific to the needs of this activity; TextViews, EditText, Buttons, etc.
-   * This idea will be built upon in the project structure breakdown
+Take note of the default values on this screen. Your MainActivity will
+be the first activity to run when your application is launched. The
+**Layout Name**: field is the name associated with this main
+activity’s layout style. This **activity_main.xml** file will describe
+_how_ the activity should look in terms of global design; toolbars, floating icons, dropdowns, etc. Another layout file, content_main.xml (not shown in the defaults), will provide components specific to the needs of this activity; TextViews, EditText, Buttons, etc. This idea will be expounded on in the project structure breakdown.
 
 * → Click Finish
 
-###### 3. Hello World!
-
-At this stage the editor should open to a graphical user interface containing a drag and drop layout editor. On this window you can view your application name with _Lab 1 Hello World_ appearing across the ActionBar/Toolbar.
-* Also note a generic ‘Hello world!’ statement within the application body.
+###### 3. Hello world!
+Your application will open to a graphical user interface containing a drag-n-drop layout editor. On this window you can view your application name, Lab 1 Hello World appearing across the ActionBar/Toolbar. Also note a generic ‘Hello world!’ statement within the application body.
 
 
 ###### 4. Running From Device
-
-_Unlocking Developer Mode for Device_
+_Unlocking Developer Mode for Device:_
 
 Navigate to your device Settings menu, find About Device,  locate the Build number and click it 7 times. You will receive notice that dev mode has been unlocked. Navigate back one menu to About Device; access the new Developer options menu and turn on USB debugging.
 
@@ -137,7 +123,9 @@ More information about the project structure can be found at [https://developer.
 
 ###### 7a. manifests directory
 
-The _manifests_ directory contains the AndroidManifest.xml file which contains among other items information about the package name and components included in the app.  Additional information can be found at [https://developer.android.com/guide/topics/manifest/manifest-intro.html](https://developer.android.com/guide/topics/manifest/manifest-intro.html)
+This directory contains the AndroidManifest.xml file. This file contains information that pertains to how your application should run, what activities within your project it depends on, and of those which is to run when the application is first launched, as well as any device/account access permissions users must agree to before being able to download your application if placed on the Google Play Store.
+
+Additional AndroidManifest.xml information: [https://developer.android.com/guide/topics/manifest/manifest-intro.html](https://developer.android.com/guide/topics/manifest/manifest-intro.html)
 
 **Deliverable 2** The application theme is also described in this AndroidManifest file; provide the attribute tag that describes this.
 
@@ -180,7 +168,7 @@ Explore http://developer.android.com/guide/topics/ui/declaring-layout.html.
 
 **Deliverable 4** What are the three common layout types? Why is it important to define IDs for view objects, especially when using RelativeLayout?
 
-The mipmap directory contains icons used for launch deck icons for the application.  Note how multiple files are supplied; this is to target devices with differing levels of pixel density screens.
+The mipmap directory contains icons used for launch deck icons for the application. Note how multiple files are supplied; this is to target devices with differing levels of pixel density screens.
 
 Under the values directory there first is a colors.xml. Initially this file contains the ```Primary```, ```Primary Dark```, and ```Accent``` colors for your application. These are used to simply create a cohesive color scheme experience across the application by allowing the Android OS to allow existing Android View Object components to rely on these three initial colors for coloring common application components (```TaskBars```, etc.).
 
@@ -200,7 +188,8 @@ Now that we’re familiar with the strings.xml resource file, let’s take a loo
 
 Right click the app/src/main/res directory and select New → Android resource directory. Set the directory name to values-es. Repeat the same process and set the directory name to values-fr.
 
-Now right-click each of these folders and create a New → Values resource file and call each strings.xml.  In the values-es/strings.xml file, add the following:
+Now right-click each of these folders and create a New → Values resource file and call each strings.xml.
+In the values-es/strings.xml file, add the following:
 
 ```xml
 
