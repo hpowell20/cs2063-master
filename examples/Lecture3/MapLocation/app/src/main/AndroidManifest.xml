@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="course.examples.maplocation"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    package="course.examples.maplocation">
 
     <application
         android:allowBackup="false"
-        android:icon="@drawable/ic_launcher"
-        android:label="MapLocation" >
-        <activity android:name="course.examples.maplocation.MapLocation" >
+        android:icon="@mipmap/ic_launcher"
+        android:label="MapLocation"
+        android:theme="@style/MaterialTheme">
+
+        <activity android:name="course.examples.maplocation.MapLocation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
