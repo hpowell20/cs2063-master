@@ -8,15 +8,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/highscore_string"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:textColor="@color/primary_text"/>
 
     <TextView
         android:id="@+id/high_score_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/high_score_label"
-        android:layout_toRightOf="@id/high_score_label"
-        android:textSize="24sp" />
+        android:layout_toEndOf="@id/high_score_label"
+        android:textSize="24sp"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:textColor="@color/primary_text"/>
 
     <TextView
         android:id="@+id/game_score_text"
@@ -24,7 +28,9 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center"
-        android:textSize="50sp" />
+        android:textSize="50sp"
+        android:textAppearance="@android:style/TextAppearance.Material.Display1"
+        android:textColor="@color/primary_text"/>
 
     <Button
         android:id="@+id/reset_button"
@@ -33,7 +39,9 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:padding="20dp"
-        android:text="@string/reset_string" >
+        android:text="@string/reset_string"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:textColor="@android:color/white">
     </Button>
 
     <Button
@@ -42,7 +50,9 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/reset_button"
         android:padding="20dp"
-        android:text="@string/play_string" >
+        android:text="@string/play_string"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:textColor="@android:color/white">
     </Button>
 
 </RelativeLayout>
