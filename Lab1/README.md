@@ -21,7 +21,7 @@ Access to Android Studio in the lab environment is through a Virtual Machine
 
 ###### 2. Create a new project
 
-* → Select the _Start a new a new Android Studio Project_ option
+* → Select the _Start a new Android Studio Project_ option
 * → Select Basic Activity and click **Next**
 * → For the project details add the following:
 	* Name: Lab 1 Hello World
