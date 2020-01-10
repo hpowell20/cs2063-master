@@ -1,10 +1,10 @@
 # Lab 2
-Today’s lab will introduce the Android Activity Lifecycle by way of demonstrating how to create and interact with multiple Activities. We will also demonstrate lifecycle methods and how they relate to volatile device configurations such as screen rotation.
+Today’s lab will introduce the Android Activity Lifecycle by demonstrating how to create and interact with multiple Activities.  We will also demonstrate the lifecycle methods and how they relate to volatile device configurations such as screen rotation.
 
 #### Pre-Lab
-Make sure you are familiar with the following section of the Android
+* Make sure you are familiar with the following section of the Android
 developer documentation:
-* https://developer.android.com/guide/components/activities/activity-lifecycle.html
+	* https://developer.android.com/guide/components/activities/activity-lifecycle.html
 
 #### Objectives
 * Interact with ```Activity``` Layout Resources programmatically
@@ -12,24 +12,41 @@ developer documentation:
 * The Android Lifecycle methods
 * Intents, and how to start new activities programmatically
 
-When an Android application provides more than one functionality, for instance adding contact information rather than just selecting an existing contact from a list, the applications are composed of multiple activities each serving their specific duty. This is a design decision by the Android engineering team and it dictates how applications are expected to generally behave in the Android OS.   
+#### Activities Overview
+When an Android application provides more than one functionality (for instance adding contact information rather than just selecting an existing contact from a list) the applications are composed of multiple activities each serving their specific duty.
 
-Each ```Activity``` serves one major function. This modularity ensures a more maintainable codebase as well as the ability for applications to interact with individual activities accessible from other applications on the device. Given the dynamic nature of device configurations, activities must be able to respond quickly to a user’s ability to change screen orientation; keyboard layout; language display; and supply correct input to fields within the application that is currently undergoing these changes.
+This is a design decision by the Android engineering team and it dictates how applications are expected to generally behave in the Android OS.   
+
+Each ```Activity``` serves one major function. This modularity ensures a more maintainable codebase as well as the ability for applications to interact with individual activities accessible from other applications on the device.
+
+Given the dynamic nature of device configurations activities must be able to respond quickly to a user’s ability to change screen orientation, keyboard layout, language display, etc. and supply correct input to fields within the application that is currently undergoing these changes.
 
 #### Example
-An email application may have one ```Activity``` to navigate a list of user emails, another ```Activity``` for reading a particular email, and another ```Activity``` for responding to an email. Each ```Activity``` will have sub-functionality that serves to achieve some goal central to that particular ```Activity```.
+An email application may have one ```Activity``` to navigate a list of user emails, another ```Activity``` for reading a particular email, and another ```Activity``` for responding to an email.  Each ```Activity``` will have sub-functionality that serves to achieve some goal central to that particular ```Activity```.
 
-For instance, in the read email ```Activity``` a user may be able to delete, archive, or choose to respond to an email.  These sub-functionalities may in turn  initiate other activities that deliver functionality fit for accomplishing the next goal of the application based on the user's choice. If the user decided to respond to an email, the application would start the ```Activity``` the developer has decided should serve that function to the user. The activity would begin, its layout and state would be loaded, the user would craft their email, hit send, and they'd be returned to, say, their email list, or to read the next email from the list, depending how the developer decided to implement return from sending email behavior.
+* For instance, in the read email ```Activity``` a user may be able to delete, archive, or choose to respond to an email
+* These sub-functionalities may in turn  initiate other activities that deliver functionality fit for accomplishing the next goal of the application based on the user's choice
+* If the user decided to respond to an email, the application would start the ```Activity``` the developer has decided should serve that function to the user
+* The activity would begin, its layout and state would be loaded, the user would craft their email, hit send, and they'd be returned to, say, their email list, or to read the next email from the list, depending how the developer decided to implement return from sending email behavior
 
-####Managing the Activity Lifecycle
+#### Managing the Activity Lifecycle
 
-Knowing that applications are made up of several ```Activity``` instances, it's important to know how ```Activity``` states are handled for an application running on a device. Each application is assigned a ```Task``` backstack. This stack consists of a hierarchy of ```Activity``` accesses within an application’s lifecycle. The most recent task item on this backstack will be the ```Activity``` that sits in the foreground and is active for the user to interact with (resumed, or running). Each successive ```Activity``` in the stack “underneath” this current ```Activity```/```Task``` and can be accessed by hitting either the device back button or a software key back button. As eluded to above, applications can also contain activities on their ```Task``` backstack that do not strictly belong to their codebase; you can call activities from other applications to meet some functionality your application needs but is commonly provided by another application. Cameras and email applications are both common examples.
+Knowing that applications are made up of several ```Activity``` instances it is important to know how ```Activity``` states are handled for an application running on a device.
 
-Other applications on the device that have public activities within their codebase allow you to use their functionality from within your application; for instance, offering users the ability to send an email from within your application, but sending out an intent to be captured by their preferred email application, or offer them the choice of email applications available on the device simply by announcing the intent of sending an email. The device handles the rest!
+* Each application is assigned a ```Task``` backstack.  This stack consists of a hierarchy of ```Activity``` accesses within an application’s lifecycle. The most recent task item on this backstack will be the ```Activity``` that sits in the foreground and is active for the user to interact with (resumed, or running).
+
+* Each successive ```Activity``` in the stack “underneath” this current ```Activity```/```Task``` and can be accessed by hitting either the device back button or a software key back button.
+
+* As eluded to above, applications can also contain activities on their ```Task``` backstack that do not strictly belong to their codebase; you can call activities from other applications to meet some functionality your application needs but is commonly provided by another application.
+	* Cameras and email applications are both common examples.
+
+* Other applications on the device that have public activities within their codebase allow you to use their functionality from within your application
+	* For instance offering users the ability to send an email from within your application, but sending out an intent to be captured by their preferred email application, or offer them the choice of email applications available on the device simply by announcing the intent of sending an email. The device handles the rest!
 
 From the pre-lab reading regarding managing the ```Activity``` lifecycle you learned that, generally, an ```Activity``` is either resumed (running), paused, or stopped. Which state an ```Activity``` is in determines how a user can or cannot interact with the ```Activity``` and whether or not the ```Activity``` is at risk of being destroyed by the OS if device resources require it. We must therefore secure ```Activity``` changes (and later, data) to ensure user-state is not lost if the application state is destroyed in memory to recoup resources.
 
 #### Activity States and Their Meaning
+
 ![](http://i.imgur.com/ok4PARv.png)
 
 **Fig. 1** https://developer.android.com/guide/components/activities/activity-lifecycle.html
@@ -58,10 +75,13 @@ There are 7 states within the lifecycle, and each can be ```@Override```d. In th
 
 ##### Initialize Project State for Lab 2
 
-* Open Android Studio
-* Import project: Lab2ActivityLifecycle
+1. Open Android Studio
+2. Import the Lab2ActivityLifecycle project
+3. Navigate to the layout file associated with Activity One
 
-With the project imported, navigate to the layout file associated with Activity One. You will be presented with a layout view containing some text and a button. Your first goal for this lab is to wire these TextViews containing lifecycle method call counts. They should contain values relevant to the number of times their respective system call functions have been activated for Activity One.  Each TextView has been assigned its own unique ID within the Android project.
+You will be presented with a layout view containing some text and a button. Your first goal for this lab is to wire these TextViews containing lifecycle method call counts.
+
+They should contain values relevant to the number of times their respective system call functions have been activated for Activity One.  Each TextView has been assigned its own unique ID within the Android project.
 
 **1.** Click on each TextView containing a lifecycle method name and count in ActivityOne and note its unique id value, obtainable from the Properties panel. Alternatively, you can inspect the `Text` view of layout to find these ids.
 	Also click on the Button and note its unique ID.
@@ -118,9 +138,18 @@ Even if you use the Device's Home Button to navigate away from ```ActivityOne```
 
 In future labs we will investigate maintaining the state of an ```Activity``` even if it is destroyed by using more permanent device storage.
 
-**10. Deliverable** Kill your application and start it fresh, holding it in the upright portrait mode. Navigate to ```ActivityTwo``` and back twice, rotate the device to your right into landscape, left back to portrait, and again left into landscape. Press the home button, reopen your application from the icon deck. Record the values displayed under your ```ActivityOne``` system call totals.
+**10. Deliverable**
+
+Kill your application and start it fresh, holding it in the upright portrait mode. Navigate to ```ActivityTwo``` and back twice, rotate the device to your right into landscape, left back to portrait, and again left into landscape. Press the home button, reopen your application from the icon deck. Record the values displayed under your ```ActivityOne``` system call totals.
 
 * onCreate() calls: __________________________
 * onStart() calls: ___________________________
 * onResume() calls: __________________________
 * onRestart() calls: _________________________
+
+**Lab Completion**
+
+* Show the following to the instructor or TA
+	* The working app along with the results of the number of method calls made when switching between orientations
+
+* Keep a copy of your project work and answers for future reference

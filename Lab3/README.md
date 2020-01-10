@@ -6,7 +6,7 @@ For this lab you need to be familiar with with how to build an Intent and how to
 
 * http://developer.android.com/training/basics/firstapp/starting-activity.html#BuildIntent
 * http://developer.android.com/training/basics/firstapp/starting-activity.html#CreateActivity
-
+ c
 Here is a list of common Intents. This isn't necessary for pre-lab reading, but you may find it valuable during this course and any future Android development.
 
 * http://developer.android.com/guide/components/intents-common.html
@@ -132,10 +132,15 @@ are going to build an ```Intent``` to explicitly call our ```MainActivity```. Th
 
 **11.** Restart your application. From the ```MainActivity```, click the Start ```Button```. Then click Back, then Start again. Do this a few times. Now, begin using the device back button to traverse the task backstack.
 
+**Writeup Task**
+
 Write a short description of your observations and relate this to what you learned about the task backstack in the previous lab.  Describe how you could modify the implementation of your ```Activity```'s back button to behave similarly to the device's soft-key back button.
 
-**Deliverables** Show the following to the instructor or TA
+**Deliverables**
 
-* Your working app
-* The screenshot you took of the email sent by your app
-* Your answers to the questions about the back button
+* Show the following to the instructor or TA
+  * Your working app
+  * The screenshot you took of the email sent by your app
+  * Your answers to the questions about the back button
+
+* Keep a copy of your project work and answers for future reference
