@@ -315,7 +315,7 @@ Log.i(TAG, "This is a log display!");
 4. You will also need to add an ```import java.util.Log``` statement.
 
 5. Run the application via the emulator or device once more
- 	* Along the bottom portion of Android Studio, click the Android Monitor tab
+ 	* Along the bottom portion of Android Studio, click the _logcat_ tab
 	* Set the log-level dropdown to Info and search for MainActivity
 	* You'll be presented with a console log information that you built into the ```onCreate()``` function
 	* This tactic can be utilized throughout the development cycle to test certain portions of your code to know how an application is behaving and where in the Activity lifecycle your application may be encountering problems
