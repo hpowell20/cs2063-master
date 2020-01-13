@@ -1,4 +1,4 @@
-# Lab 4 - AsyncTask
+# Lab 5 - AsyncTask
 
 In lecture we've seen the importance of moving long-running operations off of the UI thread and into a worker thread. In this lab you will implement (portions of) this functionality using an ```AsyncTask```.
 
@@ -6,6 +6,15 @@ Start by downloading the skeleton code for the lab.  This app uses the master/de
 Survey.  Selecting an earthquake presents further details about it. On a small device, this is a separate activity; on a larger device, the details are presented alongside the scrolling list.
 
 This [website](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php) describes a variety of [JSON](http://www.json.org/) feeds that provide information about recent earthquakes. We will use data from the feed that provides information about [all earthquakes in the past day](https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson).
+
+## Pair Programming
+
+We will again be doing pair programming for this lab.  Details on pair programming can be found at [Pair Programming](../docs/PAIR_PROGRAMMING.md).  You can again work with anybody of your choosing.
+
+**To receive credit for this lab you must pair program.**
+
+**Switch between the roles of navigator and driver every 10 to 15
+minutes.**
 
 ## Understanding the skeleton code
 

@@ -2,7 +2,7 @@
 
 ## Pair Programming
 
-For the remainder of the labs we will complete the assignments using pair programming.  Additional details can be found at [Pair Programming](../docs/PAIR_PROGRAMMING.md).  For this activity you will need to work in pairs. You can work with anybody of your choosing, however, to obtain the most benefit from the activity it is recommended you work with someone other than your partner for the course project.  This is not a requirement and will not be strictly enforced.
+We will again be doing pair programming for this lab.  Details on pair programming can be found at [Pair Programming](../docs/PAIR_PROGRAMMING.md).  You can again work with anybody of your choosing.
 
 **To receive credit for this lab you must pair program.**
 

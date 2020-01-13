@@ -1,6 +1,14 @@
 # Lab 2
 Today’s lab will introduce the Android Activity Lifecycle by demonstrating how to create and interact with multiple Activities.  We will also demonstrate the lifecycle methods and how they relate to volatile device configurations such as screen rotation.
 
+## Pair Programming
+
+For the remainder of the labs we will complete the assignments using pair programming.  Additional details can be found at [Pair Programming](../docs/PAIR_PROGRAMMING.md).  For this activity you will need to work in pairs. You can work with anybody of your choosing, however, to obtain the most benefit from the activity it is recommended you work with someone other than your partner for the course project.  This is not a requirement and will not be strictly enforced.
+
+**To receive credit for this lab you must pair program.**
+
+**Switch between the roles of navigator and driver every 10 to 15 minutes.**
+
 #### Pre-Lab
 * Make sure you are familiar with the following section of the Android
 developer documentation:
