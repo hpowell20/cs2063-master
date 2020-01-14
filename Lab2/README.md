@@ -207,7 +207,8 @@ So why do the values always reinitialize once we leave ```ActivityTwo```, return
 * ```ActivityOne``` remained on this back stack and that is why it retains its values.
 
 NOTE:
-* Even if you use the Device's Home Button to navigate away from ```ActivityOne```, it still exists as the top-most activity in your application’s ```Task``` back stack * As such, navigating to home and reopening your app will reveal the same values as your most recent interaction
+* Even if you use the Device's Home Button to navigate away from ```ActivityOne```, it still exists as the top-most activity in your application’s ```Task``` back stack
+* As such, navigating to home and reopening your app will reveal the same values as your most recent interaction
 * This will persist until you use the back button to manually kill ```ActivityOne``` (or swipe the application away from your list of running application backstacks in the Android task manager window).
 
 In future labs we will investigate maintaining the state of an ```Activity``` even if it is destroyed by using more permanent device storage.
