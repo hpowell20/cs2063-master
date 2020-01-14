@@ -86,33 +86,64 @@ There are 7 states within the lifecycle, and each can be ```@Override```d. In th
 1. Open Android Studio
 2. Import the Lab2ActivityLifecycle project
 3. Navigate to the layout file associated with Activity One
+	* You will be presented with a layout view containing some text and a button
 
-You will be presented with a layout view containing some text and a button. Your first goal for this lab is to wire these TextViews containing lifecycle method call counts.
+**Task 1**
 
-They should contain values relevant to the number of times their respective system call functions have been activated for Activity One.  Each TextView has been assigned its own unique ID within the Android project.
+Your first goal for this lab is to wire these TextViews containing lifecycle method call counts.  They should contain values relevant to the number of times their respective system call functions have been activated for Activity One.  Each TextView has been assigned its own unique ID within the Android project.
 
-**1.** Click on each TextView containing a lifecycle method name and count in ActivityOne and note its unique id value, obtainable from the Properties panel. Alternatively, you can inspect the `Text` view of layout to find these ids.
-	Also click on the Button and note its unique ID.
+1. Click on each TextView containing a lifecycle method name and count in ActivityOne and note its unique id value which can be found in the Attributes panel
+	* Alternatively, you can inspect the `Text` view of layout to find these ids
+	* Also click on the Button and note its unique ID
+	* You will use these IDs to programmatically capture references to these layout resources in your ActivityOne.java
+	* This will allow you to update their contents and, in the case of the button, perform an operation such as starting a second ```Activity```
 
-You will use these IDs to programmatically capture references to these layout resources in your ActivityOne.java. This will allow you to update their contents and, in the case of the button, perform an operation such as starting a second ```Activity```.
+NOTE:
+* Inside the source code for ActivityOne.java are ```HINTs``` and ```TODO``` items that require your attention 	
 
-Open ActivityOne.java. Inside the source code are ```HINTs``` and ```TODO``` items that require your attention. 	
+**Task 2**
 
-**2.** Complete TODO 2. Android Studio will alert you that it does not recognize ```TextView``` objects and prompt you to Alt+Enter to import this code. Go ahead and do so. Your imports list has grown!
+Complete TODO 2.
+* Android Studio may alert you that it does not recognize ```TextView``` objects
+* If so enter Alt+Enter at the prompt to import this class
+* Your imports list has grown!
 
-With programmatic placeholders for Android resources now ready to be used, we can start capturing references from the layout we looked at when when we first opened this project.  Resource capture should occur when the application is first created, which takes place during the ```onCreate()``` system method call. Each system method call must always make a call to its super to ensure that the proper Android operating system functions will be combined with whatever additional functionalities you describe.
+With programmatic placeholders for Android resources now ready to be used, we can start capturing references from the layout we looked at when when we first opened this project.  
 
-Take note of ```ActivityOne.java```’s ```onCreate()``` method; it makes a call to its super, passes super any bundled savedInstanceState it received and sets the layout for the activity using ```setContentView(R.layout.activity_one)```. The use of ```R.``` is Android's way of providing a method an Android Resource ID number. These unique numbers are assigned and handled by the Android SDK via Android Studio and get passed along as a reference by using the name of the resource file containing the item they are interested in. Here, the .XML layout file activity_one is passed as a resource ID, and its contents get used to describe the layout we saw in the editor.
+Resource capture should occur when the application is first created, which takes place during the ```onCreate()``` system method call.
 
-Hint 4 in the Skeleton project source code shows how these references to resources are obtained programmatically. You can also see that Android Button Objects have listeners attached to them very similarly to that of classic Java GUI Buttons.
+Each system method call must always make a call to its super to ensure that the proper Android operating system functions will be combined with whatever additional functionalities you describe.
 
-**3.** Complete TODO 3. See the documentation for intents for help: https://developer.android.com/reference/android/app/Activity.html#startActivity(android.content.Intent)
+Take note of ```ActivityOne.java```’s ```onCreate()``` method; it makes a call to its super, passes super any bundled savedInstanceState it received and sets the layout for the activity using ```setContentView(R.layout.activity_one)```
+* The use of ```R.``` is Android's way of providing a method an Android Resource ID number
+* These unique numbers are assigned and handled by the Android SDK via Android Studio and get passed along as a reference by using the name of the resource file containing the item they are interested in
+* Here, the .XML layout file activity_one is passed as a resource ID, and its contents get used to describe the layout we saw in the editor
+* _Hint 4_ in the Skeleton project source code shows how these references to resources are obtained programmatically
+* You can also see that Android Button Objects have listeners attached to them very similarly to that of classic Java GUI Buttons
 
-Great! But we don’t have a second activity java class yet, as we can see from the red ActivityTwo in our Intent statement. To fix this, right click mobiledev.unb.ca.lab2activitylifecycle under the Java project structure folder. Select New → Java Class and name it ActivityTwo. Just leave this class empty for now. We'll finish it later.
+**Task 3**
 
-**4.** Complete TODO 4 in ```ActivityOne```. Use the Button’s ```findViewByID``` implementation example to similarly capture resource references to each of the four ```TextView``` objects you programmatically created. These will be used to update their respective counter values later.
+Complete TODO 3.
+* See the documentation for intents for help: https://developer.android.com/reference/android/app/Activity.html#startActivity(android.content.Intent)
 
-**5.** Find and complete TODO 5 following the initial example. Note that ```CREATE_VALUE``` is a ```final``` ```String``` declared at the top of ```ActivityOne```. ```START_VALUE```, ```RESUME_VALUE```, and ```RESTART_VALUE``` have already been declared as well. These help identify values we pass around in a ```Bundle```. Note also the Skeleton code already contains ```count``` variables for each system call. These are the values we pass along with our ```Bundle```.
+Great! But we don’t have a second activity java class yet, as we can see from the red ActivityTwo in our Intent statement.
+
+To fix this:
+1. Right click _mobiledev.unb.ca.lab2activitylifecycle_ under the Java project structure folder
+2. Select New → Java Class and name it ActivityTwo
+	* Just leave this class empty for now. We'll finish it later.
+
+**Task 4**
+
+Complete TODO 4 in ```ActivityOne```.
+* Use the Button’s ```findViewByID``` implementation example to similarly capture resource references to each of the four ```TextView``` objects you programmatically created
+* These will be used to update their respective counter values later.
+
+**Task 5**
+
+Find and complete TODO 5 following the initial example.
+* Note that ```CREATE_VALUE``` is a ```final``` ```String``` declared at the top of ```ActivityOne```. ```START_VALUE```, ```RESUME_VALUE```, and ```RESTART_VALUE``` have already been declared as well. These help identify values we pass around in a ```Bundle```
+* Note also the Skeleton code already contains ```count``` variables for each system call. These are the values we pass along with our ```Bundle```.
 
 This is how a ```Bundle``` is created to save activity state when a new activity is called and added to the application’s ```Task``` stack. Having such a ```Bundle``` allows you to use the lifecycle methods to reload basic stateful elements. ```onSaveInstanceState()``` is called as an ```Activity``` is stopped, meaning it is no longer the activity of immediate user interest in the application.
 
@@ -120,35 +151,73 @@ With the ```Bundle``` programmatically created, we can now use the test of wheth
 
 We can now unbundle any existing data that may have been saved in the ```onSaveInstanceState()``` method by checking for an existing ```Bundle``` in our ```onCreate()``` implementation.
 
-**6.** Complete TODO 6 following the initial example. This is how a ```Bundle``` is unpacked to recreate an activity’s existing state before it was stopped.
+**Task 6**
 
-**7.** Complete TODO 7 following the initial example.
+Complete TODO 6 following the initial example.
+* This is how a ```Bundle``` is unpacked to recreate an activity’s existing state before it was stopped.
 
-**8.** Complete TODO 8, increment each count variable in its respective lifecycle method call ```onCreate()```, ```onStart()```, ```onResume()```, ```onRestart()```. A call to the ```updateCounts()``` method modified above (in TODO 7) has already been included in each activity lifecycle method we are overriding.  (Make sure you increment the counts before the ```updateCounts()``` method is called or else the new value will not be reflected in the text update!)
+**Task 7**
 
-**9.** At this point the entire application is almost entirely wired for two activities; however, we need to implement ```ActivityTwo```. Copy and paste the code from  ```ActivityOne.java``` into ```ActivityTwo.java```. Be sure to change your class name, set the appropriate layout resource file in ```setContentView()``` and make sure to remove the ```Button``` listener code in ```onCreate()```; the ```activity_two.xml``` layout file does not include any button to reference. Also update the TAG String (so Log Cat messages will be informative).
+Complete TODO 7 following the initial example.
 
-**10.** Now all that's missing is defining the existence of ```ActivityTwo.java``` (which itself is the programmatic instance of ```ActivityTwo```) in the ```AndroidManifest.xml```
+**Task 8**
 
-Open ```AndroidManifest.xml``` and locate the ```<application>``` and ```<activity>``` tags. Notice how your application is defined as having ```ActivityOne``` as the application’s MAIN ```<intent-filter>``` with a Category ```LAUNCH```. This allows the defined activity to be the first to run when your application is started.
+Complete TODO 8.
+* Increment each count variable in its respective lifecycle method call ```onCreate()```, ```onStart()```, ```onResume()```, ```onRestart()```
+* A call to the ```updateCounts()``` method modified above (in TODO 7) has already been included in each activity lifecycle method we are overriding
+	* Make sure you increment the counts before the ```updateCounts()``` method is called or else the new value will not be reflected in the text update!
 
-After the declaration of this first activity is ended ```</activity>```, create a new ```<activity>``` tag and use ```android:name=”.ActivityTwo”```.
+**Task 9**
 
-Your application is finally ready to run! On an emulator or device, run the application.
+At this point the entire application is almost entirely wired for two activities; however, we need to implement ```ActivityTwo```.
 
-Take note of the initial values for ```ActivityOne```. Click the ```Button``` to access ```ActivityTwo``` and you’ll see the same values. Use the back ```Button``` to navigate to ```ActivityOne``` again. Notice the values have changed! Rotate your device to the left, back to vertical, and then to the right. Notice the values change with each successive rotation. Once again access ```ActivityTwo```. The values are still the initial values!
+1. Copy and paste the code from  ```ActivityOne.java``` into ```ActivityTwo.java```
+* Be sure to change your class name and set the appropriate layout resource file in ```setContentView()```
+* Make sure to remove the ```Button``` listener code in ```onCreate()``` as the ```activity_two.xml``` layout file does not include any button to reference
+* Also update the TAG String (so Log Cat messages will be informative)
 
-Why is this? ```ActivityTwo``` is coded for behavior much like ```ActivityOne```; go ahead and rotate the device several times while in ```ActivityTwo``` and you will note the values change. So why do the values always reinitialize once we leave ```ActivityTwo```, return to ```ActivityOne```, and then go back to ```ActivityTwo```? This demonstrates the application ```Task``` back stack mentioned earlier.
+**Task 10**
 
-When the back button is being used to navigate away from ```ActivityTwo```, we the user are telling the Android operating system lifecycle that we are no longer interested in interacting with ```ActivityTwo``` (whether we are or not doesn't matter, that's how the design pattern interprets this behavior). As such, Android destroys this activity. Each time we successively re-enter ```ActivityTwo``` from ```ActivityOne```’s ```Button```, we are creating an entire new instance of ```ActivityTwo```. No previous existence of ```ActivityTwo``` remains on the backstack once we use the back button to navigate away. ```ActivityOne``` remained on this back stack and that is why it retains its values.
+Now all that's missing is defining the existence of ```ActivityTwo.java``` (which itself is the programmatic instance of ```ActivityTwo```) in the ```AndroidManifest.xml```
 
-Even if you use the Device's Home Button to navigate away from ```ActivityOne```, it still exists as the top-most activity in your application’s ```Task``` back stack. As such, navigating to home and reopening your app will reveal the same values as your most recent interaction. This will persist until you use the back button to manually kill ```ActivityOne``` (or swipe the application away from your list of running application backstacks in the Android task manager window).
+1. Open ```AndroidManifest.xml``` and locate the ```<application>``` and ```<activity>``` tags
+* Notice how your application is defined as having ```ActivityOne``` as the application’s MAIN ```<intent-filter>``` with a Category ```LAUNCH```
+* This allows the defined activity to be the first to run when your application is started.
+
+2. After the declaration of this first activity is ended ```</activity>```, create a new ```<activity>``` tag and use ```android:name=”.ActivityTwo”```.
+
+3. Your application is finally ready to run! On an emulator or device, run the application.
+
+4. Take note of the initial values for ```ActivityOne```
+* Click the ```Button``` to access ```ActivityTwo``` and you’ll see the same values
+* Use the back ```Button``` to navigate to ```ActivityOne``` again; notice that the values have changed!
+* Rotate your device to the left, back to vertical, and then to the right; notice the values change with each successive rotation
+* Once again access ```ActivityTwo```
+	* The values are still the initial values!
+
+Why is this?
+* ```ActivityTwo``` is coded for behavior much like ```ActivityOne```; go ahead and rotate the device several times while in ```ActivityTwo``` and you will note the values change.
+
+So why do the values always reinitialize once we leave ```ActivityTwo```, return to ```ActivityOne```, and then go back to ```ActivityTwo```?
+* This demonstrates the application ```Task``` back stack mentioned earlier
+* When the back button is being used to navigate away from ```ActivityTwo```, we the user are telling the Android operating system lifecycle that we are no longer interested in interacting with ```ActivityTwo``` (whether we are or not doesn't matter, that's how the design pattern interprets this behavior)
+* As such, Android destroys this activity
+* Each time we successively re-enter ```ActivityTwo``` from ```ActivityOne```’s ```Button``` we are creating an entire new instance of ```ActivityTwo```
+* No previous existence of ```ActivityTwo``` remains on the backstack once we use the back button to navigate away
+* ```ActivityOne``` remained on this back stack and that is why it retains its values.
+
+NOTE:
+* Even if you use the Device's Home Button to navigate away from ```ActivityOne```, it still exists as the top-most activity in your application’s ```Task``` back stack * As such, navigating to home and reopening your app will reveal the same values as your most recent interaction
+* This will persist until you use the back button to manually kill ```ActivityOne``` (or swipe the application away from your list of running application backstacks in the Android task manager window).
 
 In future labs we will investigate maintaining the state of an ```Activity``` even if it is destroyed by using more permanent device storage.
 
-**10. Deliverable**
+**Lab Deliverables**
 
-Kill your application and start it fresh, holding it in the upright portrait mode. Navigate to ```ActivityTwo``` and back twice, rotate the device to your right into landscape, left back to portrait, and again left into landscape. Press the home button, reopen your application from the icon deck. Record the values displayed under your ```ActivityOne``` system call totals.
+1. Kill your application and start it fresh, holding it in the upright portrait mode
+2. Navigate to ```ActivityTwo``` and back twice, rotate the device to your right into landscape, left back to portrait, and again left into landscape
+3. Press the home button, reopen your application from the icon deck
+4. Record the values displayed under your ```ActivityOne``` system call totals.
 
 * onCreate() calls: __________________________
 * onStart() calls: ___________________________
