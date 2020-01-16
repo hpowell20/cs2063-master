@@ -216,9 +216,17 @@ In future labs we will investigate maintaining the state of an ```Activity``` ev
 **Lab Deliverables**
 
 1. Kill your application and start it fresh, holding it in the upright portrait mode
-2. Navigate to ```ActivityTwo``` and back twice, rotate the device to your right into landscape, left back to portrait, and again left into landscape
-3. Press the home button, reopen your application from the icon deck
-4. Record the values displayed under your ```ActivityOne``` system call totals.
+2. Perform the following sequence of applications:
+   * Navigate to ```ActivityTwo```
+	 * Go back to ```ActivityOne```
+	 * Navigate to ```ActivityTwo```
+	 * Go back to ```ActivityOne```
+3. Rotate the device right into landscape mode
+4. Rotate the device left back into portrait mode
+5. Rotate the device left again into landscape mode
+6. Press the home button to minimize the app (do not change orientation)
+7. Re-open the app from the icon deck
+8. Record the values displayed under your ```ActivityOne``` system call totals.
 
 * onCreate() calls: __________________________
 * onStart() calls: ___________________________
