@@ -300,7 +300,7 @@ Take screenshots of your application with French and Spanish translations and sa
 Being able to identify what is occurring within your application at certain points in the running cycle is important for any development process. Android Studio offers the ability to have log messages printed to the console.
 
 1. Open the _MainActivity.java_ class file
-2. Immediately after the class decalration add the following string:
+2. Immediately after the class declaration add the following string:
 
 ```java
 private static final String TAG = "MainActivity";
@@ -315,7 +315,7 @@ Log.i(TAG, "This is a log display!");
 4. You will also need to add an ```import java.util.Log``` statement.
 
 5. Run the application via the emulator or device once more
- 	* Along the bottom portion of Android Studio, click the _logcat_ tab
+ 	* Along the bottom portion of Android Studio, click the _Logcat_ tab
 	* Set the log-level dropdown to Info and search for MainActivity
 	* You'll be presented with a console log information that you built into the ```onCreate()``` function
 	* This tactic can be utilized throughout the development cycle to test certain portions of your code to know how an application is behaving and where in the Activity lifecycle your application may be encountering problems
