@@ -15,15 +15,17 @@ For this lab you need to be familiar with with how to build an Intent and how to
 
 * http://developer.android.com/training/basics/firstapp/starting-activity.html#BuildIntent
 * http://developer.android.com/training/basics/firstapp/starting-activity.html#CreateActivity
- c
-Here is a list of common Intents. This isn't necessary for pre-lab reading, but you may find it valuable during this course and any future Android development.
-
 * http://developer.android.com/guide/components/intents-common.html
+  * This link contains a list of common intents
+  * This isn't necessary for pre-lab reading, however, you may find it valuable during this course and any future Android development
+
 
 
 #### Objectives:
 
-You are given an Android project containing one Activity. Your task is to develop a thorough understanding of starting new activities by Intents, briefly introduced last lab with more exploration below. The Android API Guide succinctly states an "Intent is a messaging object you can use to request an action from another app component" and for that reason they are a very powerful tool for getting feature rich applications running very quickly. We will cover:
+You are given an Android project containing one Activity. Your task is to develop a thorough understanding of starting new activities by Intents, briefly introduced last lab with more exploration below.
+
+The Android API Guide succinctly states an "Intent is a messaging object you can use to request an action from another app component" and for that reason they are a very powerful tool for getting feature rich applications running very quickly. We will cover:
 
 * Explicit and implicit Intents
 * Passing information with Intents
@@ -31,50 +33,72 @@ You are given an Android project containing one Activity. Your task is to develo
 * Permissions
 * `startActivityForResult()`
 
-The goal of this lab is to create a multiple Activity application that uses multiple explicit and implicit Intents. We'll access activities from within our application as well as request access for activities outside our application. We'll access camera functionality as well as the capability to send email using existing applications on the device. We'll also explore a potential pitfall if the behavior of the task backstack is misunderstood.
+The goal of this lab is to create a multiple Activity application that uses multiple explicit and implicit Intents. We'll access activities from within our application as well as request access for activities outside our application.
 
-If you are using an emulator for this lab (e.g., on your own laptop) you'll need to turn on emulated device camera access for your emulator. This can be found under advanced settings when creating an emulated device.
+We'll access camera functionality as well as the capability to send email using existing applications on the device. We'll also explore a potential pitfall if the behavior of the task backstack is misunderstood.
 
-For any device you are using to test this lab (a real phone, emulator, or Androidx86 VM) you will need to set up an email account on the device if one is not already set up. This can be done on most Android devices via ```Settings → Accounts → Add Account```.
+NOTES:
+
+* If you are using an emulator for this lab (e.g., on your own laptop) you'll need to turn on emulated device camera access for your emulator
+  * This can be found under advanced settings when creating an emulated device
+* For any device you are using to test this lab (a real phone, emulator, or Android OS VM) you will need to set up an email account on the device if one is not already set up
+  * This can be done on most Android devices via ```Settings → Accounts → Add Account```
 
 #### Intent Types
 
-New Activities are started by passing the ```startActivity()``` method an ```Intent``` parameter. Intents can be of **explicit** (stated) or **implicit** (implied) nature. Intents can be sent from an Activity component to start new Activities, which we’ve covered in some detail during Lab 2. Intents can also start Services and Broadcast Receivers, which we'll cover in later labs, as well as be started _by_ Services and Broadcast Receivers.
+New Activities are started by passing the ```startActivity()``` method an ```Intent``` parameter
+* Intents can be of **explicit** (stated) or **implicit** (implied) nature
+* Intents can be sent from an Activity component to start new Activities which was covered in some detail during Lab 2
+* Intents can also start Services and Broadcast Receivers (this will be covered in later labs) as well as be started _by_ Services and Broadcast Receivers
 
-_Explicit Intent_ - typically used to start a component (e.g.' ```Activity```/```Service```/```Broadcast Receiver```) that exists within your application project; something coded by you or imported for a specified purpose within your application. It is called explicit because you know the name of the component you intend to use, so you can explicitly announce it to the ```startActivity()``` method, and it will be handled as such.
+_Explicit Intent_
+* Typically used to start a component (e.g.' ```Activity```/```Service```/```Broadcast Receiver```) that exists within your application project; something coded by you or imported for a specified purpose within your application
+* It is called explicit because you know the name of the component you intend to use, so you can explicitly announce it to the ```startActivity()``` method, and it will be handled as such
 
-_Implicit Intent_ - if you are calling for a component from another application installed on the device, you may not have knowledge of the component name that you are requesting; you just wish to make use of the component if it’s available on the device. An application can choose to specify if it contains components that satisfy certain request types by supplying ```Intent Filters``` in their ```AndroidManifest.xml``` file. By providing such filters, their application can make certain activities available to satisfy some request from other applications. This creates even more modularity in creating application services. If multiple applications on the device satisfy some request (e.g., to take a photo), a list of possible choices is presented to the user; users can then choose, or not, to have their choice set as default behavior.
+_Implicit Intent_
+* If you are calling for a component from another application installed on the device, you may not have knowledge of the component name that you are requesting; you just wish to make use of the component if it’s available on the device
+* An application can choose to specify if it contains components that satisfy certain request types by supplying ```Intent Filters``` in their ```AndroidManifest.xml``` file
+* By providing such filters, their application can make certain activities available to satisfy some request from other applications. This creates even more modularity in creating application services
+* If multiple applications on the device satisfy some request (e.g., to take a photo), a list of possible choices is presented to the user; users can then choose, or not, to have their choice set as default behavior
 
-Investigate the constructors available for building ```Intent``` objects:
+Investigate the constructors available for building ```Intent``` objects at http://developer.android.com/reference/android/content/Intent.html#lfields.
 
-http://developer.android.com/reference/android/content/Intent.html#lfields
-
-Take a look at some of the public methods available to Intents. Note in particular the various ```putExtra()``` methods. The option to attach extra information to an ```Intent``` provides a great way to send data between two Activities. By packing an ```Intent``` with extras, its contents can be checked for, and then unpacked, in the receiving ```Activity```. This is similar behavior to how we attached counter values using ```savedInstanceState``` in ```onSaveInstanceState()``` from ```ActivityOne``` in Lab 2. Instead of using ```savedInstanceState.put<<some_value_type>>()```, we instead do ```intentName.putExtra(type, value)```.
+Take a look at some of the public methods available to Intents. Note in particular the various ```putExtra()``` methods. The option to attach extra information to an ```Intent``` provides a great way to send data between two Activities. By packing an ```Intent``` with extras, its contents can be checked for, and then unpacked, in the receiving ```Activity```. This is similar behavior to how we attached counter values using ```savedInstanceState``` in ```onSaveInstanceState()``` from ```ActivityOne``` in Lab 2.  Instead of using ```savedInstanceState.put<<some_value_type>>()```, we instead do ```intentName.putExtra(type, value)```.
 
 
-#### Procedure:
+#### Procedure
+
 Import the Lab 3 Skeleton code as a new project in Android Studio.
 
 If you are using AndroidStudio 3 (i.e., on your own laptop) you will get a Gradle error.  To fix this, make the following change in ```build.gradle (Project)```
 
-Change ```classpath 'com.android.tools.build:gradle:1.2.3'```
- to ```classpath 'com.android.tools.build:gradle:2.3.2'```
+Change ```classpath 'com.android.tools.build:gradle:3.4.2'```
+ to ```classpath 'com.android.tools.build:gradle:3.5.3'```
 
-##### Reminder Remember to make habit of adding a ```LogCat``` documentation ```String``` to all Activities and a ```Log.i``` method to each ```Activity``` method for testing purposes! Take a look at the following documentation and/or ```Lab 2``` Skeleton code for ```ActivityOne```.
+##### Reminder
+* Remember to make habit of adding a ```LogCat``` documentation ```String``` to all Activities and a ```Log.i``` method to each ```Activity``` method for testing purposes!
+* Take a look at the API documentation for the ```Log``` class at [http://developer.android.com/reference/android/util/Log.html and/or ```Lab 2``` Skeleton code for ```ActivityOne```.
 
-http://developer.android.com/reference/android/util/Log.html
 
-**1.** Once imported, note the “Start” ```Button``` in the center of the ```Main Activity``` layout.  This ```Button``` doesn't have an ID.  Give it one (either using the Properties panel in the Design view or by editing the XML in the Text view).
+**Task 1**
+
+Once imported, note the “Start” ```Button``` in the center of the ```Main Activity``` layout.  This ```Button``` doesn't have an ID.  Give it one (either using the Properties panel in the Design view or by editing the XML in the Text view).
 
 Programmatically capture a reference to this Start ```Button``` layout component from ```MainActivity``` and give it a [setOnClickListener()](http://developer.android.com/reference/android/widget/Button.html) in the ```Activity```’s ```onCreate()``` method. Take a look at the linked documentation or back to ```ActivityOne``` in Lab 2 if you forget this procedure.
 
-**2.** What's the second ```Activity``` class in the project? Take note of the Java resource file name.
+**Task 2**
 
-**3.** Construct an [Intent](http://developer.android.com/guide/components/intents-filters.html#ExampleExplicit) inside the ```setOnClickListener()``` and use it to start the second ```Activity```.
+What's the second ```Activity``` class in the project? Take note of the Java resource file name.
+
+**Task 3**
+
+Construct an [Intent](http://developer.android.com/guide/components/intents-filters.html#ExampleExplicit) inside the ```setOnClickListener()``` and use it to start the second ```Activity```.
 
 View the layout associated with this second ```Activity```. There are three buttons: one representing ```Camera``` access, one representing Email access, and one representing a Back ```Button```. Give each ```Button``` an ID.
 
-**4.** Now capture references to these buttons. For each, define an
+**Task 4**
+
+Now capture references to these buttons. For each, define an
 empty ```setOnClickListener()```.
 * The Camera ```Button``` is going to send out an implicit ```Intent``` requesting a ```Camera``` application ```Activity``` that can handle taking photos.
 * The Email ```Button``` is going to send out an implicit ```Intent```
@@ -96,10 +120,14 @@ We can provide information to the ```Activity``` we intend to start. This inform
 Here are a list of possible Actions and Extras available for communicating with email applications on the device, as well as email ```Intent``` creation examples:
 http://developer.android.com/guide/components/intents-common.html#Email
 
-**5.** Develop your email ```Button```'s ```setOnClickListener()```. Build an email-only ```Intent``` that does not include attachments. For testing, give your ```Intent``` three extras: one for the recipient email addresses (just have one
+**Task 5**
+
+Develop your email ```Button```'s ```setOnClickListener()```. Build an email-only ```Intent``` that does not include attachments. For testing, give your ```Intent``` three extras: one for the recipient email addresses (just have one
 recipient, and make it you), one for the the subject line “CS2063 Lab 3”, and one for the body of the email “This is a test email!”. The final email ```Button``` action should be to ```startActivity()``` with your new ```Intent``` as a parameter.
 
-**6.** Certain requested components may require access to device hardware, such as the camera. If your application requests use of a component that in turn will make use of such hardware, you must announce that in your application’s manifest file.
+**Task 6**
+
+Certain requested components may require access to device hardware, such as the camera. If your application requests use of a component that in turn will make use of such hardware, you must announce that in your application’s manifest file.
 
 Edit [AndroidManifest.xml](http://developer.android.com/guide/topics/manifest/manifest-intro.html) to include a ```<uses-permission>``` tag to enable writing to external storage (on-device storage that will be used to store photos that are
 taken), and a ```<uses-feature>``` tag for the camera. The following links contain information about how to do this:
@@ -107,7 +135,9 @@ taken), and a ```<uses-feature>``` tag for the camera. The following links conta
 * https://developer.android.com/training/data-storage/files.html#GetWritePermission
 * http://developer.android.com/guide/topics/manifest/uses-feature-element.html#declared
 
-**7.** Hardware feature use now declared, you can wire your camera ```Button```’s ```setOnClickListener()``` event to implicitly alert the operating system of your ```Activity```'s ```Intent``` to access to the camera functionality. Doing so will provide the user a list of applications to satisfy the request to take a photo.
+**Task 7**
+
+Hardware feature use now declared, you can wire your camera ```Button```’s ```setOnClickListener()``` event to implicitly alert the operating system of your ```Activity```'s ```Intent``` to access to the camera functionality. Doing so will provide the user a list of applications to satisfy the request to take a photo.
 
 Use the example here to take a picture and save the full-size photo:
 * https://web.archive.org/web/20150207090211/https://developer.android.com/training/camera/photobasics.html
@@ -123,7 +153,9 @@ to this:
      mCurrentPhotoPath = image.getAbsolutePath(); // Do this instead
 
 
-**8.** We've saved the photo, and we know where we saved it (in ```mCurrentPhotoPath```), but we need to alert Android to add this file to the photos database so that other applications, like a gallery application, know about it. Add ```galleryAddPic()``` from the following link to your code:
+**Task 8**
+
+We've saved the photo, and we know where we saved it (in ```mCurrentPhotoPath```), but we need to alert Android to add this file to the photos database so that other applications, like a gallery application, know about it. Add ```galleryAddPic()``` from the following link to your code:
 
 http://developer.android.com/training/camera/photobasics.html#TaskGallery
 
@@ -134,22 +166,29 @@ http://developer.android.com/training/basics/intents/result.html#ReceiveResult
 Implement ```onActivityResult``` in your ```Activity``` and have it call ```galleryAddPic()``` if it receives the correct request code and result code.
 
 
-**9.** Now we have to make our back ```Button``` work. To do so, we
+**Task 9**
+
+Now we have to make our back ```Button``` work. To do so, we
 are going to build an ```Intent``` to explicitly call our ```MainActivity```. This is done similarly to how we built and started an ```Intent``` to get from our ```MainActivity``` to ```ExternalActivityCalls```.
 
-**10.** Run your application. Take a photo using the camera button. Then send an email (to yourself), using the mail button. From within the email app, attach the photo you just took as an attachment. Open this email, and take a screenshot of it.
+**Task 10**
 
-**11.** Restart your application. From the ```MainActivity```, click the Start ```Button```. Then click Back, then Start again. Do this a few times. Now, begin using the device back button to traverse the task backstack.
+Run your application. Take a photo using the camera button. Then send an email (to yourself), using the mail button. From within the email app, attach the photo you just took as an attachment. Open this email, and take a screenshot of it.
+
+**Task 11**
+
+Restart your application. From the ```MainActivity```, click the Start ```Button```. Then click Back, then Start again. Do this a few times. Now, begin using the device back button to traverse the task backstack.
 
 **Writeup Task**
 
-Write a short description of your observations and relate this to what you learned about the task backstack in the previous lab.  Describe how you could modify the implementation of your ```Activity```'s back button to behave similarly to the device's soft-key back button.
+1. Write a short description of your observations and relate this to what you learned about the task backstack in the previous lab
+2. Describe how you could modify the implementation of your ```Activity```'s back button to behave similarly to the device's soft-key back button
 
 **Deliverables**
 
 * Show the following to the instructor or TA
   * Your working app
   * The screenshot you took of the email sent by your app
-  * Your answers to the questions about the back button
+  * Your answers to the writeup task questions about the back button
 
 * Keep a copy of your project work and answers for future reference
