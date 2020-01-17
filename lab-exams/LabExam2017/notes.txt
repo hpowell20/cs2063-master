@@ -1,0 +1,42 @@
+Creating sample data:
+
+import nltk
+
+words = sorted([[x, "; ".join([y.definition for y in nltk.corpus.wordnet.synsets(x)])] for x in nltk.corpus.wordnet.all_lemma_names() if x.isalpha() and x.startswith('ab')])
+
+import json
+outf = open('data.json', 'w')
+json.dump(words, outf)
+outf.close()
+
+For fun, consider changing to all words that contain the word 'duck':
+
+words = sorted([[x.replace('_', ' '), "; ".join([y.definition for y in nltk.corpus.wordnet.synsets(x)])] for x in nltk.corpus.wordnet.all_lemma_names() if 'duck' in x])
+
+
+
+
+Then it can be a "ducktionary"!!
+
+
+RecyclerView + AsyncTask
+
+DataModel
+
+Load JSON from a resource file into an ArrayList of DictionaryEntry
+
+DictionaryEntry
+
+Class with 2 fields, word and definition
+
+MainActivity
+
+RecyclerView showing words
+
+AsyncTask to load the data
+
+DetailActivity
+
+Show word and definition
+
+
