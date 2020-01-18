@@ -9,25 +9,26 @@
                 tools:context=".ExternalActivityCalls">
 
     <Button
+        android:id="@+id/btnCamera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Camera"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:text="@string/btn_camera" />
 
     <Button
+        android:id="@+id/btnEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:text="@string/btn_email" />
 
     <Button
+        android:id="@+id/btnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back?"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentEnd="true"
+        android:text="@string/btn_back" />
 </RelativeLayout>

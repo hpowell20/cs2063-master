@@ -1,18 +1,35 @@
 package mobiledev.unb.ca.lab3intentsandfragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 public class MainActivity extends Activity {
 
+    //private static final String TAG = "MainActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Log.i(TAG, "inside onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Set the on click listener for the button
+        final Button startButton = findViewById(R.id.btnStart);
+        startButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ExternalActivityCalls.class);
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
+            }
+        });
+
     }
 
     @Override
