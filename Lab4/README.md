@@ -1,4 +1,4 @@
-# Lab 5 - Scrolling lists
+# Lab 4 - Scrolling lists
 
 ## Pair Programming
 

@@ -1,4 +1,5 @@
-# Lab 2
+# Lab 2 - Android Activity Lifecycle
+
 Today’s lab will introduce the Android Activity Lifecycle by demonstrating how to create and interact with multiple Activities.  We will also demonstrate the lifecycle methods and how they relate to volatile device configurations such as screen rotation.
 
 ## Pair Programming
