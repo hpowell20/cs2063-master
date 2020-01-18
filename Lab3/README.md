@@ -1,4 +1,6 @@
-# Lab 3
+# Lab 3 - Activities and Intents
+
+Today’s lab will go deeper into Android Intents by demonstrating how to use explicit and implicit Intents between a couple of Activity classes.
 
 ## Pair Programming
 
@@ -11,7 +13,7 @@ minutes.**
 
 #### Background:
 
-For this lab you need to be familiar with with how to build an Intent and how to construct and call new Activities:
+For this lab you need to be familiar with how to build an Intent and how to construct and call new Activities:
 
 * http://developer.android.com/training/basics/firstapp/starting-activity.html#BuildIntent
 * http://developer.android.com/training/basics/firstapp/starting-activity.html#CreateActivity
@@ -23,7 +25,7 @@ For this lab you need to be familiar with with how to build an Intent and how to
 
 #### Objectives:
 
-You are given an Android project containing one Activity. Your task is to develop a thorough understanding of starting new activities by Intents, briefly introduced last lab with more exploration below.
+You are given an Android project containing skeleton Activity class files. Your task is to develop a thorough understanding of starting new activities by Intents which was introduced briefly last lab.  We will go deeper into more exploration below.
 
 The Android API Guide succinctly states an "Intent is a messaging object you can use to request an action from another app component" and for that reason they are a very powerful tool for getting feature rich applications running very quickly. We will cover:
 
@@ -62,33 +64,34 @@ _Implicit Intent_
 * If multiple applications on the device satisfy some request (e.g., to take a photo), a list of possible choices is presented to the user; users can then choose, or not, to have their choice set as default behavior
 
 Investigate the constructors available for building ```Intent``` objects at http://developer.android.com/reference/android/content/Intent.html#lfields.
-
-Take a look at some of the public methods available to Intents. Note in particular the various ```putExtra()``` methods. The option to attach extra information to an ```Intent``` provides a great way to send data between two Activities. By packing an ```Intent``` with extras, its contents can be checked for, and then unpacked, in the receiving ```Activity```. This is similar behavior to how we attached counter values using ```savedInstanceState``` in ```onSaveInstanceState()``` from ```ActivityOne``` in Lab 2.  Instead of using ```savedInstanceState.put<<some_value_type>>()```, we instead do ```intentName.putExtra(type, value)```.
-
-
-#### Procedure
-
-Import the Lab 3 Skeleton code as a new project in Android Studio.
-
-If you are using AndroidStudio 3 (i.e., on your own laptop) you will get a Gradle error.  To fix this, make the following change in ```build.gradle (Project)```
-
-Change ```classpath 'com.android.tools.build:gradle:3.4.2'```
- to ```classpath 'com.android.tools.build:gradle:3.5.3'```
+* Take a look at some of the public methods available to Intents
+  * Note in particular the various ```putExtra()``` methods
+  * The option to attach extra information to an ```Intent``` provides a great way to send data between two Activities
+  * By packing an ```Intent``` with extras, its contents can be checked for, and then unpacked, in the receiving ```Activity```
+* This is similar behavior to how we attached counter values using ```savedInstanceState``` in ```onSaveInstanceState()``` from ```ActivityOne``` in Lab 2
+* Instead of using ```savedInstanceState.put<<some_value_type>>()```, we instead do ```intentName.putExtra(type, value)```.
 
 ##### Reminder
 * Remember to make habit of adding a ```LogCat``` documentation ```String``` to all Activities and a ```Log.i``` method to each ```Activity``` method for testing purposes!
-* Take a look at the API documentation for the ```Log``` class at [http://developer.android.com/reference/android/util/Log.html and/or ```Lab 2``` Skeleton code for ```ActivityOne```.
+* Take a look at the API documentation for the ```Log``` class at http://developer.android.com/reference/android/util/Log.html and/or ```Lab 2``` Skeleton code for ```ActivityOne```.
 
+##### Initialize Lab Project State
+
+1. Open Android Studio
+2. Import the Lab 3 Skeleton project
 
 **Task 1**
 
-Once imported, note the “Start” ```Button``` in the center of the ```Main Activity``` layout.  This ```Button``` doesn't have an ID.  Give it one (either using the Properties panel in the Design view or by editing the XML in the Text view).
+Once the project has been imported take not of the “Start” ```Button``` in the center of the ```Main Activity``` layout.  Note that this ```Button``` doesn't have an ID
 
-Programmatically capture a reference to this Start ```Button``` layout component from ```MainActivity``` and give it a [setOnClickListener()](http://developer.android.com/reference/android/widget/Button.html) in the ```Activity```’s ```onCreate()``` method. Take a look at the linked documentation or back to ```ActivityOne``` in Lab 2 if you forget this procedure.
+1. Assign an ID to the "Start" Button using either the Attributes panel in the Design view or by editing the XML in the Text view.
+2. Programmatically capture a reference to this Start ```Button``` layout component from ```MainActivity``` and give it a [setOnClickListener()](http://developer.android.com/reference/android/widget/Button.html) in the ```Activity```’s ```onCreate()``` method
+   * Take a look at the linked documentation or back to ```ActivityOne``` in Lab 2 if you forget this procedure.
 
 **Task 2**
 
-What's the second ```Activity``` class in the project? Take note of the Java resource file name.
+What's the second ```Activity``` class in the project?
+* Take note of the Java resource file name.
 
 **Task 3**
 
