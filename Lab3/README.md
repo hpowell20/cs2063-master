@@ -144,8 +144,7 @@ For this task we will be implementing your email ```Button```'s ```setOnClickLis
 Certain requested components may require access to device hardware; for example: the camera. If your application requests use of a component that in turn will make use of such hardware you must announce that in your application’s manifest file.
 
 1. Edit [AndroidManifest.xml](http://developer.android.com/guide/topics/manifest/manifest-intro.html) to include the following:
-   * A ```<uses-permission>``` tag to enable writing to external storage (on-device storage that will be used to store photos that are
-taken)
+   * A ```<uses-permission>``` tag to enable writing to external storage (on-device storage that will be used to store photos that have been taken)
     * Additional details can be found at https://developer.android.com/training/data-storage/files.html#GetWritePermission
   * A ```<uses-feature>``` tag for the camera
     * Additional details can be found at http://developer.android.com/guide/topics/manifest/uses-feature-element.html#declared
@@ -154,8 +153,16 @@ taken)
 
 With the required hardware feature to be used declared for the app you can wire your camera ```Button```’s ```setOnClickListener()``` event to implicitly alert the operating system of your ```Activity```'s ```Intent``` to access to the camera functionality. Doing so will provide the user a list of applications to satisfy the request to take a photo.
 
-1. Using the example code from the [Take Photos](https://developer.android.com/training/camera/photobasics.html#TaskScalePhoto) documentation as a base implement the Intent used to take a picture and save the full-size photo.
-
+1. Using the example code from the [Take Photos](https://developer.android.com/training/camera/photobasics.html#TaskPath) documentation as a base implement the Intent used to take a picture and save the full-size photo.  Please note the following.
+  * Use the name ```"mobiledev.unb.ca.lab3intents.provider"```  for the authority name in place of ```"com.example.android.fileprovider"``` in both the code and the AndroidManifest.xml file.
+  * For the resource file at _res/xml/file_paths.xml_ use add the content:
+  ```XML
+  <?xml version="1.0" encoding="utf-8"?>
+  <paths>
+    <external-path name="my_images"
+      path="Android/data/mobiledev.unb.ca.lab3intents/files/Pictures" />
+  </paths>
+  ```
 
 **Task 8**
 
