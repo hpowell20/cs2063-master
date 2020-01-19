@@ -39,7 +39,7 @@ We'll access camera functionality as well as the capability to send email using 
 
 ##### Prerequisites
 
-* If you are using an emulator for this lab (e.g., on your own laptop) you'll need to turn on emulated device camera access for your emulator
+* If you are using an emulator for this lab (e.g., on your own laptop) you'll need to turn on emulated device camera access
   * This can be found under advanced settings when creating an emulated device
 * For any device you are using to test this lab (a real phone, emulator, or Android OS VM) you will need to set up an email account on the device if one is not already set up
   * This can be done on most Android devices via ```Settings → Accounts → Add Account```
