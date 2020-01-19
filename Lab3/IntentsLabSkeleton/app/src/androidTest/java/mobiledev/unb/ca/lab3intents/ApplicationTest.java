@@ -1,4 +1,4 @@
-package mobiledev.unb.ca.lab3intentsandfragments;
+package mobiledev.unb.ca.lab3intents;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
