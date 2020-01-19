@@ -1,4 +1,4 @@
-package mobiledev.unb.ca.lab3intentsandfragments;
+package mobiledev.unb.ca.lab3intents;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -99,6 +99,8 @@ public class ExternalActivityCalls extends Activity {
     }
 
     // Private Helper Methods
+    // Additional information can be found at
+    // https://android.jlelse.eu/androids-new-image-capture-from-a-camera-using-file-provider-dd178519a954
     private void dispatchTakePhotoIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
@@ -116,8 +118,9 @@ public class ExternalActivityCalls extends Activity {
             // Take the picture if the File object was created successfully
             if (null != photoFile) {
                 Uri photoURI = FileProvider.getUriForFile(this,
-                        "com.example.android.fileprovider",
+                        "mobiledev.unb.ca.lab3intents.provider",
                         photoFile);
+
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
 
                 // Calling this method allows us to capture the return code
@@ -126,6 +129,9 @@ public class ExternalActivityCalls extends Activity {
         }
     }
 
+    // This follows the latest version on the documentation; an alternate implementation
+    // can be found at https://web.archive.org/web/20150207090211/https://developer.android.com/training/camera/photobasics.html
+    // if needed.  NOt recommended however.
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -150,28 +156,10 @@ public class ExternalActivityCalls extends Activity {
         this.sendBroadcast(mediaScanIntent);
     }
 
-    // Alternate method using https://web.archive.org/web/20150207090211/https://developer.android.com/training/camera/photobasics.html
-    /*private File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  // prefix
-                ".jpg",         // suffix
-                storageDir      // directory
-        );
-
-        // Save a file: path for use with ACTION_VIEW intents
-        currentPhotoPath = image.getAbsolutePath();
-        return image;
-    }*/
-
     private void dispatchSendEmailIntent(String[] recipients, String subject, String body) {
         // Create an implicit intent to send an email
         Intent mailIntent = new Intent(Intent.ACTION_SENDTO);
-        //NOTE: ACTION_SND is used when including an attachment
+        //NOTE: ACTION_SEND is used when including an attachment
         mailIntent.setData(Uri.parse("mailto:")); // only email apps should handle this
         mailIntent.putExtra(Intent.EXTRA_EMAIL, recipients);
         mailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
