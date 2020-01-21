@@ -1,4 +1,4 @@
-package mobiledev.unb.ca.lab6skeleton;
+package mobiledev.unb.ca.lab4skeleton;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

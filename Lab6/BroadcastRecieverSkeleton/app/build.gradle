@@ -5,7 +5,7 @@ android {
     //buildToolsVersion "29.0.2"
 
     defaultConfig {
-        applicationId "mobiledev.unb.ca.lab3intentsandfragments"
+        applicationId "mobiledev.unb.ca.lab4skeleton"
         minSdkVersion 21
         targetSdkVersion 27
         versionCode 1

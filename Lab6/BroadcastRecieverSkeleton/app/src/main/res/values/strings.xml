@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">Lab 6 Skeleton</string>
+    <string name="app_name">Broadcast Receivers Skeleton</string>
     <string name="button_text">Take a photo</string>
 </resources>
