@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="mobiledev.unb.ca.lab6skeleton">
+    package="mobiledev.unb.ca.lab4skeleton">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18"/>
@@ -25,7 +25,7 @@
                 android:resource="@xml/file_paths"></meta-data>
         </provider>
 
-        <activity android:name=".MainActivity">
+        <activity android:name="mobiledev.unb.ca.lab4skeleton.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
