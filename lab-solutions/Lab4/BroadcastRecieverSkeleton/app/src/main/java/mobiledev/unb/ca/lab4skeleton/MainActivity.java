@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Set the camera button intent action
         Button cameraButton = findViewById(R.id.button);
         cameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
                 dispatchTakePictureIntent();
             }
         });
+
+        // Set the broadcast receiver alarm action
     }
 
     @Override
