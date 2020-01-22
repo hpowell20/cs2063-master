@@ -55,12 +55,13 @@ public class ExternalActivityCalls extends Activity {
         final Button backButton = findViewById(R.id.btnBack);
         backButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent backIntent = new Intent(ExternalActivityCalls.this, MainActivity.class);
+                /*Intent backIntent = new Intent(ExternalActivityCalls.this, MainActivity.class);
                 if (backIntent.resolveActivity(getPackageManager()) != null) {
                     startActivity(backIntent);
-                }
+                }*/
 
-                //ExternalActivityCalls.this.finish();
+                // This will kill the activity on the backstack
+                ExternalActivityCalls.this.finish();
             }
         });
     }
@@ -131,7 +132,7 @@ public class ExternalActivityCalls extends Activity {
 
     // This follows the latest version on the documentation; an alternate implementation
     // can be found at https://web.archive.org/web/20150207090211/https://developer.android.com/training/camera/photobasics.html
-    // if needed.  NOt recommended however.
+    // if needed.  Not recommended however.
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());

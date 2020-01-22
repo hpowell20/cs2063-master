@@ -155,7 +155,7 @@ With the required hardware feature to be used declared for the app you can wire 
 
 1. Using the example code from the [Take Photos](https://developer.android.com/training/camera/photobasics.html#TaskPath) documentation as a base implement the Intent used to take a picture and save the full-size photo.  Please note the following.
   * Use the name ```"mobiledev.unb.ca.lab3intents.provider"```  for the authority name in place of ```"com.example.android.fileprovider"``` in both the code and the AndroidManifest.xml file.
-  * For the resource file at _res/xml/file_paths.xml_ use add the content:
+  * Create a new resource file at _res/xml/file_paths.xml_ and add the following content:
   ```XML
   <?xml version="1.0" encoding="utf-8"?>
   <paths>
@@ -163,6 +163,7 @@ With the required hardware feature to be used declared for the app you can wire 
       path="Android/data/mobiledev.unb.ca.lab3intents/files/Pictures" />
   </paths>
   ```
+    * NOTE: The documentation specifies external-files-path, however, this throws an error.  The XML file contents as shown above have been known to work in an emulator and device
 
 **Task 8**
 
