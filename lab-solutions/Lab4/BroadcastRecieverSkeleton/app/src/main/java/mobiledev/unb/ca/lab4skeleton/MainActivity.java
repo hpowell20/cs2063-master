@@ -19,7 +19,8 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    private static final int REQUEST_TAKE_PHOTO = 1;
+
+    private static final int REQUEST_CAPTURE_IMAGE = 100;
     public static final String TIME_STAMP_FORMAT = "yyyyMMdd_HHmmss";
 
     private String currentPhotoPath;
@@ -43,13 +44,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Check which request we're responding to
-        if (requestCode == REQUEST_TAKE_PHOTO) {
-            // Make sure the request was successful
-            if (resultCode == RESULT_OK) {
+        // Check which request we're responding to and ensure the request was successful
+        if (requestCode == REQUEST_CAPTURE_IMAGE && resultCode == RESULT_OK) {
                 galleryAddPic();
             }
-        }
     }
 
     private void dispatchTakePictureIntent() {
@@ -69,13 +67,13 @@ public class MainActivity extends AppCompatActivity {
             // Take the picture if the File object was created successfully
             if (null != photoFile) {
                 Uri photoURI = FileProvider.getUriForFile(this,
-                        "mobiledev.unb.ca.lab6skeleton.provider",
+                        "mobiledev.unb.ca.lab4skeleton.provider",
                         photoFile);
 
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
 
                 // Calling this method allows us to capture the return code
-                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+                startActivityForResult(takePictureIntent, REQUEST_CAPTURE_IMAGE);
             }
         }
     }
@@ -83,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat(TIME_STAMP_FORMAT).format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
+        String imageFileName = "IMG_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,  // prefix
