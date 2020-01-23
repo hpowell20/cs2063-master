@@ -7,7 +7,6 @@
 package course.examples.threading.threadingsimple;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,7 +18,6 @@ public class SimpleThreadingExample extends Activity {
 
     private static final String TAG = "SimpleThreadingExample";
 
-    private Bitmap mBitmap;
     private ImageView mIView;
     private final int mDelay = 5000;
 
@@ -30,7 +28,7 @@ public class SimpleThreadingExample extends Activity {
         mIView = findViewById(R.id.imageView);
     }
 
-    public void onClickLoadButton(@SuppressWarnings("unused") View v) {
+    public void onClickLoadButton(View v) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -48,9 +46,8 @@ public class SimpleThreadingExample extends Activity {
     }
 
 
-    public void onClickOtherButton(@SuppressWarnings("unused") View v) {
+    public void onClickOtherButton(View v) {
         Toast.makeText(SimpleThreadingExample.this, "I'm Working",
                 Toast.LENGTH_SHORT).show();
     }
-
 }
