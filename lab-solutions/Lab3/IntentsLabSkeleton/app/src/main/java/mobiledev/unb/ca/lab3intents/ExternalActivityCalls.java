@@ -23,7 +23,7 @@ public class ExternalActivityCalls extends Activity {
 
     private static final String TAG = "ExternalActivityCalls";
 
-    private static final int REQUEST_TAKE_PHOTO = 1;
+    private static final int REQUEST_CAPTURE_IMAGE = 100;
 
     private static final String[] RECIPIENTS = {"hpowell@unb.ca"};
     private static final String EMAIL_SUBJECT = "CS2063 Lab 3";
@@ -55,24 +55,22 @@ public class ExternalActivityCalls extends Activity {
         final Button backButton = findViewById(R.id.btnBack);
         backButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent backIntent = new Intent(ExternalActivityCalls.this, MainActivity.class);
+                /*Intent backIntent = new Intent(ExternalActivityCalls.this, MainActivity.class);
                 if (backIntent.resolveActivity(getPackageManager()) != null) {
                     startActivity(backIntent);
-                }
+                }*/
 
-                //ExternalActivityCalls.this.finish();
+                // This will kill the activity on the backstack
+                ExternalActivityCalls.this.finish();
             }
         });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Check which request we're responding to
-        if (requestCode == REQUEST_TAKE_PHOTO) {
-            // Make sure the request was successful
-            if (resultCode == RESULT_OK) {
+        // Check which request we're responding to and make sure the request was successful
+        if (requestCode == REQUEST_CAPTURE_IMAGE && resultCode == RESULT_OK) {
                 galleryAddPic();
-            }
         }
     }
 
@@ -124,19 +122,19 @@ public class ExternalActivityCalls extends Activity {
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
 
                 // Calling this method allows us to capture the return code
-                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+                startActivityForResult(takePictureIntent, REQUEST_CAPTURE_IMAGE);
             }
         }
     }
 
     // This follows the latest version on the documentation; an alternate implementation
     // can be found at https://web.archive.org/web/20150207090211/https://developer.android.com/training/camera/photobasics.html
-    // if needed.  NOt recommended however.
+    // if needed.  Not recommended however.
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        String imageFileName = "IMG_" + timeStamp + "_";
+        File storageDir =  getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,  // prefix
                 ".jpg",   // suffix

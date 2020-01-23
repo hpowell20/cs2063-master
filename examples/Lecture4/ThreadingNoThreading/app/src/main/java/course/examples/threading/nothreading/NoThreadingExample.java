@@ -17,15 +17,15 @@ public class NoThreadingExample extends Activity {
         mIView = findViewById(R.id.imageView);
     }
 
-    public void onClickOtherButton(@SuppressWarnings("unused") View v) {
+    public void onClickOtherButton(View v) {
         Toast.makeText(NoThreadingExample.this, "I'm Working",
                 Toast.LENGTH_SHORT).show();
     }
 
 
-    public void onClickLoadButton(@SuppressWarnings("unused") View view) {
+    public void onClickLoadButton(View view) {
         try {
-            // Accentuates slow operation
+            // Accentuates slow operation; this will block any actions
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
