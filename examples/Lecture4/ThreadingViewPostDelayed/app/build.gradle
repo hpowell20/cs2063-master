@@ -1,0 +1,24 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+    //buildToolsVersion "29.0.2"
+
+    defaultConfig {
+        applicationId "mobiledev.unb.unb.threadingviewpostdelayed"
+        minSdkVersion 21
+        targetSdkVersion 27
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+/*dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+}*/
