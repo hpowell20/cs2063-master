@@ -22,7 +22,6 @@ public class NetworkingURLActivity extends Activity implements RetainedFragment.
                     .findFragmentByTag(RetainedFragment.TAG);
             mTextView.setText(savedInstanceState.getCharSequence(MTEXTVIEW_TEXT_KEY));
         } else {
-
             mRetainedFragment = new RetainedFragment();
             getFragmentManager().beginTransaction()
                     .add(mRetainedFragment, RetainedFragment.TAG)
@@ -30,7 +29,7 @@ public class NetworkingURLActivity extends Activity implements RetainedFragment.
         }
     }
 
-	public void onClick(@SuppressWarnings("unused") View v) {
+	public void onClick(View v) {
         mRetainedFragment.onButtonPressed();
 	}
 
