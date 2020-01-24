@@ -42,14 +42,14 @@ public class HandlerMessagesActivity extends Activity {
         }
     }
 
-    public void onClickLoadButton(@SuppressWarnings("unused") View v) {
+    public void onClickLoadButton(View v) {
         mLoadIconTask = new LoadIconTask(getApplicationContext())
                 .setmImageView(mImageView)
                 .setmProgressBar(mProgressBar);
         mLoadIconTask.start();
     }
 
-    public void onClickOtherButton(@SuppressWarnings("unused") View v) {
+    public void onClickOtherButton(View v) {
         Toast.makeText(HandlerMessagesActivity.this, "I'm Working",
                 Toast.LENGTH_SHORT).show();
     }
