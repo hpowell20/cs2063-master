@@ -33,7 +33,7 @@
             android:onClick="onClickLoadButton"
             android:text="@string/load_icon_string"
             android:textAppearance="@android:style/TextAppearance.Material.Large"
-            android:textColor="@color/white" />
+            android:textColor="@color/text_color" />
 
         <Button
             android:id="@+id/otherButton"
@@ -43,7 +43,7 @@
             android:onClick="onClickOtherButton"
             android:text="@string/other_button_string"
             android:textAppearance="@android:style/TextAppearance.Material.Large"
-            android:textColor="@color/white" />
+            android:textColor="@color/primaryText" />
 
     </RelativeLayout>
 
