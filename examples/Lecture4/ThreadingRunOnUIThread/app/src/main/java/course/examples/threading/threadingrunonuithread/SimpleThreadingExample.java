@@ -20,12 +20,12 @@ public class SimpleThreadingExample extends Activity {
 
     }
 
-    public void onClickOtherButton(@SuppressWarnings("unused") View v) {
+    public void onClickOtherButton(View v) {
         Toast.makeText(SimpleThreadingExample.this, "I'm Working",
                 Toast.LENGTH_SHORT).show();
     }
 
-    public void onClickLoadButton(@SuppressWarnings("unused") View view) {
+    public void onClickLoadButton(View view) {
         new Thread(new Runnable() {
             @Override
             public void run() {
