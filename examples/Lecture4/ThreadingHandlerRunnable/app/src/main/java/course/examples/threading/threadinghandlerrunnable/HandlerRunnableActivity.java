@@ -10,9 +10,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class HandlerRunnableActivity extends Activity {
-
-    @SuppressWarnings("unused")
-    private final String TAG = getClass().getSimpleName();
     private LoadIconTask mLoadIconTask;
     private ImageView mImageView;
     private ProgressBar mProgressBar;
@@ -50,7 +47,7 @@ public class HandlerRunnableActivity extends Activity {
     }
 
 
-    public void onClickOtherButton(@SuppressWarnings("unused") View v) {
+    public void onClickOtherButton(View v) {
         Toast.makeText(HandlerRunnableActivity.this, "I'm Working",
                 Toast.LENGTH_SHORT).show();
     }
