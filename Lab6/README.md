@@ -79,8 +79,30 @@ With the Broadcast Receiver in place let's go back and set an alarm.  The alarm 
 
 ## Add Notifications ##
 
+**Hints**
+
+As of Android 8.0 (API level 26) a few updates to the way Notifications are handled were added:
+* When setting the notification content a channel ID is required.  If you are running against an older version this value will be ignored.
+* The app's notification channel must be registered with the system by passing an instance of ```NotificationChannel``` to ```createNotificationChannel```.
+	* The notification channel must be created prior to posting any notifications
+	* Best practice is to execute this code as soon as the app starts
+
 **Task 4**
-Add Notification channel
+With the alarm in place we need to update the project to display a Toast notification which will prompt the user to take another picture.
+
+1. Open the ```AlarmReceiver``` class and complete the implementation for the ```onReceive``` method by adding a notification.
+	* Follow the _*Create a basic notification*_ section in the [guide](https://developer.android.com/training/notify-user/build-notification#SimpleNotification) for this
+	* The action of this notification will be to start ```MainActivity``` (i.e. clicking on the notification takes the user back to the app)
+		* Additional details to watch when building your notification:
+			* Set the small icon to ```R.mipmap.ic_launcher```
+			* Set [```setAutoCancel```](http://developer.android.com/reference/android/app/Notification.Builder.html#setAutoCancel%28boolean%29) to ```true``` so that when the user clicks on the notification it is dismissed
+			* Set the importance as IMPORTANCE_HIGH
+
+2. Run the app again
+	* When the alarm fires, you should see the notifications that you have created
+	* Notice that the alarm continues to fire even after you have closed the app
+
+### Conserving power
 
 
 Details of the alarm:
@@ -93,15 +115,6 @@ Also create a BroadcastReceiver to monitor the state of the
 battery. If the battery is low, turn off the alarm and issue a
 notification. If the battery state becomes OK, turn the alarm on, and
 issue a notification.
-**Task 4 - Add Notification**
-
-Now let's go back to ```AlarmReceiver``` and finish implementing ```onReceive```. Follow the _*Creating a simple notification*_ section in the [guide](https://web.archive.org/web/20160303170900/https://developer.android.com/guide/topics/ui/notifiers/notifications.html#SimpleNotification) for this.
-
-The action of this notification will be to start ```MainActivity``` (i.e. clicking on the notification takes the user back to the app).  When building your notification, you can set the small icon to ```R.mipmap.ic_launcher```, and you should set [```setAutoCancel```](http://developer.android.com/reference/android/app/Notification.Builder.html#setAutoCancel%28boolean%29) to ```true``` so that when the user clicks on the notification it is dismissed.
-
-Now you can run your app. When the alarm fires, you should see the notifications that you have created. Notice that the alarm continues to fire even after you have closed the app.
-
-### Conserving power
 
 Now we will modify our app to conserve power when the battery is low by disabling the alarm.  
 
