@@ -1,9 +1,13 @@
 package mobiledev.unb.ca.lab4skeleton;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
@@ -21,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     private static final int REQUEST_CAPTURE_IMAGE = 100;
-    public static final String TIME_STAMP_FORMAT = "yyyyMMdd_HHmmss";
+    private static final String TIME_STAMP_FORMAT = "yyyyMMdd_HHmmss";
+    private static final int INTERVAL_SIXTY_SECONDS = 60 * 1000;
 
     private String currentPhotoPath;
 
@@ -40,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Set the broadcast receiver alarm action
+        startAlarm();
     }
 
     @Override
@@ -50,6 +56,23 @@ public class MainActivity extends AppCompatActivity {
             }
     }
 
+    // Alarm Methods
+    private void startAlarm() {
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        Intent setAlarmIntent = new Intent(MainActivity.this, AlarmReceiver.class);
+        PendingIntent alarmIntent = PendingIntent.getBroadcast(MainActivity.this,
+                0,
+                setAlarmIntent,
+                0);
+
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,
+                SystemClock.elapsedRealtime() + INTERVAL_SIXTY_SECONDS,
+                INTERVAL_SIXTY_SECONDS,
+                alarmIntent);
+    }
+
+    // Camera Methods
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 

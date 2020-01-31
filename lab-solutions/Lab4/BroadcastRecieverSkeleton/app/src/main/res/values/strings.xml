@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Broadcast Receivers Skeleton</string>
     <string name="button_text">Take a photo</string>
+    <string name="logging_at_string">Logging alarm at: %1$s</string>
 </resources>
