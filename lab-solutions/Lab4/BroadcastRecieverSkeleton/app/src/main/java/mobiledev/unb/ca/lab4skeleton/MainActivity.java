@@ -2,8 +2,10 @@ package mobiledev.unb.ca.lab4skeleton;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -14,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int INTERVAL_SIXTY_SECONDS = 60 * 1000;
 
     private String currentPhotoPath;
+    private AlarmManager alarmManager;
+    private PendingIntent alarmReceiverIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +50,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Set the broadcast receiver alarm action
+        initAlarmValues();
         startAlarm();
+
+        // Set the battery filter intent
+        setBatteryIntentFilter();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // Unregister the battery receiver to avoid memory leaks
+        unregisterReceiver(batteryInfoReceiver);
     }
 
     @Override
@@ -53,23 +70,72 @@ public class MainActivity extends AppCompatActivity {
         // Check which request we're responding to and ensure the request was successful
         if (requestCode == REQUEST_CAPTURE_IMAGE && resultCode == RESULT_OK) {
                 galleryAddPic();
+        }
+    }
+
+    // Battery Check Methods
+    private BroadcastReceiver batteryInfoReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String intentAction = intent.getAction();
+            if (Intent.ACTION_BATTERY_OKAY.equals(intentAction)) {
+                Log.i(TAG, "Battery level good; starting the alarm");
+                startAlarm();
             }
+
+            if (Intent.ACTION_BATTERY_LOW.equals(intentAction)) {
+                Log.i(TAG, "Battery level low; cancelling the alarm");
+                cancelAlarm();
+            }
+        }
+    };
+
+    private void setBatteryIntentFilter() {
+        IntentFilter batteryIntentFilter = new IntentFilter();
+        batteryIntentFilter.addAction(Intent.ACTION_BATTERY_OKAY);
+        batteryIntentFilter.addAction(Intent.ACTION_BATTERY_LOW);
+
+        getApplicationContext().registerReceiver(batteryInfoReceiver, batteryIntentFilter);
     }
 
     // Alarm Methods
+    private void initAlarmValues() {
+        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        Intent setAlarmIntent = new Intent(MainActivity.this, AlarmReceiver.class);
+        alarmReceiverIntent = PendingIntent.getBroadcast(MainActivity.this,
+                0,
+                setAlarmIntent,
+                0);
+    }
+
     private void startAlarm() {
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        /*AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
         Intent setAlarmIntent = new Intent(MainActivity.this, AlarmReceiver.class);
         PendingIntent alarmIntent = PendingIntent.getBroadcast(MainActivity.this,
                 0,
                 setAlarmIntent,
-                0);
+                0);*/
 
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,
                 SystemClock.elapsedRealtime() + INTERVAL_SIXTY_SECONDS,
                 INTERVAL_SIXTY_SECONDS,
-                alarmIntent);
+                alarmReceiverIntent);
+
+        Toast.makeText(MainActivity.this, "Alarm started", Toast.LENGTH_SHORT).show();
+    }
+
+    private void cancelAlarm() {
+        /*AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent cancelAlarmIntent = new Intent(MainActivity.this, AlarmReceiver.class);
+        PendingIntent alarmIntent = PendingIntent.getBroadcast(MainActivity.this,
+                0,
+                cancelAlarmIntent,
+                0);*/
+
+        alarmManager.cancel(alarmReceiverIntent);
+        Toast.makeText(MainActivity.this, "Alarm cancelled", Toast.LENGTH_LONG).show();
     }
 
     // Camera Methods

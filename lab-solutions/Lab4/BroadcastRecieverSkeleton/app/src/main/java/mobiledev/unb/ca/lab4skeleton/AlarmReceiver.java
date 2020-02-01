@@ -74,6 +74,4 @@ public class AlarmReceiver extends BroadcastReceiver {
             notificationManager.createNotificationChannel(channel);
         }
     }
-
-
 }
