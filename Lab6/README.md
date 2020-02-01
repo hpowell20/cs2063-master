@@ -102,25 +102,13 @@ With the alarm in place we need to update the project to display a Toast notific
 
 ### Conserving power
 
+In lecture we've seen how the Android will start killing processes when the battery or other resources are running low.  Having a constantly running alarm task could be a candidate for termination in a low battery state.  
 
-Details of the alarm:
-When an alarm is received, if the activity is open, have it display a
-Toast notification to take another picture. If it is closed, then
-create a Notification in the Notification window; when the user
-selects that it takes them back to the original app.
+**Task 5**
 
-Also create a BroadcastReceiver to monitor the state of the
-battery. If the battery is low, turn off the alarm and issue a
-notification. If the battery state becomes OK, turn the alarm on, and
-issue a notification.
+Android sends an ```ACTION_BATTERY_LOW``` intent when the system changes to a low battery state and an ```ACTION_BATTERY_OKAY``` intent when the battery level is high enough again after previously being low. We will receive these intents to change the behavior of our app.
 
-Now we will modify our app to conserve power when the battery is low by disabling the alarm.  
-
-**Task 5 - Check Battery State**
-Android sends an ```ACTION_BATTERY_LOW``` intent when the system changes to a low battery state, and an ```ACTION_BATTERY_OKAY``` intent when the battery level is high enough again after previously being low. We will receive these intents to change the behavior of our app.
-
-In ```MainActivity``` create a new ```BroadcastReceiver``` called ```batteryInfoReceiver``` and ```@Override``` its ```onReceive``` method. This will look like this:
-
+1. In ```MainActivity``` create a new ```BroadcastReceiver``` called ```batteryInfoReceiver``` and ```@Override``` its ```onReceive``` method similar to the following
 ```
 private BroadcastReceiver batteryInfoReceiver = new BroadcastReceiver() {
     @Override
@@ -130,22 +118,31 @@ private BroadcastReceiver batteryInfoReceiver = new BroadcastReceiver() {
 ```
 
 **Task 6**
-In ```MainActivity.onCreate``` create a new ```IntentFilter``` that includes the actions ```ACTION_BATTERY_LOW``` and ```ACTION_BATTERY_OKAY```.  Register ```batteryInfoReceiver``` so that it will receive any intent that matches the filter you just created.
 
-Hint: Create an [```IntentFilter```](http://developer.android.com/reference/android/content/IntentFilter.html) and call ```addAction``` to add the appropriate actions to it.
+Now we will modify our app to conserve power when the battery is low by disabling the alarm.  If the battery is low turn off the alarm and issue a notification. If the battery state becomes OK, turn the alarm on, and issue a notification.
 
-Hint: [```registerReceiver```](http://developer.android.com/reference/android/content/Context.html#registerReceiver%28android.content.BroadcastReceiver,%20android.content.IntentFilter%29)
+1. In ```MainActivity.onCreate``` create a new ```IntentFilter``` that includes the actions ```ACTION_BATTERY_LOW``` and ```ACTION_BATTERY_OKAY```
+	* Create an [IntentFilter](http://developer.android.com/reference/android/content/IntentFilter.html) and call ```addAction``` to add the appropriate actions to it
 
+2. Register ```batteryInfoReceiver``` so that it will receive any intent that matches the filter you just created
+   - Have a look at [registerReceiver](https://developer.android.com/reference/android/content/Context.html#registerReceiver(android.content.BroadcastReceiver,%20android.content.IntentFilter)) for reference
 
-Now implement ```batteryInfoReceiver.onReceive()```. If an ```ACTION_BATTERY_LOW``` intent is received, cancel the alarm.  If an ```ACTION_BATTERY_OKAY``` intent is received, set the alarm just like you did previously. Also show a ```Toast``` indicating which intent was received.
+2. Update the  ```batteryInfoReceiver.onReceive()``` method
+   * If an ```ACTION_BATTERY_LOW``` intent is received cancel the alarm and show a ```Toast``` message
+	 * If an ```ACTION_BATTERY_OKAY``` intent is received set the alarm just like you did previously and show a ```Toast``` indicating which intent was received
 
-We dynamically registered ```batteryInfoReceiver``` and so we also need to unregister it to avoid memory leaks. ```@Override``` ```MainActivity.onDestroy()``` and unregister ```batteryInfoReceiver``` here.
+3. We dynamically registered ```batteryInfoReceiver``` and so we also need to unregister it to avoid memory leaks
+   * Create an ```@Override``` ```MainActivity.onDestroy()``` method
+	 * Unregister ```batteryInfoReceiver``` here
 
 #### Note about testing
 
-This portion of the lab will be very difficult to test if you are using a physical device. This is due to the fact that you would have to wait for the battery to become low to be able to test if the app responded correctly.  The recommended approach to test the code is using an Android emulator (which you might have installed on your own computer, but is not available on the lab machines).  The Android emulator allows you to easily simulate a device's battery state or location, receiving a text message, etc.
-
-For the purposes of this lab, if you are testing on a physical device, instead have the app cancel the alarm if the AC power is disconnected, and set the alarm when the AC power is connected. To do this, just use ```ACTION_POWER_DISCONNECTED``` instead of ```ACTION_BATTERY_LOW``` and ```ACTION_POWER_CONNECTED``` instead of ```ACTION_BATTERY_OK```.  You will not be able to test this portion of the lab on the Android VM on the computers in the lab.
+In order to test the battery conditions this portion of the lab will be very difficult to test if you are using a physical device.  This due to the fact that you would have to wait for the battery to become low to be able to test if the app responded correctly.
+* The recommended approach to test the code is using an Android emulator
+* The Android emulator allows you to easily simulate a device's battery state or location, receiving a text message, etc.
+* If you are using a physical device for testing use checks against the AC power connection as opposed to battery level
+  * Have the app cancel the alarm if the AC power is disconnected and set the alarm when the AC power is connected
+  * Use ```ACTION_POWER_DISCONNECTED``` instead of ```ACTION_BATTERY_LOW``` and ```ACTION_POWER_CONNECTED``` instead of ```ACTION_BATTERY_OKAY```
 
 
 **Lab Completion**
