@@ -2,9 +2,11 @@ package mobiledev.unb.ca.lab4skeleton;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -27,15 +29,19 @@ public class AlarmReceiver extends BroadcastReceiver {
         String channelId = context.getPackageName() + ".channel_01";
         createNotificationChannel(context, channelId);
 
+        // Set the tap action
+        Intent tapIntent = new Intent(context, MainActivity.class);
+        tapIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingTapIntent = PendingIntent.getActivity(context, 0, tapIntent, 0);
+
         // Create the Notification
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId)
-                .setAutoCancel(true)
                 .setSmallIcon(R.mipmap.ic_launcher)
+                .setAutoCancel(true)
+                .setContentIntent(pendingTapIntent)
                 .setContentTitle(context.getString(R.string.notification_title))
                 .setContentText(context.getString(R.string.notification_text));
 
-        // TODO: Set the tap action
-        
         // Show the notification
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(NOTIFICATION_ID, builder.build());
@@ -56,6 +62,12 @@ public class AlarmReceiver extends BroadcastReceiver {
             // Create the NotificationChannel object
             NotificationChannel channel = new NotificationChannel(channelId, name, importance);
             channel.setDescription(description);
+            channel.enableLights(true);
+
+            // Sets the notification light color for notifications posted to this
+            // channel, if the device supports this feature.
+            channel.setLightColor(Color.GREEN);
+            channel.enableVibration(true);
 
             // Register the channel with the system
             NotificationManager notificationManager = context.getSystemService(NotificationManager.class);

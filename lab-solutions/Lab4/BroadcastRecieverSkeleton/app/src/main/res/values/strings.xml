@@ -4,6 +4,6 @@
     <string name="logging_at_string">Logging alarm at: %1$s</string>
     <string name="channel_name">Lab 4 Notification Channel</string>
     <string name="channel_description">Notification channel for AlarmReceiver</string>
-    <string name="notification_title">Gentle Reminder</string>
-    <string name="notification_text">Remember to take a photo</string>
+    <string name="notification_title">Notification Alert.  Click Me.</string>
+    <string name="notification_text">Reminder to take a photo</string>
 </resources>

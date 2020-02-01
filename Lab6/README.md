@@ -79,8 +79,6 @@ With the Broadcast Receiver in place let's go back and set an alarm.  The alarm 
 
 ## Add Notifications ##
 
-**Hints**
-
 As of Android 8.0 (API level 26) a few updates to the way Notifications are handled were added:
 * When setting the notification content a channel ID is required.  If you are running against an older version this value will be ignored.
 * The app's notification channel must be registered with the system by passing an instance of ```NotificationChannel``` to ```createNotificationChannel```.
