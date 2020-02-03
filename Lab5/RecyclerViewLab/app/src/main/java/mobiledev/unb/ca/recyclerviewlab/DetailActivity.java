@@ -1,12 +1,8 @@
-package mobiledev.unb.ca.myapplication;
+package mobiledev.unb.ca.recyclerviewlab;
 
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.text.method.ScrollingMovementMethod;
-import android.widget.TextView;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -24,7 +20,5 @@ public class DetailActivity extends AppCompatActivity {
 
 
         //  TODO 4 Set the title of the action bar to be the course title
-
     }
-
 }

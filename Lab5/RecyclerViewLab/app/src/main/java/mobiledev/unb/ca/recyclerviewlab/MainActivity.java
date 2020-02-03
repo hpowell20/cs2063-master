@@ -1,15 +1,15 @@
-package mobiledev.unb.ca.myapplication;
+package mobiledev.unb.ca.recyclerviewlab;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import mobiledev.unb.ca.recyclerviewlab.model.Course;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // TODO 1 Get the ArrayList of Courses from the DataModel
+        // TODO 1 Get the ArrayList of Courses from the JsonUtils
         // (Ideally we would do this loading off of the main thread. We'll get to that
         // in the next lab. Today we're focusing on displyaing scrolling lists.)
 
@@ -87,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
         public int getItemCount() {
             return mDataset.size();
         }
-
     }
 }
 

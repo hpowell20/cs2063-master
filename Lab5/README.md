@@ -39,7 +39,7 @@ Note that there are four Java classes:
 
 * `Course` represents a course (!). It provides methods to get the course title and description.
 
-* `DataModel` accesses a ```JSON``` asset file included in the project (in ```assets/CS.json```). This ```JSON``` file contains information about Computer Science courses available at UNB. The ```DataModel``` class processes the ```JSON``` to create ```Course``` items. Note in particular the ```DataModel``` constructor and the argument it takes, and the ```DataModel.getCourses()``` method.
+* `JsonUtils` accesses a ```JSON``` asset file included in the project (in ```assets/CS.json```). This ```JSON``` file contains information about Computer Science courses available at UNB. The ```JsonUtils``` class processes the ```JSON``` to create ```Course``` items. Note in particular the ```JsonUtils``` constructor and the argument it takes, and the ```JsonUtils.getCourses()``` method.
 
 * `DetailActivity` will correspond to the second screenshot above, displaying information about a specific course. It doesn't do much yet. You will complete it during the lab.
 

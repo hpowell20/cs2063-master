@@ -1,4 +1,4 @@
-package mobiledev.unb.ca.myapplication;
+package mobiledev.unb.ca.recyclerviewlab;
 
 import org.junit.Test;
 
