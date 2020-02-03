@@ -7,8 +7,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 public class LoadIconTask extends Thread {
-    @SuppressWarnings("unused")
-    private final String TAG = getClass().getSimpleName();
     private final Handler mHandler;
     private ImageView mImageView;
     private ProgressBar mProgressBar;
@@ -39,7 +37,6 @@ public class LoadIconTask extends Thread {
         });
 
         // Simulating long-running operation
-
         for (int i = 1; i < 11; i++) {
             sleep();
             final int step = i;

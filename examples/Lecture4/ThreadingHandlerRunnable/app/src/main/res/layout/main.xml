@@ -32,7 +32,7 @@
             android:layout_below="@id/progressBar"
             android:text="@string/load_icon_string"
             android:textAppearance="@android:style/TextAppearance.Material.Large"
-            android:textColor="@color/white"
+            android:textColor="@color/text_color"
             android:onClick="onClickLoadButton"/>
 
         <Button
@@ -42,7 +42,7 @@
             android:layout_below="@id/loadButton"
             android:text="@string/other_button_string"
             android:textAppearance="@android:style/TextAppearance.Material.Large"
-            android:textColor="@color/white"
+            android:textColor="@color/text_color"
             android:onClick="onClickOtherButton"/>
 
 

@@ -18,12 +18,12 @@ public class SimpleThreadingViewPostActivity extends Activity {
         mImageView = findViewById(R.id.imageView);
     }
 
-    public void onClickOtherButton(@SuppressWarnings("unused") View v) {
+    public void onClickOtherButton(View v) {
         Toast.makeText(SimpleThreadingViewPostActivity.this, "I'm Working",
                 Toast.LENGTH_SHORT).show();
     }
 
-    public void onClickLoadButton(@SuppressWarnings("unused") final View view) {
+    public void onClickLoadButton(final View view) {
         view.setEnabled(false);
         new Thread(new Runnable() {
             @Override

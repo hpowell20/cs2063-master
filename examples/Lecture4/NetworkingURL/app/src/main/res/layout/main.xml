@@ -9,7 +9,7 @@
         android:id="@+id/load_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:textColor="@color/primaryText"
         android:text="@string/load_data_string"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
         android:onClick="onClick">

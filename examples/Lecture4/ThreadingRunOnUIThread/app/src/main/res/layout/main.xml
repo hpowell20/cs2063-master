@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/imageView"
         android:text="@string/load_icon_string"
-        android:textColor="@color/white"
+        android:textColor="@color/text_color"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
         android:onClick="onClickLoadButton">
     </Button>
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/loadButton"
         android:text="@string/other_button_string"
-        android:textColor="@color/white"
+        android:textColor="@color/primaryText"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
         android:onClick="onClickOtherButton">
     </Button>

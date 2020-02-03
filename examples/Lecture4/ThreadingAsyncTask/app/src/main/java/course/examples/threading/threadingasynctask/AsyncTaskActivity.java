@@ -44,13 +44,13 @@ public class AsyncTaskActivity extends Activity implements AsyncTaskFragment.OnF
         }
     }
 
-    public void onClickLoadButton(@SuppressWarnings("unused") View v) {
+    public void onClickLoadButton(View v) {
         mLoadButton.setEnabled(false);
         mAsyncTaskFragment.onButtonPressed();
     }
 
 
-    public void onClickOtherButton(@SuppressWarnings("unused") View v) {
+    public void onClickOtherButton(View v) {
         Toast.makeText(AsyncTaskActivity.this, "I'm Working",
                 Toast.LENGTH_SHORT).show();
     }
