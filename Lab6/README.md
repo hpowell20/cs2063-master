@@ -139,8 +139,8 @@ Now we will modify our app to conserve power when the battery is low by disablin
 
 In order to test the battery conditions this portion of the lab will be very difficult to test if you are using a physical device.  This due to the fact that you would have to wait for the battery to become low to be able to test if the app responded correctly.
 * The recommended approach to test the code is using an Android emulator
-* The Android emulator allows you to easily simulate a device's battery state or location, receiving a text message, etc.
-* If you are using a physical device for testing use checks against the AC power connection as opposed to battery level
+* The Android emulator can simulate a device's battery state or location, receiving a text message, etc.
+* If you are using a physical device for testing check against the AC power connection as opposed to battery level
   * Have the app cancel the alarm if the AC power is disconnected and set the alarm when the AC power is connected
   * Use ```ACTION_POWER_DISCONNECTED``` instead of ```ACTION_BATTERY_LOW``` and ```ACTION_POWER_CONNECTED``` instead of ```ACTION_BATTERY_OKAY```
 
