@@ -1,6 +1,11 @@
-# Lab 6 - Broadcast Receivers
+# Lab 5 - AsyncTask
 
-Today’s lab will build off the camera integration code used in the last lab to go deeper into working with Broadcast Receivers, alarms, and notifications.  
+In lecture we've seen the importance of moving long-running operations off of the UI thread and into a worker thread. In this lab you will implement (portions of) this functionality using an ```AsyncTask```.
+
+Start by downloading the skeleton code for the lab.  This app uses the master/detail flow (MDF) pattern, which we briefly saw in lecture 2. This app is similar in structure to an app created using the default MDF template available through Android Studio (and similar to the MDFDemo in the Examples directory). It presents a list of recent earthquakes downloaded from the United States Geological
+Survey.  Selecting an earthquake presents further details about it. On a small device, this is a separate activity; on a larger device, the details are presented alongside the scrolling list.
+
+This [website](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php) describes a variety of [JSON](http://www.json.org/) feeds that provide information about recent earthquakes. We will use data from the feed that provides information about [all earthquakes in the past day](https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson).
 
 ## Pair Programming
 
@@ -11,141 +16,45 @@ We will again be doing pair programming for this lab.  Details on pair programmi
 **Switch between the roles of navigator and driver every 10 to 15
 minutes.**
 
-#### Background
+## Understanding the skeleton code
 
-* Make sure you are familiar with the following sections of the Android developer documentation:
-	* [Notifications](https://developer.android.com/training/notify-user/build-notification)
-		* Read through the _*Create a basic notification*_ section which should be sufficient for this lab
-		* Please note this is an older version of this documentation
-	* [Alarms](http://developer.android.com/training/scheduling/alarms.html)
-		* Up to the end of Cancel an Alarm
-	* [Monitoring battery state](http://developer.android.com/training/monitoring-device-state/battery-monitoring.html)
-	* Class overview for [PendingIntent](http://developer.android.com/reference/android/app/PendingIntent.html)
-	* Class overview for [BroadcastReceiver](http://developer.android.com/reference/android/content/BroadcastReceiver.html)
+The MDF pattern employs multiple default layout files to make the UI
+adapt to different screen sizes and orientations:
 
-
-## Introduction
-
-In this lab we will be building a photo taking app that reminds the user to take a photo at regular intervals.  For example this could be the start of an app for a [365 Project](http://365project.org/)-like photography project.
-
-We will also make the app adapt to the battery state of the device to conserve power when the battery is low. In building this app we will learn about Android notifications, alarms, and BroadcastReceivers.
+* activity_geodata_detail.xml
+* activity_geodata_list.xml
+* geodata_detail.xml
+* geodata_list.xml
+  * geodata_list.xml
+  * geodata_list.xml (w900dp)
+* geodata_list_content.xml
 
 
-#### Objectives
-You are given an Android project containing the starting point code for the lab.  It is a single-```Activity``` app that has a button which dispatches an implicit ```Intent``` to take a photo and then saves the photo (same code used in Lab 3 to take a photo).
+The best way to get your bearings in an existing project file is to navigate to the ```AndroidManifest.xml``` and determine which ```Activity``` (represented by your Java source code files) contains the ```<intent-filter>``` signifying it’s the ```MAIN``` ```Activity```. This ```Activity``` will be identified by the ```android:name``` field.  You can navigate to this Java file and see which layout file it instantiates using ```setContentView()```; this will be the first screen users are presented with when this application is run. Navigate to the layout file being utilized by ```setContentView()``` in your ```MAIN``` ```Activity```.
 
-Your task is to examine the role broadcast receivers play and how the user can be notified of changes.  We will cover:
+Take a look at this and other layout files in both the Text and Design editors.  Recall that fragments must be hosted by an ```Activity```; here those ```Activity``` layouts are represented by ```activity_geodata_detail.xml``` and ```activity_geodata_list.xml```.
 
-* Adding a broadcast receiver component for working with messages within the app
-* Creation of a ```Notification```
-* Interacting with the Android system to get device status updates
+Investigating ```activity_geodata_list.xml``` we can see it contains ```framelayout``` which includes the layout ```geodata_list```(.xml). Given there are two ```geodata_list.xml``` files, the Android operating system must decide which layout to present. It does this based on screen size (which can be affected by orientation). Here, the layout file containing ```w900dp``` will be the one used for tablets in landscape mode, allowing both the list of earthquakes and the details of the selected earthquake to be displayed simultaneously side-by-side. The layout file without a screen size modifier is the one that will be used for phones.
 
-### Create the Alarm
+Take a look at the phone ```geodata_list.xml``` layout. Inside it we see a single UI element, a ```RecyclerView```. The ```RecyclerView``` will be used as a scrolling list of earthquakes that, once selected, will present a detailed description about that particular earthquake. Now examine the other ```geodata_list.xml``` file. It contains a ```RecyclerView``` and a ```FrameLayout``` (with id ```geodata_detail_container```) that will be programmatically set to contain a ```Fragment``` representing earthquake details.
 
-First we'll add the functionality to have an alarm go off at regular intervals to remind the user to take a picture.
+Going back to the ```GeoDataListActivity``` Java file we'll now explore how fragments get managed based on what screen size we are running on. Notice that ```GeoDataListActivity``` has a private boolean variable ```mTwoPane```. This member variable represents whether we are running on a screen size appropriate for displaying both the earthquake list and earthquake details simultaneously. If
+this variable is not ```true```, we assume we are running on a smaller screen device such as a phone and the Android OS will deliver the layout necessary to fit that screen size. If the variable is ```true``` the Android OS will deliver the layout details necessary to put that user experience into effect.
 
-**Task 1**
+The ```GeoDataListActivity``` class ```onCreate()``` method will instantiate the ```MAIN``` ```Activity```, provide it the described layout in ```setContentView()```, and handle managing ```Fragment``` attachments. Because we are designing our application for a positive user experience on both phone and tablet, there are some important details regarding how this is accomplished. First, notice we instantiate a ```FragmentManager```. This manager will control which fragments are active in the application based on the logic we provide
+(in this case, the logic implemented by the MDF template).
 
-Create a ```BroadcastReceiver``` to receive alarms.
+This template checks if the ```geodata_detail_container```, which is a ```NestedScrollView``` UI element in the ```activity_geodata_detail.xml```, is ```null```. If the ```geodata_detail_container``` is ```null```, we are in single pane layout (i.e., a phone or tablet in portrait mode); if the ```geodata_detail_container``` is not ```null```, we are in a dual pane layout (i.e., a tablet in landscape mode) utilizing fragments.
 
-1. Add a new Java file called ```AlarmReceiver.java``` which extends ```BroadcastReceiver```
-2. Override ```AlarmReceiver```'s ```onReceive``` method
-	* This method will be called when the ```BroadcastReceiver``` receives a broadcast
-	* Add a ```Log``` message in here for now
+## Todo
 
-**Task 2**
+Complete the TODOs in ```GeoDataListActivity``` and ```DataModel```.
 
-With the ```BroadcastReceiver``` component added to our application it needs to be registered in the ```AndroidManifest.xml``` file.  
+Make sure your app behaves as expected with and without a network connection. Make sure the floating action button (pink button in the bottom right corner) still works while the data is refreshing.
 
-1. Add the following ```receiver``` element inside of the ```application``` element of the file:
-```
-        <receiver android:name=".AlarmReceiver"/>
-```
-
-**Task 3**
-
-With the Broadcast Receiver in place let's go back and set an alarm.  The alarm should be set to repeat roughly every 60 seconds and should wake the device.
-
-1. Update the ```MainActivity.onCreate``` method to set an alarm
-	* The action of the alarm should be to start ```AlarmReceiver```
-		* The documentation on [alarms](http://developer.android.com/training/scheduling/alarms.html) and [PendingIntent](http://developer.android.com/reference/android/app/PendingIntent.html) should help here
-		* NOTE:
-			* We would typically use alarms for much longer durations. For example: for our daily photo app we might set the alarm to run once per day.
-			* However, this short interval will be useful for testing and debugging
-
-2. Run the app
- 	* You should see log messages from ```BroadcastReceiver``` indicating that ```onReceive``` is being called.
+If testing on a phone, it will be difficult to test that your app displays the tablet landscape view correctly (i.e., the list of earthquakes and selected earthquake details side-by-side). To see this behavior, add a third layout resource file for ```geodata_list``` corresponding to landscape layout. Make its contents the same as ```geodata_list.xml (w900dp)```.
 
 
-## Add Notifications ##
+## Deliverable
 
-As of Android 8.0 (API level 26) a few updates to the way Notifications are handled were added:
-* When setting the notification content a channel ID is required.  If you are running against an older version this value will be ignored.
-* The app's notification channel must be registered with the system by passing an instance of ```NotificationChannel``` to ```createNotificationChannel```.
-	* The notification channel must be created prior to posting any notifications
-	* Best practice is to execute this code as soon as the app starts
-
-**Task 4**
-With the alarm in place we need to update the project to display a Toast notification which will prompt the user to take another picture.
-
-1. Open the ```AlarmReceiver``` class and complete the implementation for the ```onReceive``` method by adding a notification.
-	* Follow the _*Create a basic notification*_ section in the [guide](https://developer.android.com/training/notify-user/build-notification#SimpleNotification) for this
-	* The action of this notification will be to start ```MainActivity``` (i.e. clicking on the notification takes the user back to the app)
-		* Additional details to watch when building your notification:
-			* Set the small icon to ```R.mipmap.ic_launcher```
-			* Set [```setAutoCancel```](http://developer.android.com/reference/android/app/Notification.Builder.html#setAutoCancel%28boolean%29) to ```true``` so that when the user clicks on the notification it is dismissed
-			* Set the importance as IMPORTANCE_HIGH
-
-2. Run the app again
-	* When the alarm fires, you should see the notifications that you have created
-	* Notice that the alarm continues to fire even after you have closed the app
-
-### Conserving power
-
-In lecture we've seen how the Android will start killing processes when the battery or other resources are running low.  Having a constantly running alarm task could be a candidate for termination in a low battery state.  
-
-**Task 5**
-
-Android sends an ```ACTION_BATTERY_LOW``` intent when the system changes to a low battery state and an ```ACTION_BATTERY_OKAY``` intent when the battery level is high enough again after previously being low. We will receive these intents to change the behavior of our app.
-
-1. In ```MainActivity``` create a new ```BroadcastReceiver``` called ```batteryInfoReceiver``` and ```@Override``` its ```onReceive``` method similar to the following
-```
-private BroadcastReceiver batteryInfoReceiver = new BroadcastReceiver() {
-    @Override
-    public void onReceive(Context context, Intent intent) {
-    }
-};
-```
-
-**Task 6**
-
-Now we will modify our app to conserve power when the battery is low by disabling the alarm.  If the battery is low turn off the alarm and issue a notification. If the battery state becomes OK, turn the alarm on, and issue a notification.
-
-1. In ```MainActivity.onCreate``` create a new ```IntentFilter``` that includes the actions ```ACTION_BATTERY_LOW``` and ```ACTION_BATTERY_OKAY```
-	* Create an [IntentFilter](http://developer.android.com/reference/android/content/IntentFilter.html) and call ```addAction``` to add the appropriate actions to it
-
-2. Register ```batteryInfoReceiver``` so that it will receive any intent that matches the filter you just created
-   - Have a look at [registerReceiver](https://developer.android.com/reference/android/content/Context.html#registerReceiver(android.content.BroadcastReceiver,%20android.content.IntentFilter)) for reference
-
-2. Update the  ```batteryInfoReceiver.onReceive()``` method
-   * If an ```ACTION_BATTERY_LOW``` intent is received cancel the alarm and show a ```Toast``` message
-	 * If an ```ACTION_BATTERY_OKAY``` intent is received set the alarm just like you did previously and show a ```Toast``` indicating which intent was received
-
-3. We dynamically registered ```batteryInfoReceiver``` and so we also need to unregister it to avoid memory leaks
-   * Create an ```@Override``` ```MainActivity.onDestroy()``` method
-	 * Unregister ```batteryInfoReceiver``` here
-
-#### Note about testing
-
-In order to test the battery conditions this portion of the lab will be very difficult to test if you are using a physical device.  This due to the fact that you would have to wait for the battery to become low to be able to test if the app responded correctly.
-* The recommended approach to test the code is using an Android emulator
-* The Android emulator can simulate a device's battery state or location, receiving a text message, etc.
-* If you are using a physical device for testing check against the AC power connection as opposed to battery level
-  * Have the app cancel the alarm if the AC power is disconnected and set the alarm when the AC power is connected
-  * Use ```ACTION_POWER_DISCONNECTED``` instead of ```ACTION_BATTERY_LOW``` and ```ACTION_POWER_CONNECTED``` instead of ```ACTION_BATTERY_OKAY```
-
-
-**Lab Completion**
-
-* Show the working app running on an emulator to the instructor or TA
-* Keep a copy of your project work and answers for future reference
+Show your working app to the instructor or TA.
