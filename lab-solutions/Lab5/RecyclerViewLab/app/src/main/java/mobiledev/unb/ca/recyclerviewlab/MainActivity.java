@@ -3,6 +3,7 @@ package mobiledev.unb.ca.recyclerviewlab;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -10,17 +11,22 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import mobiledev.unb.ca.recyclerviewlab.model.Course;
+import mobiledev.unb.ca.recyclerviewlab.util.JsonUtils;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // TODO 1 Get the ArrayList of Courses from the JsonUtils
+        // TODO 1 Get the ArrayList of Courses from the JsonUtils class
         // (Ideally we would do this loading off of the main thread. We'll get to that
-        // in the next lab. Today we're focusing on displyaing scrolling lists.)
+        // in the next lab. Today we're focusing on displaying scrolling lists.)
+        JsonUtils jsonUtils = new JsonUtils(getApplicationContext());
+        ArrayList<Course> courses = jsonUtils.getCourses();
+        Log.d(TAG, "Size: " + courses.size());
 
         // TODO 2 Get a reference to the RecyclerView and set its adapter
         // to be an instance of MyAdapter, which you will need to create
