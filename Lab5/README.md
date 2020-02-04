@@ -1,4 +1,4 @@
-# Lab 4 - Scrolling lists
+# Lab 5 - Scrolling lists
 
 ## Pair Programming
 
@@ -11,17 +11,16 @@ minutes.**
 
 ## Pre-lab reading
 
-If you haven't yet done so, read the following documentation on
-`RecyclerView`. This lab assumes you have read it.
-
-https://developer.android.com/training/material/lists-cards.html (only
-the section "Create Lists")
-
-https://developer.android.com/guide/topics/ui/layout/recyclerview.html
+This lab makes use of `RecyclerView`.  Please take some time to read the following documentation
+* https://developer.android.com/training/material/lists-cards.html
+  * Only the section "Create Lists"
+* https://developer.android.com/guide/topics/ui/layout/recyclerview.html
 
 ## Introduction
 
-Many mobile applications need to display a scrollable list of items, where the user can select an item to take some action specific to it. In this lab you will build an app that displays a scrolling list of UNB CS courses (including course numbers, titles and credit hours). Selecting a course from the list of courses in the main activity takes the user to a detail activity showing the description for the selected course. Here are screenshots of the app to show how it works. (Yes, the course information we're using in this lab is a bit out of date...)
+Many mobile applications need to display a scrollable list of items, where the user can select an item to take some action specific to it. In this lab you will build an app that displays a scrolling list of UNB CS courses (including course numbers, titles and credit hours).
+
+Selecting a course from the list of courses in the main activity takes the user to a detail activity showing the description for the selected course. Here are screenshots of the app to show how it works. (Yes, the course information we're using in this lab is a bit out of date...)
 
 ![Main Activity](https://i.imgur.com/8vQZmXf.png?1)
 
@@ -51,15 +50,22 @@ Now take note of the layout files. `activity_detail.xml` and `activity_main.xml`
 
 ## Implementation
 
+**Task 1**
 Complete the TODOs in `MainActivity`
 
-Then complete the TODOs in `DetailActivity`. I've included some hints below.
+**Task 2**
+Complete the TODOs in `DetailActivity`. I've included some hints below.
 
-**TODO 3:** On a smaller device, or for a very long course description, all of the text won't fit on the screen, so we need to be able to scroll the text. There are a variety of ways to make a `TextView` scrollable. Try to independently figure out how to do this. (Google is your friend and has the answer!) If you get stuck, let the instructor or TA know, and we'll try to point you in the right direction.
+**TODO 3** 
 
-**TODO 4:** The `ActionBar` corresponds to the text at the top of the detail activity in the screen shot above (i.e., "CS2063 Introduction to M..."). This might help you: [```getSupportActionBar()```](http://developer.android.com/reference/android/support/v7/app/AppCompatActivity.html#getSupportActionBar%28%29)
+On a smaller device, or for a very long course description, all of the text won't fit on the screen, so we need to be able to scroll the text. There are a variety of ways to make a `TextView` scrollable. Try to independently figure out how to do this. (Google is your friend and has the answer!) If you get stuck, let the instructor or TA know, and we'll try to point you in the right direction.
+
+**TODO 4**
+
+The `ActionBar` corresponds to the text at the top of the detail activity in the screen shot above (i.e., "CS2063 Introduction to M..."). This might help you: [```getSupportActionBar()```](http://developer.android.com/reference/android/support/v7/app/AppCompatActivity.html#getSupportActionBar%28%29)
 
 
-## Deliverable
+**Lab Completion**
 
-Show your working app to the instructor or TA.
+* Show the working app running on an emulator to the instructor or TA
+* Keep a copy of your project work and answers for future reference

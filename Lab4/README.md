@@ -1,4 +1,4 @@
-# Lab 6 - Broadcast Receivers
+# Lab 4 - Broadcast Receivers
 
 Today’s lab will build off the camera integration code used in the last lab to go deeper into working with Broadcast Receivers, alarms, and notifications.  
 

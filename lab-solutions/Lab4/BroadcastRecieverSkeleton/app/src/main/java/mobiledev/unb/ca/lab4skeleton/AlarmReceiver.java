@@ -23,7 +23,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         // Log receipt of the Intent with timestamp
-        Log.i(TAG, context.getString(R.string.logging_at_string, DateFormat.getDateTimeInstance().format(new Date())));
+        //Log.i(TAG, context.getString(R.string.logging_at_string, DateFormat.getDateTimeInstance().format(new Date())));
 
         // Create the notification channel
         String channelId = context.getPackageName() + ".channel_01";
@@ -45,6 +45,9 @@ public class AlarmReceiver extends BroadcastReceiver {
         // Show the notification
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(NOTIFICATION_ID, builder.build());
+
+        // Log occurrence of notify() call
+        Log.i(TAG, context.getString(R.string.send_notification_at, DateFormat.getDateTimeInstance().format(new Date())));
     }
 
     private void createNotificationChannel(Context context, String channelId) {

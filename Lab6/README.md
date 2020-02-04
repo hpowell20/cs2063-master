@@ -1,4 +1,4 @@
-# Lab 5 - AsyncTask
+# Lab 6 - AsyncTask
 
 In lecture we've seen the importance of moving long-running operations off of the UI thread and into a worker thread. In this lab you will implement (portions of) this functionality using an ```AsyncTask```.
 

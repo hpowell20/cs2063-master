@@ -16,7 +16,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
@@ -51,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Set the broadcast receiver alarm action
         initAlarmValues();
+
+        // Start the alarm
         startAlarm();
 
         // Set the battery filter intent
@@ -123,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 INTERVAL_SIXTY_SECONDS,
                 alarmReceiverIntent);
 
-        Toast.makeText(MainActivity.this, "Alarm started", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this, "Alarm started", Toast.LENGTH_SHORT).show();
     }
 
     private void cancelAlarm() {
@@ -135,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                 0);*/
 
         alarmManager.cancel(alarmReceiverIntent);
-        Toast.makeText(MainActivity.this, "Alarm cancelled", Toast.LENGTH_LONG).show();
+        //Toast.makeText(MainActivity.this, "Alarm cancelled", Toast.LENGTH_LONG).show();
     }
 
     // Camera Methods
@@ -190,4 +191,12 @@ public class MainActivity extends AppCompatActivity {
         mediaScanIntent.setData(contentUri);
         this.sendBroadcast(mediaScanIntent);
     }
+
+    /*public void onClickButton(View v) {
+        startAlarm();
+    }
+
+    public void onClickCancelButton(View v) {
+        cancelAlarm();
+    }*/
 }
