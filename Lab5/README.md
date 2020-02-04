@@ -58,11 +58,11 @@ There are two common ways to display a scrolling list of items in Android
         * It is incomplete; you will finish it below.
 
 2. Take note of the layout files  
-  * `activity_detail.xml` and `activity_main.xml` are layouts for `ActivityDetail` and `ActivityMain` respectively
+  * `activity_detail.xml` and `activity_main.xml` are layouts for `DetailActivity` and `MainActivity` respectively
     * You can verify this by looking at the calls these classes make to `setContentView()`
   * `activity_main.xml` includes a `RecyclerView` where it's `LayoutManager` has been set to a `LinearLayoutManager` to give a list of items
     * This differs from a a `GridLayoutManager` which would present the items in a grid)
-  * `item_layout.xml` will be used to display each item in the scrolling list in `ActivityMain` and contains just a single `TextView`
+  * `item_layout.xml` will be used to display each item in the scrolling list in `MainActivity` and contains just a single `TextView`
 
 ## Implementation
 
