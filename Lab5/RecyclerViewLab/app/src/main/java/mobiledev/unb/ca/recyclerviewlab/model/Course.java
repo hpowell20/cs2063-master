@@ -1,23 +1,20 @@
 package mobiledev.unb.ca.recyclerviewlab.model;
 
+import android.support.annotation.NonNull;
+
 public class Course {
 
     private final String id;
     private final String name;
     private final String description;
 
-    private Course (CourseBuilder builder) {
+    private Course (Builder builder) {
         this.id = builder.id;
         this.name = builder.name;
         this.description = builder.description;
     }
 
-    /*public Course(String id, String name, String desc) {
-        mId = id;
-        mName = name;
-        mDesc = desc;
-    }*/
-
+    // Only need to include getters
     public String getTitle() {
         return id + ": " + name;
     }
@@ -26,28 +23,15 @@ public class Course {
         return description;
     }
 
-    public static class CourseBuilder {
+    public static class Builder {
         private String id;
         private String name;
         private String description;
 
-        public CourseBuilder() {
-
-        }
-
-        public CourseBuilder id(String id) {
+        public Builder(@NonNull String id, @NonNull String name, @NonNull String description) {
             this.id = id;
-            return this;
-        }
-
-        public CourseBuilder name(String name) {
             this.name = name;
-            return this;
-        }
-
-        public CourseBuilder description(String description) {
             this.description = description;
-            return this;
         }
 
         public Course build() {

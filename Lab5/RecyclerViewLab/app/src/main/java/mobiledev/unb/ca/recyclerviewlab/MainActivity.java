@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // TODO 1 Get the ArrayList of Courses from the JsonUtils
+        // TODO 1 Get the ArrayList of Courses from the JsonUtils class
         // (Ideally we would do this loading off of the main thread. We'll get to that
         // in the next lab. Today we're focusing on displyaing scrolling lists.)
 
@@ -89,4 +89,3 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
-
