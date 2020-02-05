@@ -1,4 +1,4 @@
-package mobiledev.unb.ca.lab4uielements;
+package mobiledev.unb.ca.asynctasklab;
 
 public class GeoData {
 

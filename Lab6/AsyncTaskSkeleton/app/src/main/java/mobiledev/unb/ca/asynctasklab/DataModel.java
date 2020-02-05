@@ -1,4 +1,4 @@
-package mobiledev.unb.ca.lab4uielements;
+package mobiledev.unb.ca.asynctasklab;
 
 import javax.json.Json;
 import javax.json.stream.JsonParser;
@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class DataModel {

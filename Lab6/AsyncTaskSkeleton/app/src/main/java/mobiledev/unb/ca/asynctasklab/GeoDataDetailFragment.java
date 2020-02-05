@@ -1,4 +1,4 @@
-package mobiledev.unb.ca.lab4uielements;
+package mobiledev.unb.ca.asynctasklab;
 
 import android.app.Activity;
 import android.support.design.widget.CollapsingToolbarLayout;
