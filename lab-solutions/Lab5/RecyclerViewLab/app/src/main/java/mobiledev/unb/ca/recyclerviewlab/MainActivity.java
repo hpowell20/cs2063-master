@@ -1,9 +1,12 @@
 package mobiledev.unb.ca.recyclerviewlab;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -80,19 +83,30 @@ public class MainActivity extends AppCompatActivity {
             // TODO 3
             //  Get the Course at index position in mDataSet
             //  (Hint: you might need to declare this variable as final.)
-            Course course = mDataset.get(position);
+            final Course course = mDataset.get(position);
 
             // TODO 4
             //  Set the TextView in the ViewHolder (holder) to be the title for this Course
-            TextView textView = holder.mTextView;
-            textView.setText(course.getTitle());
+            //TextView textView = holder.mTextView;
+            holder.mTextView.setText(course.getTitle());
 
             // TODO 5
             //  Set the onClickListener for the TextView in the ViewHolder (holder) such
             //  that when it is clicked, it creates an explicit intent to launch DetailActivity
             //  HINT: You will need to put two extra pieces of information in this intent:
             //      The Course title and it's description
-            //textView.setOnClickListener();
+            holder.mTextView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                    intent.putExtra(Constants.INTENT_EXTRA_COURSE_NAME, course.getTitle());
+                    intent.putExtra(Constants.INTENT_EXTRA_COURSE_DESCRIPTION, course.getDescription());
+
+                    if (intent.resolveActivity(getPackageManager()) != null) {
+                        startActivity(intent);
+                    }
+                }
+            });
         }
 
         @Override
