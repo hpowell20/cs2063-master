@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
 
         // Unregister the battery receiver to avoid memory leaks
-        unregisterReceiver(batteryInfoReceiver);
+        getApplicationContext().unregisterReceiver(batteryInfoReceiver);
     }
 
     @Override
