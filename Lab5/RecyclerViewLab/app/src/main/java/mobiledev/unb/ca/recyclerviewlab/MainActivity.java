@@ -1,15 +1,15 @@
-package mobiledev.unb.ca.myapplication;
+package mobiledev.unb.ca.recyclerviewlab;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import mobiledev.unb.ca.recyclerviewlab.model.Course;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,13 +18,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // TODO 1 Get the ArrayList of Courses from the DataModel
-        // (Ideally we would do this loading off of the main thread. We'll get to that
-        // in the next lab. Today we're focusing on displyaing scrolling lists.)
+        // TODO 1
+        //  Get the ArrayList of Courses from the JsonUtils class
+        //  (Ideally we would do this loading off of the main thread. We'll get to that
+        //  in the next lab. Today we're focusing on displaying scrolling lists.)
 
-        // TODO 2 Get a reference to the RecyclerView and set its adapter
-        // to be an instance of MyAdapter, which you will need to create
-        // using the ArrayList of courses from above.
+        // TODO 2
+        //  Get a reference to the RecyclerView and set its adapter
+        //  to be an instance of MyAdapter, which you will need to create
+        //  using the ArrayList of courses from above.
 
     }
 
@@ -32,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     // RecyclerView's LayoutManager and the underlying data that is being displayed,
     // in this case the ArrayList of Course objects.
     public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-
         private ArrayList<Course> mDataset;
 
         public MyAdapter(ArrayList<Course> myDataset) {
@@ -44,9 +45,7 @@ public class MainActivity extends AppCompatActivity {
         // but RecyclerView gives us the flexibility to do more complex things
         // (e.g., display an image and some text).
         public class ViewHolder extends RecyclerView.ViewHolder {
-
             public TextView mTextView;
-
             public ViewHolder(TextView v) {
                 super(v);
                 mTextView = v;
@@ -62,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
                                                        int viewType) {
             TextView v = (TextView) LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.item_layout, parent, false);
+
             return new ViewHolder(v);
         }
 
@@ -70,24 +70,23 @@ public class MainActivity extends AppCompatActivity {
         // position in mDataset
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            // TODO 3 Get the Course at index position in mDataSet
-            // (Hint: you might need to declare this variable as final.)
+          // TODO 3
+          //  Get the Course at index position in mDataSet
+          //  (Hint: you might need to declare this variable as final.)
 
-            // TODO 4 Set the TextView in the ViewHolder (holder) to be the
-            // title for this Course
+          // TODO 4
+          //  Set the TextView in the ViewHolder (holder) to be the title for this Course
 
-            // TODO 5 Set the onClickListener for the TextView in the ViewHolder (holder) such
-            // that when it is clicked, it creates an explicit intent to launch DetailActivity
-            // HINT: You will need to put two extra pieces of information in this intent,
-            // the Course title, and its description
-
+          // TODO 5
+          //  Set the onClickListener for the TextView in the ViewHolder (holder) such
+          //  that when it is clicked, it creates an explicit intent to launch DetailActivity
+          //  HINT: You will need to put two extra pieces of information in this intent:
+          //      The Course title and it's description
         }
 
         @Override
         public int getItemCount() {
             return mDataset.size();
         }
-
     }
 }
-
