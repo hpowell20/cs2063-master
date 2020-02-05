@@ -1,8 +1,5 @@
 package mobiledev.unb.ca.asynctasklab;
 
-import javax.json.Json;
-import javax.json.stream.JsonParser;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -10,7 +7,11 @@ import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 
+import javax.json.Json;
+import javax.json.stream.JsonParser;
+
 public class DataModel {
+    private static final String REQUEST_URL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson";
 
     private ArrayList<GeoData> geoDataArray = new ArrayList<>();
 
@@ -22,21 +23,16 @@ public class DataModel {
 
     public void downloadJSON() {
         InputStream inputStream = null;
-        String requestURL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson";
         try {
 
             HttpURLConnection connection = null;
 
-            // TODO Establish an HttpURLConnecion to requestURL
-            // Hint: See Examples/NetworkingURL for an example of how to do this
-            // Also see documentation here:
-            // http://developer.android.com/training/basics/network-ops/connecting.html
-
-
-
-
-
-
+            // TODO
+            //  Establish an HttpURLConnecion to requestURL
+            //  Hint: See https://github.com/hpowell20/cs2063-winter-2020-examples/tree/master/Lecture4/NetworkingURL
+            //  for an example of how to do this
+            //  Also see documentation here:
+            //  http://developer.android.com/training/basics/network-ops/connecting.html
 
             inputStream = connection.getInputStream();
 

@@ -43,13 +43,12 @@ public class GeoDataDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments().containsKey(LNG)) {
-
             title = getArguments().getString(TITLE);
             lng = getArguments().getString(LNG);
             lat = getArguments().getString(LAT);
 
             Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
+            CollapsingToolbarLayout appBarLayout = activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
                 appBarLayout.setTitle("Earthquake Details");
             }
@@ -63,9 +62,8 @@ public class GeoDataDetailFragment extends Fragment {
 
         // Show the dummy content as text in a TextView.
         if (lat != null && lng != null) {
-            ((TextView) rootView.findViewById(R.id.course_detail)).setText("Title: " + title + "\n" +
-                                                                            "Longitide: " + lng + "\n" +
-                                                                            "Latitude: " + lat);
+            String text = getString(R.string.fragment_dummy_content, title, lng, lat);
+            ((TextView) rootView.findViewById(R.id.course_detail)).setText(text);
         }
 
         return rootView;

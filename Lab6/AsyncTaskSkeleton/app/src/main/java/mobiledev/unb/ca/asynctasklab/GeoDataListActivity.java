@@ -26,16 +26,19 @@ import java.util.List;
  */
 public class GeoDataListActivity extends AppCompatActivity {
 
+    private static final String TAG = "GeoDataListActivity";
+    private static final int DOWNLOAD_TIME = 4;      // Download time simulation
+
+    private DataModel dataModel;
+    private List<GeoData> mGeoDataList;
+    private Button mBgButton;
+
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
      */
     private boolean mTwoPane;
-    private DataModel dataModel;
-    private List<GeoData> mGeoDataList;
-    private int downloadTime = 4;      // Download time simulation
-    private Button mBgButton;
-    private final String TAG = "GeoDataListActivity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +47,11 @@ public class GeoDataListActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         setContentView(R.layout.activity_geodata_list);
 
-        mBgButton = (Button) findViewById(R.id.button);
+        mBgButton = findViewById(R.id.button);
 
-        // TODO Nothing to do here, just note that you will be completing the downloadGeoData()
-        // function. It will set mGeoDataList to contain the downloaded geo data.
+        // TODO
+        //  Nothing to do here, just note that you will be completing the downloadGeoData()
+        //  function. It will set mGeoDataList to contain the downloaded geo data.
         downloadGeoData();
 
         // Test if we're on a tablet
@@ -70,13 +74,14 @@ public class GeoDataListActivity extends AppCompatActivity {
         mBgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO Again, nothing to do here. Just note that the downloadGeoData() function
-                // that you will be completing is also called here.
+                // TODO
+                //  Again, nothing to do here. Just note that the downloadGeoData() function
+                //  that you will be completing is also called here.
                 downloadGeoData();
             }
         });
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -136,6 +141,7 @@ public class GeoDataListActivity extends AppCompatActivity {
                     String title = holder.mGeoData.title;
                     String lng = holder.mGeoData.longitude;
                     String lat = holder.mGeoData.latitude;
+
                     if (mTwoPane) {
                         Bundle arguments = new Bundle();
                         arguments.putString(GeoDataDetailFragment.TITLE, title);
@@ -171,8 +177,8 @@ public class GeoDataListActivity extends AppCompatActivity {
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
-                mIdView = (TextView) view.findViewById(R.id.id);
-                mContentView = (TextView) view.findViewById(R.id.content);
+                mIdView = view.findViewById(R.id.id);
+                mContentView = view.findViewById(R.id.content);
             }
 
             @Override
@@ -183,19 +189,19 @@ public class GeoDataListActivity extends AppCompatActivity {
     }
 
     private void downloadGeoData() {
-        // TODO Check whether there is a network connection. If there is, Create a DownLoaderTask
-        // and execute it. If there isn't, create a Toast indicating that there is no network
-        // connection.
-        // Hint: Read this for help on checking network connectivity:
-        // https://developer.android.com/training/monitoring-device-state/connectivity-monitoring.html
-        // Hint: Read this for help with Toast:
-        // http://developer.android.com/guide/topics/ui/notifiers/toasts.html
-
+        // TODO
+        //  Check whether there is a network connection. If there is, Create a DownLoaderTask
+        //  and execute it. If there isn't, create a Toast indicating that there is no network
+        //  connection.
+        //  Hint: Read this for help on checking network connectivity:
+        //  https://developer.android.com/training/monitoring-device-state/connectivity-monitoring.html
+        //  Hint: Read this for help with Toast:
+        //  http://developer.android.com/guide/topics/ui/notifiers/toasts.html
     }
 
     public class DownloaderTask extends AsyncTask<Void, Integer, String> {
-
-        // TODO Get a reference to the progress bar so we can interact with it later
+        // TODO
+        //  Get a reference to the progress bar so we can interact with it later
 
         @Override
         protected void onPreExecute() {
@@ -204,34 +210,33 @@ public class GeoDataListActivity extends AppCompatActivity {
              *  to be completed on the UI thread before the new thread activates.
              */
 
-            // TODO Disable the button so it can't be clicked again once a download has been
-            // started
-            // Hint: Button is subclass of TextView. Read this document to see how to
-            // disable it.
-            // http://developer.android.com/reference/android/widget/TextView.html
+            // TODO
+            //  Disable the button so it can't be clicked again once a download has been started
+            //  Hint: Button is subclass of TextView. Read this document to see how to disable it.
+            //  http://developer.android.com/reference/android/widget/TextView.html
 
 
-            // TODO Set the progress bar's maximum to be downloadTime, its initial progress to be
-            // 0, and also make sure it's visible.
-            // Hint: Read the documentation on ProgressBar
-            // http://developer.android.com/reference/android/widget/ProgressBar.html
+            // TODO
+            //  Set the progress bar's maximum to be DOWNLOAD_TIME, its initial progress to be
+            //  0, and also make sure it's visible.
+            //  Hint: Read the documentation on ProgressBar
+            //  http://developer.android.com/reference/android/widget/ProgressBar.html
 
 
         }
         @Override
         protected String doInBackground(Void... params) {
-
-            // TODO Create an instance of DataModel and get the data from it. Store the data
-            // in mGeoDataList
-
+            // TODO
+            //  Create an instance of DataModel and get the data from it. Store the data
+            //  in mGeoDataList
 
             // Leave this while loop here to simulate a lengthy download
-            for(int i = 0; i < downloadTime; i++) {
+            for(int i = 0; i < DOWNLOAD_TIME; i++) {
                 try {
                     Thread.sleep(1000);
-                    // TODO update the progress bar; calculate an appropriate value for
-                    // the new progress using i
-
+                    // TODO
+                    //  Update the progress bar; calculate an appropriate value for
+                    //  the new progress using i
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -248,17 +253,21 @@ public class GeoDataListActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            // TODO Now that the download is complete, enable the button again
+            // TODO
+            //  Now that the download is complete, enable the button again
 
 
-            // TODO Reset the progress bar, and make it disappear
+            // TODO
+            //  Reset the progress bar, and make it disappear
 
 
-            // TODO Setup the RecyclerView
+            // TODO
+            //  Setup the RecyclerView
 
 
-            // TODO Create a Toast indicating that the download is complete. Set its text
-            // to be the result String from doInBackground
+            // TODO
+            //  Create a Toast indicating that the download is complete. Set its text
+            //  to be the result String from doInBackground
 
         }
 
@@ -267,8 +276,8 @@ public class GeoDataListActivity extends AppCompatActivity {
          */
         @Override
         protected void onProgressUpdate(Integer... values) {
-
-            // TODO Update the progress bar using values
+            // TODO
+            //  Update the progress bar using values
 
 
         }
