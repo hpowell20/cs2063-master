@@ -22,9 +22,6 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        // Log receipt of the Intent with timestamp
-        //Log.i(TAG, context.getString(R.string.logging_at_string, DateFormat.getDateTimeInstance().format(new Date())));
-
         // Create the notification channel
         String channelId = context.getPackageName() + ".channel_01";
         createNotificationChannel(context, channelId);
