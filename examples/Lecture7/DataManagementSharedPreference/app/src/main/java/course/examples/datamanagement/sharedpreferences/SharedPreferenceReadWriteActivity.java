@@ -13,6 +13,8 @@ import java.util.Random;
 public class SharedPreferenceReadWriteActivity extends Activity {
     private static final String HIGH_SCORE_KEY = "HIGH_SCORE_KEY";
     private static final String GAME_SCORE_KEY = "GAME_SCORE_KEY";
+    private static final String INITIAL_HIGH_SCORE = "0";
+
     private TextView mGameScore, mHighScore;
 
     @Override
@@ -30,7 +32,7 @@ public class SharedPreferenceReadWriteActivity extends Activity {
         //Game Score
         mGameScore = findViewById(R.id.game_score_text);
         if (null == savedInstanceState) {
-            mGameScore.setText(String.valueOf("0"));
+            mGameScore.setText(INITIAL_HIGH_SCORE);
         } else {
             mGameScore.setText(savedInstanceState.getString(GAME_SCORE_KEY));
         }
@@ -48,14 +50,12 @@ public class SharedPreferenceReadWriteActivity extends Activity {
 
                 // Get Stored High Score
                 if (val > prefs.getInt(HIGH_SCORE_KEY, 0)) {
-
                     // Get and edit high score
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.putInt(HIGH_SCORE_KEY, val);
                     editor.apply();
 
                     mHighScore.setText(String.valueOf(val));
-
                 }
             }
         });
