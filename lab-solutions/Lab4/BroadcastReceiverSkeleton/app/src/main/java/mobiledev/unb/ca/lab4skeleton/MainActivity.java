@@ -1,5 +1,6 @@
 package mobiledev.unb.ca.lab4skeleton;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -12,7 +13,6 @@ import android.os.Environment;
 import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     private static final String TAG = "MainActivity";
 
@@ -56,15 +56,15 @@ public class MainActivity extends AppCompatActivity {
         startAlarm();
 
         // Set the battery filter intent
-        setBatteryIntentFilter();
+        setBatteryIntentFilters();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
 
-        // Unregister the battery receiver to avoid memory leaks
-        getApplicationContext().unregisterReceiver(batteryInfoReceiver);
+        // Unregister the battery receivers to avoid memory leaks
+        removeBatteryIntentFilters();
     }
 
     @Override
@@ -81,23 +81,57 @@ public class MainActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             String intentAction = intent.getAction();
             if (Intent.ACTION_BATTERY_OKAY.equals(intentAction)) {
-                Log.i(TAG, "Battery level good; starting the alarm");
                 startAlarm();
+                Toast.makeText(MainActivity.this,
+                        "Battery level good; starting the alarm",
+                        Toast.LENGTH_SHORT).show();
             }
 
             if (Intent.ACTION_BATTERY_LOW.equals(intentAction)) {
-                Log.i(TAG, "Battery level low; cancelling the alarm");
                 cancelAlarm();
+                Toast.makeText(MainActivity.this,
+                        "Battery level low; cancelling the alarm",
+                        Toast.LENGTH_SHORT).show();
             }
         }
     };
 
-    private void setBatteryIntentFilter() {
+    // Power Check Methods
+    private BroadcastReceiver powerInfoReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String intentAction = intent.getAction();
+            if (Intent.ACTION_POWER_CONNECTED.equals(intentAction)) {
+                startAlarm();
+                Toast.makeText(MainActivity.this,
+                        "Device plugged in; starting the alarm",
+                        Toast.LENGTH_SHORT).show();
+            }
+
+            if (Intent.ACTION_POWER_DISCONNECTED.equals(intentAction)) {
+                cancelAlarm();
+                Toast.makeText(MainActivity.this,
+                        "Device unplugged; cancelling the alarm",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
+    private void setBatteryIntentFilters() {
         IntentFilter batteryIntentFilter = new IntentFilter();
         batteryIntentFilter.addAction(Intent.ACTION_BATTERY_OKAY);
         batteryIntentFilter.addAction(Intent.ACTION_BATTERY_LOW);
+        registerReceiver(batteryInfoReceiver, batteryIntentFilter);
 
-        getApplicationContext().registerReceiver(batteryInfoReceiver, batteryIntentFilter);
+        IntentFilter powerIntentFilter = new IntentFilter();
+        powerIntentFilter.addAction(Intent.ACTION_POWER_CONNECTED);
+        powerIntentFilter.addAction(Intent.ACTION_POWER_DISCONNECTED);
+        registerReceiver(powerInfoReceiver, powerIntentFilter);
+    }
+
+    private void removeBatteryIntentFilters() {
+        unregisterReceiver(batteryInfoReceiver);
+        unregisterReceiver(powerInfoReceiver);
     }
 
     // Alarm Methods
@@ -117,12 +151,12 @@ public class MainActivity extends AppCompatActivity {
                 INTERVAL_SIXTY_SECONDS,
                 alarmReceiverIntent);
 
-        Toast.makeText(MainActivity.this, "Alarm started", Toast.LENGTH_SHORT).show();
+        Log.i(TAG, "Alarm Started");
     }
 
     private void cancelAlarm() {
         alarmManager.cancel(alarmReceiverIntent);
-        Toast.makeText(MainActivity.this, "Alarm cancelled", Toast.LENGTH_LONG).show();
+        Log.i(TAG, "Alarm Cancelled");
     }
 
     // Camera Methods

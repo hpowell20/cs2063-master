@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
 import java.text.DateFormat;
@@ -28,6 +29,11 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         // Set the tap action
         Intent tapIntent = new Intent(context, MainActivity.class);
+        // FLAG_ACTIVITY_NEW_TASK - This flag is used to create a new task and launch an activity into it
+        // FLAG_ACTIVITY_CLEAR_TASK - If set in an Intent passed to startActivity()
+        //     this flag will cause a newly launching task to be placed on top of the current
+        //     home activity task (if there is one)
+        // This combination sets the Activity to start in a new empty task
         tapIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingTapIntent = PendingIntent.getActivity(context, 0, tapIntent, 0);
 
@@ -40,7 +46,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setContentText(context.getString(R.string.notification_text));
 
         // Show the notification
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         notificationManager.notify(NOTIFICATION_ID, builder.build());
 
         // Log occurrence of notify() call
