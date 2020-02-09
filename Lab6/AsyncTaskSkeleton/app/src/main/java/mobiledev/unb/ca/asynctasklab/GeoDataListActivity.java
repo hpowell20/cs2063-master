@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import mobiledev.unb.ca.asynctasklab.model.GeoData;
+
 /**
  * An activity representing a list of GeoData. This activity
  * has different presentations for handset and tablet-size devices. On
@@ -29,7 +31,6 @@ public class GeoDataListActivity extends AppCompatActivity {
     private static final String TAG = "GeoDataListActivity";
     private static final int DOWNLOAD_TIME = 4;      // Download time simulation
 
-    private DataModel dataModel;
     private List<GeoData> mGeoDataList;
     private Button mBgButton;
 
@@ -125,7 +126,7 @@ public class GeoDataListActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mGeoData = mValues.get(position);
-            holder.mIdView.setText(mValues.get(position).title);
+            holder.mIdView.setText(mValues.get(position).getTitle());
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -138,9 +139,9 @@ public class GeoDataListActivity extends AppCompatActivity {
                      * are twoPane on a Tablet, which varies how we pass arguments to the
                      * participating activity/fragment.
                      */
-                    String title = holder.mGeoData.title;
-                    String lng = holder.mGeoData.longitude;
-                    String lat = holder.mGeoData.latitude;
+                    String title = holder.mGeoData.getTitle();
+                    String lng = holder.mGeoData.getLongitude();
+                    String lat = holder.mGeoData.getLatitude();
 
                     if (mTwoPane) {
                         Bundle arguments = new Bundle();
@@ -154,9 +155,9 @@ public class GeoDataListActivity extends AppCompatActivity {
                                 .commit();
                     } else {
                         // TODO Create an Intent to start GeoDataDetailActivity. You'll need
-                        // to add some extras to this intent. Look at that class, and the
-                        // example Fragment transaction for the two pane case above, to
-                        // figure out what you need to add.
+                        //  to add some extras to this intent. Look at that class, and the
+                        //  example Fragment transaction for the two pane case above, to
+                        //  figure out what you need to add.
 
                     }
                 }
@@ -227,7 +228,7 @@ public class GeoDataListActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... params) {
             // TODO
-            //  Create an instance of DataModel and get the data from it. Store the data
+            //  Create an instance of JsonUtil and get the data from it. Store the data
             //  in mGeoDataList
 
             // Leave this while loop here to simulate a lengthy download
@@ -278,7 +279,6 @@ public class GeoDataListActivity extends AppCompatActivity {
         protected void onProgressUpdate(Integer... values) {
             // TODO
             //  Update the progress bar using values
-
 
         }
     }

@@ -42,15 +42,18 @@ public class GeoDataDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments().containsKey(LNG)) {
-            title = getArguments().getString(TITLE);
-            lng = getArguments().getString(LNG);
-            lat = getArguments().getString(LAT);
+        Bundle arguments = getArguments();
+        if (arguments != null && arguments.containsKey(LNG)) {
+            title = arguments.getString(TITLE);
+            lng = arguments.getString(LNG);
+            lat = arguments.getString(LAT);
 
             Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout = activity.findViewById(R.id.toolbar_layout);
-            if (appBarLayout != null) {
-                appBarLayout.setTitle("Earthquake Details");
+            if (activity != null) {
+                CollapsingToolbarLayout appBarLayout = activity.findViewById(R.id.toolbar_layout);
+                if (appBarLayout != null) {
+                    appBarLayout.setTitle("Earthquake Details");
+                }
             }
         }
     }
