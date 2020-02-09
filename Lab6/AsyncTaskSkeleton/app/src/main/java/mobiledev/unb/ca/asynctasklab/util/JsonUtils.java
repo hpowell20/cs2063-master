@@ -13,7 +13,7 @@ import javax.json.stream.JsonParser;
 
 import mobiledev.unb.ca.asynctasklab.model.GeoData;
 
-public class JsonUtil {
+public class JsonUtils {
     private static final String REQUEST_URL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson";
     private static final String JSON_KEY_TITLE = "title";
     private static final String JSON_KEY_COORDINATES = "coordinates";
@@ -21,7 +21,7 @@ public class JsonUtil {
     private ArrayList<GeoData> geoDataArray;
 
     // Initializer to read our data source (JSON file) into an array of course objects
-    public JsonUtil() {
+    public JsonUtils() {
         processJSON();
     }
 

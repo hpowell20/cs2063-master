@@ -228,7 +228,7 @@ public class GeoDataListActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... params) {
             // TODO
-            //  Create an instance of JsonUtil and get the data from it. Store the data
+            //  Create an instance of JsonUtils and get the data from it. Store the data
             //  in mGeoDataList
 
             // Leave this while loop here to simulate a lengthy download
