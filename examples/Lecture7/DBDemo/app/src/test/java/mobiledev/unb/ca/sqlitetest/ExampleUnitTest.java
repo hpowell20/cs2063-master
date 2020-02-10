@@ -1,4 +1,4 @@
-package mobiledev.unb.ca.trydb2;
+package mobiledev.unb.ca.sqlitetest;
 
 import org.junit.Test;
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="mobiledev.unb.ca.trydb2.MainActivity">
+    tools:context="mobiledev.unb.ca.sqlitetest.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
