@@ -21,8 +21,9 @@ import com.google.android.gms.location.LocationServices;
 public class MainActivity extends AppCompatActivity implements ConnectionCallbacks,
         OnConnectionFailedListener {
 
-    private static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private static final String TAG = "TAG";
+    private static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
+
     private Button mButton;
     private TextView mTextView;
     private GoogleApiClient mGoogleApiClient;
@@ -32,9 +33,8 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextView = (TextView) findViewById(R.id.textview);
-
-        mButton = (Button) findViewById(R.id.button);
+        mTextView = findViewById(R.id.textview);
+        mButton = findViewById(R.id.button);
         mButton.setEnabled(false);
         mButton.setOnClickListener(
                 new View.OnClickListener() {
@@ -62,6 +62,10 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     protected void onStop() {
         mGoogleApiClient.disconnect();
         super.onStop();
+    }
+
+    private boolean checkGooglePlayServices() {
+        return true;
     }
 
     public void requestPermissions() {
@@ -129,20 +133,21 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
             Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(
                     mGoogleApiClient);
-            if (lastLocation != null) {
-                Log.i(TAG, String.valueOf(lastLocation.getLatitude()));
-                Log.i(TAG, String.valueOf(lastLocation.getLongitude()));
-                Log.i(TAG, String.valueOf(lastLocation.getAccuracy()));
 
-                mTextView.setText(String.valueOf(lastLocation.getLatitude()) +
-                        ',' + String.valueOf(lastLocation.getLongitude()) +
-                        "accuracy=" + String.valueOf(lastLocation.getAccuracy()));
-            }
-            else {
+            if (lastLocation != null) {
+                String latitude = String.valueOf(lastLocation.getLatitude());
+                Log.i(TAG, latitude);
+                String longitude = String.valueOf(lastLocation.getLongitude());
+                Log.i(TAG, longitude);
+                String accuracy = String.valueOf(lastLocation.getAccuracy());
+                Log.i(TAG, accuracy);
+
+                String text = getString(R.string.location_details, latitude, longitude, accuracy);
+                mTextView.setText(text);
+            } else {
                 Log.i(TAG, "Get location: Null location");
             }
-        }
-        else {
+        } else {
             Log.i(TAG, "Get location without permissions...");
         }
     }

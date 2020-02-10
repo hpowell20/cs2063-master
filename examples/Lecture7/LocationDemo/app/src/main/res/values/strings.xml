@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">LocationDemo</string>
+    <string name="app_name">Location Demo</string>
+    <string name="location_details">Latitude: %1$s, Longitude: %2$s, Accuracy: %3$s</string>
 </resources>
