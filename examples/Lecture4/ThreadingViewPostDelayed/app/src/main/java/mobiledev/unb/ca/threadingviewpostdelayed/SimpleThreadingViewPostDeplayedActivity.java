@@ -1,4 +1,4 @@
-package mobiledev.unb.unb.threadingviewpostdelayed;
+package mobiledev.unb.ca.threadingviewpostdelayed;
 
 import android.app.Activity;
 import android.graphics.BitmapFactory;
