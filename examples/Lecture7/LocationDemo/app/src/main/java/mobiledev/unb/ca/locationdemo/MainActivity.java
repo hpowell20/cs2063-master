@@ -3,10 +3,10 @@ package mobiledev.unb.ca.locationdemo;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     private Button mButton;
     private TextView mTextView;
     private GoogleApiClient mGoogleApiClient;
+    //private FusedLocationProviderClient fusedLocationClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,28 +45,35 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
                     }
                 });
 
-        // Create an instance of GoogleAPIClient.
-        if (mGoogleApiClient == null) {
-            mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .addApi(LocationServices.API)
-                    .build();
+        // Create an instance of the FusedLocationProviderClient
+        //fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        initGoogleApiClient();
+    }
+
+    private void initGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (null != mGoogleApiClient) {
+            mGoogleApiClient.connect();
         }
     }
 
-    protected void onStart() {
-        mGoogleApiClient.connect();
-        super.onStart();
-    }
-
+    @Override
     protected void onStop() {
-        mGoogleApiClient.disconnect();
         super.onStop();
-    }
 
-    private boolean checkGooglePlayServices() {
-        return true;
+        if (null != mGoogleApiClient) {
+            mGoogleApiClient.disconnect();
+        }
     }
 
     public void requestPermissions() {
@@ -103,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
     @Override
     public void onConnected(Bundle connectionHint) {
-        // Connected to Google Play services!
+        // Connected to Google Play services
         mButton.setEnabled(true);
     }
 
