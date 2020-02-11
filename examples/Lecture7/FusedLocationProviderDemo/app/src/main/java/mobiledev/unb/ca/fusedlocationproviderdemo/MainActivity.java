@@ -1,4 +1,4 @@
-package mobiledev.unb.ca.locationdemo;
+package mobiledev.unb.ca.fusedlocationproviderdemo;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -18,7 +18,9 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 public class MainActivity extends AppCompatActivity implements ConnectionCallbacks,
         OnConnectionFailedListener, View.OnClickListener {
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     private Button mButton;
     private TextView mTextView;
     private GoogleApiClient mGoogleApiClient;
+    private FusedLocationProviderClient fusedLocationClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +42,8 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         mButton = findViewById(R.id.button);
         mButton.setEnabled(false);
 
-        // Create an instance of Google API Client
+        // Create an instance of the FusedLocationProviderClient
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         initGoogleApiClient();
     }
 
@@ -129,8 +133,26 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
             return;
         }
 
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location lastLocation) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (lastLocation != null) {
+                            String latitude = String.valueOf(lastLocation.getLatitude());
+                            String longitude = String.valueOf(lastLocation.getLongitude());
+                            String accuracy = String.valueOf(lastLocation.getAccuracy());
+
+                            String text = getString(R.string.location_details, latitude, longitude, accuracy);
+                            mTextView.setText(text);
+                        } else {
+                            mTextView.setText("Unable to fetch the location");
+                        }
+                    }
+                });
+
         // Fetch location using the FusedLocationProviderAPI
-        Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        /*Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
 
         if (lastLocation != null) {
@@ -142,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
             mTextView.setText(text);
         } else {
             mTextView.setText("Unable to fetch the location");
-        }
+        }*/
     }
 
     @Override
