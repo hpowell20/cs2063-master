@@ -2,11 +2,6 @@
 
 In lecture we've seen the importance of moving long-running operations off of the UI thread and into a worker thread. In this lab you will implement (portions of) this functionality using an ```AsyncTask```.
 
-Start by downloading the skeleton code for the lab.  This app uses the master/detail flow (MDF) pattern, which we briefly saw in lecture 2. This app is similar in structure to an app created using the default MDF template available through Android Studio (and similar to the MDFDemo in the Examples directory). It presents a list of recent earthquakes downloaded from the United States Geological
-Survey.  Selecting an earthquake presents further details about it. On a small device, this is a separate activity; on a larger device, the details are presented alongside the scrolling list.
-
-This [website](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php) describes a variety of [JSON](http://www.json.org/) feeds that provide information about recent earthquakes. We will use data from the feed that provides information about [all earthquakes in the past day](https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson).
-
 ## Pair Programming
 
 We will again be doing pair programming for this lab.  Details on pair programming can be found at [Pair Programming](../docs/PAIR_PROGRAMMING.md).  You can again work with anybody of your choosing.
@@ -18,17 +13,26 @@ minutes.**
 
 ## Understanding the skeleton code
 
-The MDF pattern employs multiple default layout files to make the UI
-adapt to different screen sizes and orientations:
+The app will be used to present a list of recent earthquakes downloaded from the United States Geological Survey.
+  * This [website](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php) describes a variety of [JSON](http://www.json.org/) feeds that provide information about recent earthquakes
+  * We will use data from the feed that provides information about [all earthquakes in the past day](https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson)
 
-* activity_geodata_detail.xml
-* activity_geodata_list.xml
-* geodata_detail.xml
-* geodata_list.xml
-  * geodata_list.xml
-  * geodata_list.xml (w900dp)
-* geodata_list_content.xml
+By selecting an earthquake you will be presented with further details about it. On a small device this appears as a separate activity, whereas on a larger device the details are presented alongside the scrolling list.
 
+**Task 1**
+
+1. Download the skeleton code for the lab
+  * This app uses the master/detail flow (MDF) pattern which we briefly saw in lecture 2 and is similar in structure to an app created with the Android Studio Master/Detail Flow template
+    * Lecture example can be found [here](https://github.com/hpowell20/cs2063-winter-2020-examples/tree/master/Lecture2/MDFDemo)
+
+  * The MDF pattern employs multiple default layout files to make the UI adapt to different screen sizes and orientations:
+    * activity_geodata_detail.xml
+    * activity_geodata_list.xml
+    * geodata_detail.xml
+    * geodata_list.xml
+      * geodata_list.xml
+      * geodata_list.xml (w900dp)
+    * geodata_list_content.xml
 
 The best way to get your bearings in an existing project file is to navigate to the ```AndroidManifest.xml``` and determine which ```Activity``` (represented by your Java source code files) contains the ```<intent-filter>``` signifying it’s the ```MAIN``` ```Activity```. This ```Activity``` will be identified by the ```android:name``` field.  You can navigate to this Java file and see which layout file it instantiates using ```setContentView()```; this will be the first screen users are presented with when this application is run. Navigate to the layout file being utilized by ```setContentView()``` in your ```MAIN``` ```Activity```.
 
@@ -46,15 +50,16 @@ The ```GeoDataListActivity``` class ```onCreate()``` method will instantiate the
 
 This template checks if the ```geodata_detail_container```, which is a ```NestedScrollView``` UI element in the ```activity_geodata_detail.xml```, is ```null```. If the ```geodata_detail_container``` is ```null```, we are in single pane layout (i.e., a phone or tablet in portrait mode); if the ```geodata_detail_container``` is not ```null```, we are in a dual pane layout (i.e., a tablet in landscape mode) utilizing fragments.
 
-## Todo
+**Task 2**
 
-Complete the TODOs in ```GeoDataListActivity``` and ```DataModel```.
+Complete the TODO items in ```GeoDataListActivity``` and ```DataModel```.
 
 Make sure your app behaves as expected with and without a network connection. Make sure the floating action button (pink button in the bottom right corner) still works while the data is refreshing.
 
 If testing on a phone, it will be difficult to test that your app displays the tablet landscape view correctly (i.e., the list of earthquakes and selected earthquake details side-by-side). To see this behavior, add a third layout resource file for ```geodata_list``` corresponding to landscape layout. Make its contents the same as ```geodata_list.xml (w900dp)```.
 
 
-## Deliverable
+**Lab Completion**
 
-Show your working app to the instructor or TA.
+* Show the working app running on an emulator to the instructor or TA
+* Keep a copy of your project work and answers for future reference

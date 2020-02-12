@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="mobiledev.unb.ca.lab4uielements"
+<manifest package="mobiledev.unb.ca.asynctasklab"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- Include the required permissions to make a network call -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 

@@ -3,14 +3,16 @@ package mobiledev.unb.ca.locationdemo;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -19,10 +21,11 @@ import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListe
 import com.google.android.gms.location.LocationServices;
 
 public class MainActivity extends AppCompatActivity implements ConnectionCallbacks,
-        OnConnectionFailedListener {
+        OnConnectionFailedListener, View.OnClickListener {
 
-    private static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private static final String TAG = "TAG";
+    private static final int LOCATION_REQUEST = 101;
+
     private Button mButton;
     private TextView mTextView;
     private GoogleApiClient mGoogleApiClient;
@@ -32,49 +35,37 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextView = (TextView) findViewById(R.id.textview);
-
-        mButton = (Button) findViewById(R.id.button);
+        mTextView = findViewById(R.id.textview);
+        mButton = findViewById(R.id.button);
         mButton.setEnabled(false);
-        mButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        requestPermissions();
-                    }
-                });
 
-        // Create an instance of GoogleAPIClient.
-        if (mGoogleApiClient == null) {
-            mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .addApi(LocationServices.API)
-                    .build();
+        // Create an instance of Google API Client
+        initGoogleApiClient();
+    }
+
+    private void initGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (null != mGoogleApiClient) {
+            mGoogleApiClient.connect();
         }
     }
 
-    protected void onStart() {
-        mGoogleApiClient.connect();
-        super.onStart();
-    }
-
+    @Override
     protected void onStop() {
-        mGoogleApiClient.disconnect();
         super.onStop();
-    }
 
-    public void requestPermissions() {
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            Log.i(TAG, "requestPermissions: No permissions");
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
-        } else {
-            Log.i(TAG, "requestPermissions: Have permissions");
-            getLocation();
+        if (null != mGoogleApiClient) {
+            mGoogleApiClient.disconnect();
         }
     }
 
@@ -83,14 +74,15 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
                                            String permissions[],
                                            int[] grantResults) {
         switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
+            case LOCATION_REQUEST: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Log.i(TAG, "onRequestPermissionsResult: Granted");
-                    getLocation();
+                    getCurrentLocation();
 
                 } else {
+                    Toast.makeText(this, "onRequestPermissionsResult: Denied", Toast.LENGTH_SHORT);
                     Log.i(TAG, "onRequestPermissionsResult: Denied");
                 }
             }
@@ -98,9 +90,10 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     }
 
     @Override
-    public void onConnected(Bundle connectionHint) {
-        // Connected to Google Play services!
+    public void onConnected(@Nullable Bundle bundle) {
+        // Connected to Google Play services
         mButton.setEnabled(true);
+        mButton.setOnClickListener(this);
     }
 
     @Override
@@ -108,42 +101,56 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         // The connection has been interrupted.
         // Disable any UI components that depend on Google APIs
         // until onConnected() is called.
-        mGoogleApiClient.connect();
+        mButton.setEnabled(false);
+        Toast.makeText(this, "Connection was suspended", Toast.LENGTH_SHORT);
     }
 
     @Override
-    public void onConnectionFailed(ConnectionResult result) {
+    public void onConnectionFailed(@NonNull ConnectionResult result) {
         // This callback is important for handling errors that
         // may occur while attempting to connect with Google.
         //
         // More about this in the 'Handle Connection Failures' section.
-
+        mButton.setEnabled(false);
+        Toast.makeText(this, "Connection failed", Toast.LENGTH_SHORT);
         Log.i(TAG, "Connection failed: ConnectionResult.getErrorCode() = "
                 + result.getErrorCode());
     }
 
-    private void getLocation() {
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
+    private void getCurrentLocation() {
+        // Check to see if the location permission is granted
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[] {
+                    Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
+            }, LOCATION_REQUEST);
 
-            Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(
-                    mGoogleApiClient);
-            if (lastLocation != null) {
-                Log.i(TAG, String.valueOf(lastLocation.getLatitude()));
-                Log.i(TAG, String.valueOf(lastLocation.getLongitude()));
-                Log.i(TAG, String.valueOf(lastLocation.getAccuracy()));
-
-                mTextView.setText(String.valueOf(lastLocation.getLatitude()) +
-                        ',' + String.valueOf(lastLocation.getLongitude()) +
-                        "accuracy=" + String.valueOf(lastLocation.getAccuracy()));
-            }
-            else {
-                Log.i(TAG, "Get location: Null location");
-            }
-        }
-        else {
+            Toast.makeText(this, "Location permission check failed", Toast.LENGTH_SHORT);
             Log.i(TAG, "Get location without permissions...");
+            return;
+        }
+
+        // Fetch location using the FusedLocationProviderAPI
+        Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+
+
+        if (lastLocation != null) {
+            String latitude = String.valueOf(lastLocation.getLatitude());
+            String longitude = String.valueOf(lastLocation.getLongitude());
+            String accuracy = String.valueOf(lastLocation.getAccuracy());
+
+            String text = getString(R.string.location_details, latitude, longitude, accuracy);
+            mTextView.setText(text);
+        } else {
+            mTextView.setText("Unable to fetch the location");
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.button:
+                getCurrentLocation();
+                break;
         }
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="mobiledev.unb.unb.threadingviewpostdelayed">
+    package="mobiledev.unb.ca.threadingviewpostdelayed">
 
     <application
         android:allowBackup="true"
