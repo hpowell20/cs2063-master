@@ -19,6 +19,14 @@ allprojects {
     }
 }
 
+subprojects {
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << '-Xlint:unchecked'
+        }
+    }
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
