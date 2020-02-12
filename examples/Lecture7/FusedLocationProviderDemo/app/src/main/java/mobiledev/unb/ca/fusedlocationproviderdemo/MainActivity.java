@@ -31,7 +31,10 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     private Button mButton;
     private TextView mTextView;
     private GoogleApiClient mGoogleApiClient;
+    //private LocationRequest locationRequest;
     private FusedLocationProviderClient fusedLocationClient;
+    //private LocationCallback locationCallback;
+    //private boolean requestingLocationUpdates = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +43,29 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
         mTextView = findViewById(R.id.textview);
         mButton = findViewById(R.id.button);
-        mButton.setEnabled(false);
+        //mButton.setEnabled(false);
 
         // Create an instance of the FusedLocationProviderClient
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        /*initLocationClient();
+
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null) {
+                    return;
+                }
+
+                for (Location location : locationResult.getLocations()) {
+                    String latitude = String.valueOf(location.getLatitude());
+                    String longitude = String.valueOf(location.getLongitude());
+                    String accuracy = String.valueOf(location.getAccuracy());
+
+                    String text = getString(R.string.location_details, latitude, longitude, accuracy);
+                    mTextView.setText(text);
+                }
+            };
+        };*/
         initGoogleApiClient();
     }
 
@@ -55,14 +77,36 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
                 .build();
     }
 
+    /*private void initLocationClient() {
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        createLocationRequest();
+    }*/
+
+    /*private void createLocationRequest() {
+        locationRequest = LocationRequest.create();
+        locationRequest.setInterval(10000);
+        locationRequest.setFastestInterval(5000);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }*/
+
     @Override
     protected void onStart() {
         super.onStart();
+
+        //if (requestingLocationUpdates) {
+            //startLocationUpdates();
+        //}
 
         if (null != mGoogleApiClient) {
             mGoogleApiClient.connect();
         }
     }
+
+    /*private void startLocationUpdates() {
+        fusedLocationClient.requestLocationUpdates(locationRequest,
+                locationCallback,
+                Looper.getMainLooper());
+    }*/
 
     @Override
     protected void onStop() {
@@ -71,7 +115,12 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         if (null != mGoogleApiClient) {
             mGoogleApiClient.disconnect();
         }
+        //stopLocationUpdates();
     }
+
+    /*private void stopLocationUpdates() {
+        fusedLocationClient.removeLocationUpdates(locationCallback);
+    }*/
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
@@ -150,21 +199,6 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
                         }
                     }
                 });
-
-        // Fetch location using the FusedLocationProviderAPI
-        /*Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-
-
-        if (lastLocation != null) {
-            String latitude = String.valueOf(lastLocation.getLatitude());
-            String longitude = String.valueOf(lastLocation.getLongitude());
-            String accuracy = String.valueOf(lastLocation.getAccuracy());
-
-            String text = getString(R.string.location_details, latitude, longitude, accuracy);
-            mTextView.setText(text);
-        } else {
-            mTextView.setText("Unable to fetch the location");
-        }*/
     }
 
     @Override
