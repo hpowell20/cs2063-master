@@ -1,11 +1,9 @@
-# LocationDemo
+# FusedLocationProviderDemo
 
 An app that requests the device's last known location based on this
-documentation:
-http://developer.android.com/training/location/retrieve-current.html
+documentation http://developer.android.com/training/location/retrieve-current.html
 
-This app targets API level 23, and so uses the new permissions model
-for API level 23 in which permissions are granted by the user at
-run-time, instead of when the app is installed. More details on this
-new permissions model are here:
+NOTES:
+* his solution makes use of the FusedLocationProvider class as opposed to the deprecated Google Play API Location services
+* Details on the permissions for accessing the location can be found at
 http://developer.android.com/training/permissions/requesting.html
