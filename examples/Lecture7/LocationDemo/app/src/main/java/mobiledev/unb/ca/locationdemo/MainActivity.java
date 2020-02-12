@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     private Button mButton;
     private TextView mTextView;
     private GoogleApiClient mGoogleApiClient;
-    //private FusedLocationProviderClient fusedLocationClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +39,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         mButton = findViewById(R.id.button);
         mButton.setEnabled(false);
 
-        // Create an instance of the FusedLocationProviderClient
-        //fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        // Create an instance of Google API Client
         initGoogleApiClient();
     }
 

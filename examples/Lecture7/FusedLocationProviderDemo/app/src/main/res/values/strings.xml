@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Fused Location Provider Demo</string>
+    <string name="btn_get_location">Get Location</string>
+    <string name="location_details">Latitude: %1$s, Longitude: %2$s, Accuracy: %3$s</string>
+</resources>
