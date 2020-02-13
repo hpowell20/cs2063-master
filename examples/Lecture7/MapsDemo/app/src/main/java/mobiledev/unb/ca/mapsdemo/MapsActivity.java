@@ -55,16 +55,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onSuccess(Location location) {
                 if (location != null) {
                     currentLocation = location;
+
+                    Toast.makeText(getApplicationContext(), currentLocation.getLatitude() + "," +
+                            currentLocation.getLongitude(), Toast.LENGTH_LONG).show();
+
+                    // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+                    SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                            .findFragmentById(R.id.map);
+                    mapFragment.getMapAsync(MapsActivity.this);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Unable to fetch the location", Toast.LENGTH_SHORT);
                 }
-
-                Toast.makeText(getApplicationContext(), currentLocation.getLatitude() + "," +
-                        currentLocation.getLongitude(), Toast.LENGTH_LONG).show();
-
-                // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-                SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                        .findFragmentById(R.id.map);
-                mapFragment.getMapAsync(MapsActivity.this);
-
             }
         });
     }
@@ -84,11 +85,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Add a marker based on the current location and move the camera
         LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+        //MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("You are here");
+        //mMap.addMarker(markerOptions);
+        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5));
+
         MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("You are here");
-        //mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-        //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+        mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
         mMap.addMarker(markerOptions);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5));
     }
 
     /**
