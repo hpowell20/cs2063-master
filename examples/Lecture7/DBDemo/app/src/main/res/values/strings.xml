@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DBDemo</string>
+    <string name="app_name">SQLite Demo</string>
     <string name="action_settings">Settings</string>
     <string name="dialog_button_add">Add</string>
     <string name="dialog_button_cancel">Cancel</string>
