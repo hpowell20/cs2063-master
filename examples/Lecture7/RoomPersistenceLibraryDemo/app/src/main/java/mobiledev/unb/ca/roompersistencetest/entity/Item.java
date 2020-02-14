@@ -13,14 +13,6 @@ public class Item {
     private String name;
     private int num;
 
-    /*@ColumnInfo(name="created_at")
-    @TypeConverters({TimestampConverter.class})
-    private Date createdAt;
-
-    @ColumnInfo(name="updated_at")
-    @TypeConverters({TimestampConverter.class})
-    private Date updatedAt;*/
-
     public int getId() {
         return id;
     }
@@ -44,20 +36,4 @@ public class Item {
     public void setNum(int num) {
         this.num = num;
     }
-
-    /*public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }*/
 }

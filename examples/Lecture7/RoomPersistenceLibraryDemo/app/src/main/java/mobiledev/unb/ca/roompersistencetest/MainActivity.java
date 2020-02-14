@@ -29,16 +29,10 @@ import mobiledev.unb.ca.roompersistencetest.ui.MainActivityViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    //private DBManager dbManager;
-    //private ItemRepository itemRepository;
     private ListView mListView;
 
     MainActivityViewModel mainActivityViewModel;
     ItemsAdapter itemsAdapter;
-
-    // Cursor query attributes
-    private final String[] FROM = { DatabaseHelper.ITEM, DatabaseHelper.NUM };
-    private final int[] TO = { R.id.item_textview, R.id.num_textview};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position,
                                            long id) {
-                //String stringId = String.valueOf(id);
-                //deleteItem(stringId);
                 deleteItem((int)id);
                 return true;
             }
@@ -100,49 +92,19 @@ public class MainActivity extends AppCompatActivity {
                 itemsAdapter.notifyDataSetChanged();
             }
         });
-
-        // Create a new DatabaseHelper object
-        /*dbManager = new DBManager(this);
-        dbManager.open();
-        setUpListView();*/
     }
 
-    /*@Override
-    public void onDestroy() {
-        super.onDestroy();
-        dbManager.close();
-    }*/
-
-    /*private void setUpListView() {
-        // Ideally this would be done in a worker thread because
-        // the list items operation could be long running operation
-        Cursor cursor = dbManager.listAllRecords();
-
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
-                R.layout.list_layout,
-                cursor,
-                FROM,
-                TO,
-                0);
-        adapter.notifyDataSetChanged();
-        mListView.setAdapter(adapter);
-    }*/
-
     private void addItem(String item, String num) {
-        mainActivityViewModel.insert(item, Integer.parseInt(num));
-        //dbManager.insertRecord(item, num);
         // Ideally this would be done in a worker thread because
         // getWritableDatabase() can be long running operation
         // Set up the ListView again once we've modified the database
-        //setUpListView();
+        mainActivityViewModel.insert(item, Integer.parseInt(num));
     }
 
     private void deleteItem(int id) {
-        mainActivityViewModel.delete(id);
         // Ideally this would be done in a worker thread because
         // getWritableDatabase() can be long running operation
-        //dbManager.deleteRecord(item);
-        //setUpListView();
+        mainActivityViewModel.delete(id);
     }
 
     @Override

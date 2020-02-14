@@ -13,13 +13,6 @@ import mobiledev.unb.ca.roompersistencetest.R;
 import mobiledev.unb.ca.roompersistencetest.entity.Item;
 
 public class ItemsAdapter  extends ArrayAdapter<Item> {
-    private List<Item> items;
-
-    /*public void setItems(List<Item> items) {
-        this.items = items;
-        notifyDataSetChanged();
-    }*/
-
     public ItemsAdapter(Context context, List<Item> items) {
         super(context, 0, items);
     }
