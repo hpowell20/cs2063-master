@@ -1,0 +1,3 @@
+Some students found this one relatively simple (less than 30 minutes).
+Perhaps remove the JSON loading from an asset for an additional element to learn?
+Notes from prior semester; look at removing some of the TODOs - Adjust the REAME perhaps?

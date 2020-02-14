@@ -1,13 +1,14 @@
-package mobiledev.unb.ca.mapsdemo;
+package mobiledev.unb.ca.mapstest;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -79,21 +80,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+     @Override
+     public void onMapReady(GoogleMap googleMap) {
+         mMap = googleMap;
 
-        // Add a marker based on the current location and move the camera
-        LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-        //MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("You are here");
-        //mMap.addMarker(markerOptions);
-        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5));
+         // Add a marker based on the current location and move the camera
+         LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+         //MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("You are here");
+         //mMap.addMarker(markerOptions);
+         //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5));
 
-        MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("You are here");
-        mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-        mMap.addMarker(markerOptions);
-    }
+         MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("You are here");
+         mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+         mMap.addMarker(markerOptions);
+     }
 
     /**
      * Handles the result of the permissions check

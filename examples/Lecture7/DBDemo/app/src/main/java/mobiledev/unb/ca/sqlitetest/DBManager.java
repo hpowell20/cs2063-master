@@ -40,9 +40,9 @@ public class DBManager {
         return cursor;
     }
 
-    public void deleteRecord(String item) {
+    public void deleteRecord(int id) {
         database.delete(DatabaseHelper.TABLE_NAME,
                 DatabaseHelper._ID + "=?",
-                new String[]{item});
+                new String[]{String.valueOf(id)});
     }
 }

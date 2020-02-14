@@ -1,28 +1,34 @@
-package mobiledev.unb.ca.sqlitetest;
+package mobiledev.unb.ca.roompersistencetest;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.List;
+
+import mobiledev.unb.ca.roompersistencetest.entity.Item;
+import mobiledev.unb.ca.roompersistencetest.ui.ItemsAdapter;
+import mobiledev.unb.ca.roompersistencetest.ui.MainActivityViewModel;
+
 
 public class MainActivity extends AppCompatActivity {
-
-    private DBManager dbManager;
     private ListView mListView;
-
-    // Cursor query attributes
-    private final String[] FROM = {DatabaseHelper.ITEM, DatabaseHelper.NUM};
-    private final int[] TO = {R.id.item_textview, R.id.num_textview};
+    private MainActivityViewModel mainActivityViewModel;
+    private ItemsAdapter itemsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,45 +77,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Create a new DatabaseHelper object
-        dbManager = new DBManager(this);
-        dbManager.open();
-        setUpListView();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        dbManager.close();
-    }
-
-    private void setUpListView() {
-        // Ideally this would be done in a worker thread because
-        // the list items operation could be long running operation
-        Cursor cursor = dbManager.listAllRecords();
-
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
-                R.layout.list_layout,
-                cursor,
-                FROM,
-                TO,
-                0);
-        adapter.notifyDataSetChanged();
-        mListView.setAdapter(adapter);
+        mainActivityViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        mainActivityViewModel.getItems().observe(this, new Observer<List<Item>>() {
+            @Override
+            public void onChanged(@Nullable List<Item> items) {
+                if(items != null) {
+                    itemsAdapter = new ItemsAdapter(getApplicationContext(), items);
+                    mListView.setAdapter(itemsAdapter);
+                }
+                itemsAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     private void addItem(String item, String num) {
-        // Ideally this would be done in a worker thread because
-        // getWritableDatabase() can be long running operation
-        // Set up the ListView again once we've modified the database
-        dbManager.insertRecord(item, num);
-        setUpListView();
+        mainActivityViewModel.insert(item, Integer.parseInt(num));
     }
 
     private void deleteItem(int id) {
-        // Ideally this would be done in a worker thread because
-        // getWritableDatabase() can be long running operation
-        dbManager.deleteRecord(id);
-        setUpListView();
+        mainActivityViewModel.delete(id);
     }
 }
