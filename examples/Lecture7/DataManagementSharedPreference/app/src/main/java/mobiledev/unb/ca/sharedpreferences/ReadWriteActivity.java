@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.Random;
 
 public class ReadWriteActivity extends Activity {
+    private static final String PREFS_FILE_NAME = "AppPrefs";
     private static final String HIGH_SCORE_KEY = "HIGH_SCORE_KEY";
     private static final String GAME_SCORE_KEY = "GAME_SCORE_KEY";
     private static final String INITIAL_HIGH_SCORE = "0";
@@ -79,7 +80,7 @@ public class ReadWriteActivity extends Activity {
 
     // Private Helper Methods
     private void initSharedPreferences() {
-        prefs = getPreferences(Context.MODE_PRIVATE);
+        prefs = getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE);
     }
 
     private void writeHighScoreToSharedPreferences(int score) {
