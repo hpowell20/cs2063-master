@@ -1,5 +1,8 @@
 package mobiledev.unb.ca.asynctasklab;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -195,6 +198,17 @@ public class GeoDataListActivity extends AppCompatActivity {
         //  https://developer.android.com/training/monitoring-device-state/connectivity-monitoring.html
         //  Hint: Read this for help with Toast:
         //  http://developer.android.com/guide/topics/ui/notifiers/toasts.html
+        if (isNetworkAvailable()) {
+        } else {
+            // Set Toast message
+            //Toast.setText(getApplicationContext(), "No network connection available", Toast.LENGTH_SHORT);
+        }
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return null != activeNetworkInfo && activeNetworkInfo.isConnectedOrConnecting();
     }
 
     public class DownloaderTask extends AsyncTask<Void, Integer, String> {
