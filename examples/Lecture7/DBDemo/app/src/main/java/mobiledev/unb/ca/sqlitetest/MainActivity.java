@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Create a new DatabaseHelper object
         dbManager = new DBManager(this);
-        dbManager.open();
         setUpListView();
     }
 
