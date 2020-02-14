@@ -17,10 +17,10 @@ import mobiledev.unb.ca.roompersistencetest.entity.Item;
  */
 @Database(entities = {Item.class}, version = 1, exportSchema = false)
 public abstract class ItemRoomDatabase extends RoomDatabase {
-    public abstract ItemDao itemDao();
-
     private static volatile ItemRoomDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
+
+    public abstract ItemDao itemDao();
     public static final ExecutorService databaseWriterExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
     // Singleton access to the database
