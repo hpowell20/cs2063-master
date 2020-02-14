@@ -21,7 +21,7 @@ public class GeoDataDetailFragment extends Fragment {
      * represents.
      */
     public static final String TITLE = "title";
-    public static final String LNG = "item_longitutde";
+    public static final String LNG = "item_longitude";
     public static final String LAT = "item_latitude";
 
     /**
@@ -52,7 +52,7 @@ public class GeoDataDetailFragment extends Fragment {
             if (activity != null) {
                 CollapsingToolbarLayout appBarLayout = activity.findViewById(R.id.toolbar_layout);
                 if (appBarLayout != null) {
-                    appBarLayout.setTitle("Earthquake Details");
+                    appBarLayout.setTitle(getString(R.string.earthquake_details));
                 }
             }
         }

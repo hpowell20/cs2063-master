@@ -50,9 +50,9 @@ public class GeoDataListActivity extends AppCompatActivity {
 
         mBgButton = findViewById(R.id.button);
 
-        // TODO
-        //  Nothing to do here, just note that you will be completing the downloadGeoData()
-        //  function. It will set mGeoDataList to contain the downloaded geo data.
+        // HINT:
+        // Nothing to do here, just note that you will be completing the downloadGeoData()
+        // function. It will set mGeoDataList to contain the downloaded geo data.
         downloadGeoData();
 
         // Test if we're on a tablet
@@ -64,9 +64,7 @@ public class GeoDataListActivity extends AppCompatActivity {
                 // Init new detail fragment
                 geoDataDetailFragment = new GeoDataDetailFragment();
                 Bundle args = new Bundle();
-                //for (int i=0; i < mGeoDataList.size(); i++) {
-                //    args.putString("course", mGeoDataList.get(i).title);
-                //}
+
                 geoDataDetailFragment.setArguments(args);
                 fragmentManager.beginTransaction().replace(R.id.geodata_detail_container, geoDataDetailFragment, "Detail").commit();
             }
@@ -75,9 +73,7 @@ public class GeoDataListActivity extends AppCompatActivity {
         mBgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO
-                //  Again, nothing to do here. Just note that the downloadGeoData() function
-                //  that you will be completing is also called here.
+                // Update the geo data
                 downloadGeoData();
             }
         });
@@ -154,7 +150,8 @@ public class GeoDataListActivity extends AppCompatActivity {
                                 .replace(R.id.geodata_detail_container, fragment)
                                 .commit();
                     } else {
-                        // TODO Create an Intent to start GeoDataDetailActivity. You'll need
+                        // TODO
+                        //  Create an Intent to start GeoDataDetailActivity. You'll need
                         //  to add some extras to this intent. Look at that class, and the
                         //  example Fragment transaction for the two pane case above, to
                         //  figure out what you need to add.
