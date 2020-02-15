@@ -8,13 +8,12 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-import mobiledev.unb.ca.roompersistencetest.ItemRepository;
+import mobiledev.unb.ca.roompersistencetest.repository.ItemRepository;
 import mobiledev.unb.ca.roompersistencetest.entity.Item;
 
 public class MainActivityViewModel extends AndroidViewModel {
     private ItemRepository itemRepository;
     private LiveData<List<Item>> items;
-
 
     public LiveData<List<Item>> getItems() {
         if (null == items){
@@ -37,8 +36,8 @@ public class MainActivityViewModel extends AndroidViewModel {
         itemRepository.insertRecord(name, num);
     }
 
-    public void delete(int id) {
-        itemRepository.deleteRecord(id);
+    public void delete(Item item) {
+        itemRepository.deleteRecord(item);
     }
 }
 
