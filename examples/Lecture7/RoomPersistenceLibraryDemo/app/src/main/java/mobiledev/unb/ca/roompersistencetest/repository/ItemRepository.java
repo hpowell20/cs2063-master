@@ -1,4 +1,4 @@
-package mobiledev.unb.ca.roompersistencetest;
+package mobiledev.unb.ca.roompersistencetest.repository;
 
 import android.app.Application;
 
@@ -36,9 +36,9 @@ public class ItemRepository {
         });
     }
 
-    public void deleteRecord(int itemId) {
+    public void deleteRecord(Item item) {
         ItemRoomDatabase.databaseWriterExecutor.execute(() -> {
-            itemDao.deleteItem(itemId);
+            itemDao.deleteItem(item);
         });
     }
 }

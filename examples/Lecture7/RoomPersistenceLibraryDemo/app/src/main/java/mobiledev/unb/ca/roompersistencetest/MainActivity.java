@@ -44,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position,
                                            long id) {
-                deleteItem((int)id);
+                Item item = mainActivityViewModel.getItems().getValue().get(position);
+                deleteItem(item);
                 return true;
             }
         });
@@ -94,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         mainActivityViewModel.insert(item, Integer.parseInt(num));
     }
 
-    private void deleteItem(int id) {
-        mainActivityViewModel.delete(id);
+    private void deleteItem(Item item) {
+        mainActivityViewModel.delete(item);
     }
 }

@@ -2,6 +2,7 @@ package mobiledev.unb.ca.roompersistencetest.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -21,6 +22,6 @@ public interface ItemDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Item item);
 
-    @Query("DELETE FROM item_table WHERE id = :itemId")
-    void deleteItem(int itemId);
+    @Delete
+    void deleteItem(Item item);
 }

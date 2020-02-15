@@ -32,7 +32,7 @@ public class ItemsAdapter  extends ArrayAdapter<Item> {
 
         // Populate the data into the template view using the data object
         tvName.setText(item.getName());
-        tvNum.setText("" + item.getNum());
+        tvNum.setText(String.valueOf(item.getNum()));
 
         // Return the completed view to render on screen
         return convertView;
