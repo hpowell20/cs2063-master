@@ -200,9 +200,10 @@ public class GeoDataListActivity extends AppCompatActivity {
         //  Hint: Read this for help with Toast:
         //  http://developer.android.com/guide/topics/ui/notifiers/toasts.html
         if (isNetworkAvailable()) {
+            new DownloaderTask().execute();
         } else {
             // Set Toast message
-            Toast.makeText(getApplicationContext(), "No network connection available", Toast.LENGTH_SHORT);
+            Toast.makeText(getApplicationContext(), getString(R.string.no_network_msg), Toast.LENGTH_SHORT);
         }
     }
 
