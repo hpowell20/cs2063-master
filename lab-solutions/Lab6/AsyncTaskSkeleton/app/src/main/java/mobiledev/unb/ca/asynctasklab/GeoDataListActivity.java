@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -201,7 +202,7 @@ public class GeoDataListActivity extends AppCompatActivity {
         if (isNetworkAvailable()) {
         } else {
             // Set Toast message
-            //Toast.setText(getApplicationContext(), "No network connection available", Toast.LENGTH_SHORT);
+            Toast.makeText(getApplicationContext(), "No network connection available", Toast.LENGTH_SHORT);
         }
     }
 

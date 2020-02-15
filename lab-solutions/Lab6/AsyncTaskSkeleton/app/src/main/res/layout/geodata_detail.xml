@@ -1,4 +1,4 @@
-<TextView android:id="@+id/course_detail"
+<TextView android:id="@+id/geodata_detail"
           style="?android:attr/textAppearanceLarge"
           xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"

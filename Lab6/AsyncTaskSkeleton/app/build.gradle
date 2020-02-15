@@ -2,8 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
-    //buildToolsVersion "29.0.2"
-
     defaultConfig {
         applicationId "mobiledev.unb.ca.asynctasklab"
         minSdkVersion 21
@@ -17,7 +15,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    sourceSets { main { res.srcDirs = ['src/main/res', 'src/main/res/layout/geodata_list.xml'] } }
 }
 
 dependencies {
@@ -27,5 +24,6 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.android.support:design:27.1.1'
-    implementation 'javax.json:javax.json-api:1.1.4'
+    //implementation 'javax.json:javax.json-api:1.1.4'
+    implementation 'org.glassfish:javax.json:1.0.4'
 }
