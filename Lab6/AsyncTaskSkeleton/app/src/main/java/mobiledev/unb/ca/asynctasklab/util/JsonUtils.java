@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.json.Json;
@@ -25,7 +26,10 @@ public class JsonUtils {
         processJSON();
     }
 
+    // TODO: Replace with native JSON processing; later version of the library needs new versions of API
     private void processJSON() {
+        geoDataArray = new ArrayList<>();
+
         String jsonString = loadJSONFromURL();
         JsonParser parser = Json.createParser(new StringReader(jsonString));
         boolean titleTrigger = false;
@@ -76,9 +80,9 @@ public class JsonUtils {
     }
 
     private String loadJSONFromURL() {
-        try {
-            HttpURLConnection connection = null;
+        HttpURLConnection connection = null;
 
+        try {
             // TODO
             //  Establish an HttpURLConnecion to requestURL
             //  Hint: See https://github.com/hpowell20/cs2063-winter-2020-examples/tree/master/Lecture4/NetworkingURL
@@ -90,14 +94,18 @@ public class JsonUtils {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        } finally {
+            if (null != connection)
+                connection.disconnect();
         }
     }
 
     private String convertStreamToString(InputStream is) {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        BufferedReader reader = null;
         StringBuilder sb = new StringBuilder();
 
         try {
+            reader = new BufferedReader(new InputStreamReader(is));
             String line;
             while ((line = reader.readLine()) != null) {
                 sb.append(line);
@@ -105,10 +113,12 @@ public class JsonUtils {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            try {
-                is.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
