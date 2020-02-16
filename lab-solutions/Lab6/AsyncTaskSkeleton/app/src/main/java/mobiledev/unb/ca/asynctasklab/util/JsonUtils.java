@@ -28,6 +28,8 @@ public class JsonUtils {
 
     // TODO: Replace with native JSON processing; later version of the library needs new versions of API
     private void processJSON() {
+        geoDataArray = new ArrayList<>();
+
         String jsonString = loadJSONFromURL();
         JsonParser parser = Json.createParser(new StringReader(jsonString));
         boolean titleTrigger = false;
@@ -78,7 +80,6 @@ public class JsonUtils {
     }
 
     private String loadJSONFromURL() {
-        //String data = "";
         HttpURLConnection connection = null;
 
         try {
@@ -106,23 +107,6 @@ public class JsonUtils {
         } catch (IOException exception) {
             Log.e(TAG, "IOException");
         } */
-        //return data;
-
-        /*try {
-            HttpURLConnection connection = null;
-
-            // TODO
-            //  Establish an HttpURLConnecion to requestURL
-            //  Hint: See https://github.com/hpowell20/cs2063-winter-2020-examples/tree/master/Lecture4/NetworkingURL
-            //  for an example of how to do this
-            //  Also see documentation here:
-            //  http://developer.android.com/training/basics/network-ops/connecting.html
-
-            return convertStreamToString(connection.getInputStream());
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }*/
     }
 
     private String convertStreamToString(InputStream is) {
@@ -145,11 +129,6 @@ public class JsonUtils {
                     e.printStackTrace();
                 }
             }
-            /*try {
-                is.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }*/
         }
 
         return sb.toString();

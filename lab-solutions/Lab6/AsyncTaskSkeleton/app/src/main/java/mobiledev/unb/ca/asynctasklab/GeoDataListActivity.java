@@ -1,6 +1,7 @@
 package mobiledev.unb.ca.asynctasklab;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -165,6 +166,14 @@ public class GeoDataListActivity extends AppCompatActivity {
                         //  to add some extras to this intent. Look at that class, and the
                         //  example Fragment transaction for the two pane case above, to
                         //  figure out what you need to add.
+                        Intent intent = new Intent(GeoDataListActivity.this, GeoDataDetailActivity.class);
+                        intent.putExtra(GeoDataDetailFragment.TITLE, title);
+                        intent.putExtra(GeoDataDetailFragment.LNG, lng);
+                        intent.putExtra(GeoDataDetailFragment.LAT, lat);
+
+                        if (intent.resolveActivity(getPackageManager()) != null) {
+                            startActivity(intent);
+                        }
                     }
                 }
             });
@@ -205,10 +214,12 @@ public class GeoDataListActivity extends AppCompatActivity {
         //  Hint: Read this for help with Toast:
         //  http://developer.android.com/guide/topics/ui/notifiers/toasts.html
         if (isNetworkAvailable()) {
-            new DownloaderTask().execute();
+            DownloaderTask downloaderTask = new DownloaderTask();
+            downloaderTask.setProgressBar(mProgressBar);
+            downloaderTask.execute();
         } else {
             // Set Toast message
-            Toast.makeText(getApplicationContext(), getString(R.string.no_network_msg), Toast.LENGTH_SHORT);
+            Toast.makeText(getApplicationContext(), getString(R.string.no_network_msg), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -219,9 +230,15 @@ public class GeoDataListActivity extends AppCompatActivity {
     }
 
     public class DownloaderTask extends AsyncTask<Void, Integer, String> {
+        private ProgressBar progressBar;
+        //int status = 0;
+
         // TODO
         //  Get a reference to the progress bar so we can interact with it later
-        // HINT: Set a value in onCreate
+        public void setProgressBar(ProgressBar progressBar) {
+            this.progressBar = progressBar;
+        }
+        // NOTE: This could by using a reference set in onCreate or onPreExecute
 
         @Override
         protected void onPreExecute() {
@@ -241,9 +258,11 @@ public class GeoDataListActivity extends AppCompatActivity {
             //  0, and also make sure it's visible.
             //  Hint: Read the documentation on ProgressBar
             //  http://developer.android.com/reference/android/widget/ProgressBar.html
-            mProgressBar.setMax(DOWNLOAD_TIME);
-            mProgressBar.setProgress(0);
-            mProgressBar.setVisibility(View.VISIBLE);
+            //progressBar = findViewById(R.id.progressBar);
+            progressBar.setIndeterminate(false);
+            progressBar.setProgress(0);
+            progressBar.setMax(DOWNLOAD_TIME);
+            progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -258,12 +277,14 @@ public class GeoDataListActivity extends AppCompatActivity {
 
             // Leave this while loop here to simulate a lengthy download
             for(int i = 0; i < DOWNLOAD_TIME; i++) {
+                //status++;
                 try {
-                    Thread.sleep(1000);
+                    //publishProgress(status);
+                    //Thread.sleep(1000);
                     // TODO
                     //  Update the progress bar; calculate an appropriate value for
                     //  the new progress using i
-
+                    publishProgress(i * 10);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -279,7 +300,8 @@ public class GeoDataListActivity extends AppCompatActivity {
         protected void onProgressUpdate(Integer... values) {
             // TODO
             //  Update the progress bar using values
-
+            progressBar.setProgress(values[0]);
+            super.onProgressUpdate(values);
         }
 
         /** Once the DownloaderTask completes, hide the progress bar and update the
@@ -293,21 +315,23 @@ public class GeoDataListActivity extends AppCompatActivity {
             //  Now that the download is complete, enable the button again
             mBgButton.setEnabled(true);
 
-
             // TODO
             //  Reset the progress bar, and make it disappear
-            mProgressBar.setProgress(0);
-            mProgressBar.setVisibility(View.GONE);
-
+            progressBar.setProgress(0);
+            progressBar.setVisibility(View.INVISIBLE);
 
             // TODO
             //  Setup the RecyclerView
-
+            // HINT: This is defined inside the activity_geodata_list.xml file
+            // See README - look for geodata_list.xml for more details
+            RecyclerView recyclerView = findViewById(R.id.geodata_list);
+            setupRecyclerView(recyclerView);
 
             // TODO
             //  Create a Toast indicating that the download is complete. Set its text
             //  to be the result String from doInBackground
-
+            // HINT: result is passed into the method
+            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
         }
     }
 }

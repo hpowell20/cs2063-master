@@ -48,6 +48,7 @@ public class GeoDataDetailActivity extends AppCompatActivity {
                     getIntent().getStringExtra(GeoDataDetailFragment.LNG));
             arguments.putString(GeoDataDetailFragment.LAT,
                     getIntent().getStringExtra(GeoDataDetailFragment.LAT));
+
             GeoDataDetailFragment fragment = new GeoDataDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
