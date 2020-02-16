@@ -15,12 +15,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
 
 import mobiledev.unb.ca.asynctasklab.model.GeoData;
+import mobiledev.unb.ca.asynctasklab.util.JsonUtils;
 
 /**
  * An activity representing a list of GeoData. This activity
@@ -37,6 +39,7 @@ public class GeoDataListActivity extends AppCompatActivity {
 
     private List<GeoData> mGeoDataList;
     private Button mBgButton;
+    private ProgressBar mProgressBar;
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -53,6 +56,9 @@ public class GeoDataListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_geodata_list);
 
         mBgButton = findViewById(R.id.button);
+
+        // Set a reference of the progress bar for use in the AsyncTask class
+        mProgressBar = findViewById(R.id.progressBar);
 
         // HINT:
         // Nothing to do here, just note that you will be completing the downloadGeoData()
@@ -159,7 +165,6 @@ public class GeoDataListActivity extends AppCompatActivity {
                         //  to add some extras to this intent. Look at that class, and the
                         //  example Fragment transaction for the two pane case above, to
                         //  figure out what you need to add.
-
                     }
                 }
             });
@@ -216,6 +221,7 @@ public class GeoDataListActivity extends AppCompatActivity {
     public class DownloaderTask extends AsyncTask<Void, Integer, String> {
         // TODO
         //  Get a reference to the progress bar so we can interact with it later
+        // HINT: Set a value in onCreate
 
         @Override
         protected void onPreExecute() {
@@ -228,21 +234,27 @@ public class GeoDataListActivity extends AppCompatActivity {
             //  Disable the button so it can't be clicked again once a download has been started
             //  Hint: Button is subclass of TextView. Read this document to see how to disable it.
             //  http://developer.android.com/reference/android/widget/TextView.html
-
+            mBgButton.setEnabled(false);
 
             // TODO
             //  Set the progress bar's maximum to be DOWNLOAD_TIME, its initial progress to be
             //  0, and also make sure it's visible.
             //  Hint: Read the documentation on ProgressBar
             //  http://developer.android.com/reference/android/widget/ProgressBar.html
-
-
+            mProgressBar.setMax(DOWNLOAD_TIME);
+            mProgressBar.setProgress(0);
+            mProgressBar.setVisibility(View.VISIBLE);
         }
+
         @Override
         protected String doInBackground(Void... params) {
             // TODO
             //  Create an instance of JsonUtils and get the data from it. Store the data
             //  in mGeoDataList
+            JsonUtils jsonUtils = new JsonUtils();
+            mGeoDataList = jsonUtils.getGeoData();
+            //ArrayList<GeoData> geoData = jsonUtils.getGeoData();
+            //mGeoDataList.addAll(geoData);
 
             // Leave this while loop here to simulate a lengthy download
             for(int i = 0; i < DOWNLOAD_TIME; i++) {
@@ -260,6 +272,16 @@ public class GeoDataListActivity extends AppCompatActivity {
             return "Download Via BG Thread Complete";
         }
 
+        /** Handle mProgressBar display updates whenever the AsyncTask subclass
+         * DownloaderTask notifies its onProgressUpdate()
+         */
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            // TODO
+            //  Update the progress bar using values
+
+        }
+
         /** Once the DownloaderTask completes, hide the progress bar and update the
          *  RecyclerView with the geographic earthquake data we simulated downloading.
          */
@@ -269,10 +291,13 @@ public class GeoDataListActivity extends AppCompatActivity {
 
             // TODO
             //  Now that the download is complete, enable the button again
+            mBgButton.setEnabled(true);
 
 
             // TODO
             //  Reset the progress bar, and make it disappear
+            mProgressBar.setProgress(0);
+            mProgressBar.setVisibility(View.GONE);
 
 
             // TODO
@@ -282,16 +307,6 @@ public class GeoDataListActivity extends AppCompatActivity {
             // TODO
             //  Create a Toast indicating that the download is complete. Set its text
             //  to be the result String from doInBackground
-
-        }
-
-        /** Handle mProgressBar display updates whenever the AsyncTask subclass
-         * DownloaderTask notifies its onProgressUpdate()
-         */
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            // TODO
-            //  Update the progress bar using values
 
         }
     }

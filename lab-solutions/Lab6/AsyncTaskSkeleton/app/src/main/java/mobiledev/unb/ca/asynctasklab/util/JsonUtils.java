@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.json.Json;
@@ -25,6 +26,7 @@ public class JsonUtils {
         processJSON();
     }
 
+    // TODO: Replace with native JSON processing; later version of the library needs new versions of API
     private void processJSON() {
         String jsonString = loadJSONFromURL();
         JsonParser parser = Json.createParser(new StringReader(jsonString));
@@ -76,7 +78,37 @@ public class JsonUtils {
     }
 
     private String loadJSONFromURL() {
+        //String data = "";
+        HttpURLConnection connection = null;
+
         try {
+            // TODO
+            //  Establish an HttpURLConnecion to requestURL
+            //  Hint: See https://github.com/hpowell20/cs2063-winter-2020-examples/tree/master/Lecture4/NetworkingURL
+            //  for an example of how to do this
+            //  Also see documentation here:
+            //  http://developer.android.com/training/basics/network-ops/connecting.html
+            connection = (HttpURLConnection) new URL(REQUEST_URL).openConnection();
+
+            return convertStreamToString(connection.getInputStream());
+            //InputStream in = new BufferedInputStream(httpUrlConnection.getInputStream());
+            //data = convertStreamToString(in);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            if (null != connection)
+                connection.disconnect();
+        }
+
+        /*catch (MalformedURLException exception) {
+            Log.e(TAG, "MalformedURLException");
+        } catch (IOException exception) {
+            Log.e(TAG, "IOException");
+        } */
+        //return data;
+
+        /*try {
             HttpURLConnection connection = null;
 
             // TODO
@@ -90,14 +122,15 @@ public class JsonUtils {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
-        }
+        }*/
     }
 
     private String convertStreamToString(InputStream is) {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        BufferedReader reader = null;
         StringBuilder sb = new StringBuilder();
 
         try {
+            reader = new BufferedReader(new InputStreamReader(is));
             String line;
             while ((line = reader.readLine()) != null) {
                 sb.append(line);
@@ -105,11 +138,18 @@ public class JsonUtils {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            try {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            /*try {
                 is.close();
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
 
         return sb.toString();
