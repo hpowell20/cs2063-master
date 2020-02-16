@@ -21,7 +21,7 @@ By selecting an earthquake you will be presented with further details about it. 
 
 **Task 1**
 
-1. Download the skeleton project for the lab and review the existing code.
+1. Download the skeleton code for the lab
   * This app uses the master/detail flow (MDF) pattern which we briefly saw in lecture 2 and is similar in structure to an app created with the Android Studio Master/Detail Flow template
     * Lecture example can be found [here](https://github.com/hpowell20/cs2063-winter-2020-examples/tree/master/Lecture2/MDFDemo)
 
@@ -63,9 +63,8 @@ By selecting an earthquake you will be presented with further details about it. 
   * First, notice we instantiate a ```FragmentManager```
   * This manager will control which fragments are active in the application based on the logic we provide (in this case, the logic implemented by the MDF template)
 
-* This template checks if the ```geodata_detail_container``` (which is a ```NestedScrollView``` UI element in the ```activity_geodata_detail.xml```) is ```null```
-  * If the ```geodata_detail_container``` is ```null``` we are in single pane layout (i.e., a phone or tablet in portrait mode)
-  * If the ```geodata_detail_container``` is not ```null``` we are in a dual pane layout (i.e., a tablet in landscape mode) utilizing fragments
+* This template checks if the ```geodata_detail_container```, which is a ```NestedScrollView``` UI element in the ```activity_geodata_detail.xml``` is ```null```
+  * If the ```geodata_detail_container``` is ```null``` we are in single pane layout (i.e., a phone or tablet in portrait mode); if the ```geodata_detail_container``` is not ```null```, we are in a dual pane layout (i.e., a tablet in landscape mode) utilizing fragments
 
 **Task 2**
 

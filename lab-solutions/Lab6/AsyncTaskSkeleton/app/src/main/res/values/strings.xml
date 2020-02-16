@@ -5,4 +5,5 @@
     <string name="download_complete">Background thread download complete</string>
     <string name="earthquake_details">Earthquake Details</string>
     <string name="detail_fragment_content">Title: %1$s\nLongitude: %2$s\nLatitude: %3$s</string>
+    <string name="no_network_msg">No network connection available</string>
 </resources>

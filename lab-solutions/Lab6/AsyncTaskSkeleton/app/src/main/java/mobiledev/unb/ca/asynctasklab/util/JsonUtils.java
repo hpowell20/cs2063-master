@@ -89,8 +89,11 @@ public class JsonUtils {
             //  for an example of how to do this
             //  Also see documentation here:
             //  http://developer.android.com/training/basics/network-ops/connecting.html
+            connection = (HttpURLConnection) new URL(REQUEST_URL).openConnection();
 
             return convertStreamToString(connection.getInputStream());
+            //InputStream in = new BufferedInputStream(httpUrlConnection.getInputStream());
+            //data = convertStreamToString(in);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -98,6 +101,12 @@ public class JsonUtils {
             if (null != connection)
                 connection.disconnect();
         }
+
+        /*catch (MalformedURLException exception) {
+            Log.e(TAG, "MalformedURLException");
+        } catch (IOException exception) {
+            Log.e(TAG, "IOException");
+        } */
     }
 
     private String convertStreamToString(InputStream is) {
