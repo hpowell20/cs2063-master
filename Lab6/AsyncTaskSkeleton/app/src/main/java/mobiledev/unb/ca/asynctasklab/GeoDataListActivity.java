@@ -241,7 +241,7 @@ public class GeoDataListActivity extends AppCompatActivity {
                 }
             }
 
-            return "Download Via BG Thread Complete";
+            return getString(R.string.download_complete);
         }
 
         /** Once the DownloaderTask completes, hide the progress bar and update the

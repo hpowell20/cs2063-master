@@ -65,7 +65,7 @@ public class GeoDataDetailFragment extends Fragment {
 
         // Show the dummy content as text in a TextView.
         if (lat != null && lng != null) {
-            String text = getString(R.string.fragment_dummy_content, title, lng, lat);
+            String text = getString(R.string.detail_fragment_content, title, lng, lat);
             ((TextView) rootView.findViewById(R.id.geodata_detail)).setText(text);
         }
 
