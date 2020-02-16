@@ -290,7 +290,7 @@ public class GeoDataListActivity extends AppCompatActivity {
                 }
             }
 
-            return "Download Via BG Thread Complete";
+            return getString(R.string.download_complete);
         }
 
         /** Handle mProgressBar display updates whenever the AsyncTask subclass
