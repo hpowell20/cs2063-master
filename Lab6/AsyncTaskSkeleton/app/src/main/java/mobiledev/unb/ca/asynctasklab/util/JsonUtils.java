@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 import javax.json.Json;
@@ -86,7 +85,7 @@ public class JsonUtils {
 
         try {
             // TODO
-            //  Establish an HttpURLConnecion to requestURL
+            //  Establish an HttpURLConnecion to REQUEST_URL (defined as a constant)
             //  Hint: See https://github.com/hpowell20/cs2063-winter-2020-examples/tree/master/Lecture4/NetworkingURL
             //  for an example of how to do this
             //  Also see documentation here:
