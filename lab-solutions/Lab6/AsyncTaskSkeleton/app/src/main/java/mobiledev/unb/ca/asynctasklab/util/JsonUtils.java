@@ -1,11 +1,14 @@
 package mobiledev.unb.ca.asynctasklab.util;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -15,6 +18,7 @@ import javax.json.stream.JsonParser;
 import mobiledev.unb.ca.asynctasklab.model.GeoData;
 
 public class JsonUtils {
+    private static final String TAG = "JsonUtils";
     private static final String REQUEST_URL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson";
     private static final String JSON_KEY_TITLE = "title";
     private static final String JSON_KEY_COORDINATES = "coordinates";
@@ -31,21 +35,21 @@ public class JsonUtils {
         geoDataArray = new ArrayList<>();
 
         String jsonString = loadJSONFromURL();
-        JsonParser parser = Json.createParser(new StringReader(jsonString));
-        boolean titleTrigger = false;
-        boolean coordTrigger = false;
-        int count = 0;
-        int coordCount = 0;
 
         try {
+            JsonParser parser = Json.createParser(new StringReader(jsonString));
+            boolean titleTrigger = false;
+            boolean coordTrigger = false;
+            int count = 0;
+            int coordCount = 0;
+
             while(parser.hasNext()) {
                 JsonParser.Event event = parser.next();
                 switch (event) {
                     case KEY_NAME:
                         if(parser.getString().equals(JSON_KEY_TITLE)) {
                             titleTrigger = true;
-                        }
-                        else if (parser.getString().equals(JSON_KEY_COORDINATES)) {
+                        } else if (parser.getString().equals(JSON_KEY_COORDINATES)) {
                             coordTrigger = true;
                         }
                         break;
@@ -58,12 +62,11 @@ public class JsonUtils {
                         }
                         break;
                     case VALUE_NUMBER:
-                        if(coordTrigger && (coordCount == 0) ) {
+                        if(coordTrigger && (coordCount == 0)) {
                             GeoData geoData = geoDataArray.get(count);
                             geoData.setLongitude(parser.getString());
                             coordCount++;
-                        }
-                        else if(!coordTrigger && (coordCount == 1)) {
+                        } else if(!coordTrigger && (coordCount == 1)) {
                             GeoData geoData = geoDataArray.get(count);
                             geoData.setLatitude(parser.getString());
                             coordCount = 0;
@@ -71,7 +74,6 @@ public class JsonUtils {
                         }
                         coordTrigger = false;
                         break;
-
                 }
             }
         } catch (Exception e) {
@@ -92,8 +94,12 @@ public class JsonUtils {
             connection = (HttpURLConnection) new URL(REQUEST_URL).openConnection();
 
             return convertStreamToString(connection.getInputStream());
-            //InputStream in = new BufferedInputStream(httpUrlConnection.getInputStream());
-            //data = convertStreamToString(in);
+        } catch (MalformedURLException exception) {
+            Log.e(TAG, "MalformedURLException");
+            return null;
+        } catch (IOException exception) {
+            Log.e(TAG, "IOException");
+            return null;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -101,12 +107,6 @@ public class JsonUtils {
             if (null != connection)
                 connection.disconnect();
         }
-
-        /*catch (MalformedURLException exception) {
-            Log.e(TAG, "MalformedURLException");
-        } catch (IOException exception) {
-            Log.e(TAG, "IOException");
-        } */
     }
 
     private String convertStreamToString(InputStream is) {
