@@ -21,6 +21,7 @@ public abstract class ItemRoomDatabase extends RoomDatabase {
     private static final int NUMBER_OF_THREADS = 4;
 
     public abstract ItemDao itemDao();
+    // Define an ExecutorService with a fixed thread pool which is used to run database operations asynchronously on a background thread
     public static final ExecutorService databaseWriterExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
     // Singleton access to the database

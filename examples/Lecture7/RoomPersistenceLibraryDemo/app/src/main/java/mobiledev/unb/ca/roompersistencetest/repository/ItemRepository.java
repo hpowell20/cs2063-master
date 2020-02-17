@@ -30,15 +30,21 @@ public class ItemRepository {
         insertRecord(newItem);
     }
 
-    private void insertRecord(Item item) {
-        ItemRoomDatabase.databaseWriterExecutor.execute(() -> {
-            itemDao.insert(item);
+    private void insertRecord(final Item item) {
+        ItemRoomDatabase.databaseWriterExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                itemDao.insert(item);
+            }
         });
     }
 
-    public void deleteRecord(Item item) {
-        ItemRoomDatabase.databaseWriterExecutor.execute(() -> {
-            itemDao.deleteItem(item);
+    public void deleteRecord(final Item item) {
+        ItemRoomDatabase.databaseWriterExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                itemDao.deleteItem(item);
+            }
         });
     }
 }
