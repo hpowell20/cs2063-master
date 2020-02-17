@@ -24,6 +24,5 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.android.support:design:27.1.1'
-    //implementation 'javax.json:javax.json-api:1.1.4'
     implementation 'org.glassfish:javax.json:1.0.4'
 }
