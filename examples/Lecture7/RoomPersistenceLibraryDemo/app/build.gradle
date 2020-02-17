@@ -17,10 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    /*compileOptions {
+    compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
-    }*/
+    }
 }
 
 ext {
@@ -44,9 +44,9 @@ dependencies {
     // Lifecycle components
     implementation "androidx.lifecycle:lifecycle-extensions:$archLifecycleVersion"
     // Uncomment if using Java 8 support
-    //implementation "androidx.lifecycle:lifecycle-common-java8:$archLifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$archLifecycleVersion"
     // Comment if using Java 8
-    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$archLifecycleVersion"
+    //annotationProcessor "androidx.lifecycle:lifecycle-compiler:$archLifecycleVersion"
     // If not using androidx
     //implementation "android.arch.lifecycle:livedata:1.1.1"
     //annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
