@@ -16,7 +16,7 @@
     This layout is a two-pane layout for the Geo Data Items in master/detail flow.
     -->
 
-    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/geodata_list"
         android:name="mobiledev.unb.ca.asynctasklab.GeoDataListFragment"
