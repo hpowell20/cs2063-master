@@ -75,7 +75,7 @@ By selecting an earthquake you will be presented with further details about it. 
    * Ensure that the floating action button (pink button in the bottom right corner) still works while the data is refreshing
 
 NOTES:
-* If testing on a phone it will be difficult to test that your app displays the tablet landscape view correctly (i.e., the list of earthquakes and selected earthquake details side-by-side)
+* When using a phone it will be difficult to test that your app displays the tablet landscape view correctly (i.e., the list of earthquakes and selected earthquake details side-by-side)
 * To see this behavior add a third layout resource file for `geodata_list` corresponding to landscape layout
   * Create a new layout resource directory called `layout-land`
   * Make the file contents the same as `geodata_list.xml (w900dp)`
