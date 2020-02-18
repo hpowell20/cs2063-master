@@ -6,12 +6,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +13,14 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -34,8 +36,6 @@ import mobiledev.unb.ca.asynctasklab.util.JsonUtils;
  * item details side-by-side using two vertical panes.
  */
 public class GeoDataListActivity extends AppCompatActivity {
-
-    private static final String TAG = "GeoDataListActivity";
     private static final int DOWNLOAD_TIME = 4;      // Download time simulation
 
     private List<GeoData> mGeoDataList;
@@ -81,22 +81,14 @@ public class GeoDataListActivity extends AppCompatActivity {
             }
         }
 
-        mBgButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Update the geo data
-                downloadGeoData();
-            }
+        mBgButton.setOnClickListener(view -> {
+            // Update the geo data
+            downloadGeoData();
         });
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "I'm working!", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        fab.setOnClickListener(view -> Snackbar.make(view, "I'm working!", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show());
 
         if (findViewById(R.id.geodata_detail_container) != null) {
             // The detail container view will be present only in the
@@ -135,45 +127,42 @@ public class GeoDataListActivity extends AppCompatActivity {
             holder.mGeoData = mValues.get(position);
             holder.mIdView.setText(mValues.get(position).getTitle());
 
-            holder.mView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    /**
-                     * Setting the data to be sent to the Detail portion of the template.
-                     * Here, we send the title, longitude, and latitude of the Earthquake
-                     * that was clicked in the RecyclerView. The Detail Activity/Fragment
-                     * will then display this information. Condition check is whether we
-                     * are twoPane on a Tablet, which varies how we pass arguments to the
-                     * participating activity/fragment.
-                     */
-                    String title = holder.mGeoData.getTitle();
-                    String lng = holder.mGeoData.getLongitude();
-                    String lat = holder.mGeoData.getLatitude();
+            holder.mView.setOnClickListener(v -> {
+                /**
+                 * Setting the data to be sent to the Detail portion of the template.
+                 * Here, we send the title, longitude, and latitude of the Earthquake
+                 * that was clicked in the RecyclerView. The Detail Activity/Fragment
+                 * will then display this information. Condition check is whether we
+                 * are twoPane on a Tablet, which varies how we pass arguments to the
+                 * participating activity/fragment.
+                 */
+                String title = holder.mGeoData.getTitle();
+                String lng = holder.mGeoData.getLongitude();
+                String lat = holder.mGeoData.getLatitude();
 
-                    if (mTwoPane) {
-                        Bundle arguments = new Bundle();
-                        arguments.putString(GeoDataDetailFragment.TITLE, title);
-                        arguments.putString(GeoDataDetailFragment.LNG, lng);
-                        arguments.putString(GeoDataDetailFragment.LAT, lat);
-                        GeoDataDetailFragment fragment = new GeoDataDetailFragment();
-                        fragment.setArguments(arguments);
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.geodata_detail_container, fragment)
-                                .commit();
-                    } else {
-                        // TODO
-                        //  Create an Intent to start GeoDataDetailActivity. You'll need
-                        //  to add some extras to this intent. Look at that class, and the
-                        //  example Fragment transaction for the two pane case above, to
-                        //  figure out what you need to add.
-                        Intent intent = new Intent(GeoDataListActivity.this, GeoDataDetailActivity.class);
-                        intent.putExtra(GeoDataDetailFragment.TITLE, title);
-                        intent.putExtra(GeoDataDetailFragment.LNG, lng);
-                        intent.putExtra(GeoDataDetailFragment.LAT, lat);
+                if (mTwoPane) {
+                    Bundle arguments = new Bundle();
+                    arguments.putString(GeoDataDetailFragment.TITLE, title);
+                    arguments.putString(GeoDataDetailFragment.LNG, lng);
+                    arguments.putString(GeoDataDetailFragment.LAT, lat);
+                    GeoDataDetailFragment fragment = new GeoDataDetailFragment();
+                    fragment.setArguments(arguments);
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.geodata_detail_container, fragment)
+                            .commit();
+                } else {
+                    // TODO
+                    //  Create an Intent to start GeoDataDetailActivity. You'll need
+                    //  to add some extras to this intent. Look at that class, and the
+                    //  example Fragment transaction for the two pane case above, to
+                    //  figure out what you need to add.
+                    Intent intent = new Intent(GeoDataListActivity.this, GeoDataDetailActivity.class);
+                    intent.putExtra(GeoDataDetailFragment.TITLE, title);
+                    intent.putExtra(GeoDataDetailFragment.LNG, lng);
+                    intent.putExtra(GeoDataDetailFragment.LAT, lat);
 
-                        if (intent.resolveActivity(getPackageManager()) != null) {
-                            startActivity(intent);
-                        }
+                    if (intent.resolveActivity(getPackageManager()) != null) {
+                        startActivity(intent);
                     }
                 }
             });
@@ -226,12 +215,28 @@ public class GeoDataListActivity extends AppCompatActivity {
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return null != activeNetworkInfo && activeNetworkInfo.isConnectedOrConnecting();
+        return null != activeNetworkInfo && activeNetworkInfo.isConnected();
     }
+
+    /*private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val nw      = connectivityManager.activeNetwork ?: return false
+            val actNw = connectivityManager.getNetworkCapabilities(nw) ?: return false
+            return when {
+                actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+            else -> false
+            }
+        } else {
+            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+            return null != activeNetworkInfo && activeNetworkInfo.isConnectedOrConnecting();
+        }
+    }*/
 
     public class DownloaderTask extends AsyncTask<Void, Integer, String> {
         private ProgressBar progressBar;
-        //int status = 0;
 
         // TODO
         //  Get a reference to the progress bar so we can interact with it later
@@ -258,7 +263,6 @@ public class GeoDataListActivity extends AppCompatActivity {
             //  0, and also make sure it's visible.
             //  Hint: Read the documentation on ProgressBar
             //  http://developer.android.com/reference/android/widget/ProgressBar.html
-            //progressBar = findViewById(R.id.progressBar);
             progressBar.setIndeterminate(false);
             progressBar.setProgress(0);
             progressBar.setMax(DOWNLOAD_TIME);
@@ -272,15 +276,10 @@ public class GeoDataListActivity extends AppCompatActivity {
             //  in mGeoDataList
             JsonUtils jsonUtils = new JsonUtils();
             mGeoDataList = jsonUtils.getGeoData();
-            //ArrayList<GeoData> geoData = jsonUtils.getGeoData();
-            //mGeoDataList.addAll(geoData);
 
             // Leave this while loop here to simulate a lengthy download
             for(int i = 0; i < DOWNLOAD_TIME; i++) {
-                //status++;
                 try {
-                    //publishProgress(status);
-                    //Thread.sleep(1000);
                     // TODO
                     //  Update the progress bar; calculate an appropriate value for
                     //  the new progress using i

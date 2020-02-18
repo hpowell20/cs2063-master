@@ -18,8 +18,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -43,9 +43,10 @@ dependencies {
 
     // Lifecycle components
     implementation "androidx.lifecycle:lifecycle-extensions:$archLifecycleVersion"
+    // Uncomment if using Java 8 support
     implementation "androidx.lifecycle:lifecycle-common-java8:$archLifecycleVersion"
-    // If not using Java 8
-    //annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.2.0"
+    // Comment if using Java 8
+    //annotationProcessor "androidx.lifecycle:lifecycle-compiler:$archLifecycleVersion"
     // If not using androidx
     //implementation "android.arch.lifecycle:livedata:1.1.1"
     //annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
