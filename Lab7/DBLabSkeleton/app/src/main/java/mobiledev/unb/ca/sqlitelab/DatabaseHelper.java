@@ -1,29 +1,28 @@
-package mobiledev.unb.ca.trydb;
-
+package mobiledev.unb.ca.sqlitelab;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
+public class DatabaseHelper extends SQLiteOpenHelper {
+    // Database information
+    private static final String DATABASE_NAME = "SQLITE_LAB.DB";
+    private static final int DATABASE_VERSION = 1;
 
-public class DBHelper extends SQLiteOpenHelper {
-
-    private static final int DATABASE_VERSION = 2;
-    public static final String TABLE_NAME = "mytable";
-    final static String _ID = "_id";
+    // Table columns
+    public static final String _ID = "_id";
     public static final String ITEM = "item";
     public static final String NUM = "number";
+    private static String[] COLUMNS = { _ID, ITEM, NUM };
+
+    // Table creation statement
+    public static final String TABLE_NAME = "mytable";
     private static final String TABLE_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" + _ID
                     + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                    + ITEM + " TEXT, " +
-                    NUM + " INT);";
-    private static final String TAG = "DBHelper";
-    private static final String DATABASE_NAME = "mydb";
-    final static String[] COLUMNS = { _ID, ITEM, NUM };
+                    + ITEM + " TEXT, " + NUM + " INT);";
 
-    DBHelper(Context context) {
+    DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -32,9 +31,9 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(TABLE_CREATE);
     }
 
+    @Override
     public void onUpgrade (SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.i(TAG, "onUpgrade");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
     }
-
-
 }
+
