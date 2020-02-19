@@ -1,5 +1,7 @@
 # Lab 7 - SQLite Database Storage
 
+In lecture we have explored different storage mechanisms available for app specific data.  One of the more used alternatives is [SQLite database](https://www.sqlite.org/) which allows for more complex structured data to be stored.  In this lab you will build a simple app that uses a SQLite database for managing data.
+
 ## Pair Programming
 
 We will again be doing pair programming for this lab.  Details on pair programming can be found at [Pair Programming](../docs/PAIR_PROGRAMMING.md).  You can again work with anybody of your choosing.
@@ -9,19 +11,28 @@ We will again be doing pair programming for this lab.  Details on pair programmi
 **Switch between the roles of navigator and driver every 10 to 15
 minutes.**
 
-## Introduction
+## Understanding the skeleton code
 
-In this lab you will build a simple app that uses an [SQLite database](https://www.sqlite.org/).
+You are provided with skeleton code which includes three files:
+* `MainActivity`
+  * Entry point for the app
+* `DatabaseHelper`
+  * Class defined as a subclass of the `SQLiteOpenHelper` which creates a database table with three columns: ID, item, and number
+* `DBHelper`
+  * Class used to as the interface between the the database and the UI where the database queries are to be added
 
-You are provided with skeleton code, which includes two Java files: ```MainActiviy``` and ```DBHelper```. ```DBHelper``` is a subclass of ```SQLiteOpenHelper```. This class creates a database that has three columns: an id, item, and number.
+Once completed the user will be able to use the app for the following:
+* Add new rows to the database
+* Search for rows that have a particular item
+  * Below is a sample screenshot of the app after the user has searched for the item "Cats".
 
-The app allows the user to add new rows to the database. The app also allows the user to search for rows that have a particular item. Below is a sample screenshot of the app after the user has searched for the item "Cats". In this case the database had three rows with the item "Cats" with the numbers "3", "5", and "10". (Note that the results have been sorted by number.)
+  ![Main Activity](https://i.imgur.com/cWblnHD.png?1)
 
-![Main Activity](https://i.imgur.com/cWblnHD.png?1)
+    * In this case the database had three rows with the item "Cats" with the numbers "3", "5", and "10". (Note that the results have been sorted by number.)
 
-In the case that a search item does not match any rows in the database, a message indicating this is displayed, as shown below.
+    * In the case that a search item does not match any rows in the database, a message indicating this is displayed, as shown below.
 
-![Main Activity](https://i.imgur.com/wQ7Ub7F.png?1)
+    ![Main Activity](https://i.imgur.com/wQ7Ub7F.png?1)
 
 
 ## Resources
