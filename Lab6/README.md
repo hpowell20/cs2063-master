@@ -69,7 +69,7 @@ By selecting an earthquake you will be presented with further details about it. 
 
 **Task 2**
 
-1. Complete the TODO items in `GeoDataListActivity` and `DataModel`.
+1. Complete the TODO items in `GeoDataListActivity` and `JsonUtils`.
 
    * Make sure your app behaves as expected with and without a network connection
    * Ensure that the floating action button (pink button in the bottom right corner) still works while the data is refreshing

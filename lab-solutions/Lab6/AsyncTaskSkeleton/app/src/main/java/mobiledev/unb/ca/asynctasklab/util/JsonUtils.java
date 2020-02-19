@@ -30,13 +30,16 @@ public class JsonUtils {
         processJSON();
     }
 
-    // TODO: Replace with native JSON processing; later version of the library needs new versions of API
+    // TODO Add unit tests
     private void processJSON() {
-        geoDataArray = new ArrayList<>();
-
         String jsonString = loadJSONFromURL();
+        if (null == jsonString) {
+            Log.i(TAG, "No JSON string to process");
+            return;
+        }
 
         try {
+            geoDataArray = new ArrayList<>();
             JsonParser parser = Json.createParser(new StringReader(jsonString));
             boolean titleTrigger = false;
             boolean coordTrigger = false;

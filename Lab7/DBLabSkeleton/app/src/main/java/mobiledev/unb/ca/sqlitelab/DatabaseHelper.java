@@ -13,7 +13,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String _ID = "_id";
     public static final String ITEM = "item";
     public static final String NUM = "number";
-    private static String[] COLUMNS = { _ID, ITEM, NUM };
+    public static String[] COLUMNS = { _ID, ITEM, NUM };
 
     // Table creation statement
     public static final String TABLE_NAME = "mytable";

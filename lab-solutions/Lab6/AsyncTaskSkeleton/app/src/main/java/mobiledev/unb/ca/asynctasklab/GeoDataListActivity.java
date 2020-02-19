@@ -170,6 +170,10 @@ public class GeoDataListActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
+            if (null == mValues) {
+                return 0;
+            }
+
             return mValues.size();
         }
 
@@ -276,6 +280,9 @@ public class GeoDataListActivity extends AppCompatActivity {
             //  in mGeoDataList
             JsonUtils jsonUtils = new JsonUtils();
             mGeoDataList = jsonUtils.getGeoData();
+            if (null == mGeoDataList) {
+                return getString(R.string.download_error_msg);
+            }
 
             // Leave this while loop here to simulate a lengthy download
             for(int i = 0; i < DOWNLOAD_TIME; i++) {
