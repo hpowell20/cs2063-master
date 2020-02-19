@@ -37,23 +37,19 @@ Once completed the user will be able to use the app for the following:
 
 ## Resources
 
-The following documentation might be helpful in this lab.
+The following documentation will be helpful in this lab.
 
-SQLite databases in Android: https://developer.android.com/training/data-storage/sqlite.html
+* SQLite databases in Android: https://developer.android.com/training/data-storage/sqlite.html
+* SimpleCursorAdapter: https://developer.android.com/reference/android/widget/SimpleCursorAdapter.html
+* SQLite database example from class:
+https://github.com/hpowell20/cs2063-winter-2020-examples/tree/master/Lecture7/DBDemo
 
-(Android has recently introduced an alternative to SQLite databases called the Room Persistence Library, mentioned in this documentation. We won't be using that today, but you might want to learn about it for your project.)
+**Tasks**
 
-SimpleCursorAdapter: https://developer.android.com/reference/android/widget/SimpleCursorAdapter.html
+1. Read the skeleton code and make sure you understand what it's doing
+2. Complete the TODO items in the classes
 
-The SQLite database example from class might also be helpful:
-https://github.com/cpaulcook/cs2063LabsWinter2018/tree/master/Examples/DBDemo
+**Lab Completion**
 
-## Todo
-
-Read the skeleton code and make sure you understand what it's doing.
-
-Complete the TODOs **by pair programming**.
-
-## Deliverables
-
-Show your working app to the instructor or TA
+* Show the working app to the instructor or TA
+* Keep a copy of your project work and answers for future reference
