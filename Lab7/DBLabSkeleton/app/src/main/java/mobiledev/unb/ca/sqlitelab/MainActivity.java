@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // TODO Check if some text has been entered in both the item and number
                 //  EditTexts. If so, create and execute an AddTask, passing its
-                //  doInBackground method the text from these EditTetxs. If not,
+                //  doInBackground method the text from these EditTexts. If not,
                 //  display a toast indicating that the data entered was incomplete.
             }
         });

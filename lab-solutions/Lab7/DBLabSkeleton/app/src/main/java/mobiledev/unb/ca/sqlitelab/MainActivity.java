@@ -3,6 +3,7 @@ package mobiledev.unb.ca.sqlitelab;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -46,8 +47,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // TODO Check if some text has been entered in both the item and number
                 //  EditTexts. If so, create and execute an AddTask, passing its
-                //  doInBackground method the text from these EditTetxs. If not,
+                //  doInBackground method the text from these EditTexts. If not,
                 //  display a toast indicating that the data entered was incomplete.
+               String itemText =  mItemEditText.getText().toString();
+               int itemNum = 0;
+               try {
+                   Integer.parseInt(mNumberEditText.getText().toString());
+               } catch (NumberFormatException nfe) {
+                   Log.w(TAG, "Error parsing the number value. " + nfe.getMessage());
+               }
             }
         });
 
