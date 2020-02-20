@@ -29,7 +29,6 @@ public class JsonUtils {
         processJSON();
     }
 
-    // TODO: Replace with native JSON processing; later version of the library needs new versions of API
     private void processJSON() {
         geoDataArray = new ArrayList<>();
 
