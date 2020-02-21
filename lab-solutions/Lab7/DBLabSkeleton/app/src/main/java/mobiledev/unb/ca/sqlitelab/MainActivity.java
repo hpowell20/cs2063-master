@@ -69,6 +69,13 @@ public class MainActivity extends AppCompatActivity {
                    return;
                }
 
+               // Hide the keyboard
+               KeyboardUtils.hideKeyboard(MainActivity.this);
+
+               // Clear the search results
+               updateListView(null);
+               
+               // Create the new item
                AddTask addTask = new AddTask();
                addTask.execute(itemText, numberText);
             }
@@ -81,10 +88,17 @@ public class MainActivity extends AppCompatActivity {
                     // TODO v is the search EditText. (EditText is a subclass of TextView.)
                     //  Get the text from this view. Create and execute a QueryTask passing
                     //  its doInBackground method this text.
-                    QueryTask queryTask = new QueryTask();
-                    queryTask.execute(v.getText().toString());
+                    String text = v.getText().toString();
+                    if (!TextUtils.isEmpty(text)) {
+                        KeyboardUtils.hideKeyboard(MainActivity.this);
+                        QueryTask queryTask = new QueryTask();
+                        queryTask.execute(text);
 
-                    return true;
+                        return true;
+                    }
+
+                    // Show error message
+                    Toast.makeText(getApplicationContext(), getString(R.string.err_no_search_term_entered), Toast.LENGTH_SHORT).show();
                 }
 
                 return false;
@@ -120,6 +134,8 @@ public class MainActivity extends AppCompatActivity {
             //  changes elsewhere in the app. Exactly how you make the
             //  UI behave is up to you, but you should make reasonable
             //  choices.
+            mItemEditText.setText("");
+            mNumberEditText.setText("");
             Toast.makeText(getApplicationContext(), getString(R.string.msg_record_added), Toast.LENGTH_SHORT).show();
         }
     }
@@ -151,15 +167,25 @@ public class MainActivity extends AppCompatActivity {
                 mResultsTextView.setText(text);
             }
 
-            SimpleCursorAdapter adapter = new SimpleCursorAdapter(getApplicationContext(),
-                    R.layout.list_layout,
-                    result,
-                    FROM,
-                    TO,
-                    0);
-
-            adapter.notifyDataSetChanged();
-            mListView.setAdapter(adapter);
+            updateListView(result);
         }
+    }
+
+    private void updateListView(Cursor cursor) {
+        if (null == cursor) {
+            mResultsTextView.setText("");
+        }
+
+        mSearchEditText.setText("");
+
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(getApplicationContext(),
+                R.layout.list_layout,
+                cursor,
+                FROM,
+                TO,
+                0);
+
+        adapter.notifyDataSetChanged();
+        mListView.setAdapter(adapter);
     }
 }
