@@ -18,6 +18,4 @@ public class DBManager {
         dbHelper.close();
     }
 
-    // TODO
-    //  Add database query operations in this class
 }

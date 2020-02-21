@@ -19,7 +19,7 @@ You are provided with skeleton code which includes three files:
 * `DatabaseHelper`
   * Class defined as a subclass of the `SQLiteOpenHelper` which creates a database table with three columns: ID, item, and number
 * `DBHelper`
-  * Class used to as the interface between the the database and the UI where the database queries are to be added
+  * Class used to as the interface between the database and the UI where the database queries are to be added
 
 Once completed the user will be able to use the app for the following:
 * Add new rows to the database

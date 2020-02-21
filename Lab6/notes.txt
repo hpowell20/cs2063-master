@@ -1,0 +1,7 @@
+https://www.techyourchance.com/asynctask-deprecated/
+
+AsyncTask has been deprecated with Android 11; see how this lab can be rewritten to use
+java.util.concurrent libraries (Kotlin perhaps?)
+
+Can this be done using RxJava?
+Kotlin coroutines?
