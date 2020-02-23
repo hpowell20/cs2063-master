@@ -57,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     // TODO v is the search EditText. (EditText is a subclass of TextView.)
-                    //  Get the text from this view. Call the searchRecords method using the item name.
+                    //  Get the text from this view.
+                    //  Call the searchRecords method using the item name.
                 }
 
                 return false;
@@ -91,11 +92,45 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void searchRecords(String item) {
-        // TODO Make a call to the view model to search for records in the database that match the query item
+      // TODO Make a call to the view model to search for records in the database that match the query item.
+      //  Make sure that the results are sorted appropriately
 
         // TODO Update the results section.
         //  If there are no results, set the results TextView to indicate that there are no results.
         //  If there are results, set the results TextView to indicate that there are results.
         //  Again, you might need to write a bit of extra code here or elsewhere, to get the UI to behave nicely.
     }
+
+    /*private class AddTask extends AsyncTask<String, Void, Void> {
+           protected Void doInBackground(String... params) {
+               // TODO Get the item and number that were passed to this method
+               //  as params. Add a corresponding row to the the database.
+
+               return null;
+           }
+
+           protected void onPostExecute(Void result) {
+               // TODO You will need to write a bit of extra code to get the
+               //  UI to behave nicely, e.g., showing and hiding the keyboard
+               //  at the right time, clearing text fields appropriately. Some
+               //  of that code will likely go here, but you might also make
+               //  changes elsewhere in the app. Exactly how you make the
+               //  UI behave is up to you, but you should make reasonable
+               //  choices.
+           }
+       }
+
+    private class QueryTask extends AsyncTask<String, Void, List<Item>> {
+        protected List<Item> doInBackground(String... params) {
+            // TODO Make a call to the view model to search for records in the database that match the query item.
+            //  Make sure that the results are sorted appropriately.
+        }
+
+        protected void onPostExecute(List<Item> result) {
+            // TODO Update the results section.
+            //  If there are no results, set the results TextView to indicate that there are no results.
+            //  If there are results, set the results TextView to indicate that there are results.
+            //  Again, you might need to write a bit of extra code here or elsewhere, to get the UI to behave nicely.
+        }
+    }*/
 }

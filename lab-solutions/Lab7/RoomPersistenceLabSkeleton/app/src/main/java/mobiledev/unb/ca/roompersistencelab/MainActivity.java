@@ -15,6 +15,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
@@ -64,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
                 // Hide the keyboard
                 KeyboardUtils.hideKeyboard(MainActivity.this);
 
+                // Clear the search results
+                updateListView(null);
+
                 // Create the record
                 addItem(itemText, numberText);
             }
@@ -75,6 +81,18 @@ public class MainActivity extends AppCompatActivity {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     // TODO v is the search EditText. (EditText is a subclass of TextView.)
                     //  Get the text from this view. Call the searchRecords method using the item name.
+                    String text = v.getText().toString();
+                    if (!TextUtils.isEmpty(text)) {
+                        KeyboardUtils.hideKeyboard(MainActivity.this);
+                        searchRecords(text);
+                        //QueryTask queryTask = new QueryTask();
+                        //queryTask.execute(text);
+
+                        return true;
+                    }
+
+                    // Show error message if no search field added
+                    Toast.makeText(getApplicationContext(), getString(R.string.err_no_search_term_entered), Toast.LENGTH_SHORT).show();
                 }
 
                 return false;
@@ -83,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Set the ViewModel
         mItemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
+        // TODO for me: See if there is a way to use this syntax
         /*mItemViewModel.getItems().observe(this, new Observer<List<Item>>() {
             @Override
             public void onChanged(@Nullable List<Item> items) {
@@ -112,11 +131,63 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void searchRecords(String item) {
-        // TODO Make a call to the view model to search for records in the database that match the query item
+        // TODO Make a call to the view model to search for records in the database that match the query item.
+        //  Make sure that the results are sorted appropriately.
+        List<Item> items = mItemViewModel.findItemsByName(item);
 
         // TODO Update the results section.
         //  If there are no results, set the results TextView to indicate that there are no results.
         //  If there are results, set the results TextView to indicate that there are results.
         //  Again, you might need to write a bit of extra code here or elsewhere, to get the UI to behave nicely.
+        int itemsCount = items.size();
+        if (itemsCount <= 0) {
+            mResultsTextView.setText(getString(R.string.msg_no_results_found));
+        } else {
+            String text = itemsCount == 1 ?
+                    getString(R.string.msg_single_result_found, itemsCount) :
+                    getString(R.string.msg_multiple_results_found, itemsCount);
+            mResultsTextView.setText(text);
+        }
+
+        updateListView(items);
+    }
+
+    /*private class QueryTask extends AsyncTask<String, Void, List<Item>> {
+        protected List<Item> doInBackground(String... params) {
+            // TODO Make a call to the view model to search for records in the database that match the query item.
+            //  Make sure that the results are sorted appropriately.
+            return mItemViewModel.findItemsByName(params[0]);
+        }
+
+        protected void onPostExecute(List<Item> result) {
+            // TODO Update the results section.
+            //  If there are no results, set the results TextView to indicate that there are no results.
+            //  If there are results, set the results TextView to indicate that there are results.
+            //  Again, you might need to write a bit of extra code here or elsewhere, to get the UI to behave nicely.
+            int itemsCount = result.size();
+            if (itemsCount <= 0) {
+                mResultsTextView.setText(getString(R.string.msg_no_results_found));
+            } else {
+                String text = itemsCount == 1 ?
+                        getString(R.string.msg_single_result_found, itemsCount) :
+                        getString(R.string.msg_multiple_results_found, itemsCount);
+                mResultsTextView.setText(text);
+            }
+
+            updateListView(result);
+        }
+    }*/
+
+    private void updateListView(List<Item> items) {
+        if (null == items) {
+            mResultsTextView.setText("");
+            items = new ArrayList<Item>();
+        }
+
+        mSearchEditText.setText("");
+
+        mItemsAdapter = new ItemsAdapter(getApplicationContext(), items);
+        mListView.setAdapter(mItemsAdapter);
+        mItemsAdapter.notifyDataSetChanged();
     }
 }

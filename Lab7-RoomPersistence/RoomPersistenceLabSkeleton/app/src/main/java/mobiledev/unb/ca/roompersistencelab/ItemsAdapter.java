@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class ItemsAdapter  extends ArrayAdapter<Item> {
+public class ItemsAdapter extends ArrayAdapter<Item> {
     public ItemsAdapter(Context context, List<Item> items) {
         super(context, 0, items);
     }
