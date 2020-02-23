@@ -1,4 +1,4 @@
-package mobiledev.unb.ca.sqlitelab;
+package mobiledev.unb.ca.roompersistencelab;
 
 import android.app.Activity;
 import android.view.View;

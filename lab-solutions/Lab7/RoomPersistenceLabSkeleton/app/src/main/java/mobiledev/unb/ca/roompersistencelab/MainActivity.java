@@ -1,8 +1,8 @@
 package mobiledev.unb.ca.roompersistencelab;
 
-import android.database.Cursor;
-import android.os.AsyncTask;
+import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -10,13 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -48,9 +45,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO Check if some text has been entered in both the item and number
-                //  EditTexts. If so, create and execute an AddTask, passing its
-                //  doInBackground method the text from these EditTexts. If not,
-                //  display a toast indicating that the data entered was incomplete.
+                //  EditTexts.
+                //  If so call the addItem method using the the text from these EditTexts.
+                //  If not display a toast indicating that the data entered was incomplete.
+                Context context = getApplicationContext();
+                String itemText =  mItemEditText.getText().toString();
+                if (TextUtils.isEmpty(itemText)) {
+                    Toast.makeText(context, getString(R.string.err_no_item_value_entered), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                String numberText = mNumberEditText.getText().toString();
+                if (TextUtils.isEmpty(numberText)) {
+                    Toast.makeText(context, getString(R.string.err_no_number_value_entered), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Hide the keyboard
+                KeyboardUtils.hideKeyboard(MainActivity.this);
+
+                // Create the record
+                addItem(itemText, numberText);
             }
         });
 
@@ -59,8 +74,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     // TODO v is the search EditText. (EditText is a subclass of TextView.)
-                    //  Get the text from this view. Create and execute a QueryTask passing
-                    //  its doInBackground method this text.
+                    //  Get the text from this view. Call the searchRecords method using the item name.
                 }
 
                 return false;
@@ -69,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Set the ViewModel
         mItemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
-        mItemViewModel.getItems().observe(this, new Observer<List<Item>>() {
+        /*mItemViewModel.getItems().observe(this, new Observer<List<Item>>() {
             @Override
             public void onChanged(@Nullable List<Item> items) {
                 if(items != null) {
@@ -78,47 +92,31 @@ public class MainActivity extends AppCompatActivity {
                 }
                 mItemsAdapter.notifyDataSetChanged();
             }
-        });
+        });*/
     }
 
-    private class AddTask extends AsyncTask<String, Void, Void> {
-        protected Void doInBackground(String... params) {
-            // TODO Get the item and number that were passed to this method
-            //  as params. Add a corresponding row to the the database.
+    private void addItem(String item, String num) {
+        // TODO Make a call to the view model to create a record in the database table
+        mItemViewModel.insert(item, Integer.parseInt(num));
 
-            return null;
-        }
-
-        protected void onPostExecute(Void result) {
-            // TODO You will need to write a bit of extra code to get the
-            //  UI to behave nicely, e.g., showing and hiding the keyboard
-            //  at the right time, clearing text fields appropriately. Some
-            //  of that code will likely go here, but you might also make
-            //  changes elsewhere in the app. Exactly how you make the
-            //  UI behave is up to you, but you should make reasonable
-            //  choices.
-        }
+        // TODO You will need to write a bit of extra code to get the
+        //  UI to behave nicely, e.g., showing and hiding the keyboard
+        //  at the right time, clearing text fields appropriately. Some
+        //  of that code will likely go here, but you might also make
+        //  changes elsewhere in the app. Exactly how you make the
+        //  UI behave is up to you, but you should make reasonable
+        //  choices.
+        mItemEditText.setText("");
+        mNumberEditText.setText("");
+        Toast.makeText(getApplicationContext(), getString(R.string.msg_record_added), Toast.LENGTH_SHORT).show();
     }
 
+    private void searchRecords(String item) {
+        // TODO Make a call to the view model to search for records in the database that match the query item
 
-    private class QueryTask extends AsyncTask<String, Void, Cursor> {
-        protected Cursor doInBackground(String... params) {
-            // TODO Get the query String from params. Query the database to
-            //  retrieve all rows that have an item that matches this query,
-            //  and return this Cursor object. Make sure that the results
-            //  are sorted appropriately.
-
-            // TODO Remove this return statement when you're done this part
-            return null;
-        }
-
-        protected void onPostExecute(Cursor result) {
-            // TODO Use a SimpleCursorAdapter to set the adapter for
-            //  the ListView (mListview) to be the Cursor passed
-            //  to onPostExecute. If there are no results, set the
-            //  results TextView to indicate that there are no results.
-            //  Again, you might need to write a bit of extra code here,
-            //  or elsewhere, to get the UI to behave nicely.
-        }
+        // TODO Update the results section.
+        //  If there are no results, set the results TextView to indicate that there are no results.
+        //  If there are results, set the results TextView to indicate that there are results.
+        //  Again, you might need to write a bit of extra code here or elsewhere, to get the UI to behave nicely.
     }
 }

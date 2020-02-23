@@ -25,8 +25,12 @@ public class ItemViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Item>> updateItemsList(){
+        // TODO Remove this return statement when you have completed this part
         return null;
     }
 
     // TODO Add mapping calls between the UI and Database
+    public void insert(String name, int num) {
+        itemRepository.insertRecord(name, num);
+    }
 }

@@ -4,4 +4,8 @@
     <string name="btn_add">Add</string>
     <string name="lbl_item_edit_text_hint">Enter an item</string>
     <string name="lbl_number_edit_text_hint">Enter a number</string>
+    <string name="err_no_item_value_entered">Please enter an item value</string>
+    <string name="err_no_number_value_entered">Please enter a number value</string>
+    <string name="err_no_search_term_entered">Please enter a search string</string>
+    <string name="msg_record_added">Record added</string>
 </resources>
