@@ -18,4 +18,5 @@ public class DBManager {
         dbHelper.close();
     }
 
+    // TODO Add in app related queries
 }
