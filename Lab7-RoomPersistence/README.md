@@ -24,7 +24,7 @@ You are provided with skeleton code which includes three files:
   * Entity class which defines the structure of the records in the table
 * `ItemRepository`
   * Class used to manages queries and enables the use of multiple backends
-  
+
 Once completed the user will be able to use the app for the following:
 * Add new rows to the database
 * Search for rows that have a particular item
@@ -43,9 +43,8 @@ Once completed the user will be able to use the app for the following:
 
 The following documentation will be helpful in this lab.
 
-* SQLite databases in Android: https://developer.android.com/training/data-storage/sqlite.html
-* SimpleCursorAdapter: https://developer.android.com/reference/android/widget/SimpleCursorAdapter.html
-* [SQLite example](https://github.com/hpowell20/cs2063-winter-2020-examples/tree/master/Lecture7/DBDemo) from class
+* Android Room Persistence Library: https://developer.android.com/training/data-storage/room
+* [Room Persistence Library example](https://github.com/hpowell20/cs2063-winter-2020-examples/tree/master/Lecture7/RoomPersistenceLibraryDemo) from class
 
 
 **Tasks**

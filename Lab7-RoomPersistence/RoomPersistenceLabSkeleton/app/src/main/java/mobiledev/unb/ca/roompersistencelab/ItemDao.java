@@ -10,6 +10,4 @@ import androidx.room.OnConflictStrategy;
 @Dao
 public interface ItemDao {
     // TODO Add app specific queries in here
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(Item item);
 }

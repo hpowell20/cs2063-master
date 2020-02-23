@@ -25,6 +25,7 @@ public class ItemViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Item>> updateItemsList(){
+        // TODO Remove this return statement when you have completed this part
         return null;
     }
 
