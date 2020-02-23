@@ -104,10 +104,10 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Cursor result) {
             // TODO Use a SimpleCursorAdapter to set the adapter for
             //  the ListView (mListview) to be the Cursor passed
-            //  to onPostExecute. If there are no results, set the
-            //  results TextView to indicate that there are no results.
-            //  Again, you might need to write a bit of extra code here,
-            //  or elsewhere, to get the UI to behave nicely.
+            //  to onPostExecute.
+            //  If there are no results, set the results TextView to indicate that there are no results.
+            //  If there are results, set the results TextView to indicate that there are results.
+            //  Again, you might need to write a bit of extra code here or elsewhere, to get the UI to behave nicely.
         }
     }
 }
