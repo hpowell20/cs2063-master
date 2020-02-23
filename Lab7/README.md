@@ -26,13 +26,13 @@ Once completed the user will be able to use the app for the following:
 * Search for rows that have a particular item
   * Below is a sample screenshot of the app after the user has searched for the item "Cats".
 
-  ![Main Activity](https://i.imgur.com/cWblnHD.png?1)
+    ![Main Activity](../screencaps/Lab7/No_Results_found.png)
 
-    * In this case the database had three rows with the item "Cats" with the numbers "3", "5", and "10". (Note that the results have been sorted by number.)
+  * In this case the database had three rows with the item "Cats" with the numbers "3", "5", and "10". (Note that the results have been sorted by number.)
 
-    * In the case that a search item does not match any rows in the database, a message indicating this is displayed, as shown below.
+  * In the case that a search item does not match any rows in the database, a message indicating this is displayed, as shown below.
 
-    ![Main Activity](https://i.imgur.com/wQ7Ub7F.png?1)
+    ![Main Activity](../screencaps/Lab7/Results_found.png)
 
 
 ## Resources
@@ -41,8 +41,8 @@ The following documentation will be helpful in this lab.
 
 * SQLite databases in Android: https://developer.android.com/training/data-storage/sqlite.html
 * SimpleCursorAdapter: https://developer.android.com/reference/android/widget/SimpleCursorAdapter.html
-* SQLite database example from class:
-https://github.com/hpowell20/cs2063-winter-2020-examples/tree/master/Lecture7/DBDemo
+* [SQLite example](https://github.com/hpowell20/cs2063-winter-2020-examples/tree/master/Lecture7/DBDemo) from class
+
 
 **Tasks**
 
@@ -51,5 +51,5 @@ https://github.com/hpowell20/cs2063-winter-2020-examples/tree/master/Lecture7/DB
 
 **Lab Completion**
 
-* Show the working app to the instructor or TA
+* Show the working app to the instructor or TA using the following scenarios
 * Keep a copy of your project work and answers for future reference
