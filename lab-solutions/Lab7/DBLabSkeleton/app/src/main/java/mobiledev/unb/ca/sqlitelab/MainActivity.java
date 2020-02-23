@@ -115,13 +115,9 @@ public class MainActivity extends AppCompatActivity {
         protected Void doInBackground(String... params) {
             // TODO Get the item and number that were passed to this method
             //  as params. Add a corresponding row to the the database.
-            try {
-                String item = params[0];
-                int num = Integer.parseInt(params[1]);
-                mDBManager.insertRecord(item, num);
-            } catch (NullPointerException npe) {
-                Toast.makeText(getApplicationContext(), getString(R.string.err_not_numeric_value), Toast.LENGTH_SHORT).show();
-            }
+            String item = params[0];
+            int num = Integer.parseInt(params[1]);
+            mDBManager.insertRecord(item, num);
 
             return null;
         }
