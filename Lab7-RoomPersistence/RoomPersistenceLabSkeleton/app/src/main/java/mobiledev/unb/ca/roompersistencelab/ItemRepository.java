@@ -15,8 +15,7 @@ public class ItemRepository {
     //  to see examples of how to work with the Executor Service
 
     // TODO Add query specific methods
-
-    // HINTS
-    //  The insert operation needs to make use of the Runnable interface
-    //  The search operation needs to make use of the Callable interface
+    //  HINTS
+    //   The insert operation needs to make use of the Runnable interface
+    //   The search operation needs to make use of the Callable interface
 }
