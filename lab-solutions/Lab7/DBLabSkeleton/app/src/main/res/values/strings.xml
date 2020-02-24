@@ -11,7 +11,6 @@
     <string name="err_no_item_value_entered">Please enter an item value</string>
     <string name="err_no_number_value_entered">Please enter a number value</string>
     <string name="err_no_search_term_entered">Please enter a search string</string>
-    <string name="err_not_numeric_value">Number value is not numeric</string>
     <string name="hint_item_value">Item Name</string>
     <string name="hint_number_value">Number</string>
     <string name="hint_search_value">Item Search</string>

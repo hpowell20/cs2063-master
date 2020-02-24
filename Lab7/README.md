@@ -26,13 +26,13 @@ Once completed the user will be able to use the app for the following:
 * Search for rows that have a particular item
   * Below is a sample screenshot of the app after the user has searched for the item "Cats".
 
-    ![Main Activity](../screencaps/Lab7/No_Results_found.png)
+    ![Main Activity](../screenshots/Lab7/Results_found.png)
 
   * In this case the database had three rows with the item "Cats" with the numbers "3", "5", and "10". (Note that the results have been sorted by number.)
 
   * In the case that a search item does not match any rows in the database, a message indicating this is displayed, as shown below.
 
-    ![Main Activity](../screencaps/Lab7/Results_found.png)
+    ![Main Activity](../screenshots/Lab7/No_Results_found.png)
 
 
 ## Resources
