@@ -5,29 +5,29 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "TAG";
+    private static final int BITMAPSIZE = 64;
 
     // Display dimensions
     private int mDisplayWidth;
     private int mDisplayHeight;
     private RelativeLayout mFrame;
-    //private Bitmap mBitmap;
-    private static final int BITMAPSIZE = 64;
-    private static final String TAG = "TAG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mFrame = (RelativeLayout) findViewById(R.id.frame);
+        mFrame = findViewById(R.id.frame);
     }
 
     @Override
@@ -104,7 +104,4 @@ public class MainActivity extends AppCompatActivity {
                     mCurrY + BITMAPSIZE >= 0;
         }
     }
-
-
-
 }
