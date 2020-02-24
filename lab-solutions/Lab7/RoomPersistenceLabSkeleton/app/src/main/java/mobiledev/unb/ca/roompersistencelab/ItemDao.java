@@ -20,5 +20,5 @@ public interface ItemDao {
     List<Item> findItemsWithName(String name);
 
     //@Query("SELECT * FROM item_table WHERE name = :name ORDER BY num")
-    //Item findItemsWithName(String name);
+    //LiveData<List<Item>> findItemsWithName(String name);
 }

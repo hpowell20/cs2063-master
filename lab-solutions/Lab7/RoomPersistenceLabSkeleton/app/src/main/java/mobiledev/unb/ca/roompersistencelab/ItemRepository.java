@@ -42,13 +42,13 @@ public class ItemRepository {
         });
     }
 
-    /*public List<Item> findItemsWithName(final String name) {
+
+    /*public LiveData<List<Item>> findItemsWithName(String name) {
         return itemDao.findItemsWithName(name);
     }*/
 
     public List<Item> findItemsWithName(final String name) {
-        // TODO:Should this use LiveData?
-        @SuppressWarnings("unchecked")
+        @SuppressWarnings(value = "unchecked")
         Future<List<Item>> future = AppDatabase.databaseWriterExecutor.submit(new Callable(){
             public List<Item> call() {
                 return itemDao.findItemsWithName(name);

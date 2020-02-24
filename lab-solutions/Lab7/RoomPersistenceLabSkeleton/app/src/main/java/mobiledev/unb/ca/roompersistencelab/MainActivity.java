@@ -85,8 +85,6 @@ public class MainActivity extends AppCompatActivity {
                     if (!TextUtils.isEmpty(text)) {
                         KeyboardUtils.hideKeyboard(MainActivity.this);
                         searchRecords(text);
-                        //QueryTask queryTask = new QueryTask();
-                        //queryTask.execute(text);
 
                         return true;
                     }
@@ -101,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Set the ViewModel
         mItemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
-        // TODO for me: See if there is a way to use this syntax
+        // TODO for me: See if there is a way to use this syntax?
         /*mItemViewModel.getItems().observe(this, new Observer<List<Item>>() {
             @Override
             public void onChanged(@Nullable List<Item> items) {
@@ -135,6 +133,32 @@ public class MainActivity extends AppCompatActivity {
         //  Make sure that the results are sorted appropriately.
         List<Item> items = mItemViewModel.findItemsByName(item);
 
+        // Uncomment if using LiveData; issue with this approach is that the search list does not clear out
+        /*LiveData<List<Item>> items = mItemViewModel.findItemsByName(item);
+        items.observe(this, new Observer<List<Item>>() {
+            @Override
+            public void onChanged(@Nullable List<Item> items) {
+                if(items != null) {
+                    int itemsCount = items.size();
+                    if (itemsCount <= 0) {
+                        mResultsTextView.setText(getString(R.string.msg_no_results_found));
+                    } else {
+                        String text = itemsCount == 1 ?
+                                getString(R.string.msg_single_result_found, itemsCount) :
+                                getString(R.string.msg_multiple_results_found, itemsCount);
+                        mResultsTextView.setText(text);
+                    }
+
+                    //updateListView(itemsList);
+
+                    //mItemsAdapter = new ItemsAdapter(getApplicationContext(), items);
+                    //mListView.setAdapter(mItemsAdapter);
+                }
+                //mItemsAdapter.notifyDataSetChanged();
+                updateListView(items);
+            }
+        });*/
+
         // TODO Update the results section.
         //  If there are no results, set the results TextView to indicate that there are no results.
         //  If there are results, set the results TextView to indicate that there are results.
@@ -152,31 +176,6 @@ public class MainActivity extends AppCompatActivity {
         updateListView(items);
     }
 
-    /*private class QueryTask extends AsyncTask<String, Void, List<Item>> {
-        protected List<Item> doInBackground(String... params) {
-            // TODO Make a call to the view model to search for records in the database that match the query item.
-            //  Make sure that the results are sorted appropriately.
-            return mItemViewModel.findItemsByName(params[0]);
-        }
-
-        protected void onPostExecute(List<Item> result) {
-            // TODO Update the results section.
-            //  If there are no results, set the results TextView to indicate that there are no results.
-            //  If there are results, set the results TextView to indicate that there are results.
-            //  Again, you might need to write a bit of extra code here or elsewhere, to get the UI to behave nicely.
-            int itemsCount = result.size();
-            if (itemsCount <= 0) {
-                mResultsTextView.setText(getString(R.string.msg_no_results_found));
-            } else {
-                String text = itemsCount == 1 ?
-                        getString(R.string.msg_single_result_found, itemsCount) :
-                        getString(R.string.msg_multiple_results_found, itemsCount);
-                mResultsTextView.setText(text);
-            }
-
-            updateListView(result);
-        }
-    }*/
 
     private void updateListView(List<Item> items) {
         if (null == items) {
