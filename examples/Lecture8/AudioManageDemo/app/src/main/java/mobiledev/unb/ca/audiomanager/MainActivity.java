@@ -2,11 +2,12 @@ package mobiledev.unb.ca.audiomanager;
 
 import android.media.AudioAttributes;
 import android.media.SoundPool;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Get the button and set it to initially not be enabled
-        mButton = (Button) findViewById(R.id.button);
+        mButton = findViewById(R.id.button);
         mButton.setEnabled(false);
 
         mButton.setOnClickListener(new View.OnClickListener() {
@@ -47,10 +48,6 @@ public class MainActivity extends AppCompatActivity {
                 .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                 .build());
         mSoundPool = spb.build();
-
-        // In Lab 7 we will be working with an older API level and will use this instead
-        // of a SoundPool.Builder to create the SoundPool appropriately
-        //mSoundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
 
         // Load a bubble popping sound.
         // See further documentation on SoundPool.play here:
