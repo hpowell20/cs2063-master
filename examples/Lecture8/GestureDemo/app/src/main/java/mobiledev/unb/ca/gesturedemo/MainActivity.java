@@ -1,11 +1,12 @@
 package mobiledev.unb.ca.gesturedemo;
 
-import android.support.v4.view.GestureDetectorCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GestureDetectorCompat;
 
 public class MainActivity extends AppCompatActivity implements
         GestureDetector.OnGestureListener,
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event){
+    public boolean onTouchEvent(MotionEvent event) {
         this.mDetector.onTouchEvent(event);
         // Be sure to call the superclass implementation
         return super.onTouchEvent(event);
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public boolean onFling(MotionEvent event1, MotionEvent event2,
                            float velocityX, float velocityY) {
-        Log.d(DEBUG_TAG, "onFling: " + event1.toString()+event2.toString());
+        Log.d(DEBUG_TAG, "onFling: " + event1.toString() + event2.toString());
         return true;
     }
 
@@ -88,8 +89,4 @@ public class MainActivity extends AppCompatActivity implements
         Log.d(DEBUG_TAG, "onSingleTapConfirmed: " + event.toString());
         return true;
     }
-
-
-
-
 }
