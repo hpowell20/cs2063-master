@@ -1,19 +1,21 @@
 package mobiledev.unb.ca.motioneventdemo;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final String TAG = "TAG";
+    private TextView mTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mTextView = findViewById(R.id.textview);
     }
 
     public boolean onTouchEvent(MotionEvent motionEvent) {
@@ -23,13 +25,13 @@ public class MainActivity extends AppCompatActivity {
 
         switch (action) {
             case (MotionEvent.ACTION_DOWN):
-                Log.i(TAG, "Action was DOWN");
+                mTextView.setText("Action was DOWN");
                 return true;
             case (MotionEvent.ACTION_MOVE):
-                Log.i(TAG, "Action was MOVE");
+                mTextView.setText("Action was MOVE");
                 return true;
             case (MotionEvent.ACTION_UP):
-                Log.i(TAG, "Action was UP");
+                mTextView.setText("Action was UP");
                 return true;
             default:
                 return super.onTouchEvent(motionEvent);
