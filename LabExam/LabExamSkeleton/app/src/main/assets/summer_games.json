@@ -1,0 +1,229 @@
+{
+  "host_cities": [
+    {
+      "year": "1896",
+      "number": "I",
+      "host_city": "Athens",
+      "dates": "April 6 - April 15",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/Athens"
+    },
+    {
+      "year": "1900",
+      "number": "II",
+      "host_city": "Paris",
+      "dates": "May 14 - October 28",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/Paris"
+    },
+    {
+      "year": "1904",
+      "number": "III",
+      "host_city": "St. Louis",
+      "dates": "July 1 - November 23",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/St._Louis"
+    },
+    {
+      "year": "1908",
+      "number": "IV",
+      "host_city": "London",
+      "dates": "April 27 - October 31",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/London"
+    },
+    {
+      "year": "1912",
+      "number": "V",
+      "host_city": "Stockholm",
+      "dates": "July 6 - July 22",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/Stockholm"
+    },
+    {
+      "year": "1916",
+      "number": "VI",
+      "host_city": "Berlin",
+      "dates": "Cancelled due to World War I",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/Berlin"
+    },
+    {
+      "year": "1920",
+      "number": "VII",
+      "host_city": "Antwerp",
+      "dates": "August 14 - September 12",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/Antwerp"
+    },
+    {
+      "year": "1924",
+      "number": "VIII",
+      "host_city": "Paris",
+      "dates": "May 4 - July 27",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/Paris"
+    },
+    {
+      "year": "1928",
+      "number": "IX",
+      "host_city": "Amsterdam",
+      "dates": "July 28 - August 12",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/Amsterdam"
+    },
+    {
+      "year": "1932",
+      "number": "X",
+      "host_city": "Los Angeles",
+      "dates": "July 30 - August 14",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/Los_Angeles"
+    },
+    {
+      "year": "1936",
+      "number": "XI",
+      "host_city": "Berlin",
+      "dates": "August 1 - August 16",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/Berlin"
+    },
+    {
+      "year": "1940",
+      "number": "XII",
+      "host_city": "Helsinki",
+      "dates": "Cancelled due to World War II",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/Helsinki"
+    },
+    {
+      "year": "1944",
+      "number": "XIII",
+      "host_city": "London",
+      "dates": "Cancelled due to World War II",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/London"
+    },
+    {
+      "year": "1948",
+      "number": "XIV",
+      "host_city": "London",
+      "dates": "July 29 - August 14",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/London"
+    },
+    {
+      "year": "1948",
+      "number": "XV",
+      "host_city": "Helsinki",
+      "dates": "July 19 - August 3",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/Helsinki"
+    },
+    {
+      "year": "1956",
+      "number": "XVI",
+      "host_city": "Melbourne",
+      "dates": "November 22 - December 8",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/Melbourne"
+    },
+    {
+      "year": "1960",
+      "number": "XVII",
+      "host_city": "Rome",
+      "dates": "August 25 - September 11",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/Rome"
+    },
+    {
+      "year": "1964",
+      "number": "XVIII",
+      "host_city": "Tokyo",
+      "dates": "October 10 - October 24",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/Tokyo"
+    },
+    {
+      "year": "1968",
+      "number": "XIX",
+      "host_city": "Mexico City",
+      "dates": "October 12 - October 27",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/Mexico_City"
+    },
+    {
+      "year": "1972",
+      "number": "XX",
+      "host_city": "Munich",
+      "dates": "August 26 - September 11",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/Munich"
+    },
+    {
+      "year": "1976",
+      "number": "XXI",
+      "host_city": "Montreal",
+      "dates": "July 17 - August 1",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/Montreal"
+    },
+    {
+      "year": "1980",
+      "number": "XXII",
+      "host_city": "Moscow",
+      "dates": "July 19 - August 3",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/Moscow"
+    },
+    {
+      "year": "1984",
+      "number": "XXIII",
+      "host_city": "Los Angeles",
+      "dates": "July 28 - August 12",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/Los_Angeles"
+    },
+    {
+      "year": "1988",
+      "number": "XXIV",
+      "host_city": "Seoul",
+      "dates": "September 17 - October 2",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/Seoul"
+    },
+    {
+      "year": "1992",
+      "number": "XXV",
+      "host_city": "Barcelona",
+      "dates": "July 25 - August 9",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/Barcelona"
+    },
+    {
+      "year": "1996",
+      "number": "XXVI",
+      "host_city": "Atlanta",
+      "dates": "July 19 - August 4",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/Atlanta"
+    },
+    {
+      "year": "2000",
+      "number": "XXVII",
+      "host_city": "Sydney",
+      "dates": "September 15 - October 1",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/Sydney"
+    },
+    {
+      "year": "2004",
+      "number": "XXVIII",
+      "host_city": "Athens",
+      "dates": "August 13 - August 29",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/Athens"
+    },
+    {
+      "year": "2008",
+      "number": "XXIX",
+      "host_city": "Beijing",
+      "dates": "August 8 - August 24",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/Beijing"
+    },
+    {
+      "year": "2012",
+      "number": "XXX",
+      "host_city": "London",
+      "dates": "July 27 - August 12",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/London"
+    },
+    {
+      "year": "2016",
+      "number": "XXXI",
+      "host_city": "Rio de Janeiro",
+      "dates": "August 5 - August 21",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/Rio_de_Janeiro"
+    },
+    {
+      "year": "2020",
+      "number": "XXXII",
+      "host_city": "Tokyo",
+      "dates": "July 24 - August 9",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/Tokyo"
+    }
+  ]
+}
+
