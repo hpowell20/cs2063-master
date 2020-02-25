@@ -1,4 +1,4 @@
-# Lab 7 - SQLite Database Storage
+# Lab 7 - Database Storage using Room Persistence Library
 
 In lecture we have explored different storage mechanisms available for app specific data.  One of the more used alternatives is to make use of a [SQLite database](https://www.sqlite.org/) which allows for more complex structured data to be stored.  We also learned that there are several issues and shortcomings with using SQLite directly.  As such, Google recommends the use of the Room Persistence Library framework to help solve these issues.  In this lab you will build a simple app that uses a SQLite database and Room for managing the data.
 
@@ -43,8 +43,12 @@ The following documentation will be helpful in this lab.
   * Start by having a look in the app/build.gradle file
     * There you will notice the following dependency imports which enable us to use the Room Persistence framework
     ```java
+    // Room Components
     implementation "androidx.room:room-runtime:$roomVersion"
     annotationProcessor "androidx.room:room-compiler:$roomVersion"
+    ```
+    ```java
+     // Lifecycle components
     implementation "androidx.lifecycle:lifecycle-extensions:$archLifecycleVersion"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$archLifecycleVersion"
     ```
