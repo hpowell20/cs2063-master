@@ -2,7 +2,7 @@ package mobiledev.unb.ca.labexam.model;
 
 import androidx.annotation.NonNull;
 
-public class City {
+public class GamesInfo {
 
     private final String year;
     private final String number;
@@ -10,7 +10,7 @@ public class City {
     private final String dates;
     private final String wikipediaLink;
 
-    private City(Builder builder) {
+    private GamesInfo(Builder builder) {
         this.year = builder.year;
         this.number = builder.number;
         this.hostCity = builder.hostCity;
@@ -20,11 +20,19 @@ public class City {
 
     // Only need to include getters
     public String getTitle() {
-        return number + ": " + hostCity;
+        return number + " - " + hostCity;
     }
 
     public String getYear() {
         return year;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public String getHostCity() {
+        return hostCity;
     }
 
     public String getDates() {
@@ -54,8 +62,8 @@ public class City {
             this.wikipediaLink = wikipediaLink;
         }
 
-        public City build() {
-            return new City(this);
+        public GamesInfo build() {
+            return new GamesInfo(this);
         }
     }
 }

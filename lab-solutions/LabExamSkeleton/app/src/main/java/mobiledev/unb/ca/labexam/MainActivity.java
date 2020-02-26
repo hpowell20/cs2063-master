@@ -1,6 +1,8 @@
 package mobiledev.unb.ca.labexam;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,7 +24,10 @@ import mobiledev.unb.ca.labexam.util.JsonUtils;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String PREFS_FILE_NAME = "LabExamPrefs";
+
     private RecyclerView mRecyclerView;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +41,12 @@ public class MainActivity extends AppCompatActivity {
 
         // TODO: SharedPreferences
         //  Setup the instance of shared preferences you will be using
+        initSharedPreferences();
 
         // TODO
         //  Create an instance of LoadDataTask and execute it
+        LoadDataTask loadDataTask = new LoadDataTask();
+        loadDataTask.execute();
     }
 
     private class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
@@ -73,22 +81,41 @@ public class MainActivity extends AppCompatActivity {
             // TODO
             //  Get the GamesInfo at index position in mDataSet
             //  (Hint: you might need to declare this variable as final.)
+            final GamesInfo gamesInfo = mDataset.get(position);
 
             // TODO
             //  Set the TextView in the ViewHolder (holder) to be the name for the city
+            holder.mTextView.setText(gamesInfo.getTitle());
 
             // TODO
             //  Set the onClickListener for the TextView in the ViewHolder (holder) such
             //  that when it is clicked, it creates an explicit intent to launch DetailActivity
             //  Hint: You will need to put extra pieces of information in this intent.
+            final String number = gamesInfo.getNumber();
+            holder.mTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                    intent.putExtra(Constants.INTENT_KEY_NUMBER, number);
+                    intent.putExtra(Constants.INTENT_KEY_YEAR, gamesInfo.getYear());
+                    intent.putExtra(Constants.INTENT_KEY_DATES, gamesInfo.getDates());
+                    intent.putExtra(Constants.INTENT_KEY_HOST_CITY, gamesInfo.getHostCity());
+                    intent.putExtra(Constants.INTENT_KEY_WIKIPEDIA_LINK, gamesInfo.getWikipediaLink());
+
+                    if (intent.resolveActivity(getPackageManager()) != null) {
+                        startActivity(intent);
+                    }
+                }
+            });
 
             // TODO: SharedPreference
             //  Set the CheckBox in the ViewHolder (holder) to be checked if the
-            //  value stored in the shared preferences for the number for this GamesInfo is true, and to
+            //  value stored in the shared preferences for the id for this GamesInfo is true, and to
             //  be not checked otherwise; if there is no value in the shared
             //  preferences for this id, then the checkbox should not be checked
-            //  (i.e., assume a default value of false for anytng not in
+            //  (i.e., assume a default value of false for ids that are not in
             //  the shared preferences).
+            holder.mCheckBox.setChecked(prefs.getBoolean(number, false));
 
             // Hints:
             // https://developer.android.com/reference/android/content/SharedPreferences.html#getBoolean(java.lang.String,%20boolean)
@@ -97,7 +124,6 @@ public class MainActivity extends AppCompatActivity {
 
             holder.mCheckBox.setOnCheckedChangeListener(
                     new CompoundButton.OnCheckedChangeListener() {
-
                         // This method is called when a CheckBox is clicked, and its status
                         // changes from checked to not checked, or from not checked to checked.
                         // isChecked will be true if the CheckBox is now checked, and false if
@@ -106,16 +132,18 @@ public class MainActivity extends AppCompatActivity {
                             // TODO: SharedPreferences
                             //  Get a SharedPreferences.Editor for SharedPreferences
                             //  Hint: https://developer.android.com/reference/android/content/SharedPreferences.html#edit()
+                            SharedPreferences.Editor editor = prefs.edit();
 
                             // TODO: Shared Preferences
-                            //  Set the value stored in SharedPreferences for the number for this GamesInfo to be
+                            //  Set the value stored in SharedPreferences for the id for this GamesInfo to be
                             //  the value of isChecked
                             //  Hint: https://developer.android.com/reference/android/content/SharedPreferences.Editor.html#putBoolean(java.lang.String,%20boolean)
+                            editor.putBoolean(number, isChecked);
 
                             // TODO: SharedPreferences
                             //  Apply the changes from this editor
                             //  Hint: https://developer.android.com/reference/android/content/SharedPreferences.Editor.html#apply()
-
+                            editor.commit();
                         }
                     }
             );
@@ -135,11 +163,19 @@ public class MainActivity extends AppCompatActivity {
         protected ArrayList<GamesInfo> doInBackground(Void... params) {
             // TODO
             //  Use JsonUtils to load the data from the JSON assets file and return the list of cities
+            JsonUtils jsonUtils = new JsonUtils(getApplicationContext());
+            return jsonUtils.getHostCities();
         }
 
         protected void onPostExecute(ArrayList<GamesInfo> result) {
             // TODO
             //  Use result to set the adapter for the RecyclerView in MainActivity
+            MyAdapter myAdapter = new MyAdapter(result);
+            mRecyclerView.setAdapter(myAdapter);
         }
+    }
+
+    private void initSharedPreferences() {
+        prefs = getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE);
     }
 }

@@ -1,4 +1,4 @@
-package mobiledev.unb.ca.labexam.util;
+package mobiledev.unb.ca.labexam;
 
 public class Constants {
     public static final String INTENT_KEY_YEAR = "year";
