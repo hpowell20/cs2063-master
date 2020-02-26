@@ -1,8 +1,10 @@
 package mobiledev.unb.ca.labexam;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -15,9 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import mobiledev.unb.ca.labexam.model.City;
+import mobiledev.unb.ca.labexam.model.GamesInfo;
+import mobiledev.unb.ca.labexam.util.JsonUtils;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String PREFS_FILE_NAME = "LabExamPrefs";
 
     private RecyclerView mRecyclerView;
 
@@ -31,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
 
-        // TODO
+        // TODO: SharedPreferences
         //  Setup the instance of shared preferences you will be using
 
         // TODO
@@ -39,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-        private ArrayList<City> mDataset;
+        private ArrayList<GamesInfo> mDataset;
 
-        public MyAdapter(ArrayList<City> myDataset) {
+        public MyAdapter(ArrayList<GamesInfo> myDataset) {
             mDataset = myDataset;
         }
 
@@ -68,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             // TODO
-            //  Get the City at index position in mDataSet
+            //  Get the GamesInfo at index position in mDataSet
             //  (Hint: you might need to declare this variable as final.)
 
             // TODO
@@ -81,12 +86,10 @@ public class MainActivity extends AppCompatActivity {
             //  Set the onClickListener for the TextView in the ViewHolder (holder) such
             //  that when it is clicked, it creates an explicit intent to launch DetailActivity
             //  Hint: You will need to put extra pieces of information in this intent.
-            //   The keys used for the intents can be found in utils/Constants.java
 
-
-            // TODO
-            //  SharedPreferences: Set the CheckBox in the ViewHolder (holder) to be checked if the
-            //  value stored in the shared preferences for the id for this City is true, and to
+            // TODO: SharedPreference
+            //  Set the CheckBox in the ViewHolder (holder) to be checked if the
+            //  value stored in the shared preferences for the id for this GamesInfo is true, and to
             //  be not checked otherwise; if there is no value in the shared
             //  preferences for this id, then the checkbox should not be checked
             //  (i.e., assume a default value of false for ids that are not in
@@ -105,17 +108,17 @@ public class MainActivity extends AppCompatActivity {
                         // isChecked will be true if the CheckBox is now checked, and false if
                         // the CheckBox is now not checked.
                         public void onCheckedChanged(CompoundButton v, boolean isChecked) {
-                            // TODO
-                            //  SharedPreferences: Get a SharedPreferences.Editor for SharedPreferences
+                            // TODO: SharedPreferences
+                            //  Get a SharedPreferences.Editor for SharedPreferences
                             //  Hint: https://developer.android.com/reference/android/content/SharedPreferences.html#edit()
 
-                            // TODO
-                            //  Shared Preferences: Set the value stored in SharedPreferences for the id for this City to be
+                            // TODO: Shared Preferences
+                            //  Set the value stored in SharedPreferences for the id for this GamesInfo to be
                             //  the value of isChecked
                             //  Hint: https://developer.android.com/reference/android/content/SharedPreferences.Editor.html#putBoolean(java.lang.String,%20boolean)
 
-                            // TODO
-                            //  SharedPreferences: Apply the changes from this editor
+                            // TODO: SharedPreferences
+                            //  Apply the changes from this editor
                             //  Hint: https://developer.android.com/reference/android/content/SharedPreferences.Editor.html#apply()
 
                         }
@@ -132,22 +135,16 @@ public class MainActivity extends AppCompatActivity {
     // TODO Complete the TODOs for LoadDataTask below
     //  Note: This class must use JsonUtils to load the data on a worker/background thread, and
     //  then set the data for the RecyclerView in MainActivity on the UI thread.
-    private class LoadDataTask extends AsyncTask<Void, Void, ArrayList<City>> {
+    private class LoadDataTask extends AsyncTask<Void, Void, ArrayList<GamesInfo>> {
 
-        protected ArrayList<City> doInBackground(Void... params) {
+        protected ArrayList<GamesInfo> doInBackground(Void... params) {
             // TODO
             //  Use JsonUtils to load the data from the JSON assets file and return the list of cities
-
-            // TODO
-            //  Remove this return statement when you're done this part
-            return null;
-
         }
 
-        protected void onPostExecute(ArrayList<City> result) {
+        protected void onPostExecute(ArrayList<GamesInfo> result) {
             // TODO
             //  Use result to set the adapter for the RecyclerView in MainActivity
-
         }
     }
 }
