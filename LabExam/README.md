@@ -4,32 +4,31 @@ This lab exam is open everything (Android documentation, labs and examples, Stac
 
 **You must not communicate with others (in person or online) during the exam.**
 
-# Summer Olympics Host Cities app
+# Summer Olympics Host Games app
 
-This year the latest installment of the [Summer Olympic Games](https://en.wikipedia.org/wiki/Summer_Olympic_Games) are being held in Tokyo, Japan.  We will celebrate this occasion by building an app that displays information about cities that have hosted summer games.
+This year the latest installment of the [Summer Olympic Games](https://en.wikipedia.org/wiki/Summer_Olympic_Games) are being held in Tokyo, Japan.  We will celebrate this occasion by building an app that displays information about all of the summer games that have taken place in the past.
 
-This app will consist of two activities. The main activity will include a `RecyclerView` where the items are names of host cities from around the world along with checkboxes that the user can check when they have seen an item.
+This app will consist of two activities. The main activity will include a `RecyclerView` where the items are the Olympiad number and host city name along with checkboxes that the user can check when they have seen an item.
 
 Clicking on the name of a host city will take the user to a detail activity
-that shows the extra details about the particular games they hosted along with a button to view the Wikipedia entry for the city. Pressing back from the detail activity takes the user back
-to the main activity. See examples below.
+that shows the extra details about the particular games (Year of the games, dates) along with a button to view the Wikipedia entry for more information on the games themselves. Pressing back from the detail activity takes the user back to the main activity. See examples below.
 
 The instructor has Android devices with a sample solution installed. You can ask to briefly borrow one of these devices to see the intended functionality.
 
 ### Main activity:
 
-![Main Activity](https://i.imgur.com/xyA5qxL.png?1)
+![Main Activity](../screenshots/LabExam/main-activity.png)
 
 ### Detail activity:
 
-![Detail Activity](https://i.imgur.com/znqsTu8.png?1)
+![Detail Activity](../screenshots/LabExam/detail-activity.png)
 
 ## Skeleton Code
 
 You have been provided with skeleton code. The structure of the app
 will be familiar to you from previous labs.
 
-* `City` represents a city
+* `GamesInfo` represents a summer games event
   * Although there are no optional properties in the class new objects are created using the Builder pattern which helps to set immutability for the class data
   * As a result only getter methods to retrieve the course title and description are provided
 
@@ -40,10 +39,9 @@ will be familiar to you from previous labs.
   * It doesn't do much yet as you will be completing it
 
 * `MainActivity.java` will display a list of names of host cities using a ` RecyclerView`
-  * When the name of a city is clicked `DetailActivity` will be launched via an explicit `Intent`
-  * `MainActivity` will use `SharedPreferences` to store information about which cities the user has visited
-    * For example, in the screenshot for `MainActivity` the user has visited Adams
-    Lake and Amelia Lake
+  * When the name of a games is clicked the `DetailActivity` will be launched via an explicit `Intent`
+  * `MainActivity` will use `SharedPreferences` to store information about which games the user has visited
+    * For example, in the screenshot for `MainActivity` the user has visited II - Paris, VI - Berlin, and IX - Amsterdam
     * For the `SharedPreferences` the keys will be olympic games number associated with a host city and the values will be booleans
       * True representing that a user has visited a city and false representing that a user has not
       * If an id is not found in the `SharedPreferences` its value will be assumed to be false.
