@@ -77,9 +77,6 @@ public class MainActivity extends AppCompatActivity {
             // TODO
             //  Set the TextView in the ViewHolder (holder) to be the name for the city
 
-            // Nothing to do here; just leave this here and complete the other todos in place
-            holder.mCheckBox.setOnCheckedChangeListener(null);
-
             // TODO
             //  Set the onClickListener for the TextView in the ViewHolder (holder) such
             //  that when it is clicked, it creates an explicit intent to launch DetailActivity
@@ -87,10 +84,10 @@ public class MainActivity extends AppCompatActivity {
 
             // TODO: SharedPreference
             //  Set the CheckBox in the ViewHolder (holder) to be checked if the
-            //  value stored in the shared preferences for the id for this GamesInfo is true, and to
+            //  value stored in the shared preferences for the number for this GamesInfo is true, and to
             //  be not checked otherwise; if there is no value in the shared
             //  preferences for this id, then the checkbox should not be checked
-            //  (i.e., assume a default value of false for ids that are not in
+            //  (i.e., assume a default value of false for anytng not in
             //  the shared preferences).
 
             // Hints:
@@ -111,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                             //  Hint: https://developer.android.com/reference/android/content/SharedPreferences.html#edit()
 
                             // TODO: Shared Preferences
-                            //  Set the value stored in SharedPreferences for the id for this GamesInfo to be
+                            //  Set the value stored in SharedPreferences for the number for this GamesInfo to be
                             //  the value of isChecked
                             //  Hint: https://developer.android.com/reference/android/content/SharedPreferences.Editor.html#putBoolean(java.lang.String,%20boolean)
 
