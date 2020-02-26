@@ -10,8 +10,7 @@
     tools:context="mobiledev.unb.ca.simplegestureviewdemo.MainActivity"
     android:id="@+id/textview">
 
-
-    <TextView
+    <mobiledev.unb.ca.simplegestureviewdemo.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -22,5 +21,18 @@
         android:background="#0d47a1"
         android:minHeight="50dp"
         android:minWidth="200dp"
-        android:gravity="center" />
+        android:gravity="center"/>
+
+    <!--<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="I detect gestures"
+        android:id="@+id/textView"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:background="#0d47a1"
+        android:minHeight="50dp"
+        android:minWidth="200dp"
+        android:gravity="center" />-->
 </RelativeLayout>
