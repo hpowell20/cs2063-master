@@ -22,8 +22,6 @@ import mobiledev.unb.ca.labexam.util.JsonUtils;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String PREFS_FILE_NAME = "LabExamPrefs";
-
     private RecyclerView mRecyclerView;
 
     @Override
