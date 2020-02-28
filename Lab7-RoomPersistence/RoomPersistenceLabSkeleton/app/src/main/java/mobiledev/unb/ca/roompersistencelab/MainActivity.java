@@ -78,8 +78,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void searchRecords(String item) {
-      // TODO Make a call to the view model to search for records in the database that match the query item.
-      //  Make sure that the results are sorted appropriately
+        // TODO Make a call to the view model to search for records in the database that match the query item.
+        //  Make sure that the results are sorted appropriately
 
         // TODO Update the results section.
         //  If there are no results, set the results TextView to indicate that there are no results.
