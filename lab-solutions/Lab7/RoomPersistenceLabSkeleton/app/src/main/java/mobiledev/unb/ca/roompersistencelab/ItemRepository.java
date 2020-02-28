@@ -42,14 +42,12 @@ public class ItemRepository {
         });
     }
 
-
     /*public LiveData<List<Item>> findItemsWithName(String name) {
         return itemDao.findItemsWithName(name);
     }*/
 
     public List<Item> findItemsWithName(final String name) {
-        @SuppressWarnings(value = "unchecked")
-        Future<List<Item>> future = AppDatabase.databaseWriterExecutor.submit(new Callable(){
+        Future<List<Item>> future = AppDatabase.databaseWriterExecutor.submit(new Callable<List<Item>>(){
             public List<Item> call() {
                 return itemDao.findItemsWithName(name);
             }
