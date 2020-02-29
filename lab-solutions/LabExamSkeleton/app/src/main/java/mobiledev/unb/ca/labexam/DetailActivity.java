@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +21,6 @@ public class DetailActivity extends AppCompatActivity {
         // TODO
         //  Get the intent that started this activity, and retrieve the extras added to it
         final Intent intent = getIntent();
-
 
         // TODO
         //  Set the details for the number, year, and dates
@@ -49,7 +49,15 @@ public class DetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Uri uri = Uri.parse(intent.getStringExtra(Constants.INTENT_KEY_WIKIPEDIA_LINK));
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(browserIntent);
+
+                // Ensure that there is an web application to handle the intent
+                if (browserIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(browserIntent);
+                } else {
+                    Toast.makeText(getApplicationContext(),
+                            getString(R.string.err_no_web_app_installed),
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
