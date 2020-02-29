@@ -68,23 +68,22 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             // TODO
-            //  Get the GamesInfo at index position in mDataSet
-            //  (Hint: you might need to declare this variable as final.)
+            //  Get the item at index position in mDataSet
 
             // TODO
-            //  Set the TextView in the ViewHolder (holder) to be the name for the city
+            //  Set the TextView in the ViewHolder to be the name for the city
 
             // TODO
-            //  Set the onClickListener for the TextView in the ViewHolder (holder) such
+            //  Set the onClickListener for the TextView in the ViewHolder such
             //  that when it is clicked, it creates an explicit intent to launch DetailActivity
-            //  Hint: You will need to put extra pieces of information in this intent.
+            //  with extra pieces of information in this intent.
 
             // TODO: SharedPreference
             //  Set the CheckBox in the ViewHolder (holder) to be checked if the
             //  value stored in the shared preferences for the number for this GamesInfo is true, and to
             //  be not checked otherwise; if there is no value in the shared
             //  preferences for this id, then the checkbox should not be checked
-            //  (i.e., assume a default value of false for anytng not in
+            //  (i.e., assume a default value of false for anything not in
             //  the shared preferences).
 
             // Hints:
@@ -124,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // TODO Complete the TODOs for LoadDataTask below
     private class LoadDataTask extends AsyncTask<Void, Void, ArrayList<GamesInfo>> {
 
         protected ArrayList<GamesInfo> doInBackground(Void... params) {
