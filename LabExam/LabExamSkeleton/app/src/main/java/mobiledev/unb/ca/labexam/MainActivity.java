@@ -1,10 +1,8 @@
 package mobiledev.unb.ca.labexam;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -18,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import mobiledev.unb.ca.labexam.model.GamesInfo;
-import mobiledev.unb.ca.labexam.util.JsonUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -128,13 +125,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // TODO Complete the TODOs for LoadDataTask below
-    //  Note: This class must use JsonUtils to load the data on a worker/background thread, and
-    //  then set the data for the RecyclerView in MainActivity on the UI thread.
     private class LoadDataTask extends AsyncTask<Void, Void, ArrayList<GamesInfo>> {
 
         protected ArrayList<GamesInfo> doInBackground(Void... params) {
             // TODO
-            //  Use JsonUtils to load the data from the JSON assets file and return the list of cities
+            //  Load the data from the JSON assets file and return the list of cities
+
+            // Remove this statement once this section has been completed
+            return null;
         }
 
         protected void onPostExecute(ArrayList<GamesInfo> result) {
