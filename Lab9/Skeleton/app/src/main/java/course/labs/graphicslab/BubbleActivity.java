@@ -1,10 +1,5 @@
 package course.labs.graphicslab;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -15,19 +10,20 @@ import android.graphics.Point;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-// TODO Nothing to do here; just note that BubbleActivity implements
-// SensorEventListener
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
+
+// Nothing to do here; just note that BubbleActivity implements SensorEventListener
 public class BubbleActivity extends Activity implements SensorEventListener {
 
 	private static final String TAG = "BubbleActivity";
@@ -52,11 +48,9 @@ public class BubbleActivity extends Activity implements SensorEventListener {
     private static final int HIGH_PASS_FILTER = 2;
     private int mFilter = NO_FILTER;
 
-    // TODO Create members for a SensorManager and Sensor
-
-
-
-
+    // TODO
+    //  Create members for a SensorManager and Sensor
+    
     @Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -64,20 +58,18 @@ public class BubbleActivity extends Activity implements SensorEventListener {
 		setContentView(R.layout.main);
 
 		// Set up user interface
-		mFrame = (RelativeLayout) findViewById(R.id.frame);
+		mFrame = findViewById(R.id.frame);
 
         // Set up text view
-        mPlayerMessage = (TextView) findViewById(R.id.startMessage);
+        mPlayerMessage = findViewById(R.id.startMessage);
 
 		// Load basic bubble Bitmap
 		mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ball);
 
-        // TODO Get a SensorManager, and then use it to get an accelerometer
-        // Sensor. Set the SensorManager and Sensor members that you defined
-        // above appropriately. If the device does not have an accelerometer,
-        // display a message indicating so and exit.
-
-
+        // TODO
+        //  Get a SensorManager, and then use it to get an accelerometer Sensor.
+        //  Set the SensorManager and Sensor members that you defined above appropriately.
+        //  If the device does not have an accelerometer, display a message indicating so and exit.
 
         // Calculate display size
         Display display = getWindowManager().getDefaultDisplay();
@@ -94,30 +86,25 @@ public class BubbleActivity extends Activity implements SensorEventListener {
 	protected void onResume() {
 		super.onResume();
 
-        // TODO Register a listener for the accelerometer
-
-
-
+        // TODO
+        //  Register a listener for the accelerometer
 
         setupGestureDetector();
 
     }
 
     public void onSensorChanged(SensorEvent event) {
+        // TODO
+        //  Apply a low- and high-pass filter to the raw sensor values
 
 
-            // TODO Apply a low- and high-pass filter to the raw sensor values
-
-
-
-            // TODO If there is a BubbleView, use its setSpeedAndDirection() method
-            // to set its speed and direction based on the sensor values and the
-            // current setting of mFilter, which will be one of NO_FILTER,
-            // LOW_PASS_FILTER, or HIGH_PASS_FILTER.
-
+        // TODO
+        //  If there is a BubbleView, use its setSpeedAndDirection() method
+        //  to set its speed and direction based on the sensor values and the
+        //  current setting of mFilter, which will be one of NO_FILTER, LOW_PASS_FILTER, or HIGH_PASS_FILTER.
     }
 
-    // TODO Nothing to do here, just note that onAccuracyChanged must be implemented
+    // Nothing to do here, just note that onAccuracyChanged must be implemented
     @Override
     public final void onAccuracyChanged(Sensor sensor, int accuracy) {
         // Do something here if sensor accuracy changes. We will leave this unimplemented.
@@ -188,7 +175,8 @@ public class BubbleActivity extends Activity implements SensorEventListener {
 	protected void onPause() {
 		super.onPause();
 
-        // TODO Unregister the sensor event listener
+        // TODO
+        //  Unregister the sensor event listener
 
 	}
 
@@ -243,9 +231,10 @@ public class BubbleActivity extends Activity implements SensorEventListener {
             mDx = x;
             mDy = y;
 
-            // TODO Once your app is working, experiment with alternative
-            // ways of calculating mDx and mDy based on x and y to change
-            // the "feel". Some ideas are shown below.
+            // TODO
+            //  Once your app is working, experiment with alternative
+            //  ways of calculating mDx and mDy based on x and y to change
+            //  the "feel". Some ideas are shown below.
 
             // Uncomment this to make the ball go faster!
             //mDx = 2 * x;
