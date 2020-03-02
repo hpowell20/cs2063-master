@@ -11,7 +11,6 @@ public class MainActivity extends AppCompatActivity {
 
     private SoundPool soundPool;
     private int sound1, sound2, sound3, sound4, sound5, sound6;
-    //private int sound3StreamId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         switch (v.getId()) {
             case R.id.button_sound1:
                 soundPool.play(sound1, 1, 1, 0, 0, 1);
-                //soundPool.pause(sound3StreamId);
                 soundPool.autoPause(); // Pause all other sounds
                 break;
             case R.id.button_sound2:
