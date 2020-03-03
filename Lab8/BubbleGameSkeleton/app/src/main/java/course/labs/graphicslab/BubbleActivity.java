@@ -110,6 +110,10 @@ public class BubbleActivity extends Activity {
 		mGestureDetector = new GestureDetector(this,
 		new GestureDetector.SimpleOnGestureListener() {
 
+			@Override
+      public boolean onDown(MotionEvent motionEvent) {
+        return true;
+      }
 			// If a fling gesture starts on a BubbleView then change the
 			// BubbleView's velocity based on x and y velocity from
 			// this gesture
@@ -134,9 +138,9 @@ public class BubbleActivity extends Activity {
 			@Override
 			public boolean onSingleTapConfirmed(MotionEvent event) {
 				// TODO - Implement onSingleTapConfirmed actions.
-				// (See comment above for expected behaviour.)
-				// You can get all Views in mFrame using the
-				// ViewGroup.getChildCount() method
+				//  (See comment above for expected behaviour.)
+				//  You can get all Views in mFrame using the
+				//  ViewGroup.getChildCount() method
 
 
 				return true;
@@ -151,7 +155,7 @@ public class BubbleActivity extends Activity {
 
 		// Remove this when you're done the above todo
 		return true || false;
-		
+
 	}
 
 	@Override
