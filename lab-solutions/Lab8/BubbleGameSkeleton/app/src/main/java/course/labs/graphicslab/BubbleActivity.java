@@ -1,14 +1,18 @@
 package course.labs.graphicslab;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -24,6 +28,7 @@ import java.util.concurrent.TimeUnit;
 
 public class BubbleActivity extends Activity {
 	private static final String TAG = "BubbleActivity";
+	private static final int SOUND_POOL_MAX_STREAMS = 10;
 
 	// The Main view
 	private RelativeLayout mFrame;
@@ -71,33 +76,63 @@ public class BubbleActivity extends Activity {
 
 		// Manage bubble popping sound
 		// Use AudioManager.STREAM_MUSIC as stream type
-
 		AudioManager audioManager = (AudioManager)getSystemService(AUDIO_SERVICE);
 
-		mStreamVolume = (float) audioManager
-				.getStreamVolume(AudioManager.STREAM_MUSIC)
+		mStreamVolume = (float) audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
 				/ audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 
 		// TODO
 		//  Make a new SoundPool, allowing up to 10 streams
 		//  Store this as mSoundPool
-
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			createNewSoundPool();
+		} else {
+			createOldSoundPool();
+		}
 
 		// TODO
 		//  Set a SoundPool OnLoadCompletedListener that calls setupGestureDetector()
+		mSoundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+			@Override
+			public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+				if (0 == status) {
+					setupGestureDetector();
+				} else {
+					Log.i(TAG, "Unable to load sound");
+					finish();
+				}
+			}
+		});
 
 
 		// TODO
 		//  Load the sound from res/raw/bubble_pop.wav
 		//  Store this as mSoundID
+		mSoundID = mSoundPool.load(this, R.raw.bubble_pop, 1);
+	}
 
+	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
+	protected void createNewSoundPool(){
+		AudioAttributes audioAttributes = new AudioAttributes.Builder()
+				.setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+				.setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+				.build();
+
+		mSoundPool = new SoundPool.Builder()
+				.setMaxStreams(SOUND_POOL_MAX_STREAMS)
+				.setAudioAttributes(audioAttributes)
+				.build();
+	}
+
+	@SuppressWarnings("deprecation")
+	protected void createOldSoundPool(){
+		mSoundPool = new SoundPool(SOUND_POOL_MAX_STREAMS, AudioManager.STREAM_MUSIC, 0);
 	}
 
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
 		if (hasFocus) {
-
 			// Get the size of the display so this View knows where borders are
 			mDisplayWidth = mFrame.getWidth();
 			mDisplayHeight = mFrame.getHeight();
@@ -106,9 +141,12 @@ public class BubbleActivity extends Activity {
 
 	// Set up GestureDetector
 	private void setupGestureDetector() {
+		mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
 
-		mGestureDetector = new GestureDetector(this,
-		new GestureDetector.SimpleOnGestureListener() {
+			@Override
+			public boolean onDown(MotionEvent motionEvent) {
+				return true;
+			}
 
 			// If a fling gesture starts on a BubbleView then change the
 			// BubbleView's velocity based on x and y velocity from
@@ -121,6 +159,17 @@ public class BubbleActivity extends Activity {
 				// TODO
 				//  Implement onFling actions (See comment above for expected behaviour)
 				//  You can get all Views in mFrame one at a time using the ViewGroup.getChildAt() method
+				float x = event1.getRawX();
+				float y = event1.getRawY();
+				int numBubbles = mFrame.getChildCount();
+
+				// Have a look into the methods available in the BubbleView class
+				for (int i = 0; i < numBubbles; i++) {
+					BubbleView bubbleView = (BubbleView) mFrame.getChildAt(i);
+					if (bubbleView.intersects(x, y)) {
+						bubbleView.deflect(velocityX, velocityY);
+					}
+				}
 
 				return true;
 			}
@@ -134,9 +183,9 @@ public class BubbleActivity extends Activity {
 			@Override
 			public boolean onSingleTapConfirmed(MotionEvent event) {
 				// TODO - Implement onSingleTapConfirmed actions.
-				// (See comment above for expected behaviour.)
-				// You can get all Views in mFrame using the
-				// ViewGroup.getChildCount() method
+				//  (See comment above for expected behaviour.)
+				//  You can get all Views in mFrame using the
+				//  ViewGroup.getChildCount() method
 
 
 				return true;
@@ -148,25 +197,25 @@ public class BubbleActivity extends Activity {
 	public boolean onTouchEvent(MotionEvent event) {
 		// TODO
 		//  Delegate the touch to the gestureDetector
-
-		// Remove this when you're done the above todo
-		return true || false;
-		
+		return mGestureDetector.onTouchEvent(event);
 	}
 
 	@Override
 	protected void onPause() {
+		super.onPause();
 
 		// TODO
 		//  Release all SoundPool resources
-
-		super.onPause();
+		if (null == mSoundPool) {
+			mSoundPool.unload(mSoundID);
+			mSoundPool.release();
+			mSoundPool = null;
+		}
 	}
 
 	// BubbleView is a View that displays a bubble.
 	// This class handles animating, drawing, and popping amongst other actions.
 	// A new BubbleView is created for each bubble on the display
-
 	public class BubbleView extends View {
 
 		private static final int BITMAP_SIZE = 64;
@@ -263,10 +312,7 @@ public class BubbleActivity extends Activity {
 
 			// TODO
 			//  Return true if the BubbleView intersects position (x,y)
-
-
-			// Remove this when you're done the above todo
-			return false;
+			return Math.sqrt(Math.pow(centerX - x, 2) + Math.pow(centerY - y, 2)) <= mRadius;
 		}
 
 		// Cancel the Bubble's movement
