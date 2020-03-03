@@ -23,18 +23,25 @@ public class MainActivity extends AppCompatActivity {
         // Extract the action from the event
         final int action = motionEvent.getActionMasked();
 
-        switch (action) {
-            case (MotionEvent.ACTION_DOWN):
-                mTextView.setText("Action was DOWN");
-                return true;
-            case (MotionEvent.ACTION_MOVE):
-                mTextView.setText("Action was MOVE");
-                return true;
-            case (MotionEvent.ACTION_UP):
-                mTextView.setText("Action was UP");
-                return true;
-            default:
-                return super.onTouchEvent(motionEvent);
+        switch(action) {
+          case (MotionEvent.ACTION_DOWN) :
+            mTextView.setText("Action was DOWN");
+            return true;
+          case (MotionEvent.ACTION_MOVE) :
+            mTextView.setText("Action was MOVE");
+            return true;
+          case (MotionEvent.ACTION_UP) :
+            mTextView.setText("Action was UP");
+            return true;
+          case (MotionEvent.ACTION_CANCEL) :
+            mTextView.setText("Action was CANCEL");
+            return true;
+          case (MotionEvent.ACTION_OUTSIDE) :
+            mTextView.setText("Movement occurred outside bounds " +
+                              "of current screen element");
+            return true;
+          default :
+            return super.onTouchEvent(event);
         }
     }
 }

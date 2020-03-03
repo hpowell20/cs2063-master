@@ -1,10 +1,8 @@
 package mobiledev.unb.ca.labexam;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -18,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import mobiledev.unb.ca.labexam.model.GamesInfo;
-import mobiledev.unb.ca.labexam.util.JsonUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -71,23 +68,22 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             // TODO
-            //  Get the GamesInfo at index position in mDataSet
-            //  (Hint: you might need to declare this variable as final.)
+            //  Get the item at index position in mDataSet
 
             // TODO
-            //  Set the TextView in the ViewHolder (holder) to be the name for the city
+            //  Set the TextView in the ViewHolder to be the name for the city
 
             // TODO
-            //  Set the onClickListener for the TextView in the ViewHolder (holder) such
+            //  Set the onClickListener for the TextView in the ViewHolder such
             //  that when it is clicked, it creates an explicit intent to launch DetailActivity
-            //  Hint: You will need to put extra pieces of information in this intent.
+            //  with extra pieces of information in this intent.
 
             // TODO: SharedPreference
             //  Set the CheckBox in the ViewHolder (holder) to be checked if the
             //  value stored in the shared preferences for the number for this GamesInfo is true, and to
             //  be not checked otherwise; if there is no value in the shared
             //  preferences for this id, then the checkbox should not be checked
-            //  (i.e., assume a default value of false for anytng not in
+            //  (i.e., assume a default value of false for anything not in
             //  the shared preferences).
 
             // Hints:
@@ -127,14 +123,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // TODO Complete the TODOs for LoadDataTask below
-    //  Note: This class must use JsonUtils to load the data on a worker/background thread, and
-    //  then set the data for the RecyclerView in MainActivity on the UI thread.
     private class LoadDataTask extends AsyncTask<Void, Void, ArrayList<GamesInfo>> {
 
         protected ArrayList<GamesInfo> doInBackground(Void... params) {
             // TODO
-            //  Use JsonUtils to load the data from the JSON assets file and return the list of cities
+            //  Load the data from the JSON assets file and return the list of cities
+
+            // Remove this statement once this section has been completed
+            return null;
         }
 
         protected void onPostExecute(ArrayList<GamesInfo> result) {

@@ -1,13 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
-    //buildToolsVersion "29.0.2"
+    compileSdkVersion 29
 
     defaultConfig {
         applicationId "course.labs.sensorslab"
         minSdkVersion 21
-        targetSdkVersion 27
+        targetSdkVersion 29
 
         testApplicationId "course.labs.graphicslab.test"
         testInstrumentationRunner "android.test.InstrumentationTestRunner"
@@ -21,6 +20,11 @@ android {
     }
 }
 
+ext {
+    robotiumVersion = '5.6.3'
+}
+
 dependencies {
-    androidTestImplementation 'com.jayway.android.robotium:robotium-solo:5.2.1'
+    implementation "com.jayway.android.robotium:robotium-solo:$robotiumVersion"
+    androidTestImplementation "com.jayway.android.robotium:robotium-solo:$robotiumVersion"
 }
