@@ -1,13 +1,17 @@
 package mobiledev.unb.ca.soundpooldemo;
 
+import android.annotation.TargetApi;
 import android.media.AudioAttributes;
+import android.media.AudioManager;
 import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int SOUND_POOL_MAX_STREAMS = 6;
 
     private SoundPool soundPool;
     private int sound1, sound2, sound3, sound4, sound5, sound6;
@@ -17,15 +21,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        AudioAttributes audioAttributes = new AudioAttributes.Builder()
-                .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
-                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                .build();
-
-        soundPool = new SoundPool.Builder()
-                .setMaxStreams(6)
-                .setAudioAttributes(audioAttributes)
-                .build();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            createNewSoundPool();
+        } else {
+            createOldSoundPool();
+        }
 
         sound1 = soundPool.load(this, R.raw.crackling_fireplace, 1);
         sound2 = soundPool.load(this, R.raw.thunder, 1);
@@ -57,6 +57,24 @@ public class MainActivity extends AppCompatActivity {
                 soundPool.play(sound6, 1, 1, 0, 0, 1);
                 break;
         }
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    protected void createNewSoundPool(){
+        AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build();
+
+        soundPool = new SoundPool.Builder()
+                .setMaxStreams(SOUND_POOL_MAX_STREAMS)
+                .setAudioAttributes(audioAttributes)
+                .build();
+    }
+
+    @SuppressWarnings("deprecation")
+    protected void createOldSoundPool(){
+        soundPool = new SoundPool(SOUND_POOL_MAX_STREAMS, AudioManager.STREAM_MUSIC, 0);
     }
 
     @Override
