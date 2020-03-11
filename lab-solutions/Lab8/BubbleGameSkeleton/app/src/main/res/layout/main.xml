@@ -6,7 +6,7 @@
     android:background="#FF444444"
     android:id="@+id/outer">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="#FF444444"
@@ -25,15 +25,15 @@
             android:layout_width="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_height="wrap_content"
-            android:id="@+id/text1"
-            android:text="Number of bubbles: "/>
+            android:id="@+id/bubbles_text"
+            android:text="@string/txt_number_of_bubbles"/>
 
-        <TextView
+        <!--<TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/count"
-            android:text="0"/>
+            android:text="0"/> -->
     </LinearLayout>
 
 </RelativeLayout>
