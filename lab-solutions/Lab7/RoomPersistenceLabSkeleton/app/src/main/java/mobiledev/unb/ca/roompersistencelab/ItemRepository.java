@@ -57,7 +57,7 @@ public class ItemRepository {
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
-            return new ArrayList<Item>();
+            return new ArrayList<>();
         }
     }
 }
