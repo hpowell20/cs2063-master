@@ -346,7 +346,7 @@ public class BubbleActivity extends Activity {
 			//  Return true if the BubbleView is still on the screen after
 			//  the move operation
 
-			// Remove this when you're done the above todo
+			// Remove this when you're done the above TODO
 			return false;
 		}
 	}
