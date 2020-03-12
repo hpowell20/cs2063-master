@@ -37,7 +37,7 @@ This lab makes use of java.util.concurrent.ExecutorService asynchronous executio
   * In order to get a result from the task a Callable will need to be used
   * For example:
   ```java
-  executorService.execute(new Runnable() {
+  AppDatabase.databaseWriterExecutor.execute(new Runnable() {
     public void run() {
         System.out.println("Asynchronous task");
     }
@@ -48,8 +48,8 @@ This lab makes use of java.util.concurrent.ExecutorService asynchronous executio
   * This is used for operations when you need to return specific records or a list of records that do not need to have the LiveData lifecycle
   * For example:
   ```java
-  Future future = executorService.submit(new Callable(){
-      public Object call() throws Exception {
+  Future<T> future = AppDatabase.databaseWriterExecutor.submit(new Callable<T>(){
+      public T call() throws Exception {
           System.out.println("Asynchronous Callable");
           return "Callable Result";
       }
