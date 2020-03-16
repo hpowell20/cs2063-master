@@ -1,0 +1,30 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+
+    defaultConfig {
+        applicationId "course.labs.sensorslab"
+        minSdkVersion 21
+        targetSdkVersion 29
+
+        testApplicationId "course.labs.graphicslab.test"
+        testInstrumentationRunner "android.test.InstrumentationTestRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+ext {
+    robotiumVersion = '5.6.3'
+}
+
+dependencies {
+    implementation "com.jayway.android.robotium:robotium-solo:$robotiumVersion"
+    androidTestImplementation "com.jayway.android.robotium:robotium-solo:$robotiumVersion"
+}
