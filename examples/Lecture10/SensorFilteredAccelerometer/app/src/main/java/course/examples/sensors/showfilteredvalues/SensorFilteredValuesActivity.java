@@ -121,17 +121,14 @@ public class SensorFilteredValuesActivity extends Activity implements
 
     // Deemphasize transient forces
     private float lowPass(float current, float gravity) {
-
         float mAlpha = 0.8f;
         return gravity * mAlpha + current * (1 - mAlpha);
-
     }
 
     // Deemphasize constant forces
     private float highPass(float current, float gravity) {
         return current - gravity;
     }
-
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
