@@ -12,9 +12,14 @@ minutes.**
 ## Introduction
 In lecture we've seen how to detect gestures, create animations, and play sounds. In this lab we'll put these pieces together to create a game-like app.
 
-The "game" begins with a blank screen.  Tapping on the screen will create a bubble at that location.  The bubble will have a random size, rotation, and direction of movement.  Tapping on a bubble will pop it and play a popping sound.  Starting a fling gesture on a bubble will fling that bubble off the screen, at a velocity determined by the fling gesture.  If left alone, a bubble will eventually move off the screen.  A counter at the bottom of the screen keeps track of the number of bubbles on the screen.
+The game begins with a blank screen with the following actions that can be performed.
 
-If you'd like to see the app in action, a sample solution has been installed on the tablet that the instructor has in the lab. Try it out!
+* Tapping on the screen will create a bubble at that location
+  * The bubble will have a random size, rotation, and direction of movement
+* Tapping on a bubble will pop it and play a popping sound
+* Starting a fling gesture on a bubble will fling that bubble off the screen at a velocity determined by the fling gesture
+* If left alone a bubble will eventually move off the screen
+* A counter at the bottom of the screen keeps track of the number of bubbles on the screen
 
 ## Useful Links
 
