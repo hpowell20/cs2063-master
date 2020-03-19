@@ -32,11 +32,12 @@ public class SensorRawAccelerometerActivity extends Activity implements
 
         // Get reference to Accelerometer
         if (null != mSensorManager) {
-            mAccelerometer = mSensorManager
-                    .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+            mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         }
 
-        if (null == mAccelerometer) finish();
+        if (null == mAccelerometer) {
+            finish();
+        }
 
     }
 
@@ -49,7 +50,6 @@ public class SensorRawAccelerometerActivity extends Activity implements
                 SensorManager.SENSOR_DELAY_UI);
 
         mLastUpdate = System.currentTimeMillis();
-
     }
 
     // Unregister listener
@@ -62,13 +62,10 @@ public class SensorRawAccelerometerActivity extends Activity implements
     // Process new reading
     @Override
     public void onSensorChanged(SensorEvent event) {
-
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-
             long actualTime = System.currentTimeMillis();
 
             if (actualTime - mLastUpdate > UPDATE_THRESHOLD) {
-
                 mLastUpdate = actualTime;
 
                 float x = event.values[0], y = event.values[1], z = event.values[2];
@@ -76,7 +73,6 @@ public class SensorRawAccelerometerActivity extends Activity implements
                 mXValueView.setText(String.valueOf(x));
                 mYValueView.setText(String.valueOf(y));
                 mZValueView.setText(String.valueOf(z));
-
             }
         }
     }

@@ -12,7 +12,6 @@ public class SensorFilteredValuesActivity extends Activity implements
         SensorEventListener {
 
     // References to SensorManager and accelerometer
-
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
 
@@ -51,9 +50,11 @@ public class SensorFilteredValuesActivity extends Activity implements
 
         if (null != mSensorManager) {
             // Get reference to Accelerometer
-            mAccelerometer = mSensorManager
-                    .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-            if (null == mAccelerometer) finish();
+            mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
+            if (null == mAccelerometer) {
+                finish();
+            }
 
             mLastUpdate = System.currentTimeMillis();
         }
@@ -114,26 +115,20 @@ public class SensorFilteredValuesActivity extends Activity implements
                 mXAccelView.setText(String.valueOf(mAccel[0]));
                 mYAccelView.setText(String.valueOf(mAccel[1]));
                 mZAccelView.setText(String.valueOf(mAccel[2]));
-
             }
         }
     }
 
     // Deemphasize transient forces
     private float lowPass(float current, float gravity) {
-
         float mAlpha = 0.8f;
         return gravity * mAlpha + current * (1 - mAlpha);
-
     }
 
     // Deemphasize constant forces
     private float highPass(float current, float gravity) {
-
         return current - gravity;
-
     }
-
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
