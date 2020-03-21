@@ -38,7 +38,6 @@ public class SensorRawAccelerometerActivity extends Activity implements
         if (null == mAccelerometer) {
             finish();
         }
-
     }
 
     // Register listener
@@ -46,9 +45,7 @@ public class SensorRawAccelerometerActivity extends Activity implements
     protected void onResume() {
         super.onResume();
 
-        mSensorManager.registerListener(this, mAccelerometer,
-                SensorManager.SENSOR_DELAY_UI);
-
+        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_UI);
         mLastUpdate = System.currentTimeMillis();
     }
 
@@ -62,6 +59,7 @@ public class SensorRawAccelerometerActivity extends Activity implements
     // Process new reading
     @Override
     public void onSensorChanged(SensorEvent event) {
+        // Do something with this sensor value
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             long actualTime = System.currentTimeMillis();
 
@@ -79,6 +77,6 @@ public class SensorRawAccelerometerActivity extends Activity implements
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        // Not implemented
+        // Do something here if sensor accuracy changes
     }
 }
