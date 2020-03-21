@@ -3,6 +3,7 @@ package mobiledev.unb.ca.sensorlistdemo;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,18 +19,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView sensorListText = findViewById(R.id.sensor_list_text_view);
+        TextView sensorListText = findViewById(R.id.sensors_list);
 
         // Retrieve a list of the supported sensors on the device
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         List<Sensor> sensorList = sensorManager.getSensorList(Sensor.TYPE_ALL);
 
-        for (int i = 1; i < sensorList.size(); i++) {
-            Sensor currSensor = sensorList.get(i);
-            sensorListText.append("Sensor Name: " + currSensor.getName() +
+        for (Sensor currSensor : sensorList) {
+            sensorListText.append(currSensor.getName() + "\n");
+            /*sensorListText.append("Sensor Name: " + currSensor.getName() +
                     "\nVendor Name: " + currSensor.getVendor() +
-                    "\nVersion: " + currSensor.getVersion() + "\n\n");
+                    "\nVersion: " + currSensor.getVersion() + "\n\n");*/
         }
+
+        sensorListText.setVisibility(View.VISIBLE);
     }
 
 }
