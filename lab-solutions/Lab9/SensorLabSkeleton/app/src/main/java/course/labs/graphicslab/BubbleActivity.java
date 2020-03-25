@@ -138,12 +138,12 @@ public class BubbleActivity extends Activity implements SensorEventListener {
                 acceleration[1] = applyHighPassFilter(event.values[1], gravity[1]);
                 acceleration[2] = applyHighPassFilter(event.values[2], gravity[2]);
 
-                /*final float alpha = 0.8f;
+                /*final float ALPHA = 0.8f;
 
                 // Isolate the force of gravity with the low-pass filter.
-                gravity[0] = alpha * gravity[0] + (1 - alpha) * event.values[0];
-                gravity[1] = alpha * gravity[1] + (1 - alpha) * event.values[1];
-                gravity[2] = alpha * gravity[2] + (1 - alpha) * event.values[2];
+                gravity[0] = ALPHA * gravity[0] + (1 - ALPHA) * event.values[0];
+                gravity[1] = ALPHA * gravity[1] + (1 - ALPHA) * event.values[1];
+                gravity[2] = ALPHA * gravity[2] + (1 - ALPHA) * event.values[2];
 
                 // Remove the gravity contribution with the high-pass filter.
                 acceleration[0] = event.values[0] - gravity[0];
