@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import mobiledev.unb.ca.labexam.model.City;
+import mobiledev.unb.ca.labexam.model.GamesInfo;
 
 public class JsonUtils {
 
@@ -23,7 +23,7 @@ public class JsonUtils {
     private static final String KEY_DATES = "dates";
     private static final String KEY_WIKIPEDIA_LINK = "wikipedia_link";
 
-    private ArrayList<City> hostCitiesArray;
+    private ArrayList<GamesInfo> hostCitiesArray;
 
     // Initializer to read our data source (JSON file) into an array of host city objects
     public JsonUtils(Context context) {
@@ -46,14 +46,14 @@ public class JsonUtils {
                 JSONObject elementObject = jsonArray.getJSONObject(i);
 
                 // Get data from individual JSON Object
-                City city = new City.Builder(elementObject.getString(KEY_YEAR),
+                GamesInfo city = new GamesInfo.Builder(elementObject.getString(KEY_YEAR),
                         elementObject.getString(KEY_NUMBER),
                         elementObject.getString(KEY_HOST_CITY),
                         elementObject.getString(KEY_DATES),
                         elementObject.getString(KEY_WIKIPEDIA_LINK))
                         .build();
 
-                // Add new City to courses ArrayList
+                // Add new GamesInfo to courses ArrayList
                 hostCitiesArray.add(city);
             }
         } catch (JSONException e) {
@@ -76,7 +76,7 @@ public class JsonUtils {
 
     }
 
-    public ArrayList<City> getHostCities() {
+    public ArrayList<GamesInfo> getHostCities() {
         return hostCitiesArray;
     }
 }
