@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
             //  Get the item at index position in mDataSet
 
             // TODO
-            //  Set the TextView in the ViewHolder to be the name for the city
+            //  Set the TextView in the ViewHolder to be the title attribute
 
             // TODO
             //  Set the onClickListener for the TextView in the ViewHolder such
