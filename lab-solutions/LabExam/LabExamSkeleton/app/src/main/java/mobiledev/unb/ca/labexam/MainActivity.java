@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
             // TODO
             //  Get the GamesInfo at index position in mDataSet
             //  (Hint: you might need to declare this variable as final.)
+            //Log.w("Position ", String.valueOf(position));
             final GamesInfo gamesInfo = mDataset.get(position);
 
             // TODO
@@ -103,6 +104,9 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra(Constants.INTENT_KEY_WIKIPEDIA_LINK, gamesInfo.getWikipediaLink());
 
                     if (intent.resolveActivity(getPackageManager()) != null) {
+                        // Automatically set the check box to be selected
+                        updateSharedPreferences(number, true);
+
                         startActivity(intent);
                     }
                 }
@@ -115,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
             //  preferences for this id, then the checkbox should not be checked
             //  (i.e., assume a default value of false for ids that are not in
             //  the shared preferences).
-            holder.mCheckBox.setChecked(prefs.getBoolean(number, false));
+            holder.mCheckBox.setChecked(readCheckedState(number));
 
             // Hints:
             // https://developer.android.com/reference/android/content/SharedPreferences.html#getBoolean(java.lang.String,%20boolean)
@@ -123,27 +127,14 @@ public class MainActivity extends AppCompatActivity {
             // https://developer.android.com/reference/android/widget/CompoundButton.html#setChecked(boolean)//
 
             holder.mCheckBox.setOnCheckedChangeListener(
+                    // TODO: Fix the code so that the stored values do not change when the list is scrolled
                     new CompoundButton.OnCheckedChangeListener() {
                         // This method is called when a CheckBox is clicked, and its status
                         // changes from checked to not checked, or from not checked to checked.
                         // isChecked will be true if the CheckBox is now checked, and false if
                         // the CheckBox is now not checked.
                         public void onCheckedChanged(CompoundButton v, boolean isChecked) {
-                            // TODO: SharedPreferences
-                            //  Get a SharedPreferences.Editor for SharedPreferences
-                            //  Hint: https://developer.android.com/reference/android/content/SharedPreferences.html#edit()
-                            SharedPreferences.Editor editor = prefs.edit();
-
-                            // TODO: Shared Preferences
-                            //  Set the value stored in SharedPreferences for the id for this GamesInfo to be
-                            //  the value of isChecked
-                            //  Hint: https://developer.android.com/reference/android/content/SharedPreferences.Editor.html#putBoolean(java.lang.String,%20boolean)
-                            editor.putBoolean(number, isChecked);
-
-                            // TODO: SharedPreferences
-                            //  Apply the changes from this editor
-                            //  Hint: https://developer.android.com/reference/android/content/SharedPreferences.Editor.html#apply()
-                            editor.commit();
+                            updateSharedPreferences(number, isChecked);
                         }
                     }
             );
@@ -176,6 +167,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initSharedPreferences() {
+        //Log.w("Init ", "here");
         prefs = getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE);
+    }
+
+    private boolean readCheckedState(String number) {
+        return prefs.getBoolean(number, false);
+    }
+
+    private void updateSharedPreferences(String number, boolean isChecked) {
+        // TODO: SharedPreferences
+        //  Get a SharedPreferences.Editor for SharedPreferences
+        //  Hint: https://developer.android.com/reference/android/content/SharedPreferences.html#edit()
+        SharedPreferences.Editor editor = prefs.edit();
+
+        // TODO: Shared Preferences
+        //  Set the value stored in SharedPreferences for the id for this GamesInfo to be
+        //  the value of isChecked
+        //  Hint: https://developer.android.com/reference/android/content/SharedPreferences.Editor.html#putBoolean(java.lang.String,%20boolean)
+        editor.putBoolean(number, isChecked);
+
+        // TODO: SharedPreferences
+        //  Apply the changes from this editor
+        //  Hint: https://developer.android.com/reference/android/content/SharedPreferences.Editor.html#apply()
+        editor.commit();
+
+        /*Map<String, ?> allEntries = prefs.getAll();
+        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
+            Log.w("map values", entry.getKey() + ": " + entry.getValue().toString());
+        }*/
     }
 }
