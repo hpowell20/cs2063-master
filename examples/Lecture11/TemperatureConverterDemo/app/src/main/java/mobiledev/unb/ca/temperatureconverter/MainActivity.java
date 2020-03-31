@@ -25,12 +25,14 @@ public class MainActivity extends AppCompatActivity {
     public void btnCalculate_onClickHandler(View view) {
         switch (view.getId()) {
             case R.id.btnCalculate:
-                if (text.getText().length() == 0) {
+                String textStr = text.getText().toString();
+
+                if (textStr.length() == 0) {
                     Toast.makeText(this, "Please enter a valid number",
                             Toast.LENGTH_LONG).show();
                 }
 
-                float inputValue = getInputValue(text);
+                float inputValue = getInputValue(textStr);
 
                 RadioButton celsiusButton = findViewById(R.id.rbCelcius);
                 RadioButton fahrenheitButton =findViewById(R.id.rbFahrenhiet);
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private float getInputValue(EditText editText) {
-        return Float.parseFloat(editText.getText().toString());
+    private float getInputValue(String textStr) {
+        return Float.parseFloat(textStr);
     }
 }
