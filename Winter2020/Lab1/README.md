@@ -123,7 +123,7 @@ Take a screenshot of your app running (on any device or emulator).
 
 * We won't be needing the floating mail icon so go ahead and select it and delete it from the view
 	* You can't delete it from the content_main.xml file however, you'll have to navigate to /layout/activity_main.xml and remove it there. That is because it's considered a global layout element for this activity
-* If you access the Text tab at the bottom-left of the layout editor you can locate an XML line in activity_main that states ```<include layout=@layout/content_main"/>```
+* If you access the Code tab at the top-right of the layout editor you can locate an XML line in activity_main that states ```<include layout=@layout/content_main"/>```
 	* This tells the build process to factor in the content_main.xml layout contents into main's own.
 
 * Also note in the activity_main.xml Text tab that the entire layout you see in the layout editor appears described in XML
@@ -215,7 +215,7 @@ This directory contains many different types of resources that get used inside a
 The layout directory contains _activity_main.xml_ and _content_main.xml_ files.
 * The _activity_main.xml_ is the resource that is sent as a parameter to the ```setContentView()``` method call in our MainActivity.java class file discussed above
 	* Open this file to once again reveal the GUI layout editor
-	* Near the bottom left corner of this layout editor window, switch from the Design tab to the Text tab
+	* Near the bottom left corner of this layout editor window, switch from the Design tab to the Code tab
 	* You’ll be presented with a hierarchy of XML tags each containing attributes relevant to defining the layout for the application you created in the GUI editor
 	* Layouts can be designed in either fashion, by GUI or XML. The menu directory contains a similar file for customizing the layout for menu appearances in your application
 	* Explore http://developer.android.com/guide/topics/ui/declaring-layout.html.
