@@ -86,7 +86,7 @@ There are 7 states within the lifecycle, and each can be ```@Override```d. In th
 Your first goal for this lab is to wire these TextViews containing lifecycle method call counts.  They should contain values relevant to the number of times their respective system call functions have been activated for Activity One.  Each TextView has been assigned its own unique ID within the Android project.
 
 1. Click on each TextView containing a lifecycle method name and count in ActivityOne and note its unique id value which can be found in the Attributes panel
-	* Alternatively, you can inspect the `Text` view of layout to find these ids
+	* Alternatively, you can inspect the `Code` view of layout to find these ids
 	* Also click on the Button and note its unique ID
 	* You will use these IDs to programmatically capture references to these layout resources in your ActivityOne.java
 	* This will allow you to update their contents and, in the case of the button, perform an operation such as starting a second ```Activity```
@@ -101,7 +101,7 @@ Complete TODO 2.
 * If so enter Alt+Enter at the prompt to import this class
 * Your imports list has grown!
 
-With programmatic placeholders for Android resources now ready to be used, we can start capturing references from the layout we looked at when when we first opened this project.  
+With programmatic placeholders for Android resources now ready to be used, we can start capturing references from the layout we looked at when we first opened this project.  
 
 Resource capture should occur when the application is first created, which takes place during the ```onCreate()``` system method call.
 
