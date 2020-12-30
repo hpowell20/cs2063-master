@@ -2,12 +2,28 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="mobiledev.unb.ca.lab3intents" >
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme" >
+
+        <!-- Provider value for saving a file; required for API 24 and higher -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="mobiledev.unb.ca.lab3intents.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">mobiledev.unb.ca.lab3intents.provider
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"></meta-data>
+        </provider>
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
@@ -24,6 +40,13 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
+
+            <!-- Add Intent Filter should you want another App to invoke an Activity -->
+            <intent-filter>
+                <action android:name="android.intent.action.SENDTO" />
+                <data android:scheme="mailto" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
     </application>
 

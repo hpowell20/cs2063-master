@@ -71,10 +71,10 @@ Investigate the constructors available for building ```Intent``` objects at http
 
 **Task 1**
 
-Once the project has been imported take not of the “Start” ```Button``` in the center of the ```Main Activity``` layout.  Note that this ```Button``` doesn't have an ID
+Once the project has been imported open the ```ActivityMain``` layout file.  You will notice that the “Start” ```Button``` has not been assigned an ID.
 
-1. Assign an ID to the "Start" Button using either the Attributes panel in the Design view or by editing the XML in the Code view.
-2. Programmatically capture a reference to this Start ```Button``` layout component from ```MainActivity``` and give it a [setOnClickListener()](http://developer.android.com/reference/android/widget/Button.html) inside the ```Activity```’s ```onCreate()``` method which will be used later on
+1. Using either the Attributes panel in the Design view or by editing the XML in the Code view assign an ID to the button
+2. Programmatically capture a reference to this Start ```Button``` layout component from ```MainActivity``` by assigning it a [setOnClickListener()](http://developer.android.com/reference/android/widget/Button.html) event inside the ```Activity```’s ```onCreate()``` method
    * Take a look at the linked documentation or back to ```ActivityOne``` in Lab 2 if you forget this procedure
 
 **Task 2**
