@@ -2,6 +2,7 @@ package mobiledev.unb.ca.lab3intents;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -112,8 +113,31 @@ public class ExternalActivityCalls extends Activity {
         }
     }
 
+    /*if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+
+                            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            ContentResolver resolver = getContext().getContentResolver();
+                            ContentValues contentValues = new ContentValues();
+                            contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, "temp");
+                            contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/png");
+                            contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, "DCIM/" + "TEMP");
+                            Uri imageUri123 = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+                            intent.putExtra(MediaStore.EXTRA_OUTPUT,
+                                    imageUri123);
+                            startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+
+
+                        }else {
+                            File photo = new File(Environment.getExternalStorageDirectory(), "temp.jpg");
+                            Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                            cameraIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Build.VERSION.SDK_INT >= Build.VERSION_CODES.M?getOutputMediaFileUri(getActivity(), photo):Uri.fromFile(photo));
+                            startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
+                        }*/
+
     // This follows the latest version on the documentation; an alternate implementation
-    // can be found at https://web.archive.org/web/20150207090211/https://developer.android.com/training/camera/photobasics.html
+    // can be found at https://web.archive.org/web/20150207090211/ or
+    // https://developer.android.com/training/camera/photobasics.html
     // if needed.  Not recommended however.
     private File createImageFile() throws IOException {
         // Create an image file name
@@ -172,15 +196,18 @@ public class ExternalActivityCalls extends Activity {
     }*/
 
     private void galleryAddPic() {
-        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        // Deprecated - Pre API level 29
+        /*Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         File f = new File(currentPhotoPath);
         Uri contentUri = Uri.fromFile(f);
         mediaScanIntent.setData(contentUri);
-        this.sendBroadcast(mediaScanIntent);
-        /*File file = new File(currentPhotoPath);
+        this.sendBroadcast(mediaScanIntent);*/
+
+        // Post API level 29
+        File file = new File(currentPhotoPath);
         MediaScannerConnection.scanFile(this,
                 new String[]{file.toString()},
-                new String[]{file.getName()},null);*/
+                new String[]{file.getName()},null);
     }
 
     @Override
