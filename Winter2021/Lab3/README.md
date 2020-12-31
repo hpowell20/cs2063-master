@@ -169,6 +169,10 @@ But where should we call ```galleryAddPic()```?
 
 2. Implement ```onActivityResult``` in your ```Activity``` and have it call ```galleryAddPic()``` if it receives the correct request code and result code
 
+**NOTE**
+* There is a known issue with the code from Task Gallery in which the image is not saved to the gallery when using devices running Android version 10 and higher
+* Provided the camera is invoked from the application and a picture can be taken this is sufficient for the lab
+
 **Task 9**
 
 With the email and camera intents in place we now have to make our back ```Button``` work by implementing an ```Intent``` to explicitly call our ```MainActivity```.
