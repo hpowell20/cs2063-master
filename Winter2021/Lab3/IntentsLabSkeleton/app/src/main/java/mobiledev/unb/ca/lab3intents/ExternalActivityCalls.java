@@ -1,13 +1,12 @@
 package mobiledev.unb.ca.lab3intents;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidx.appcompat.app.AppCompatActivity;
 
-public class ExternalActivityCalls extends Activity {
-
+public class ExternalActivityCalls extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
