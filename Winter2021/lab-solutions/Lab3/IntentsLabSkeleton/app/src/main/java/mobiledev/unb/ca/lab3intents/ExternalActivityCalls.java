@@ -1,6 +1,5 @@
 package mobiledev.unb.ca.lab3intents;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
@@ -13,18 +12,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
-
-public class ExternalActivityCalls extends Activity {
+public class ExternalActivityCalls extends AppCompatActivity {
     private static final String TAG = "External Activity Calls";
 
     private static final int REQUEST_CAPTURE_IMAGE = 100;
+    private static final String TIME_STAMP_FORMAT = "yyyyMMdd_HHmmss";
 
     private static final String[] RECIPIENTS = {"hpowell@unb.ca"};
     private static final String EMAIL_SUBJECT = "CS2063 Lab 3";
@@ -77,6 +78,7 @@ public class ExternalActivityCalls extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to and make sure the request was successful
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CAPTURE_IMAGE && resultCode == RESULT_OK) {
             galleryAddPic();
         }
@@ -141,7 +143,7 @@ public class ExternalActivityCalls extends Activity {
     // if needed.  Not recommended however.
     private File createImageFile() throws IOException {
         // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String timeStamp = new SimpleDateFormat(TIME_STAMP_FORMAT, Locale.getDefault()).format(new Date());
         String imageFileName = "IMG_" + timeStamp + "_";
 
         File storageDir =  getExternalFilesDir(Environment.DIRECTORY_PICTURES);
