@@ -2,15 +2,6 @@
 
 Today’s lab will build off the camera integration code used in the last lab to go deeper into working with Broadcast Receivers, alarms, and notifications.  
 
-## Pair Programming
-
-We will again be doing pair programming for this lab.  Details on pair programming can be found at [Pair Programming](../docs/PAIR_PROGRAMMING.md).  You can again work with anybody of your choosing.
-
-**To receive credit for this lab you must pair program.**
-
-**Switch between the roles of navigator and driver every 10 to 15
-minutes.**
-
 #### Background
 
 * Make sure you are familiar with the following sections of the Android developer documentation:
@@ -70,7 +61,8 @@ With the Broadcast Receiver in place let's go back and set an alarm.  The alarm 
 	* The action of the alarm should be to start ```AlarmReceiver```
 		* The documentation on [alarms](http://developer.android.com/training/scheduling/alarms.html) and [PendingIntent](http://developer.android.com/reference/android/app/PendingIntent.html) should help here
 		* NOTE:
-			* We would typically use alarms for much longer durations. For example: for our daily photo app we might set the alarm to run once per day.
+			* We would typically use alarms for much longer durations
+				* For example: for our daily photo app we might set the alarm to run once per day
 			* However, this short interval will be useful for testing and debugging
 
 2. Run the app
@@ -79,22 +71,24 @@ With the Broadcast Receiver in place let's go back and set an alarm.  The alarm 
 
 ## Add Notifications ##
 
-As of Android 8.0 (API level 26) a few updates to the way Notifications are handled were added:
-* When setting the notification content a channel ID is required.  If you are running against an older version this value will be ignored.
-* The app's notification channel must be registered with the system by passing an instance of ```NotificationChannel``` to ```createNotificationChannel```.
-	* The notification channel must be created prior to posting any notifications
-	* Best practice is to execute this code as soon as the app starts
-
 **Task 4**
 With the alarm in place we need to update the project to display a Toast notification which will prompt the user to take another picture.
 
 1. Open the ```AlarmReceiver``` class and complete the implementation for the ```onReceive``` method by adding a notification.
 	* Follow the _*Create a basic notification*_ section in the [guide](https://developer.android.com/training/notify-user/build-notification#SimpleNotification) for this
-	* The action of this notification will be to start ```MainActivity``` (i.e. clicking on the notification takes the user back to the app)
+	* The tap action of this notification will be to start ```MainActivity``` (i.e. clicking on the notification takes the user back to the app)
 		* Additional details to watch when building your notification:
 			* Set the small icon to ```R.mipmap.ic_launcher```
 			* Set [```setAutoCancel```](http://developer.android.com/reference/android/app/Notification.Builder.html#setAutoCancel%28boolean%29) to ```true``` so that when the user clicks on the notification it is dismissed
 			* Set the importance as IMPORTANCE_HIGH
+			* The notification channel creation code must be called regardless of the Android level being used; see Notes below
+
+**NOTES:**
+* Android 8.0 (API level 26) introduced a few updates to the way Notifications are handled were added:
+		*A channel ID is required for the notification channel.  If you are running against an older version this value will be ignored.
+		* The app's notification channel must be registered with the system by passing an instance of ```NotificationChannel``` to ```createNotificationChannel```.
+			* The notification channel must be created prior to posting any notifications
+			* Best practice is to execute this code as soon as the app starts
 
 2. Run the app again
 	* When the alarm fires, you should see the notifications that you have created
