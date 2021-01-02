@@ -170,8 +170,8 @@ But where should we call ```galleryAddPic()```?
 2. Implement ```onActivityResult``` in your ```Activity``` and have it call ```galleryAddPic()``` if it receives the correct request code and result code
 
 **NOTE**
-* There is a known issue with the code from Task Gallery in which the image is not saved to the gallery when using devices running Android version 10 and higher
-* Provided the camera is invoked from the application and a picture can be taken this is sufficient for the lab
+* As of Android 10 the way storage is handled in apps is to use Scoped Storage; as such there is a known issue with the code from Task Gallery in which the image is not saved to the gallery when using devices running Android version 10 and higher
+* Provided the camera is invoked from the application and a picture can be taken this is sufficient for the lab as we are concerned with intents functionality
 
 **Task 9**
 
