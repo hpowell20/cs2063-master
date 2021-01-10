@@ -22,20 +22,16 @@ public class MusicServiceClient extends Activity {
 		final Button startButton = (Button) findViewById(R.id.start_button);
 		startButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View src) {
-				
 				// Start the MusicService using the Intent
 				startService(musicServiceIntent);
-
 			}
 		});
 
 		final Button stopButton = (Button) findViewById(R.id.stop_button);
 		stopButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View src) {
-
 				// Stop the MusicService using the Intent
 				stopService(musicServiceIntent);
-
 			}
 		});
 	}

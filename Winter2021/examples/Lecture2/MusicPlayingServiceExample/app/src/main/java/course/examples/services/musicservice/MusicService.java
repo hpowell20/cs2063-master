@@ -61,13 +61,14 @@ public class MusicService extends Service {
             String description = context.getString(R.string.channel_description);
 
             // Set the channel importance
-            int importance = NotificationManager.IMPORTANCE_HIGH;
+            int importance = NotificationManager.IMPORTANCE_NONE;
 
             // Create the NotificationChannel object
             NotificationChannel channel = new NotificationChannel(channelId, name, importance);
             channel.setDescription(description);
             channel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
             channel.enableLights(true);
+            channel.enableVibration(false);
 
             // Sets the notification light color for notifications posted to this
             // channel, if the device supports this feature.
@@ -88,8 +89,8 @@ public class MusicService extends Service {
         final Notification notification = new Notification.Builder(
                 context, channelId)
                 .setSmallIcon(android.R.drawable.ic_media_play)
-                .setOngoing(true).setContentTitle("Music Playing")
-                .setContentText("Click to Access Music Player")
+                .setOngoing(true).setContentTitle(getString(R.string.notification_title))
+                .setContentText(getString(R.string.notification_text))
                 .setContentIntent(pendingIntent).build();
 
         // Put this Service in a foreground state, so it won't
