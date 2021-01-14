@@ -1,0 +1,20 @@
+Deliverable 1 (1 mark):
+  - Includes screenshot of running app
+Deliverable 2 (1 mark):
+  - android:themes
+Deliverable 3 (1 mark):
+  - Sets the activity content from a layout resource
+  - For example: setContentView(R.layout.main) where
+      R means Resource
+      layout means design
+      main is the xml created under res->layout->main.xml
+Deliverable 4 (2 marks)
+  - Three common layout types are Linear Layout, Relative Layout, and Web View
+  (https://developer.android.com/guide/topics/ui/declaring-layout)
+  - IDs are used in Relative Layout to help align elements by specifying how
+  they are positioned relative to other elements
+Deliverable 5 (2 marks)
+  - Includes screenshot of Spanish translations
+  - Includes screenshot of French translations
+Deliverable 6 (1 marks)
+  - Includes screenshot of log message
