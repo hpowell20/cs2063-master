@@ -1,3 +1,5 @@
+TOTAL: 10 marks
+
 Deliverable 1 (1 mark):
   - Includes screenshot of running app
 Deliverable 2 (1 mark):
@@ -8,9 +10,9 @@ Deliverable 3 (1 mark):
       R means Resource
       layout means design
       main is the xml created under res->layout->main.xml
-Deliverable 4 (2 marks)
-  - Three common layout types are Linear Layout, Relative Layout, and Web View
-  (https://developer.android.com/guide/topics/ui/declaring-layout)
+Deliverable 4 (4 marks)
+  - Three common layout types are Linear Layout, Relative Layout, and Web View (3 marks)
+    - See https://developer.android.com/guide/topics/ui/declaring-layout
   - IDs are used in Relative Layout to help align elements by specifying how
   they are positioned relative to other elements
 Deliverable 5 (2 marks)
