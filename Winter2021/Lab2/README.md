@@ -228,7 +228,9 @@ In future labs we will investigate maintaining the state of an ```Activity``` ev
 
 **Lab Completion**
 
-* Show the following to the instructor or TA
-	* The working app along with the results of the number of method calls made when switching between orientations
+* Upload the following to the D2L assignment drop box
+	* ActivityOne.java
+	* ActivityTwo.java
+	* Results of the number of method calls made when switching between orientations
 
 * Keep a copy of your project work and answers for future reference
