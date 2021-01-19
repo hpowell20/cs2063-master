@@ -41,10 +41,6 @@ public class ActivityOne extends AppCompatActivity {
     //  To contain references to Android SDK Object types they must be programmatically
     //  declared as instances of the object type, much like when
     //  declaring an int, double, or String.
-    private TextView onCreateTextView;
-    private TextView onStartTextView;
-    private TextView onResumeTextView;
-    private TextView onRestartTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
