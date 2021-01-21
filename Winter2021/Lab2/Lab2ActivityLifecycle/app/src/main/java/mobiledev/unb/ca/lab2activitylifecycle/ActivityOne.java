@@ -68,7 +68,6 @@ public class ActivityOne extends AppCompatActivity {
                 //  Launch the Activity using the above intent. For more information
                 //  consult the Android API documentation for starting activities:
                 //  https://developer.android.com/reference/android/app/Activity#startActivity(android.content.Intent)
-                startActivity(intent);
             }
         });
 
