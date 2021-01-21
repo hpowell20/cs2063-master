@@ -2,7 +2,7 @@ TOTAL: 10 marks
 
 Completion of required TODOs in the code (9 marks):
 Method call solution (1 mark):
-  - onCreate() calls: 5
+  - onCreate() calls: 4
   - onStart() calls: 7
   - onResume() calls: 7
-  - onRestart() calls: 2
+  - onRestart() calls: 3
