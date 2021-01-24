@@ -198,12 +198,9 @@ Restart your application and perform the following steps:
 
 1. Write a short description of your observations and relate this to what you learned about the task backstack in the previous lab
 2. Describe how you could modify the implementation of your ```Activity```'s back button to behave similarly to the device's soft-key back button
+3. Add the screenshot of the email sent by your app
 
 **Deliverables**
 
-* Show the following to the instructor or TA
-  * Your working app
-  * The screenshot you took of the email sent by your app
-  * Your answers to the writeup task questions about the back button
-
+* Submit `MainActivity.java`, `ExternalActivityCalls.java`, and your answers to the writeup task to the Lab3 drop box folder on D2L
 * Keep a copy of your project work and answers for future reference
