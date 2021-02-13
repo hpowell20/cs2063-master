@@ -2,10 +2,7 @@
 
 ## Pre-lab reading
 
-This lab makes use of `RecyclerView`.  Please take some time to read the following documentation
-* https://developer.android.com/training/material/lists-cards.html
-  * Only the section "Create Lists"
-* https://developer.android.com/guide/topics/ui/layout/recyclerview.html
+This lab makes use of `RecyclerView`.  Please take some time to read the following documentation [here](https://developer.android.com/guide/topics/ui/layout/recyclerview.html)
 
 ## Introduction
 
