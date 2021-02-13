@@ -60,16 +60,18 @@ Complete the TODOs in `MainActivity`
 
 **Task 3**
 
-Complete the TODOs in `DetailActivity`. I've included some hints below.
+Complete the TODOs in `DetailActivity`
 
-**HINTS:**
-* On a smaller device (or for a very long course description) all of the text won't fit on the screen so we need to be able to scroll the text
-  * There are a variety of ways to make a `TextView` scrollable
-  * Try to independently figure out how to do this. (Google is your friend and has the answer!)
-  * If you get stuck, let the instructor or TA know, and we'll try to point you in the right direction
+NOTE:
 * The `ActionBar` corresponds to the text at the top of the detail activity in the screen shot above (i.e., "CS2063 Introduction to M...")
   * This might help you -  [```getSupportActionBar()```](http://developer.android.com/reference/android/support/v7/app/AppCompatActivity.html#getSupportActionBar%28%29)
 
+**Task 4**
+
+On a smaller device (or for a very long course description) all of the text won't fit on the screen so we need to be able to scroll the text. You will also notice that there is no vertical scroll bar when the content is too long.
+
+1. Update one of the course descriptions in the CS.json file to ensure that it is long enough to scroll (if one is not already long enough)
+2. Fix the `TextView` in the `DetailActivity` to include a scrollbar.
 
 **Lab Completion**
 
