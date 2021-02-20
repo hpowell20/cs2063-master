@@ -52,6 +52,10 @@ public class GeoDataListActivity extends AppCompatActivity {
 
         mBgButton = findViewById(R.id.button);
 
+        // TODO
+        //  Create a variable used as a reference for the progress bar to use in the AsyncTask class
+        //  NOTE: Look for the ID of the progress bar in the resource files
+
         // HINT:
         // Nothing to do here, just note that you will be completing the downloadGeoData()
         // function. It will set mGeoDataList to contain the downloaded geo data.
@@ -221,14 +225,13 @@ public class GeoDataListActivity extends AppCompatActivity {
             //  0, and also make sure it's visible.
             //  Hint: Read the documentation on ProgressBar
             //  http://developer.android.com/reference/android/widget/ProgressBar.html
-
-
         }
+
         @Override
         protected String doInBackground(Void... params) {
             // TODO
-            //  Create an instance of JsonUtils and get the data from it. Store the data
-            //  in mGeoDataList
+            //  Create an instance of JsonUtils and get the data from it,
+            //  store the data in mGeoDataList
 
             // Leave this while loop here to simulate a lengthy download
             for(int i = 0; i < DOWNLOAD_TIME; i++) {
@@ -256,19 +259,15 @@ public class GeoDataListActivity extends AppCompatActivity {
             // TODO
             //  Now that the download is complete, enable the button again
 
-
             // TODO
             //  Reset the progress bar, and make it disappear
-
 
             // TODO
             //  Setup the RecyclerView
 
-
             // TODO
             //  Create a Toast indicating that the download is complete. Set its text
             //  to be the result String from doInBackground
-
         }
 
         /** Handle mProgressBar display updates whenever the AsyncTask subclass
@@ -278,7 +277,6 @@ public class GeoDataListActivity extends AppCompatActivity {
         protected void onProgressUpdate(Integer... values) {
             // TODO
             //  Update the progress bar using values
-
         }
     }
 }
