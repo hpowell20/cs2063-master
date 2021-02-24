@@ -1,6 +1,7 @@
 package mobiledev.unb.ca.fusedlocationproviderdemo;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -53,29 +54,27 @@ public class MainActivity extends AppCompatActivity {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
     }
 
+    @SuppressLint("MissingPermission")
     private void getLastLocation() {
-        if (checkPermissions()) {
-            if (isLocationEnabled()) {
-                fusedLocationClient.getLastLocation()
-                        .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                            @Override
-                            public void onSuccess(Location lastLocation) {
-                                // Got last known location. In some rare situations this can be null.
-                                if (lastLocation != null) {
-                                    setTextViewDisplay(lastLocation);
-                                } else {
-                                    mTextView.setText("Unable to fetch the location");
-                                    requestNewLocationData();
-                                }
+        checkPermissions();
+        if (isLocationEnabled()) {
+            fusedLocationClient.getLastLocation()
+                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location lastLocation) {
+                            // Got last known location. In some rare situations this can be null.
+                            if (lastLocation != null) {
+                                setTextViewDisplay(lastLocation);
+                            } else {
+                                mTextView.setText("Unable to fetch the location");
+                                requestNewLocationData();
                             }
-                        });
-            } else {
-                Toast.makeText(this, "Please turn location services on", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                startActivity(intent);
-            }
+                        }
+                    });
         } else {
-            requestPermissions();
+            Toast.makeText(this, "Please turn location services on", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(intent);
         }
     }
 
@@ -90,23 +89,21 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Method to determine if the user has granted the appropriate access levels
-     * @return Flag indicating grant access level
      */
-    private boolean checkPermissions() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            return true;
+    private void checkPermissions() {
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            requestRuntimePermissions();
         }
-
-        return false;
     }
 
     /**
      * Grants the appropriate permissions
      */
-    private void requestPermissions() {
+    private void requestRuntimePermissions() {
         ActivityCompat.requestPermissions(this, new String[]{
-                Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
+                Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION
         }, LOCATION_REQUEST);
     }
 
@@ -142,16 +139,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("MissingPermission")
     private void requestNewLocationData() {
-        LocationRequest mLocationRequest = new LocationRequest();
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setInterval(0);
-        mLocationRequest.setFastestInterval(0);
-        mLocationRequest.setNumUpdates(1);
+        LocationRequest locationRequest = LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setInterval(0)
+                .setFastestInterval(0)
+                .setNumUpdates(1)
+                .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         fusedLocationClient.requestLocationUpdates(
-                mLocationRequest, mLocationCallback,
+                locationRequest, mLocationCallback,
                 Looper.myLooper()
         );
     }
