@@ -2,15 +2,6 @@
 
 In lecture we have explored different storage mechanisms available for app specific data.  One of the more used alternatives is to make use of a [SQLite database](https://www.sqlite.org/) which allows for more complex structured data to be stored.  We also learned that there are several issues and shortcomings with using SQLite directly.  As such, Google recommends the use of the Room Persistence Library framework to help solve these issues.  In this lab you will build a simple app that uses a SQLite database and Room for managing the data.
 
-## Pair Programming
-
-We will again be doing pair programming for this lab.  Details on pair programming can be found at [Pair Programming](../docs/PAIR_PROGRAMMING.md).  You can again work with anybody of your choosing.
-
-**To receive credit for this lab you must pair program.**
-
-**Switch between the roles of navigator and driver every 10 to 15
-minutes.**
-
 ## App Functionality
 
 Once completed the user will be able to use the app for the following:
