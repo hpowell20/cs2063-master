@@ -43,7 +43,7 @@ dependencies {
     // Lifecycle components
     implementation "androidx.lifecycle:lifecycle-extensions:$archLifecycleExtensionsVersion"
     // Uncomment if using Java 8 support
-    implementation "androidx.lifecycle:lifecycle-common-java8:$archLifecycleVersion"
+    annotationProcessor "androidx.lifecycle:lifecycle-common-java8:$archLifecycleVersion"
     // Comment if using Java 8
     //annotationProcessor "androidx.lifecycle:lifecycle-compiler:$archLifecycleVersion"
     // If not using androidx
