@@ -41,27 +41,21 @@ public class MainActivity extends AppCompatActivity {
         mResultsTextView = findViewById(R.id.results_text_view);
         mListView = findViewById(R.id.listview);
 
-        mAddButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Check if some text has been entered in both the item and number
-                //  EditTexts.
-                //  If so call the addItem method using the the text from these EditTexts.
-                //  If not display a toast indicating that the data entered was incomplete.
-            }
+        mAddButton.setOnClickListener(view -> {
+            // TODO Check if some text has been entered in both the item and number
+            //  EditTexts.
+            //  If so call the addItem method using the the text from these EditTexts.
+            //  If not display a toast indicating that the data entered was incomplete.
         });
 
-        mSearchEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    // TODO v is the search EditText. (EditText is a subclass of TextView.)
-                    //  Get the text from this view.
-                    //  Call the searchRecords method using the item name.
-                }
-
-                return false;
+        mSearchEditText.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                // TODO v is the search EditText. (EditText is a subclass of TextView.)
+                //  Get the text from this view.
+                //  Call the searchRecords method using the item name.
             }
+
+            return false;
         });
 
         // Set the ViewModel
