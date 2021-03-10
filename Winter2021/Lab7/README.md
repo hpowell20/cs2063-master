@@ -53,7 +53,7 @@ The following documentation will be helpful in this lab.
 * [Android Room Persistence Library](https://developer.android.com/training/data-storage/room)
 * [Accessing Data using Room](https://developer.android.com/training/data-storage/room/accessing-data)
 * [ExecutorService](https://developer.android.com/reference/java/util/concurrent/ExecutorService)
-* [Room Persistence Library example](https://github.com/hpowell20/cs2063-winter-2020-examples/tree/master/Lecture7/RoomPersistenceLibraryDemo) from class
+* [Room Persistence Library example](https://github.com/hpowell20/cs2063-winter-2021-examples/tree/master/Lecture7/RoomPersistenceLibraryDemo) from class
 * [View Model Overview](https://developer.android.com/topic/libraries/architecture/viewmodel)
 * [ExecutorService](https://developer.android.com/reference/java/util/concurrent/ExecutorService)
 
