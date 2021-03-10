@@ -25,7 +25,7 @@ public class BubbleActivity extends Activity {
     private static final int STREAM_TYPE = AudioManager.STREAM_MUSIC;
 
     // The Main view
-    private RelativeLayout frame;
+    private RelativeLayout mFrame;
 
     // Bubble image's bitmap
     private Bitmap bitmap;
@@ -55,7 +55,7 @@ public class BubbleActivity extends Activity {
         setContentView(R.layout.main);
 
         // Set up user interface
-        frame = findViewById(R.id.frame);
+        mFrame = findViewById(R.id.mFrame);
         bubbleCountTextView = findViewById(R.id.count);
 
         // Load basic bubble Bitmap
@@ -85,8 +85,8 @@ public class BubbleActivity extends Activity {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) {
             // Get the size of the display so this View knows where borders are
-            displayWidth = frame.getWidth();
-            displayHeight = frame.getHeight();
+            displayWidth = mFrame.getWidth();
+            displayHeight = mFrame.getHeight();
         }
     }
 
@@ -128,14 +128,14 @@ public class BubbleActivity extends Activity {
                                            float velocityX, float velocityY) {
                         // TODO
                         //  Implement onFling actions (See comment above for expected behaviour)
-                        //  You can get all Views in mFrame one at a time using the ViewGroup.getChildAt() method
+                        //  You can get all Views in mmFrame one at a time using the ViewGroup.getChildAt() method
 
                         return true;
                     }
 
                     // If a single tap intersects a BubbleView, then pop the BubbleView
                     // Otherwise, create a new BubbleView at the tap's location and add
-                    // it to mFrame. Hint: Don't forget to start the movement of the
+                    // it to mmFrame. Hint: Don't forget to start the movement of the
                     // BubbleView.
                     // Also update the number of bubbles displayed in the appropriate TextView
 
@@ -143,7 +143,7 @@ public class BubbleActivity extends Activity {
                     public boolean onSingleTapConfirmed(MotionEvent event) {
                         // TODO - Implement onSingleTapConfirmed actions.
                         //  (See comment above for expected behaviour.)
-                        //  You can get all Views in mFrame using the
+                        //  You can get all Views in mmFrame using the
                         //  ViewGroup.getChildCount() method
 
                         return true;
@@ -162,10 +162,10 @@ public class BubbleActivity extends Activity {
 
     @Override
     protected void onPause() {
+        super.onPause();
+
         // TODO
         //  Release all SoundPool resources
-
-        super.onPause();
     }
 
     // BubbleView is a View that displays a bubble.
@@ -270,7 +270,7 @@ public class BubbleActivity extends Activity {
         }
 
         // Cancel the Bubble's movement
-        // Remove Bubble from mFrame
+        // Remove Bubble from mmFrame
         // Play pop sound if the BubbleView was popped
         private void stopMovement(final boolean wasPopped) {
             if (null != mMoverFuture) {
@@ -279,11 +279,11 @@ public class BubbleActivity extends Activity {
                 }
 
                 // This work will be performed on the UI Thread
-                frame.post(new Runnable() {
+                mFrame.post(new Runnable() {
                     @Override
                     public void run() {
                         // TODO
-                        //  Remove the BubbleView from mFrame
+                        //  Remove the BubbleView from mmFrame
 
                         // TODO
                         //  Update the TextView displaying the number of bubbles
