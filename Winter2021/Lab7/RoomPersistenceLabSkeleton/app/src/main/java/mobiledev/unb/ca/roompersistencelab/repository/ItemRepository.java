@@ -14,7 +14,7 @@ public class ItemRepository {
     }
 
     //  See the example project file at
-    //  https://github.com/hpowell20/cs2063-winter-2020-examples/blob/master/Lecture7/RoomPersistenceLibraryDemo/app/src/main/java/mobiledev/unb/ca/roompersistencetest/repository/ItemRepository.java
+    //  https://github.com/hpowell20/cs2063-winter-2021-examples/blob/master/Lecture7/RoomPersistenceLibraryDemo/app/src/main/java/mobiledev/unb/ca/roompersistencetest/repository/ItemRepository.java
     //  to see examples of how to work with the Executor Service
 
     // TODO Add query specific methods
