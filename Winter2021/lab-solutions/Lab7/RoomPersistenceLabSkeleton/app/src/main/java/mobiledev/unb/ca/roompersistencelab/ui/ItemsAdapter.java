@@ -33,6 +33,8 @@ public class ItemsAdapter extends ArrayAdapter<Item> {
         // TODO
         //  Set the text used by tvName and tvNum using the data object
         //  This will need to updated once the entity model has been updated
+        tvName.setText(item.getName());
+        tvNum.setText(String.valueOf(item.getNum()));
 
         // Return the completed view to render on screen
         return convertView;
