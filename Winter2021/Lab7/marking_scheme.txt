@@ -1,4 +1,4 @@
-TOTAL: 22 marks
+TOTAL: 24 marks
 
 MainActivity:
   - onCreate() - Check for empty fields when adding (2 marks)
@@ -19,6 +19,9 @@ ItemRepository:
 ItemDao:
   - Add method for inserting a record (1 mark)
   - Add method for searching (1 mark)
+
+ItemsAdapter:
+  - Set the text used by tvName and tvNum using the data object (2 marks)
 
 Item:
   - Add fields for id, name, and num (3 marks)
