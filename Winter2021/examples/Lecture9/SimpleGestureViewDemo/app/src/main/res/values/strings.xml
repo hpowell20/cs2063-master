@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Simple Gesture View Demo</string>
+    <string name="btn_detect_gestures">Detect Gestures</string>
+</resources>
