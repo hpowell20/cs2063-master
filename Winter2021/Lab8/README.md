@@ -25,12 +25,9 @@ Also see the `SoundPool` example in the course GitHub repository.
 
 **Lab Todo**
 
-Examine the code to get an understanding of what's already implemented. You don't need to understand every line, but should understand the overall structure of the app.
-This lab requires you to learn independently and read lots of documentation. The help section below gives you some pointers. Ask questions if you get stuck!
+Examine the code to get an understanding of what's already implemented. You don't need to understand every line, but should understand the overall structure of the app.  This lab requires you to learn independently and read lots of documentation. 
 
-Complete the TODOs in `BubbleActivity`.
-
-Have fun!
+Complete the TODOs in `BubbleActivity`.  Have fun!
 
 **Lab Completion**
 
