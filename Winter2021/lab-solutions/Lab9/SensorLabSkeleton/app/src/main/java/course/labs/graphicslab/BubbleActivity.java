@@ -56,6 +56,7 @@ public class BubbleActivity extends Activity implements SensorEventListener {
     private Sensor accelerometer;
 
     private long lastUpdate;
+    
     // Arrays for storing filtered values
     private final float[] gravity = new float[3];
     private final float[] acceleration = new float[3];
@@ -112,38 +113,46 @@ public class BubbleActivity extends Activity implements SensorEventListener {
     }
 
     public void onSensorChanged(SensorEvent event) {
-        // TODO
-        //  Apply a low- and high-pass filter to the raw sensor values
-        //  HINT: See https://developer.android.com/guide/topics/sensors/sensors_motion#sensors-motion-accel
-        //        for more information
-        float x = event.values[0];
-        float y = event.values[1];
-        float z = event.values[2];
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            long actualTime = System.currentTimeMillis();
 
-        // Isolate the force of gravity with the low-pass filter.
-        gravity[0] = applyLowPassFilter(x, gravity[0]);
-        gravity[1] = applyLowPassFilter(y, gravity[1]);
-        gravity[2] = applyLowPassFilter(z, gravity[2]);
+            if (actualTime - lastUpdate > BubbleView.REFRESH_RATE) {
+                lastUpdate = actualTime;
 
-        // Remove the gravity contribution with the high-pass filter.
-        acceleration[0] = applyHighPassFilter(event.values[0], gravity[0]);
-        acceleration[1] = applyHighPassFilter(event.values[1], gravity[1]);
-        acceleration[2] = applyHighPassFilter(event.values[2], gravity[2]);
+                // TODO
+                //  Apply a low- and high-pass filter to the raw sensor values
+                //  HINT: See https://developer.android.com/guide/topics/sensors/sensors_motion#sensors-motion-accel
+                //        for more information
+                float x = event.values[0];
+                float y = event.values[1];
+                float z = event.values[2];
 
-        // TODO
-        //  If there is a BubbleView, use its setSpeedAndDirection() method
-        //  to set its speed and direction based on the sensor values and the
-        //  current setting of mFilter, which will be one of NO_FILTER, LOW_PASS_FILTER, or HIGH_PASS_FILTER.
-        BubbleView bubbleView = (BubbleView) mFrame.getChildAt(0);
-        if (null != bubbleView) {
-            if (mFilter == NO_FILTER) {
-                bubbleView.setSpeedAndDirection(x, y);
-            } else if (mFilter == LOW_PASS_FILTER) {
-                bubbleView.setSpeedAndDirection(gravity[0], gravity[1]);
-            } else if (mFilter == HIGH_PASS_FILTER) {
-                bubbleView.setSpeedAndDirection(acceleration[0], acceleration[1 ]);
-            } else {
-                Log.w(TAG, "Unknown filter type " + mFilter + ".  No action taken");
+                // Isolate the force of gravity with the low-pass filter.
+                gravity[0] = applyLowPassFilter(x, gravity[0]);
+                gravity[1] = applyLowPassFilter(y, gravity[1]);
+                gravity[2] = applyLowPassFilter(z, gravity[2]);
+
+                // Remove the gravity contribution with the high-pass filter.
+                acceleration[0] = applyHighPassFilter(event.values[0], gravity[0]);
+                acceleration[1] = applyHighPassFilter(event.values[1], gravity[1]);
+                acceleration[2] = applyHighPassFilter(event.values[2], gravity[2]);
+
+                // TODO
+                //  If there is a BubbleView, use its setSpeedAndDirection() method
+                //  to set its speed and direction based on the sensor values and the
+                //  current setting of mFilter, which will be one of NO_FILTER, LOW_PASS_FILTER, or HIGH_PASS_FILTER.
+                BubbleView bubbleView = (BubbleView) mFrame.getChildAt(0);
+                if (null != bubbleView) {
+                    if (mFilter == NO_FILTER) {
+                        bubbleView.setSpeedAndDirection(x, y);
+                    } else if (mFilter == LOW_PASS_FILTER) {
+                        bubbleView.setSpeedAndDirection(gravity[0], gravity[1]);
+                    } else if (mFilter == HIGH_PASS_FILTER) {
+                        bubbleView.setSpeedAndDirection(acceleration[0], acceleration[1 ]);
+                    } else {
+                        Log.w(TAG, "Unknown filter type " + mFilter + ".  No action taken");
+                    }
+                }
             }
         }
     }
