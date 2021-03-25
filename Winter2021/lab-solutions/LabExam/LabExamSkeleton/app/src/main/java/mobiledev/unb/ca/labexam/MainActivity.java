@@ -13,6 +13,7 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -78,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
+            // Disable recycling
+            //holder.setIsRecyclable(false);
+
             // TODO
             //  Get the item at index position in mDataSet
             final GamesInfo gamesInfo = dataset.get(position);
@@ -140,6 +144,12 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public int getItemCount() {
             return dataset.size();
+        }
+
+        @Override
+        public void onViewRecycled(@NonNull ViewHolder holder) {
+            holder.mCheckBox.setOnCheckedChangeListener(null);
+            super.onViewRecycled(holder);
         }
     }
 

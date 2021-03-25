@@ -121,6 +121,12 @@ public class MainActivity extends AppCompatActivity {
         public int getItemCount() {
             return dataset.size();
         }
+
+        @Override
+        public void onViewRecycled(@NonNull ViewHolder holder) {
+           holder.mCheckBox.setOnCheckedChangeListener(null);
+           super.onViewRecycled(holder);
+        }
     }
 
     private class LoadDataTask extends AsyncTask<Void, Void, ArrayList<GamesInfo>> {
