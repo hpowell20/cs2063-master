@@ -4,7 +4,7 @@ Main Activity (12 marks):
   1 - Create instance of SharedPreferences
   1 - Invoke LoadDataTask
   1 - Get item at position in mDataSet
-  1 - Set TextView
+  1 - Set TextView with the title
   1 - Set onClickListener
   1 - Set Intent with extras
   1 - Set checkbox value based on SharedPreferences
