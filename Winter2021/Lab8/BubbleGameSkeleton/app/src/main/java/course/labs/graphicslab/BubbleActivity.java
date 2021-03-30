@@ -58,6 +58,9 @@ public class BubbleActivity extends Activity {
         mFrame = findViewById(R.id.mFrame);
         bubbleCountTextView = findViewById(R.id.count);
 
+        // Initialize the number of bubbles
+        mBubbleCountTextView.setText(0);
+
         // Load basic bubble Bitmap
         bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.b64);
     }
