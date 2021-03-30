@@ -65,6 +65,7 @@ public class DetailActivity extends AppCompatActivity {
         //  Set the title of the action bar to be the host city name
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(intent.getStringExtra(Constants.INTENT_KEY_HOST_CITY));
         }
     }
