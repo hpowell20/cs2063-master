@@ -20,3 +20,4 @@ Deliverable 5 (2 marks)
   - Includes screenshot of French translations
 Deliverable 6 (1 marks)
   - Includes screenshot of log message
+
