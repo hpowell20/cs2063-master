@@ -17,13 +17,13 @@ public class MusicServiceClient extends Activity {
 		final Intent musicServiceIntent = new Intent(getApplicationContext(),
 				MusicService.class);
 
-		final Button startButton = (Button) findViewById(R.id.start_button);
+		final Button startButton = findViewById(R.id.start_button);
 		startButton.setOnClickListener(src -> {
 			// Start the MusicService using the Intent
 			startService(musicServiceIntent);
 		});
 
-		final Button stopButton = (Button) findViewById(R.id.stop_button);
+		final Button stopButton = findViewById(R.id.stop_button);
 		stopButton.setOnClickListener(src -> {
 			// Stop the MusicService using the Intent
 			stopService(musicServiceIntent);
