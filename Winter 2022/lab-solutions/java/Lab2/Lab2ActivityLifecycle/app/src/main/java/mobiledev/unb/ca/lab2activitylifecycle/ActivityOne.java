@@ -39,6 +39,10 @@ public class ActivityOne extends AppCompatActivity {
     //  To contain references to Android SDK Object types they must be programmatically
     //  declared as instances of the object type, much like when
     //  declaring an int, double, or String.
+    private TextView createTextView = null;
+    private TextView startTextView = null;
+    private TextView resumeTextView = null;
+    private TextView restartTextView = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,28 +68,34 @@ public class ActivityOne extends AppCompatActivity {
             //  consult the Android API documentation for starting activities:
             //  https://developer.android.com/reference/android/app/Activity#startActivity(android.content.Intent)
             Intent intent = new Intent(ActivityOne.this, ActivityTwo.class);
+            startActivity(intent);
         });
 
         // TODO 4
         //  Use the above Button resource reference example to capture TextView
         //  references for the four private TextView objects
-
+        createTextView = findViewById(R.id.onCreate);
+        startTextView = findViewById(R.id.onStart);
+        restartTextView = findViewById(R.id.onRestart);
+        resumeTextView = findViewById(R.id.onResume);
 
         // HINT for 6:
         // This checks whether or not a savedInstanceState currently exists
         // If it does, counter values will be loaded from its previous state
         if (savedInstanceState != null) {
-            onCreateCount = savedInstanceState.getInt(CREATE_VALUE);
-
             // TODO 6
             //  If a savedInstanceState Bundle exists then there have already
             //  been system calls made to activity lifecycle methods. We can
             //  use this Bundle to set current values.
+            onCreateCount = savedInstanceState.getInt(CREATE_VALUE);
+            onStartCount = savedInstanceState.getInt(START_VALUE);
+            onResumeCount = savedInstanceState.getInt(RESUME_VALUE);
+            onRestartCount = savedInstanceState.getInt(RESTART_VALUE);
         }
 
         // TODO 8
         //  Increment onCreateCount
-
+        onCreateCount++;
         updateCountsDisplay();
     }
 
@@ -96,7 +106,7 @@ public class ActivityOne extends AppCompatActivity {
 
         // TODO 8
         //  Increment onStartCount
-
+        onStartCount++;
         updateCountsDisplay();
     }
 
@@ -107,7 +117,7 @@ public class ActivityOne extends AppCompatActivity {
 
         // TODO 8
         //  Increment onResumeCount
-
+        onResumeCount++;
         updateCountsDisplay();
     }
 
@@ -118,7 +128,7 @@ public class ActivityOne extends AppCompatActivity {
 
         // TODO 8
         //  Increment onRestartCount
-
+        onRestartCount++;
         updateCountsDisplay();
     }
 
@@ -129,6 +139,9 @@ public class ActivityOne extends AppCompatActivity {
         //  savedInstanceState Bundle so they can be refreshed when
         //  returning to this Activity.
         savedInstanceState.putInt(CREATE_VALUE, onCreateCount);
+        savedInstanceState.putInt(START_VALUE, onStartCount);
+        savedInstanceState.putInt(RESTART_VALUE, onRestartCount);
+        savedInstanceState.putInt(RESUME_VALUE, onResumeCount);
 
         // Must always call the superclass so it can save the view hierarchy state
         super.onSaveInstanceState(savedInstanceState);
@@ -140,7 +153,10 @@ public class ActivityOne extends AppCompatActivity {
         //  HINT:
         //  Follow the provided example where yourOnCreateTextVariableName
         //  refers to any of the private TextView objects
-        yourOnCreateTextVariableName.setText("onCreate() calls: " + onCreateCount);
+        createTextView.setText(getString(R.string.onCreateMessage, onCreateCount));
+        startTextView.setText(getString(R.string.onStartMessage, onStartCount));
+        resumeTextView.setText(getString(R.string.onResumeMessage, onResumeCount));
+        restartTextView.setText(getString(R.string.onRestartMessage, onRestartCount));
     }
 
     @Override
