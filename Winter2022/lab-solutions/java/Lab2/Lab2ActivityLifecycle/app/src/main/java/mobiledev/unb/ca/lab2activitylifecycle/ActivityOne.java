@@ -68,7 +68,9 @@ public class ActivityOne extends AppCompatActivity {
             //  consult the Android API documentation for starting activities:
             //  https://developer.android.com/reference/android/app/Activity#startActivity(android.content.Intent)
             Intent intent = new Intent(ActivityOne.this, ActivityTwo.class);
-            startActivity(intent);
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            }
         });
 
         // TODO 4
