@@ -1,6 +1,7 @@
 package mobiledev.unb.ca.lab3intents;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -42,13 +43,8 @@ public class ExternalActivityCalls extends AppCompatActivity {
     private String currentPhotoPath;
     private String imageFileName;
 
-    ActivityResultLauncher<Intent> cameraActivityResultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (result.getResultCode() == Activity.RESULT_OK) {
-                    galleryAddPic();
-                }
-            });
+    // Activity listeners
+    private ActivityResultLauncher<Intent> cameraActivityResultLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,14 +63,27 @@ public class ExternalActivityCalls extends AppCompatActivity {
             // This will kill the activity on the backstack
             ExternalActivityCalls.this.finish();
         });
+
+        // Register the activity listener
+        setCameraActivityResultLauncher();
     }
 
     // Private helper functions
+    private void setCameraActivityResultLauncher() {
+        cameraActivityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        galleryAddPic();
+                    }
+                });
+    }
+
     private void dispatchTakePhotoIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         // Ensure that there is a camera activity to handle the intent
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+        try {
             // Set the File object used to save the photo
             File photoFile = null;
             try {
@@ -94,8 +103,9 @@ public class ExternalActivityCalls extends AppCompatActivity {
 
                 // Calling this method allows us to capture the return code
                 cameraActivityResultLauncher.launch(takePictureIntent);
-//                startActivityForResult(takePictureIntent, REQUEST_CAPTURE_IMAGE);
             }
+        } catch (ActivityNotFoundException e) {
+            Log.e(TAG, "Unable to load camera activity", e);
         }
     }
 
@@ -167,10 +177,12 @@ public class ExternalActivityCalls extends AppCompatActivity {
         mailIntent.putExtra(Intent.EXTRA_TEXT, ExternalActivityCalls.EMAIL_BODY);
 
         // Ensure that there is an email activity to handle the intent
-        if (mailIntent.resolveActivity(getPackageManager()) != null) {
+        try {
             startActivity(mailIntent);
             //TODO: This line forces an app chooser
             //startActivity(Intent.createChooser(mailIntent, "Choose an email client from..."));
+        } catch (ActivityNotFoundException e) {
+            Log.e(TAG, "Unable to load mail activity", e);
         }
     }
 
