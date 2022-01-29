@@ -7,6 +7,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -160,11 +161,11 @@ public class ExternalActivityCalls extends AppCompatActivity {
     }
 
     private void mediaScannerAddPicToGallery() {
-        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        File f = new File(currentPhotoPath);
-        Uri contentUri = Uri.fromFile(f);
-        mediaScanIntent.setData(contentUri);
-        this.sendBroadcast(mediaScanIntent);
+        File file = new File(currentPhotoPath);
+        MediaScannerConnection.scanFile(this,
+                new String[]{file.toString()},
+                new String[]{file.getName()},
+                null);
     }
 
     private void dispatchSendEmailIntent() {
