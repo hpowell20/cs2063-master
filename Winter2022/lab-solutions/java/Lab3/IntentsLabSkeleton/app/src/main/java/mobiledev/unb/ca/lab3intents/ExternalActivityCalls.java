@@ -1,5 +1,6 @@
 package mobiledev.unb.ca.lab3intents;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -15,6 +16,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
@@ -29,7 +32,6 @@ import java.util.Objects;
 public class ExternalActivityCalls extends AppCompatActivity {
     private static final String TAG = "External Activity Calls";
 
-    private static final int REQUEST_CAPTURE_IMAGE = 100;
     private static final String TIME_STAMP_FORMAT = "yyyyMMdd_HHmmss";
 
     private static final String[] RECIPIENTS = {"hpowell@unb.ca"};
@@ -39,6 +41,14 @@ public class ExternalActivityCalls extends AppCompatActivity {
     // Attributes for storing the file photo path
     private String currentPhotoPath;
     private String imageFileName;
+
+    ActivityResultLauncher<Intent> cameraActivityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    galleryAddPic();
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,15 +67,6 @@ public class ExternalActivityCalls extends AppCompatActivity {
             // This will kill the activity on the backstack
             ExternalActivityCalls.this.finish();
         });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Check which request we're responding to and make sure the request was successful
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CAPTURE_IMAGE && resultCode == RESULT_OK) {
-            galleryAddPic();
-        }
     }
 
     // Private helper functions
@@ -92,7 +93,8 @@ public class ExternalActivityCalls extends AppCompatActivity {
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
 
                 // Calling this method allows us to capture the return code
-                startActivityForResult(takePictureIntent, REQUEST_CAPTURE_IMAGE);
+                cameraActivityResultLauncher.launch(takePictureIntent);
+//                startActivityForResult(takePictureIntent, REQUEST_CAPTURE_IMAGE);
             }
         }
     }
