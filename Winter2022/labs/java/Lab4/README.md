@@ -12,7 +12,7 @@ Today’s lab will build off the camera integration code used in the last lab to
 		* Up to the end of Cancel an Alarm
 	* [Monitoring battery state](http://developer.android.com/training/monitoring-device-state/battery-monitoring.html)
 	* Class overview for [PendingIntent](http://developer.android.com/reference/android/app/PendingIntent.html)
-	* Class overview for [BroadcastReceiver](http://developer.android.com/reference/android/content/BroadcastReceiver.html)
+	* Class overview for [BroadcastReceiver](http://developer.android.com/reference/android/content/BroadcastReceiver.html) 
 
 
 ## Introduction
@@ -138,8 +138,15 @@ In order to test the battery conditions this portion of the lab will be very dif
   * Have the app cancel the alarm if the AC power is disconnected and set the alarm when the AC power is connected
   * Use ```ACTION_POWER_DISCONNECTED``` instead of ```ACTION_BATTERY_LOW``` and ```ACTION_POWER_CONNECTED``` instead of ```ACTION_BATTERY_OKAY```
 
+**Writeup Task**
+
+Create a document with the following items:
+	* A screenshot of the toast message when the application enters either a low battery or power disconnected state
+	* A screenshot of the toast message when the application leaves either a low battery or power disconnected state
+	* A screenshot of the notification reminding the user to tale a picture
 
 **Lab Completion**
 
-* Show the working app running on an emulator to the instructor or TA
+* Take screenshots of the application in a either a low battery Show the working app running on an emulator to the instructor or TA
+* Submit `MainActivity.java`, `AlarmReceiver.java`, and your answers to the writeup task to the Lab3 drop box folder on D2L
 * Keep a copy of your project work and answers for future reference
