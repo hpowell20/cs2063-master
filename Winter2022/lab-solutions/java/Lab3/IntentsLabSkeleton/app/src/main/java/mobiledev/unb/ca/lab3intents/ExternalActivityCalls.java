@@ -1,8 +1,12 @@
 package mobiledev.unb.ca.lab3intents;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
-import android.media.MediaScannerConnection;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -16,9 +20,11 @@ import androidx.core.content.FileProvider;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 public class ExternalActivityCalls extends AppCompatActivity {
     private static final String TAG = "External Activity Calls";
@@ -30,8 +36,9 @@ public class ExternalActivityCalls extends AppCompatActivity {
     private static final String EMAIL_SUBJECT = "CS2063 Lab 3";
     private static final String EMAIL_BODY = "This is a test email!";
 
-    // Attribute for storing the file photo path
+    // Attributes for storing the file photo path
     private String currentPhotoPath;
+    private String imageFileName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +100,7 @@ public class ExternalActivityCalls extends AppCompatActivity {
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat(TIME_STAMP_FORMAT, Locale.getDefault()).format(new Date());
-        String imageFileName = "IMG_" + timeStamp + "_";
+        imageFileName = "IMG_" + timeStamp + "_";
 
         File storageDir =  getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
@@ -108,18 +115,44 @@ public class ExternalActivityCalls extends AppCompatActivity {
     }
 
     private void galleryAddPic() {
-        // Deprecated - Pre API level 29
-        /*Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        Log.d(TAG, "Saving image to the gallery");
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            // Android 10 and above
+            mediaStoreAddPicToGallery();
+        } else {
+            // Pre Android 10
+            mediaScannerAddPicToGallery();
+        }
+        Log.i(TAG, "Image saved!");
+    }
+
+    private void mediaStoreAddPicToGallery() {
+        String name = imageFileName;
+        Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath);
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, name + ".jpg");
+        contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/jpg");
+        contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES);
+
+        ContentResolver resolver = getContentResolver();
+        Uri imageUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+
+        try (OutputStream fos = resolver.openOutputStream(Objects.requireNonNull(imageUri))) {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            //Objects.requireNonNull(fos).close();
+        } catch (IOException e){
+            Log.e(TAG,"Error saving the file ", e);
+        }
+    }
+
+    private void mediaScannerAddPicToGallery() {
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         File f = new File(currentPhotoPath);
         Uri contentUri = Uri.fromFile(f);
         mediaScanIntent.setData(contentUri);
-        this.sendBroadcast(mediaScanIntent);*/
-
-        // Post API level 29
-        File file = new File(currentPhotoPath);
-        MediaScannerConnection.scanFile(this,
-                new String[]{file.toString()},
-                new String[]{file.getName()},null);
+        this.sendBroadcast(mediaScanIntent);
     }
 
     private void dispatchSendEmailIntent() {
