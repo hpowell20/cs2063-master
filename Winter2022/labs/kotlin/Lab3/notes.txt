@@ -1,0 +1,4 @@
+The instructions need to be updated to reflect the new style of startActivityForResult
+Include steps for working with Android 10+
+
+https://www.tutorialspoint.com/android/android_sending_email.htm
