@@ -16,7 +16,7 @@ public class ExternalActivityCalls extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_activity_two, menu);
+        getMenuInflater().inflate(R.menu.menu_external_activity_calls, menu);
         return true;
     }
 
