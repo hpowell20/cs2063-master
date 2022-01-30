@@ -7,12 +7,6 @@ import android.util.Log;
 import android.widget.TextView;
 
 public class ActivityTwo extends AppCompatActivity {
-    // Strings will serve as keys when saving state between activities
-    private static final String CREATE_VALUE = "create";
-    private static final String START_VALUE = "start";
-    private static final String RESUME_VALUE = "resume";
-    private static final String RESTART_VALUE = "restart";
-
     // String for LogCat documentation
     private final static String TAG = "Lab 2 - Activity Two";
 
@@ -39,10 +33,10 @@ public class ActivityTwo extends AppCompatActivity {
         resumeTextView = findViewById(R.id.onResume);
 
         if (savedInstanceState != null) {
-            onCreateCount = savedInstanceState.getInt(CREATE_VALUE);
-            onStartCount = savedInstanceState.getInt(START_VALUE);
-            onResumeCount = savedInstanceState.getInt(RESUME_VALUE);
-            onRestartCount = savedInstanceState.getInt(RESTART_VALUE);
+            onCreateCount = savedInstanceState.getInt(Constants.CREATE_VALUE);
+            onStartCount = savedInstanceState.getInt(Constants.START_VALUE);
+            onResumeCount = savedInstanceState.getInt(Constants.RESUME_VALUE);
+            onRestartCount = savedInstanceState.getInt(Constants.RESTART_VALUE);
         }
 
         //  Increment onCreateCount
@@ -82,10 +76,10 @@ public class ActivityTwo extends AppCompatActivity {
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
-        savedInstanceState.putInt(CREATE_VALUE, onCreateCount);
-        savedInstanceState.putInt(START_VALUE, onStartCount);
-        savedInstanceState.putInt(RESTART_VALUE, onRestartCount);
-        savedInstanceState.putInt(RESUME_VALUE, onResumeCount);
+        savedInstanceState.putInt(Constants.CREATE_VALUE, onCreateCount);
+        savedInstanceState.putInt(Constants.START_VALUE, onStartCount);
+        savedInstanceState.putInt(Constants.RESTART_VALUE, onRestartCount);
+        savedInstanceState.putInt(Constants.RESUME_VALUE, onResumeCount);
 
         // Must always call the superclass so it can save the view hierarchy state
         super.onSaveInstanceState(savedInstanceState);
