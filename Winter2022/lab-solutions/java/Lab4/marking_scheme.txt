@@ -1,6 +1,6 @@
 TOTAL: 10 marks
 
-Include the AlarmReceiver class in the AndroidManifest.xml file (1 mark)
+Screenshots attached of notifications and toast messages (1 mark)
 
 MainActivity:
  - Addition of code to create the alarm manager (2 marks)

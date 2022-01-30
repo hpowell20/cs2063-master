@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         val cameraButton = findViewById<Button>(R.id.button)
         cameraButton.setOnClickListener { dispatchTakePhotoIntent() }
 
@@ -48,6 +49,7 @@ class MainActivity : AppCompatActivity() {
 
         // Set the broadcast receiver alarm values
         initAlarmValues()
+
         // Set the battery filter intents
         setBatteryIntentFilters()
     }
@@ -182,7 +184,7 @@ class MainActivity : AppCompatActivity() {
                 photoFile?.also {
                     val photoURI = FileProvider.getUriForFile(
                         this,
-                        "mobiledev.unb.ca.lab3intents.provider",
+                        "mobiledev.unb.ca.lab4skeleton.provider",
                         photoFile
                     )
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
