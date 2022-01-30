@@ -6,17 +6,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ActivityOne extends AppCompatActivity {
-    // Strings will serve as keys when saving state between activities
-    private static final String CREATE_VALUE = "create";
-    private static final String START_VALUE = "start";
-    private static final String RESUME_VALUE = "resume";
-    private static final String RESTART_VALUE = "restart";
-
     // String for LogCat documentation
     private final static String TAG = "Lab 2 - Activity One";
 
@@ -75,7 +68,7 @@ public class ActivityOne extends AppCompatActivity {
         // This checks whether or not a savedInstanceState currently exists
         // If it does, counter values will be loaded from its previous state
         if (savedInstanceState != null) {
-            onCreateCount = savedInstanceState.getInt(CREATE_VALUE);
+            onCreateCount = savedInstanceState.getInt(Constants.CREATE_VALUE);
 
             // TODO 6
             //  If a savedInstanceState Bundle exists then there have already
@@ -128,7 +121,7 @@ public class ActivityOne extends AppCompatActivity {
         //  Following the example below, save the current counters to a
         //  savedInstanceState Bundle so they can be refreshed when
         //  returning to this Activity.
-        savedInstanceState.putInt(CREATE_VALUE, onCreateCount);
+        savedInstanceState.putInt(Constants.CREATE_VALUE, onCreateCount);
 
         // Must always call the superclass so it can save the view hierarchy state
         super.onSaveInstanceState(savedInstanceState);
