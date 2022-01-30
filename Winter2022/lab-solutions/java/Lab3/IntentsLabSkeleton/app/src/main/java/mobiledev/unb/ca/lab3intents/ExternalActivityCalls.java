@@ -179,9 +179,9 @@ public class ExternalActivityCalls extends AppCompatActivity {
 
         // Ensure that there is an email activity to handle the intent
         try {
-            startActivity(mailIntent);
-            //TODO: This line forces an app chooser
-            //startActivity(Intent.createChooser(mailIntent, "Choose an email client from..."));
+            // This line forces an app chooser
+            startActivity(Intent.createChooser(mailIntent, "Choose an email client from..."));
+            finish();
         } catch (ActivityNotFoundException e) {
             Log.e(TAG, "Unable to load mail activity", e);
         }
