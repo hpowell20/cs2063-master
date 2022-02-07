@@ -1,4 +1,6 @@
-The instructions need to be updated to reflect the new style of startActivityForResult
+The instructions need to be updated to reflect the new style of startActivityForResult (registerForActivityResult)
 Include steps for working with Android 10+
+Perhaps add a dummy method which indicates differing paths for Android versions?
+  - This is a good chance to show them how to work with different versions
 
 https://www.tutorialspoint.com/android/android_sending_email.htm

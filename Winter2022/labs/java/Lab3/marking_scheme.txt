@@ -13,5 +13,6 @@ Add code for Return button from ExternalActivityCalls to MainActivity (1 mark)
 Writeup (3 marks):
 
 Part 1 - Something to the extent that activities keep getting added and removed from the stack
-Part 2 - The implementation can be adjusted to use ExternalActivityCalls.this.finish();
+This differs from Lab 2 as the back button was being used to go back as opposed to continually adding to the back stack
+Part 2 - The implementation can be adjusted to use ExternalActivityCalls.this.finish(); (this behaves like the back button by destroying the activity)
 Part 3 - Include screenshot
