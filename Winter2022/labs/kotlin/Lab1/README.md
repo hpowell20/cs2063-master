@@ -44,7 +44,7 @@ In order to connect to the device __Developer Mode__ needs to be enabled which a
 3. Locate the Build number and click it 7 times
 	* NOTE: The location of the build number and number of clicks may vary between devices; you may need to look up the device instructions
 4. You will receive notice that developer mode has been unlocked
-5. Navigate back one menu to About Device to access the new Developer options menu
+5. Navigate back one menu to System to access the new Developer options menu
 6. Turn on USB debugging
 7. With Android Studio open attach via USB cable an Android device to your computer
 8. On your device press **OK** to allow USB debugging
