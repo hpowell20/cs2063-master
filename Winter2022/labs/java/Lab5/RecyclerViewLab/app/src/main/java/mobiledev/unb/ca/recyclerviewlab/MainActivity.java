@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
             return new ViewHolder(v);
         }
 
-
         // onBindViewHolder binds a ViewHolder to the data at the specified
         // position in mDataset
         @Override
