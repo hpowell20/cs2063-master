@@ -31,7 +31,6 @@ class HttpGetTask extends AsyncTask<Void, Void, String> {
 
     @Override
     protected String doInBackground(Void... params) {
-//        String data = null;
         HttpURLConnection httpUrlConnection = null;
 
         try {
