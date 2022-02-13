@@ -41,14 +41,17 @@ public class JsonUtils {
             JSONArray jsonArray = jsonObject.getJSONArray(KEY_COURSES);
 
             for (int i = 0; i < jsonArray.length(); i++) {
-                // TODO 1:
-                //  Using the JSON array update coursesArray
-
                 // Create a JSON Object from individual JSON Array element
+                JSONObject elementObject = jsonArray.getJSONObject(i);
 
                 // Get data from individual JSON Object
+                Course course = new Course.Builder(elementObject.getString(KEY_COURSE_ID),
+                        elementObject.getString(KEY_NAME),
+                        elementObject.getString(KEY_DESCRIPTION))
+                        .build();
 
-                // Add new Course to courses ArrayList;
+                // Add new Course to courses ArrayList
+                coursesArray.add(course);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -62,7 +65,14 @@ public class JsonUtils {
         //  2. Open the CS_JSON_FILE from the assets folder
         //     (https://developer.android.com/reference/android/content/res/AssetManager)
         //  3. Process the file using an InputStream
-        return "";
+        try (InputStream is = context.getAssets().open(CS_JSON_FILE)) {
+            byte[] buffer = new byte[is.available()];
+            is.read(buffer);
+            return new String(buffer, StandardCharsets.UTF_8);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
 
     // Getter method for courses ArrayList
