@@ -18,7 +18,7 @@ public class DetailActivity extends AppCompatActivity {
         //  Get the intent that started this activity, and get the extras from it
         //  corresponding to the title and description of the course
         Intent intent = getIntent();
-        String courseName = intent.getStringExtra(Constants.INTENT_EXTRA_COURSE_NAME);
+        String courseTitle = intent.getStringExtra(Constants.INTENT_EXTRA_COURSE_TITLE);
         String courseDescription = intent.getStringExtra(Constants.INTENT_EXTRA_COURSE_DESCRIPTION);
 
         // TODO 2
@@ -32,6 +32,6 @@ public class DetailActivity extends AppCompatActivity {
 
         // TODO 4
         //  Set the title of the action bar to be the course title
-        getSupportActionBar().setTitle(courseName);
+        getSupportActionBar().setTitle(courseTitle);
     }
 }

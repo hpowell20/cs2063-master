@@ -41,6 +41,11 @@ public class JsonUtils {
             JSONArray jsonArray = jsonObject.getJSONArray(KEY_COURSES);
 
             for (int i = 0; i < jsonArray.length(); i++) {
+                // TODO 1:
+                //  Using the JSON array update coursesArray
+                //  1. Retrieve the current object by index
+                //  2. Add new Course to courses ArrayList
+
                 // Create a JSON Object from individual JSON Array element
                 JSONObject elementObject = jsonArray.getJSONObject(i);
 

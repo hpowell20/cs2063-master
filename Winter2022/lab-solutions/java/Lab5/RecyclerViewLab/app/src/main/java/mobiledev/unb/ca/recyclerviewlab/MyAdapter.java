@@ -74,7 +74,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         //      The Course title and it's description
         holder.mTextView.setOnClickListener(v -> {
             Intent intent = new Intent(this.parentActivity, DetailActivity.class);
-            intent.putExtra(Constants.INTENT_EXTRA_COURSE_NAME, course.getTitle());
+            intent.putExtra(Constants.INTENT_EXTRA_COURSE_TITLE, course.getTitle());
             intent.putExtra(Constants.INTENT_EXTRA_COURSE_DESCRIPTION, course.getDescription());
 
             try {
