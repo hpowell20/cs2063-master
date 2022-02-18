@@ -4,6 +4,10 @@
 
 This lab makes use of `RecyclerView`.  Please take some time to read the following documentation [here](https://developer.android.com/guide/topics/ui/layout/recyclerview.html)
 
+## Pair Programming
+
+For the remainder of the labs we will complete the assignments using pair programming.  Additional details can be found at [Pair Programming](../docs/PAIR_PROGRAMMING.md).  For this activity you will need to work in pairs. You can work with anybody of your choosing, however, to obtain the most benefit from the activity it is recommended you work with someone other than your partner for the course project.  This is not a requirement and will not be strictly enforced.
+
 ## Introduction
 
 Many mobile applications need to display a scrollable list of items where the user can select an item to take some action specific to it. In this lab you will build an app that displays a scrolling list of UNB CS courses (including course numbers, titles and credit hours).
@@ -37,7 +41,8 @@ There are two common ways to display a scrolling list of items in Android
     * It doesn't do much yet as you will be completing it during the lab
 
   * `MainActivity` presents the scrolling list of courses using a `RecyclerView`
-    * It contains an inner class `MyAdapter` that extends `RecyclerView.Adapter`
+
+  * `MyAdapter` represents the custom adaptor class used by the RecyclerView which extends `RecyclerView.Adapter`
     * The `RecyclerView.Adapter` class provides a layer of abstraction between the `RecyclerView`'s `LayoutManager` and the underlying data that is being displayed which in this case a list of `Course` objects
     * `MyAdapter` itself contains an inner class `ViewHolder` which represents an individual item to display in the scrolling list
       * `onCreateViewHolder` creates `ViewHolder` objects by inflating the corresponding XML layout resource file; it's already implemented for you
@@ -56,24 +61,30 @@ There are two common ways to display a scrolling list of items in Android
 
 **Task 2**
 
-Complete the TODOs in `MainActivity`
-
-**Task 3**
-
-Complete the TODOs in `DetailActivity`
+Complete the TODOs in the `MainActivity`, `JsonUtils`, `MyAdaptor`, and `DetailActivity` files
 
 NOTE:
 * The `ActionBar` corresponds to the text at the top of the detail activity in the screen shot above (i.e., "CS2063 Introduction to M...")
   * This might help you -  [```getSupportActionBar()```](http://developer.android.com/reference/android/support/v7/app/AppCompatActivity.html#getSupportActionBar%28%29)
 
-**Task 4**
+**Task 3**
 
 On a smaller device (or for a very long course description) all of the text won't fit on the screen so we need to be able to scroll the text. You will also notice that there is no vertical scroll bar when the content is too long.
 
 1. Update one of the course descriptions in the CS.json file to ensure that it is long enough to scroll (if one is not already long enough)
 2. Fix the `TextView` in the `DetailActivity` to include a scrollbar.
 
+**Writeup Task - For At Home Completions Only**
+
+Create a document with the following items:
+	* A screenshot of the main activity recycler view
+  * A screenshot of the details activity
+	* A screenshot of the scrollbar added in Task 4
+
 **Lab Completion**
 
-* Show the working app running on an emulator to the instructor or TA
+* IN LAB: 
+  * Show the working app running on an emulator to the instructor or TA
+AT HOME: 
+  * Submit `MainActivity.java`, `MyAdapter.java`, `DetailActivity.java`, `JsonUtils.java`, and your answers to the writeup task to the Lab5 drop box folder on D2L 
 * Keep a copy of your project work and answers for future reference
