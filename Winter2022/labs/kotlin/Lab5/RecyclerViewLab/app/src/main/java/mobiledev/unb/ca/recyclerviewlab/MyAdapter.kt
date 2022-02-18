@@ -17,7 +17,7 @@ class MyAdapter(private val mDataset: ArrayList<Course>, private val parentActiv
     // it will just be a single TextView (displaying the title of a course)
     // but RecyclerView gives us the flexibility to do more complex things
     // (e.g., display an image and some text).
-    class ViewHolder(private var mTextView: TextView) : RecyclerView.ViewHolder(
+    class ViewHolder(var mTextView: TextView) : RecyclerView.ViewHolder(
         mTextView)
 
     // The inflate method of the LayoutInflater class can be used to obtain the

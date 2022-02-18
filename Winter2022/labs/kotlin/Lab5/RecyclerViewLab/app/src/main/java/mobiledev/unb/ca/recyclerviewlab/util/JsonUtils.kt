@@ -22,16 +22,10 @@ class JsonUtils(context: Context) {
             // This array is the "courses" array mentioned in the lab write-up
             val jsonArray = jsonObject.getJSONArray(KEY_COURSES)
             for (i in 0 until jsonArray.length()) {
-                // Create a JSON Object from individual JSON Array element
-                val elementObject = jsonArray.getJSONObject(i)
-
-                // Get data from individual JSON Object
-                val course = Course.Builder(elementObject.getString(KEY_COURSE_ID),
-                    elementObject.getString(KEY_NAME),
-                    elementObject.getString(KEY_DESCRIPTION)).build()
-
-                // Add new Course to courses ArrayList
-                courses!!.add(course)
+                // TODO 1:
+                //  Using the JSON array update coursesArray
+                //  1. Retrieve the current object by index
+                //  2. Add new Course to courses ArrayList
             }
         } catch (e: JSONException) {
             e.printStackTrace()
@@ -39,16 +33,18 @@ class JsonUtils(context: Context) {
     }
 
     private fun loadJSONFromAssets(context: Context): String? {
-        try {
-            context.assets.open(CS_JSON_FILE).use { `is` ->
-                val buffer = ByteArray(`is`.available())
-                `is`.read(buffer)
-                return String(buffer, StandardCharsets.UTF_8)
-            }
-        } catch (ex: IOException) {
-            ex.printStackTrace()
-            return null
-        }
+        // TODO 2:
+        //  1. Obtain an instance of the AssetManager class from the referenced context
+        //    (https://developer.android.com/reference/android/content/Context#getAssets())
+        //  2. Open the CS_JSON_FILE from the assets folder
+        //     (https://developer.android.com/reference/android/content/res/AssetManager)
+        //  3. Process the file using an InputStream
+        return ""
+    }
+
+    // Getter method for courses ArrayList
+    fun getCourses(): ArrayList<Course>? {
+        return courses
     }
 
     companion object {

@@ -1,24 +1,25 @@
 package mobiledev.unb.ca.recyclerviewlab.model
 
-class Course private constructor() {
+class Course private constructor(
+    // Use val for immutable; var for mutable
+    private val id: String?,
+    private val name: String?,
+    val description: String?,
+) {
+    // Only need to include getters
+    val title: String
+        get() = "$id: $name"
 
-    class Builder(
-        private var id: String,
-        private var name: String,
-        private var description: String? = null
+    data class Builder(
+        var id: String? = null,
+        var name: String? = null,
+        var description: String? = null,
     ) {
 
-        // Only need to include getters
-        fun getTitle(): String {
-            return "$id: $name"
-        }
+        fun id(id: String) = apply { this.id = id }
+        fun name(name: String) = apply { this.name = name }
+        fun description(description: String) = apply { this.description = description }
 
-        fun getDescription(): String? {
-            return description
-        }
-
-        fun build(): Course {
-            return Course()
-        }
+        fun build() = Course(id, name, description)
     }
 }
