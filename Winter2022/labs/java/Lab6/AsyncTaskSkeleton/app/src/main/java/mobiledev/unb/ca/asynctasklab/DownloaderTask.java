@@ -3,29 +3,40 @@ package mobiledev.unb.ca.asynctasklab;
 import android.app.Activity;
 import android.os.AsyncTask;
 
-import java.lang.ref.WeakReference;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
-public class DownloaderTask extends AsyncTask<Void, Integer, String> {
+import java.lang.ref.WeakReference;
+import java.util.List;
+
+import mobiledev.unb.ca.asynctasklab.model.GeoData;
+import mobiledev.unb.ca.asynctasklab.util.JsonUtils;
+
+public class DownloaderTask extends AsyncTask<String, Integer, String> {
     private static final int DOWNLOAD_TIME = 4;      // Download time simulation
 
-    private final WeakReference<Activity> mActivity;
+    private List<GeoData> mGeoDataList;
 
-    public DownloaderTask(Activity activity) {
+    // Keep a weak reference to the activity
+    /*
+    If, however, the AsyncTask is not an inner class of the Activity, you will need to pass an
+    Activity reference to the AsyncTask.
+    When you do this, one potential problem that may occur is
+    that the AsyncTask will keep the reference of the Activity until the AsyncTask has
+    completed its work in its background thread.
+    If the Activity is finished or killed before the AsyncTask's
+    background thread work is done, the AsyncTask will still
+    have its reference to the Activity, and therefore it cannot be garbage collected.
+
+    As a result, this will cause a memory leak.  In order to prevent this from happening,
+    make use of a WeakReference in the AsyncTask instead of having a direct
+    reference to the Activity.
+     */
+    private final WeakReference<GeoDataListActivity> mActivity;
+
+    public DownloaderTask(GeoDataListActivity activity) {
         mActivity = new WeakReference<>(activity);
     }
-
-    // Keep a reference to the progress bar and buttons so we can interact with it later
-//        private final WeakReference<ProgressBar> progressBar;
-//        private final WeakReference<Button> backgroundButton;
-//
-//        // Set the localized download complete message
-//        private final String downloadCompleteMessage;
-//
-//        public DownloaderTask(ProgressBar progressBar, Button backgroundButton, String downloadCompleteMessage) {
-//            this.progressBar = new WeakReference<>(progressBar);
-//            this.backgroundButton = new WeakReference<>(backgroundButton);
-//            this.downloadCompleteMessage = downloadCompleteMessage;
-//        }
 
     @Override
     protected void onPreExecute() {
@@ -39,8 +50,7 @@ public class DownloaderTask extends AsyncTask<Void, Integer, String> {
             //  Disable the button so it can't be clicked again once a download has been started
             //  Hint: Button is subclass of TextView. Read this document to see how to disable it.
             //  http://developer.android.com/reference/android/widget/TextView.html
-
-
+            
             // TODO
             //  Set the progress bar's maximum to be DOWNLOAD_TIME, its initial progress to be
             //  0, and also make sure it's visible.
@@ -50,10 +60,18 @@ public class DownloaderTask extends AsyncTask<Void, Integer, String> {
     }
 
     @Override
-    protected String doInBackground(Void... params) {
+    protected String doInBackground(String... params) {
+        String successMessage = params[0];
+        String errorMessage = params[1];
+
         // TODO
         //  Create an instance of JsonUtils and get the data from it,
         //  store the data in mGeoDataList
+        JsonUtils jsonUtils = new JsonUtils();
+        mGeoDataList = jsonUtils.getGeoData();
+        if (null == mGeoDataList) {
+            return errorMessage;
+        }
 
         // Leave this while loop here to simulate a lengthy download
         for(int i = 0; i < DOWNLOAD_TIME; i++) {
@@ -62,14 +80,12 @@ public class DownloaderTask extends AsyncTask<Void, Integer, String> {
                 // TODO
                 //  Update the progress bar; calculate an appropriate value for
                 //  the new progress using i
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        return "Done";
-        // downloadCompleteMessage;
+        return successMessage;
     }
 
     /** Once the DownloaderTask completes, hide the progress bar and update the
@@ -83,13 +99,13 @@ public class DownloaderTask extends AsyncTask<Void, Integer, String> {
 
             // TODO
             //  Now that the download is complete, enable the button again
-
+ 
             // TODO
             //  Reset the progress bar, and make it disappear
-
+ 
             // TODO
             //  Setup the RecyclerView
-
+ 
             // TODO
             //  Create a Toast indicating that the download is complete. Set its text
             //  to be the result String from doInBackground
@@ -101,7 +117,14 @@ public class DownloaderTask extends AsyncTask<Void, Integer, String> {
      */
     @Override
     protected void onProgressUpdate(Integer... values) {
-        // TODO
-        //  Update the progress bar using values
+        final Activity activity = mActivity.get();
+        if (activity != null) {
+            // TODO
+            //  Update the progress bar using values
+        }
+    }
+
+    private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(mGeoDataList, mActivity));
     }
 }

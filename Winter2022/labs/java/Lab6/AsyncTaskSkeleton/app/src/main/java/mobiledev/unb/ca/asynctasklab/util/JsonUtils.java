@@ -84,8 +84,8 @@ public class JsonUtils {
 
         try {
             // TODO
-            //  Establish an HttpURLConnecion to REQUEST_URL (defined as a constant)
-            //  Hint: See https://github.com/hpowell20/cs2063-winter-2021-examples/tree/master/Lecture4/NetworkingURL
+            //  Establish an HttpURLConnection to REQUEST_URL (defined as a constant)
+            //  Hint: See https://github.com/hpowell20/cs2063-winter-2022-examples/tree/master/Lecture6/NetworkingURL
             //  for an example of how to do this
             //  Also see documentation here:
             //  http://developer.android.com/training/basics/network-ops/connecting.html
