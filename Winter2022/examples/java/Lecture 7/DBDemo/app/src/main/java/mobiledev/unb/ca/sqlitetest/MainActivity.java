@@ -3,6 +3,8 @@ package mobiledev.unb.ca.sqlitetest;
 import android.app.AlertDialog;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -15,18 +17,24 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class MainActivity extends AppCompatActivity {
     private DBManager dbManager;
     private ListView mListView;
 
-    // Cursor query attributes
-    private final String[] FROM = {DatabaseHelper.ITEM, DatabaseHelper.NUM};
-    private final int[] TO = {R.id.item_textview, R.id.num_textview};
+    private ExecutorService executor;
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Set the executor service
+        executor = Executors.newSingleThreadExecutor();
+        handler = new Handler(Looper.getMainLooper());
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -34,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         // Add the listener events
         mListView = findViewById(R.id.listview);
         mListView.setOnItemLongClickListener((parent, view, position, id) -> {
-            deleteItem((int)id);
+            deleteItem((int) id);
             return true;
         });
 
@@ -70,32 +78,45 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpListView() {
-        // Ideally this would be done in a worker thread because
-        // the list items operation could be long running operation
-        Cursor cursor = dbManager.listAllRecords();
+        executor.execute(() -> {
+            // Perform background call to retrieve the records
+            Cursor cursor = dbManager.listAllRecords();
 
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
-                R.layout.list_layout,
-                cursor,
-                FROM,
-                TO,
-                0);
-        adapter.notifyDataSetChanged();
-        mListView.setAdapter(adapter);
+            handler.post(() -> {
+                // Cursor query attributes
+                final String[] FROM = {DatabaseHelper.ITEM, DatabaseHelper.NUM};
+                final int[] TO = {R.id.item_textview, R.id.num_textview};
+
+                // Update the UI with the results
+                SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
+                        R.layout.list_layout,
+                        cursor,
+                        FROM,
+                        TO,
+                        0);
+                adapter.notifyDataSetChanged();
+                mListView.setAdapter(adapter);
+            });
+        });
     }
 
     private void addItem(String item, String num) {
-        // Ideally this would be done in a worker thread because
-        // getWritableDatabase() can be long running operation
-        // Set up the ListView again once we've modified the database
-        dbManager.insertRecord(item, num);
-        setUpListView();
+        executor.execute(() -> {
+            // Perform background call to save the record
+            dbManager.insertRecord(item, num);
+
+            // Update the UI with the results
+            handler.post(this::setUpListView);
+        });
     }
 
     private void deleteItem(int id) {
-        // Ideally this would be done in a worker thread because
-        // getWritableDatabase() can be long running operation
-        dbManager.deleteRecord(id);
-        setUpListView();
+        executor.execute(() -> {
+            // Perform background call to remove the record
+            dbManager.deleteRecord(id);
+
+            // Update the UI with the results
+            handler.post(this::setUpListView);
+        });
     }
 }
