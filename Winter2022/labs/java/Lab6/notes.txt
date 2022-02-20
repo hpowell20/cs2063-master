@@ -4,3 +4,5 @@ AsyncTask has been deprecated with Android 11; see how this lab can be rewritten
 java.util.concurrent libraries (Kotlin coroutines perhaps?)
 
 Separate downloader class to better illustrate the use of a progress bar object reference
+
+https://riptutorial.com/android/example/14069/pass-activity-as-weakreference-to-avoid-memory-leaks
