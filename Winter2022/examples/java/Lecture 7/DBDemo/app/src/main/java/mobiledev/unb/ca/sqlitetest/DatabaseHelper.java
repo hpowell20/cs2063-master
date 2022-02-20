@@ -10,15 +10,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     // Table columns
-    public static final String _ID = "_id";
+    public static final String ITEM_ID = "_id";
     public static final String ITEM = "item";
     public static final String NUM = "number";
-    public static String[] COLUMNS = { _ID, ITEM, NUM };
+    public static String[] COLUMNS = {ITEM_ID, ITEM, NUM };
 
     // Table creation statement
     public static final String TABLE_NAME = "mytable";
     private static final String TABLE_CREATE =
-            "CREATE TABLE " + TABLE_NAME + " (" + _ID
+            "CREATE TABLE " + TABLE_NAME + " (" + ITEM_ID
                     + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + ITEM + " TEXT, " + NUM + " INT);";
 

@@ -78,15 +78,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpListView() {
+        // Cursor query attributes
+        final String[] FROM = {DatabaseHelper.ITEM, DatabaseHelper.NUM};
+        final int[] TO = {R.id.item_textview, R.id.num_textview};
+
         executor.execute(() -> {
             // Perform background call to retrieve the records
             Cursor cursor = dbManager.listAllRecords();
 
             handler.post(() -> {
-                // Cursor query attributes
-                final String[] FROM = {DatabaseHelper.ITEM, DatabaseHelper.NUM};
-                final int[] TO = {R.id.item_textview, R.id.num_textview};
-
                 // Update the UI with the results
                 SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
                         R.layout.list_layout,

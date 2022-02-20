@@ -33,7 +33,7 @@ public class DBManager {
 
     public void deleteRecord(int id) {
         openWriteDatabase().delete(DatabaseHelper.TABLE_NAME,
-                DatabaseHelper._ID + "=?",
+                DatabaseHelper.ITEM_ID + "=?",
                 new String[]{String.valueOf(id)});
     }
 
