@@ -1,6 +1,6 @@
-# Lab 6 - AsyncTask
+# Lab 6 - Threading
 
-In lecture we've seen the importance of moving long-running operations off of the UI thread and into a worker thread. In this lab you will implement (portions of) this functionality using an `AsyncTask`.
+In class we have seen the importance of moving long-running operations off of the UI thread and into a worker thread. In this lab you will implement (portions of) this functionality using a runnable thread from the an `AsyncTask`.
 
 ## Understanding the skeleton code
 
@@ -13,10 +13,8 @@ By selecting an earthquake you will be presented with further details about it. 
 **Task 1**
 
 1. Download the skeleton project for the lab and review the existing code.
-  * This app uses the master/detail flow (MDF) pattern which we briefly saw in lecture 2 and is similar in structure to an app created with the Android Studio Master/Detail Flow template
-    * Lecture example can be found [here](https://github.com/hpowell20/cs2063-winter-2021-examples/tree/master/Lecture2/MDFDemo)
-
-  * The MDF pattern employs multiple default layout files to make the UI adapt to different screen sizes and orientations:
+  * This app uses the Primary/Detail flow pattern
+  * This pattern employs multiple default layout files to make the UI adapt to different screen sizes and orientations:
     * activity_geodata_detail.xml
     * activity_geodata_list.xml
     * geodata_detail.xml
@@ -60,7 +58,7 @@ By selecting an earthquake you will be presented with further details about it. 
 
 **Task 2**
 
-1. Complete the TODO items in `GeoDataListActivity` and `JsonUtils`.
+1. Complete the TODO items in `GeoDataListActivity`, `JsonUtils`, `SimpleItemRecyclerViewAdapter`, and `DownloaderTask` classes.
 
    * Make sure your app behaves as expected with and without a network connection
    * Ensure that the floating action button (pink button in the bottom right corner) still works while the data is refreshing

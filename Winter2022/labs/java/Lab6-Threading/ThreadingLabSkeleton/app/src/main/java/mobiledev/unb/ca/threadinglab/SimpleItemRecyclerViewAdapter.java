@@ -1,9 +1,6 @@
 package mobiledev.unb.ca.threadinglab;
 
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +17,7 @@ import mobiledev.unb.ca.threadinglab.model.GeoData;
 public class SimpleItemRecyclerViewAdapter
         extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-    private final static String TAG = "SimpleItemRecyclerView";
-
     private final List<GeoData> mValues;
-    //private final GeoDataListActivity mActivity;
     private final AppCompatActivity parentActivity;
     private final boolean isTwoPane;
 
@@ -71,20 +65,10 @@ public class SimpleItemRecyclerViewAdapter
                         .commit();
             } else {
                 // TODO
-                //  Create an Intent to start GeoDataDetailActivity. You'll need
-                //  to add some extras to this intent. Look at that class, and the
+                //  Create an Intent to start the parentActivity class.
+                //  You'll need to add some extras to this intent. Look at that class, and the
                 //  example Fragment transaction for the two pane case above, to
                 //  figure out what you need to add.
-                Intent intent = new Intent(parentActivity, GeoDataDetailActivity.class);
-                intent.putExtra(GeoDataDetailFragment.TITLE, title);
-                intent.putExtra(GeoDataDetailFragment.LNG, lng);
-                intent.putExtra(GeoDataDetailFragment.LAT, lat);
-
-                try {
-                    parentActivity.startActivity(intent);
-                } catch (ActivityNotFoundException e) {
-                    Log.e(TAG, "Unable to start activity", e);
-                }
             }
         });
     }

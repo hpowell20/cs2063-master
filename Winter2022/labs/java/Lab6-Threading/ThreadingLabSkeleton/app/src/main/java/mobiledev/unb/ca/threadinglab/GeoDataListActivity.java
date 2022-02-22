@@ -1,14 +1,13 @@
 package mobiledev.unb.ca.threadinglab;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 /**
  * An activity representing a list of GeoData. This activity
@@ -55,6 +54,10 @@ public class GeoDataListActivity extends AppCompatActivity {
             // Update the geo data
             downloadGeoData();
         });
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(view -> Snackbar.make(view, "I'm working!", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show());
     }
 
     public boolean isTwoPane() {
@@ -70,21 +73,5 @@ public class GeoDataListActivity extends AppCompatActivity {
         //  https://developer.android.com/training/monitoring-device-state/connectivity-monitoring.html
         //  Hint: Read this for help with Toast:
         //  http://developer.android.com/guide/topics/ui/notifiers/toasts.html
-        if (isNetworkAvailable()) {
-            DownloaderTask downloaderTask = new DownloaderTask(this)
-                    .setRefreshButton(findViewById(R.id.button))
-                    .setProgressBar(findViewById(R.id.progressBar))
-                    .setupRecyclerView(findViewById(R.id.geodata_list));
-            downloaderTask.execute();
-        } else {
-            // Set Toast message
-            Toast.makeText(getApplicationContext(), getString(R.string.no_network_msg), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return null != activeNetworkInfo && activeNetworkInfo.isConnected();
     }
 }

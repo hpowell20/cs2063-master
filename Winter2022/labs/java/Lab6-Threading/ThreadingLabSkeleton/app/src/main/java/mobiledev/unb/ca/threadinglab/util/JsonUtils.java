@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 import javax.json.Json;
@@ -90,7 +89,6 @@ public class JsonUtils {
             //  for an example of how to do this
             //  Also see documentation here:
             //  http://developer.android.com/training/basics/network-ops/connecting.html
-            connection = (HttpURLConnection) new URL(REQUEST_URL).openConnection();
             return convertStreamToString(connection.getInputStream());
         } catch (MalformedURLException exception) {
             Log.e(TAG, "MalformedURLException");

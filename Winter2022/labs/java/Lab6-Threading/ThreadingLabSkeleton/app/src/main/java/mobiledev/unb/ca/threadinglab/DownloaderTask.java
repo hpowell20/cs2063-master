@@ -3,10 +3,8 @@ package mobiledev.unb.ca.threadinglab;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,7 +13,6 @@ import java.util.List;
 import java.util.concurrent.Executors;
 
 import mobiledev.unb.ca.threadinglab.model.GeoData;
-import mobiledev.unb.ca.threadinglab.util.JsonUtils;
 
 public class DownloaderTask {
     private static final int DOWNLOAD_TIME = 4;      // Download time simulation
@@ -48,35 +45,34 @@ public class DownloaderTask {
     }
 
     public void execute() {
-        // Disable the button
-        refreshButton.setEnabled(false);
+        // TODO
+        //  Disable the button so it can't be clicked again once a download has been started
+        //  Hint: Button is subclass of TextView. Read this document to see how to disable it.
+        //  http://developer.android.com/reference/android/widget/TextView.html
 
-        // Show the progress bar
-        progressBar.setIndeterminate(false);
-        progressBar.setProgress(0);
-        progressBar.setMax(DOWNLOAD_TIME);
-        progressBar.setVisibility(View.VISIBLE);
+        // TODO
+        //  Set the progress bar's maximum to be DOWNLOAD_TIME, its initial progress to be
+        //  0, and also make sure it's visible.
+        //  Hint: Read the documentation on ProgressBar
+        //  http://developer.android.com/reference/android/widget/ProgressBar.html
 
         // Perform background call to read the information from the URL
         Executors.newSingleThreadExecutor().execute(() -> {
             Handler mainHandler = new Handler(Looper.getMainLooper());
 
-            // Perform the background work
-            JsonUtils jsonUtils = new JsonUtils();
-            ArrayList<GeoData> mGeoDataList = jsonUtils.getGeoData();
-            if (null == mGeoDataList) {
-                Toast.makeText(appContext, activity.getString(R.string.download_error_msg), Toast.LENGTH_SHORT).show();
-            }
+            // TODO
+            //  Create an instance of JsonUtils and get the data from it,
+            //  store the data in mGeoDataList
 
             // Simulating long-running operation
             for (int i = 1; i < DOWNLOAD_TIME; i++) {
                 sleep();
-                final int step = i;
-                mainHandler.post(() -> progressBar.setProgress(step * 10));
+                // TODO
+                //  Update the progress bar using values
             }
 
-            // Update the UI with the results
-            mainHandler.post(() -> setUpListView(mGeoDataList));
+            // TODO
+            //  Update the UI with the results
         });
     }
 
@@ -89,23 +85,19 @@ public class DownloaderTask {
         }
     }
 
-    private void setUpListView(ArrayList<GeoData> mGeoDataList) {
-        //  Now that the download is complete, enable the button again
-        refreshButton.setEnabled(true);
+    private void updateDisplay(ArrayList<GeoData> mGeoDataList) {
+        // TODO
+        //  With the download completed, enable the button again
 
         // TODO
         //  Reset the progress bar, and make it disappear
-        progressBar.setProgress(0);
-        progressBar.setVisibility(View.INVISIBLE);
 
         // TODO
         //  Setup the RecyclerView
-        setupRecyclerView(mGeoDataList);
 
         // TODO
         //  Create a Toast indicating that the download is complete. Set its text
         //  to be the result String from doInBackground
-        Toast.makeText(appContext, activity.getString(R.string.download_complete), Toast.LENGTH_SHORT).show();
     }
 
     private void setupRecyclerView(List<GeoData> mGeoDataList) {
