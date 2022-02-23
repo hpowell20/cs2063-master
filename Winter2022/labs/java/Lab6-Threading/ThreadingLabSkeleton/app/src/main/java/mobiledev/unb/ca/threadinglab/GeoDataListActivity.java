@@ -66,8 +66,9 @@ public class GeoDataListActivity extends AppCompatActivity {
 
     private void downloadGeoData() {
         // TODO
-        //  Check whether there is a network connection. If there is, Create a DownLoaderTask using
-        //  this activity in the constructor and execute it by adding in parameters for success and error messages
+        //  Check whether there is a network connection. 
+        //  If there is, Create a DownLoaderTask using this activity in the constructor
+        //  and use the setters to pass in the objects needed during execution
         //  If there isn't, create a Toast indicating that there is no network connection.
         //  Hint: Read this for help on checking network connectivity:
         //  https://developer.android.com/training/monitoring-device-state/connectivity-monitoring.html

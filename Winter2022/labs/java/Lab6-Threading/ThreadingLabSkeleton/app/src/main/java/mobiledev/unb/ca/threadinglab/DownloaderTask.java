@@ -72,7 +72,7 @@ public class DownloaderTask {
             }
 
             // TODO
-            //  Update the UI with the results
+            //  Using the updateDisplay method update the UI with the results
         });
     }
 
