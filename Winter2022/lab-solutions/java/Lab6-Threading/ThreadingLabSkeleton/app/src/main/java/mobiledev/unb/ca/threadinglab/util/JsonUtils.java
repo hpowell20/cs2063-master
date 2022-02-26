@@ -2,6 +2,9 @@ package mobiledev.unb.ca.threadinglab.util;
 
 import android.util.Log;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,6 +14,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Objects;
 
 import javax.json.Json;
 import javax.json.stream.JsonParser;
@@ -32,6 +37,20 @@ public class JsonUtils {
 
     private void processJSON() {
         geoDataArray = new ArrayList<>();
+
+        // Create a JSON Object from file contents String
+        try {
+            JSONObject jsonObject = new JSONObject(Objects.requireNonNull(loadJSONFromURL()));
+            Iterator<String> keys= jsonObject.keys();
+            while (keys.hasNext())
+            {
+                String keyValue = (String)keys.next();
+                String valueString = jsonObject.getString(keyValue);
+                Log.w(TAG, valueString);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         String jsonString = loadJSONFromURL();
 

@@ -42,7 +42,7 @@ public class DownloaderTask {
         return this;
     }
 
-    public DownloaderTask setupRecyclerView(RecyclerView recyclerView) {
+    public DownloaderTask setRecyclerView(RecyclerView recyclerView) {
         this.recyclerView = recyclerView;
         return this;
     }
@@ -103,8 +103,7 @@ public class DownloaderTask {
         setupRecyclerView(mGeoDataList);
 
         // TODO
-        //  Create a Toast indicating that the download is complete. Set its text
-        //  to be the result String from doInBackground
+        //  Create a Toast indicating that the download is complete
         Toast.makeText(appContext, activity.getString(R.string.download_complete), Toast.LENGTH_SHORT).show();
     }
 

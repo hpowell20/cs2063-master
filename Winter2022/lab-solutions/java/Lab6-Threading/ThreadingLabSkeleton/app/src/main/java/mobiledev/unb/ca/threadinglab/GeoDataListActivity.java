@@ -10,6 +10,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+
 /**
  * An activity representing a list of GeoData. This activity
  * has different presentations for handset and tablet-size devices. On
@@ -55,6 +58,10 @@ public class GeoDataListActivity extends AppCompatActivity {
             // Update the geo data
             downloadGeoData();
         });
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(view -> Snackbar.make(view, "I'm working!", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show());
     }
 
     public boolean isTwoPane() {
@@ -70,11 +77,12 @@ public class GeoDataListActivity extends AppCompatActivity {
         //  https://developer.android.com/training/monitoring-device-state/connectivity-monitoring.html
         //  Hint: Read this for help with Toast:
         //  http://developer.android.com/guide/topics/ui/notifiers/toasts.html
+        // TODO (ME): Link for checking network connection is not useful; see what other one exists
         if (isNetworkAvailable()) {
             DownloaderTask downloaderTask = new DownloaderTask(this)
                     .setRefreshButton(findViewById(R.id.button))
                     .setProgressBar(findViewById(R.id.progressBar))
-                    .setupRecyclerView(findViewById(R.id.geodata_list));
+                    .setRecyclerView(findViewById(R.id.geodata_list));
             downloaderTask.execute();
         } else {
             // Set Toast message
