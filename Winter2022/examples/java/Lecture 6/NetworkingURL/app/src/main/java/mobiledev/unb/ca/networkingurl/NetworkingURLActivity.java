@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class NetworkingURLActivity extends Activity implements RetainedFragment.OnFragmentInteractionListener{
+public class NetworkingURLActivity extends Activity implements RetainedFragment.OnFragmentInteractionListener {
     private final static String TEST_VIEW_KEY = "TEST_VIEW_KEY";
 
     private TextView textView;
@@ -17,7 +17,7 @@ public class NetworkingURLActivity extends Activity implements RetainedFragment.
 
         setContentView(R.layout.main);
         textView = findViewById(R.id.textView);
-
+        
         if (null != savedInstanceState) {
             retainedFragment = (RetainedFragment) getFragmentManager()
                     .findFragmentByTag(RetainedFragment.TAG);
