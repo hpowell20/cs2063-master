@@ -68,6 +68,5 @@ class SimpleItemRecyclerViewAdapter(
         override fun toString(): String {
             return super.toString() + " '" + mContentView.text + "'"
         }
-
     }
 }

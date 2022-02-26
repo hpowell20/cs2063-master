@@ -26,7 +26,7 @@ class DownloaderTask(private val activity: GeoDataListActivity) {
         return this
     }
 
-    fun setupRecyclerView(recyclerView: RecyclerView?): DownloaderTask {
+    fun setRecyclerView(recyclerView: RecyclerView?): DownloaderTask {
         this.recyclerView = recyclerView
         return this
     }
@@ -92,5 +92,4 @@ class DownloaderTask(private val activity: GeoDataListActivity) {
     companion object {
         private const val DOWNLOAD_TIME = 4 // Download time simulation
     }
-
 }

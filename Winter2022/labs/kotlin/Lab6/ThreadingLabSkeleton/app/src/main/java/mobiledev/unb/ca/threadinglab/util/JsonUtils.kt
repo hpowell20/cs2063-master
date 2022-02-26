@@ -13,8 +13,7 @@ import java.util.ArrayList
 
 class JsonUtils {
     // Getter method for courses ArrayList
-    var geoDataArray: ArrayList<GeoData>? = null
-        private set
+    private var geoDataArray: ArrayList<GeoData>? = null
 
     private fun processJSON() {
         geoDataArray = ArrayList()
@@ -22,17 +21,16 @@ class JsonUtils {
         try {
             val parser = Json.createParser(StringReader(jsonString))
             var titleTrigger = false
-            var coordTrigger = false
+            var coordinateTrigger = false
             var count = 0
-            var coordCount = 0
+            var coordinateCount = 0
 
             while (parser.hasNext()) {
-                val event = parser.next()
-                when (event) {
+                when (parser.next()) {
                     JsonParser.Event.KEY_NAME -> if (parser.string == JSON_KEY_TITLE) {
                         titleTrigger = true
                     } else if (parser.string == JSON_KEY_COORDINATES) {
-                        coordTrigger = true
+                        coordinateTrigger = true
                     }
                     JsonParser.Event.VALUE_STRING -> if (titleTrigger && parser.string.startsWith("M")) {
                         val geoData = GeoData()
@@ -41,18 +39,19 @@ class JsonUtils {
                         titleTrigger = false
                     }
                     JsonParser.Event.VALUE_NUMBER -> {
-                        if (coordTrigger && coordCount == 0) {
+                        if (coordinateTrigger && coordinateCount == 0) {
                             val geoData = geoDataArray!![count]
                             geoData.longitude = parser.string
-                            coordCount++
-                        } else if (!coordTrigger && coordCount == 1) {
+                            coordinateCount++
+                        } else if (!coordinateTrigger && coordinateCount == 1) {
                             val geoData = geoDataArray!![count]
                             geoData.latitude = parser.string
-                            coordCount = 0
+                            coordinateCount = 0
                             count++
                         }
-                        coordTrigger = false
+                        coordinateTrigger = false
                     }
+                    else -> {}
                 }
             }
         } catch (e: Exception) {
@@ -109,6 +108,7 @@ class JsonUtils {
 
     companion object {
         private const val TAG = "JsonUtils"
+        // TODO: Lookup some more local open data set?
         private const val REQUEST_URL =
             "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
         private const val JSON_KEY_TITLE = "title"
