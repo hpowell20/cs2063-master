@@ -44,7 +44,7 @@ public class JsonUtils {
             Iterator<String> keys= jsonObject.keys();
             while (keys.hasNext())
             {
-                String keyValue = (String)keys.next();
+                String keyValue = keys.next();
                 String valueString = jsonObject.getString(keyValue);
                 Log.w(TAG, valueString);
             }
@@ -57,9 +57,9 @@ public class JsonUtils {
         try {
             JsonParser parser = Json.createParser(new StringReader(jsonString));
             boolean titleTrigger = false;
-            boolean coordTrigger = false;
+            boolean coordinateTrigger = false;
             int count = 0;
-            int coordCount = 0;
+            int coordinateCount = 0;
 
             while(parser.hasNext()) {
                 JsonParser.Event event = parser.next();
@@ -68,7 +68,7 @@ public class JsonUtils {
                         if(parser.getString().equals(JSON_KEY_TITLE)) {
                             titleTrigger = true;
                         } else if (parser.getString().equals(JSON_KEY_COORDINATES)) {
-                            coordTrigger = true;
+                            coordinateTrigger = true;
                         }
                         break;
                     case VALUE_STRING:
@@ -80,17 +80,17 @@ public class JsonUtils {
                         }
                         break;
                     case VALUE_NUMBER:
-                        if(coordTrigger && (coordCount == 0)) {
+                        if(coordinateTrigger && (coordinateCount == 0)) {
                             GeoData geoData = geoDataArray.get(count);
                             geoData.setLongitude(parser.getString());
-                            coordCount++;
-                        } else if(!coordTrigger && (coordCount == 1)) {
+                            coordinateCount++;
+                        } else if(!coordinateTrigger && (coordinateCount == 1)) {
                             GeoData geoData = geoDataArray.get(count);
                             geoData.setLatitude(parser.getString());
-                            coordCount = 0;
+                            coordinateCount = 0;
                             count++;
                         }
-                        coordTrigger = false;
+                        coordinateTrigger = false;
                         break;
                 }
             }
