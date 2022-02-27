@@ -1,18 +1,21 @@
 package mobiledev.unb.ca.threadinglab
 
-import mobiledev.unb.ca.threadinglab.model.GeoData
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import android.view.ViewGroup
-import android.view.LayoutInflater
-import android.os.Bundle
-import android.view.View
-import android.widget.TextView
+import mobiledev.unb.ca.threadinglab.model.GeoData
 
 class SimpleItemRecyclerViewAdapter(
     private val mValues: List<GeoData>,
     private val parentActivity: AppCompatActivity,
-    private val isTwoPane: Boolean
+    private val isTwoPane: Boolean,
 ) : RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -47,10 +50,20 @@ class SimpleItemRecyclerViewAdapter(
                     .commit()
             } else {
                 // TODO
-                //  Create an Intent to start the parentActivity class.
+                //  Create an Intent to start GeoDataDetailFragment from the parentActivity class.
                 //  You'll need to add some extras to this intent. Look at that class, and the
                 //  example Fragment transaction for the two pane case above, to
                 //  figure out what you need to add.
+                val intent = Intent(parentActivity, GeoDataDetailActivity::class.java)
+                intent.putExtra(GeoDataDetailFragment.TITLE, title)
+                intent.putExtra(GeoDataDetailFragment.LNG, lng)
+                intent.putExtra(GeoDataDetailFragment.LAT, lat)
+
+                try {
+                    parentActivity.startActivity(intent)
+                } catch (e: ActivityNotFoundException) {
+                    Log.e(TAG, "Unable to start activity", e)
+                }
             }
         }
     }
@@ -68,6 +81,9 @@ class SimpleItemRecyclerViewAdapter(
         override fun toString(): String {
             return super.toString() + " '" + mContentView.text + "'"
         }
+    }
 
+    companion object {
+        private const val TAG = "SimpleItemRecyclerView"
     }
 }

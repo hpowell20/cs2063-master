@@ -1,9 +1,14 @@
 package mobiledev.unb.ca.threadinglab
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 
@@ -70,5 +75,72 @@ class GeoDataListActivity : AppCompatActivity() {
         //  https://developer.android.com/training/monitoring-device-state/connectivity-monitoring.html
         //  Hint: Read this for help with Toast:
         //  http://developer.android.com/guide/topics/ui/notifiers/toasts.html
+        if (isNetworkAvailable(applicationContext)) {
+            val downloaderTask: DownloaderTask = DownloaderTask(this)
+                .setRefreshButton(findViewById(R.id.button))
+                .setProgressBar(findViewById(R.id.progressBar))
+                .setRecyclerView(findViewById(R.id.geodata_list))
+            downloaderTask.execute()
+        } else {
+            // Set Toast message
+            Toast.makeText(applicationContext,
+                getString(R.string.no_network_msg),
+                Toast.LENGTH_SHORT).show()
+        }
     }
+
+    private fun isNetworkAvailable(context: Context?): Boolean {
+        if (context == null) return false
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            // Android 10+
+            connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)?.let { networkCapabilities ->
+                return networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
+                        || networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+            }
+        } else {
+            // if the android version is below M
+            @Suppress("DEPRECATION") val networkInfo =
+                connectivityManager.activeNetworkInfo ?: return false
+            @Suppress("DEPRECATION")
+            return networkInfo.isConnectedOrConnecting
+            //return cmg.activeNetworkInfo?.isConnectedOrConnecting == true
+        }
+
+        return false
+    }
+
+//    private fun isNetworkAvailable(context: Context?): Boolean {
+//        if (context == null) return false
+//        val connectivityManager = context.getSystemService(ConnectivityManager::class.java) as ConnectivityManager
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+//            // Returns a Network object corresponding to
+//            // the currently active default data network.
+//            val network = connectivityManager.activeNetwork ?: return false
+//
+//            // Representation of the capabilities of an active network.
+//            val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+//
+//            return when {
+//                // Indicates this network uses a Wi-Fi transport,
+//                // or WiFi has network connectivity
+//                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+//
+//                // Indicates this network uses a Cellular transport. or
+//                // Cellular has network connectivity
+//                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+//
+//                // else return false
+//                else -> false
+//            }
+//        } else {
+//            // if the android version is below M
+//            @Suppress("DEPRECATION") val networkInfo =
+//                connectivityManager.activeNetworkInfo ?: return false
+//            @Suppress("DEPRECATION")
+//            return networkInfo.isConnectedOrConnecting
+//        }
+//    }
 }

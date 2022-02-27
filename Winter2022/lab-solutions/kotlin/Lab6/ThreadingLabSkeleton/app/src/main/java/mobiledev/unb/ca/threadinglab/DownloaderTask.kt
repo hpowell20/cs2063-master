@@ -2,12 +2,14 @@ package mobiledev.unb.ca.threadinglab
 
 import android.content.Context
 import android.os.Handler
-import android.widget.ProgressBar
-import androidx.recyclerview.widget.RecyclerView
 import android.os.Looper
+import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
+import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
 import mobiledev.unb.ca.threadinglab.model.GeoData
-import java.util.ArrayList
+import mobiledev.unb.ca.threadinglab.util.JsonUtils
 import java.util.concurrent.Executors
 
 class DownloaderTask(private val activity: GeoDataListActivity) {
@@ -26,7 +28,7 @@ class DownloaderTask(private val activity: GeoDataListActivity) {
         return this
     }
 
-    fun setupRecyclerView(recyclerView: RecyclerView?): DownloaderTask {
+    fun setRecyclerView(recyclerView: RecyclerView?): DownloaderTask {
         this.recyclerView = recyclerView
         return this
     }
@@ -36,12 +38,17 @@ class DownloaderTask(private val activity: GeoDataListActivity) {
         //  Disable the button so it can't be clicked again once a download has been started
         //  Hint: Button is subclass of TextView. Read this document to see how to disable it.
         //  http://developer.android.com/reference/android/widget/TextView.html
+        refreshButton!!.isEnabled = false
 
         // TODO
         //  Set the progress bar's maximum to be DOWNLOAD_TIME, its initial progress to be
         //  0, and also make sure it's visible.
         //  Hint: Read the documentation on ProgressBar
         //  http://developer.android.com/reference/android/widget/ProgressBar.html
+        progressBar!!.isIndeterminate = false
+        progressBar!!.progress = 0
+        progressBar!!.max = DOWNLOAD_TIME
+        progressBar!!.visibility = View.VISIBLE
 
         // Perform background call to read the information from the URL
         Executors.newSingleThreadExecutor().execute {
@@ -50,13 +57,25 @@ class DownloaderTask(private val activity: GeoDataListActivity) {
             // TODO
             //  Create an instance of JsonUtils and get the data from it,
             //  store the data in mGeoDataList
+            val jsonUtils = JsonUtils()
+            val mGeoDataList: java.util.ArrayList<GeoData>? = jsonUtils.getGeoData()
+            if (null == mGeoDataList) {
+                Toast.makeText(appContext,
+                    activity.getString(R.string.download_error_msg),
+                    Toast.LENGTH_SHORT).show()
+            }
 
             // Simulating long-running operation
             for (i in 1 until DOWNLOAD_TIME) {
                 sleep()
                 // TODO
                 //  Update the progress bar using values
+                handler.post { progressBar!!.progress = i * 10 }
             }
+
+            // TODO
+            //  Using the updateDisplay method update the UI with the results
+            handler.post { updateDisplay(mGeoDataList!!) }
         }
     }
 
@@ -72,16 +91,22 @@ class DownloaderTask(private val activity: GeoDataListActivity) {
     private fun updateDisplay(mGeoDataList: ArrayList<GeoData>) {
         // TODO
         //  With the download completed, enable the button again
+        refreshButton!!.isEnabled = true
 
         // TODO
         //  Reset the progress bar, and make it disappear
+        progressBar!!.progress = 0
+        progressBar!!.visibility = View.INVISIBLE
 
         // TODO
         //  Setup the RecyclerView
+        setupRecyclerView(mGeoDataList)
 
         // TODO
-        //  Create a Toast indicating that the download is complete. Set its text
-        //  to be the result String from doInBackground
+        //  Create a Toast indicating that the download is complete
+        Toast.makeText(appContext,
+            activity.getString(R.string.download_complete),
+            Toast.LENGTH_SHORT).show()
     }
 
     private fun setupRecyclerView(mGeoDataList: List<GeoData>) {

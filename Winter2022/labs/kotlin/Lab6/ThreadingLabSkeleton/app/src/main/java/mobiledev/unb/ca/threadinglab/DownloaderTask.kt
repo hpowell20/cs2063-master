@@ -57,6 +57,9 @@ class DownloaderTask(private val activity: GeoDataListActivity) {
                 // TODO
                 //  Update the progress bar using values
             }
+
+            // TODO
+            //  Using the updateDisplay method update the UI with the results
         }
     }
 
@@ -80,8 +83,7 @@ class DownloaderTask(private val activity: GeoDataListActivity) {
         //  Setup the RecyclerView
 
         // TODO
-        //  Create a Toast indicating that the download is complete. Set its text
-        //  to be the result String from doInBackground
+        //  Create a Toast indicating that the download is complete
     }
 
     private fun setupRecyclerView(mGeoDataList: List<GeoData>) {

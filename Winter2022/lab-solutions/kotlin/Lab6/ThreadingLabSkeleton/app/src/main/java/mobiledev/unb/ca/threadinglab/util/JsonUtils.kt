@@ -9,12 +9,12 @@ import java.lang.Exception
 import java.lang.StringBuilder
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
+import java.net.URL
 import java.util.ArrayList
 
 class JsonUtils {
     // Getter method for courses ArrayList
-    var geoDataArray: ArrayList<GeoData>? = null
-        private set
+    private var geoDataArray: ArrayList<GeoData>? = null
 
     private fun processJSON() {
         geoDataArray = ArrayList()
@@ -22,17 +22,16 @@ class JsonUtils {
         try {
             val parser = Json.createParser(StringReader(jsonString))
             var titleTrigger = false
-            var coordTrigger = false
+            var coordinateTrigger = false
             var count = 0
-            var coordCount = 0
+            var coordinateCount = 0
 
             while (parser.hasNext()) {
-                val event = parser.next()
-                when (event) {
+                when (parser.next()) {
                     JsonParser.Event.KEY_NAME -> if (parser.string == JSON_KEY_TITLE) {
                         titleTrigger = true
                     } else if (parser.string == JSON_KEY_COORDINATES) {
-                        coordTrigger = true
+                        coordinateTrigger = true
                     }
                     JsonParser.Event.VALUE_STRING -> if (titleTrigger && parser.string.startsWith("M")) {
                         val geoData = GeoData()
@@ -41,18 +40,19 @@ class JsonUtils {
                         titleTrigger = false
                     }
                     JsonParser.Event.VALUE_NUMBER -> {
-                        if (coordTrigger && coordCount == 0) {
+                        if (coordinateTrigger && coordinateCount == 0) {
                             val geoData = geoDataArray!![count]
                             geoData.longitude = parser.string
-                            coordCount++
-                        } else if (!coordTrigger && coordCount == 1) {
+                            coordinateCount++
+                        } else if (!coordinateTrigger && coordinateCount == 1) {
                             val geoData = geoDataArray!![count]
                             geoData.latitude = parser.string
-                            coordCount = 0
+                            coordinateCount = 0
                             count++
                         }
-                        coordTrigger = false
+                        coordinateTrigger = false
                     }
+                    else -> {}
                 }
             }
         } catch (e: Exception) {
@@ -61,50 +61,44 @@ class JsonUtils {
     }
 
     private fun loadJSONFromURL(): String? {
-        val connection: HttpURLConnection? = null
-        return try {
+        var connection: HttpURLConnection? = null
+        try {
             // TODO
             //  Establish an HttpURLConnection to REQUEST_URL (defined as a constant)
             //  Hint: See https://github.com/hpowell20/cs2063-winter-2022-examples/tree/master/Lecture6/NetworkingURL
             //  for an example of how to do this
             //  Also see documentation here:
             //  http://developer.android.com/training/basics/network-ops/connecting.html
-            convertStreamToString(connection!!.inputStream)
+            connection = URL(REQUEST_URL).openConnection() as HttpURLConnection
+            val `in`: InputStream = BufferedInputStream(connection.inputStream)
+            return convertStreamToString(`in`)
         } catch (exception: MalformedURLException) {
             Log.e(TAG, "MalformedURLException")
-            null
         } catch (exception: IOException) {
             Log.e(TAG, "IOException")
-            null
-        } catch (e: Exception) {
-            e.printStackTrace()
-            null
         } finally {
             connection?.disconnect()
         }
+        return null
     }
 
-    private fun convertStreamToString(`is`: InputStream): String {
-        var reader: BufferedReader? = null
-        val sb = StringBuilder()
+    private fun convertStreamToString(`in`: InputStream): String {
+        val data = StringBuilder()
         try {
-            reader = BufferedReader(InputStreamReader(`is`))
-            var line: String?
-            while (reader.readLine().also { line = it } != null) {
-                sb.append(line)
-            }
-        } catch (e: IOException) {
-            e.printStackTrace()
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close()
-                } catch (e: IOException) {
-                    e.printStackTrace()
+            BufferedReader(InputStreamReader(`in`)).use { reader ->
+                var line: String?
+                while (reader.readLine().also { line = it } != null) {
+                    data.append(line)
                 }
             }
+        } catch (e: IOException) {
+            Log.e(TAG, "IOException")
         }
-        return sb.toString()
+        return data.toString()
+    }
+
+    fun getGeoData(): ArrayList<GeoData>? {
+        return geoDataArray
     }
 
     companion object {

@@ -9,6 +9,7 @@ import java.lang.Exception
 import java.lang.StringBuilder
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
+import java.net.URL
 import java.util.ArrayList
 
 class JsonUtils {
@@ -68,7 +69,8 @@ class JsonUtils {
             //  for an example of how to do this
             //  Also see documentation here:
             //  http://developer.android.com/training/basics/network-ops/connecting.html
-            convertStreamToString(connection!!.inputStream)
+            val `in`: InputStream = BufferedInputStream(connection?.inputStream)
+            return convertStreamToString(`in`)
         } catch (exception: MalformedURLException) {
             Log.e(TAG, "MalformedURLException")
             null
@@ -83,27 +85,19 @@ class JsonUtils {
         }
     }
 
-    private fun convertStreamToString(`is`: InputStream): String {
-        var reader: BufferedReader? = null
-        val sb = StringBuilder()
+    private fun convertStreamToString(`in`: InputStream): String {
+        val data = StringBuilder()
         try {
-            reader = BufferedReader(InputStreamReader(`is`))
-            var line: String?
-            while (reader.readLine().also { line = it } != null) {
-                sb.append(line)
-            }
-        } catch (e: IOException) {
-            e.printStackTrace()
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close()
-                } catch (e: IOException) {
-                    e.printStackTrace()
+            BufferedReader(InputStreamReader(`in`)).use { reader ->
+                var line: String?
+                while (reader.readLine().also { line = it } != null) {
+                    data.append(line)
                 }
             }
+        } catch (e: IOException) {
+            Log.e(TAG, "IOException")
         }
-        return sb.toString()
+        return data.toString()
     }
 
     companion object {
