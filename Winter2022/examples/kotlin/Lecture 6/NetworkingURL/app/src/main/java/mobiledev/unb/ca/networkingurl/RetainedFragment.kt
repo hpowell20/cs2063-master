@@ -1,11 +1,9 @@
 package mobiledev.unb.ca.networkingurl
 
 import android.app.Fragment
+//import androidx.fragment.app.Fragment;
 import android.content.Context
-import mobiledev.unb.ca.networkingurl.RetainedFragment.OnFragmentInteractionListener
 import android.os.Bundle
-import android.util.Log
-import mobiledev.unb.ca.networkingurl.HttpGetTask
 import java.lang.RuntimeException
 
 class RetainedFragment : Fragment() {

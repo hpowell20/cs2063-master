@@ -1,11 +1,10 @@
 package mobiledev.unb.ca.networkingurl
 
 import android.app.Activity
-import mobiledev.unb.ca.networkingurl.RetainedFragment.OnFragmentInteractionListener
 import android.widget.TextView
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
+import mobiledev.unb.ca.networkingurl.RetainedFragment.OnFragmentInteractionListener
 
 class NetworkingURLActivity : Activity(), OnFragmentInteractionListener {
     private var textView: TextView? = null

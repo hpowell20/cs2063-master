@@ -1,45 +1,58 @@
 package mobiledev.unb.ca.networkingurl
 
-import android.os.AsyncTask
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import java.io.*
-import java.lang.StringBuilder
-import java.lang.ref.WeakReference
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
 import java.net.URL
+import java.util.concurrent.Executors
 
-internal class HttpGetTask(retainedFragment: RetainedFragment?) :
-    AsyncTask<Void?, Void?, String?>() {
-    private val mListener: WeakReference<RetainedFragment?> = WeakReference(retainedFragment)
+internal class HttpGetTask(retainedFragment: RetainedFragment?) {
+    private var listenerFragment: RetainedFragment? = null
 
-    override fun doInBackground(vararg params: Void?): String? {
+    init {
+        this.listenerFragment = retainedFragment
+    }
+
+    fun execute() {
+        // Perform background call to read the information from the URL
+        Executors.newSingleThreadExecutor().execute {
+            val handler = Handler(Looper.getMainLooper())
+            val jsonString: String? = loadJsonFromUrl()
+            handler.post { updateDisplay(jsonString) }
+        }
+    }
+
+    private fun updateDisplay(jsonString: String?) {
+        listenerFragment?.onDownloadFinished(jsonString)
+    }
+
+    private fun loadJsonFromUrl(): String? {
         var httpUrlConnection: HttpURLConnection? = null
-        try {
+        return try {
             // 1. Get connection. 2. Prepare request (URI)
             httpUrlConnection = URL(URL).openConnection() as HttpURLConnection
 
-            // 3. This app does not use a request body
-            // 4. Read the response
+            // 3. This app does not use a request body.  4. Read the response
             val `in`: InputStream = BufferedInputStream(httpUrlConnection.inputStream)
-            return readStream(`in`)
+            return convertStreamToString(`in`)
         } catch (exception: MalformedURLException) {
             Log.e(TAG, "MalformedURLException")
+            null
         } catch (exception: IOException) {
             Log.e(TAG, "IOException")
+            null
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
         } finally {
             httpUrlConnection?.disconnect()
         }
-        return null
     }
 
-    override fun onPostExecute(result: String?) {
-        if (null != mListener.get()) {
-            mListener.get()!!.onDownloadFinished(result)
-        }
-    }
-
-    private fun readStream(`in`: InputStream): String {
+    private fun convertStreamToString(`in`: InputStream): String {
         val data = StringBuilder()
         try {
             BufferedReader(InputStreamReader(`in`)).use { reader ->
@@ -64,5 +77,4 @@ internal class HttpGetTask(retainedFragment: RetainedFragment?) :
             ("http://" + HOST + "/earthquakesJSON?north=44.1&south=-9.9&east=-22.4&west=55.2&username="
                     + USER_NAME)
     }
-
 }
