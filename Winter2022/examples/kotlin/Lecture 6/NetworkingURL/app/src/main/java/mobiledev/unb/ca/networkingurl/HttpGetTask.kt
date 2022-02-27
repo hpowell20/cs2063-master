@@ -39,10 +39,10 @@ internal class HttpGetTask(retainedFragment: RetainedFragment?) {
             val `in`: InputStream = BufferedInputStream(httpUrlConnection.inputStream)
             return convertStreamToString(`in`)
         } catch (exception: MalformedURLException) {
-            Log.e(TAG, "MalformedURLException")
+            Log.e(TAG, "MalformedURLException in loadJsonFromUrl; error: " + exception.localizedMessage)
             null
         } catch (exception: IOException) {
-            Log.e(TAG, "IOException")
+            Log.e(TAG, "IOException in loadJsonFromUrl; error: " + exception.localizedMessage)
             null
         } catch (e: Exception) {
             e.printStackTrace()
@@ -62,7 +62,7 @@ internal class HttpGetTask(retainedFragment: RetainedFragment?) {
                 }
             }
         } catch (e: IOException) {
-            Log.e(TAG, "IOException")
+            Log.e(TAG, "IOException in convertStreamToString; error: " + e.localizedMessage)
         }
         return data.toString()
     }

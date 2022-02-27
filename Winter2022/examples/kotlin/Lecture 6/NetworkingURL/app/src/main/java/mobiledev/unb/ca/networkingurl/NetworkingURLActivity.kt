@@ -1,12 +1,12 @@
 package mobiledev.unb.ca.networkingurl
 
-import android.app.Activity
-import android.widget.TextView
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import mobiledev.unb.ca.networkingurl.RetainedFragment.OnFragmentInteractionListener
 
-class NetworkingURLActivity : Activity(), OnFragmentInteractionListener {
+class NetworkingURLActivity : AppCompatActivity(), OnFragmentInteractionListener {
     private var textView: TextView? = null
     private var retainedFragment: RetainedFragment? = null
 
@@ -19,14 +19,11 @@ class NetworkingURLActivity : Activity(), OnFragmentInteractionListener {
         loadButton.setOnClickListener { onClick() }
 
         if (null != savedInstanceState) {
-            retainedFragment = fragmentManager
-                .findFragmentByTag(RetainedFragment.TAG) as RetainedFragment
+            retainedFragment = supportFragmentManager.findFragmentByTag(RetainedFragment.TAG) as RetainedFragment
             textView!!.text = savedInstanceState.getCharSequence(TEST_VIEW_KEY)
         } else {
             retainedFragment = RetainedFragment()
-            fragmentManager.beginTransaction()
-                .add(retainedFragment, RetainedFragment.TAG)
-                .commit()
+            supportFragmentManager.beginTransaction().add(retainedFragment!!, RetainedFragment.TAG).commit()
         }
     }
 

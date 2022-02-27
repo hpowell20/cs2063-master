@@ -1,17 +1,11 @@
 package mobiledev.unb.ca.networkingurl
 
-import android.app.Fragment
-//import androidx.fragment.app.Fragment;
+import androidx.fragment.app.Fragment
 import android.content.Context
-import android.os.Bundle
 import java.lang.RuntimeException
 
 class RetainedFragment : Fragment() {
     private var mListener: OnFragmentInteractionListener? = null
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        retainInstance = true
-    }
 
     fun onButtonPressed() {
         HttpGetTask(this).execute()
