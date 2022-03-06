@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import mobiledev.unb.ca.labexam.model.GamesInfo;
 
 public class JsonUtils {
-    private static final String INPUT_JSON_FILE = "summer_games.json";
+    private static final String INPUT_JSON_FILE = "winter_games.json";
 
     private static final String KEY_HOST_CITIES = "host_cities";
     private static final String KEY_YEAR = "year";
