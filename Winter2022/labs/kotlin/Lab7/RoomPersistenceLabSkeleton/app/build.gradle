@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 31
@@ -30,18 +31,19 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     implementation 'androidx.appcompat:appcompat:1.4.1'
 
+    // Extensions = ViewModel + LiveData
+    implementation "androidx.room:room-runtime:$roomVersion"
+
     // Room Components
     implementation "androidx.room:room-runtime:$roomVersion"
-    annotationProcessor "androidx.room:room-compiler:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
 
     // Lifecycle components
     implementation "androidx.lifecycle:lifecycle-extensions:$archLifecycleExtensionsVersion"
-    annotationProcessor "androidx.lifecycle:lifecycle-common-java8:$archLifecycleVersion"
+    kapt "androidx.lifecycle:lifecycle-common-java8:$archLifecycleVersion"
 
     // UI
     implementation "com.google.android.material:material:$materialVersion"
     implementation "androidx.core:core-ktx:1.7.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
-

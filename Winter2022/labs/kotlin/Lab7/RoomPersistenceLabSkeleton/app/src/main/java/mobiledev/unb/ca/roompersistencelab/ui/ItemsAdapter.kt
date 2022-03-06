@@ -9,8 +9,8 @@ import mobiledev.unb.ca.roompersistencelab.R
 import android.widget.TextView
 import mobiledev.unb.ca.roompersistencelab.entity.Item
 
-class ItemsAdapter(context: Context?, items: List<Item?>?) : ArrayAdapter<Item?>(
-    context!!, 0, items!!) {
+class ItemsAdapter(context: Context, items: List<Item>) : ArrayAdapter<Item>(
+    context, 0, items) {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         // Get the data item for this position
         var currView = convertView

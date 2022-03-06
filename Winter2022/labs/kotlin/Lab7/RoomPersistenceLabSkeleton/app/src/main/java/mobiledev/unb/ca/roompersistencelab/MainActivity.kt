@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         mListView = findViewById(R.id.listview)
 
         val mAddButton = findViewById<Button>(R.id.add_button)
-        mAddButton.setOnClickListener { v: View? ->
+        mAddButton.setOnClickListener {
             // TODO
             //  Check if some text has been entered in both the item and number EditTexts.
             //  If so call the addItem method using the the text from these EditTexts.
