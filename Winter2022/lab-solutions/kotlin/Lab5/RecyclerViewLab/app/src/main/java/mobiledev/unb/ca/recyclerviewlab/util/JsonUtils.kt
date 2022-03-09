@@ -6,7 +6,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
 import java.nio.charset.StandardCharsets
-import java.util.*
+import java.util.ArrayList
 
 class JsonUtils(context: Context) {
     // Getter method for courses ArrayList
@@ -16,8 +16,8 @@ class JsonUtils(context: Context) {
         courses = ArrayList()
         try {
             // Create a JSON Object from file contents String
-            val jsonObject = JSONObject(Objects.requireNonNull(loadJSONFromAssets(context)))
-
+            val jsonObject = JSONObject(loadJSONFromAssets(context).toString())
+            
             // Create a JSON Array from the JSON Object
             // This array is the "courses" array mentioned in the lab write-up
             val jsonArray = jsonObject.getJSONArray(KEY_COURSES)
