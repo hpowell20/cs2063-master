@@ -33,8 +33,7 @@ public class MainActivity extends AppCompatActivity {
         LoadDataTask loadDataTask = new LoadDataTask(this)
                 .setRecyclerView(recyclerView)
                 .setSharedPreferencesHelper(prefsHelper);
-        loadDataTask.execute();
-    }
+        loadDataTask.execute(); }
 
     // Private Helper Methods
     private SharedPreferencesHelper initSharedPreferences() {

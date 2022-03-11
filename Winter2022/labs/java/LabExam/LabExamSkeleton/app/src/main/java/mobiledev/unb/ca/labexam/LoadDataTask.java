@@ -1,4 +1,4 @@
-package mobiledev.unb.ca.labexam.util;
+package mobiledev.unb.ca.labexam;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-import mobiledev.unb.ca.labexam.MyAdapter;
 import mobiledev.unb.ca.labexam.model.GamesInfo;
 
 public class LoadDataTask {
@@ -31,7 +30,7 @@ public class LoadDataTask {
         return this;
     }
 
-    public LoadDataTask setSharedPreferencesHelper(SharedPreferences sharedPreferences) {
+    public LoadDataTask setSharedPreferences(SharedPreferences sharedPreferences) {
         this.sharedPreferences = sharedPreferences;
         return this;
     }
@@ -44,7 +43,7 @@ public class LoadDataTask {
             //  Load the data from the JSON assets file and return the list of cities
 
             // TODO
-            //  Use result to set the adapter for the RecyclerView
+            //  Use result to set the adapter for the RecyclerView (see setupRecyclerView in this class)
         });
     }
 

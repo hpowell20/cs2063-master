@@ -38,7 +38,7 @@ public class JsonUtils {
             JSONObject jsonObject = new JSONObject(loadJSONFromAssets(context));
 
             // Create a JSON Array from the JSON Object
-            // This array is the "courses" array mentioned in the lab write-up
+            // This array is the "gamesInfo" array mentioned in the lab write-up
             JSONArray jsonArray = jsonObject.getJSONArray(KEY_HOST_CITIES);
 
             for (int i=0; i < jsonArray.length(); i++) {

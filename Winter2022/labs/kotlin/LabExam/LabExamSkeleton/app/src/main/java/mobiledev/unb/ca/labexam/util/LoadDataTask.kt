@@ -11,7 +11,7 @@ import mobiledev.unb.ca.labexam.MyAdapter
 import java.util.concurrent.Executors
 
 class LoadDataTask(private val activity: AppCompatActivity) {
-    private val appContext: Context
+    private val appContext: Context = activity.applicationContext
     private var recyclerView: RecyclerView? = null
     private var sharedPreferences: SharedPreferences? = null
 
@@ -20,21 +20,24 @@ class LoadDataTask(private val activity: AppCompatActivity) {
         return this
     }
 
-    fun setSharedPreferencesHelper(sharedPreferences: SharedPreferences?): LoadDataTask {
+    fun setSharedPreferences(sharedPreferences: SharedPreferences?): LoadDataTask {
         this.sharedPreferences = sharedPreferences
         return this
     }
 
     fun execute() {
         Executors.newSingleThreadExecutor()
-            .execute { val mainHandler = Handler(Looper.getMainLooper()) }
+            .execute {
+                val mainHandler = Handler(Looper.getMainLooper())
+                // TODO
+                //  Load the data from the JSON assets file and return the list of cities
+
+                // TODO
+                //  Use result to set the adapter for the RecyclerView}
+            }
     }
 
     private fun setupRecyclerView(gamesInfoList: List<GamesInfo>) {
         recyclerView!!.adapter = MyAdapter(activity, gamesInfoList, sharedPreferences!!)
-    }
-
-    init {
-        appContext = activity.applicationContext
     }
 }

@@ -17,13 +17,8 @@ class MyAdapter(
     private val sharedPreferences: SharedPreferences
 ) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
     class ViewHolder(v: LinearLayout) : RecyclerView.ViewHolder(v) {
-        var mTextView: TextView
-        var mCheckBox: CheckBox
-
-        init {
-            mTextView = v.findViewById(R.id.item_textview)
-            mCheckBox = v.findViewById(R.id.item_checkbox)
-        }
+        var mTextView: TextView = v.findViewById(R.id.item_textview)
+        var mCheckBox: CheckBox = v.findViewById(R.id.item_checkbox)
     }
 
     override fun onCreateViewHolder(
@@ -64,7 +59,7 @@ class MyAdapter(
         // changes from checked to not checked, or from not checked to checked.
         // isChecked will be true if the CheckBox is now checked, and false if
         // the CheckBox is now not checked.
-        holder.mCheckBox.setOnCheckedChangeListener { v: CompoundButton?, isChecked: Boolean ->
+        holder.mCheckBox.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
             // TODO: SharedPreferences
             //  Get a SharedPreferences.Editor for SharedPreferences
             //  Hint: https://developer.android.com/reference/android/content/SharedPreferences.html#edit()
