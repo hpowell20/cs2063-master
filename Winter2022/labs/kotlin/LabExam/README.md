@@ -4,9 +4,9 @@ This lab exam is open everything (Android documentation, labs and examples, Stac
 
 **You must not communicate with others (in person or online) during the exam.**
 
-# Summer Olympics Host Games app
+# Winter Olympics Host Games app
 
-This year the latest installment of the [Summer Olympic Games](https://en.wikipedia.org/wiki/Summer_Olympic_Games) are being held in Tokyo, Japan.  We will celebrate this occasion by building an app that displays information about all of the summer games that have taken place in the past.
+This year the latest installment of the [Winter Olympic Games](https://en.wikipedia.org/wiki/Winter_Olympic_Games) was held in Beijing, China.  We will celebrate this occasion by building an app that displays information about all of the summer games that have taken place in the past.
 
 This app will consist of two activities. The main activity will include a `RecyclerView` where the items are the Olympiad number and host city name along with checkboxes that the user can check when they have seen an item.
 
@@ -38,35 +38,35 @@ will be familiar to you from previous labs.
 * `DetailActivity` corresponds to the second screenshot above, displaying information about a specific host city
   * It doesn't do much yet as you will be completing it
 
-* `MainActivity.java` will display a list of names of host cities using a ` RecyclerView`
-  * When the name of a games is clicked the `DetailActivity` will be launched via an explicit `Intent`
+* `MainActivity.java` will display a list of names of host cities using a `RecyclerView`
   * `MainActivity` will use `SharedPreferences` to store information about which games the user has visited
-    * For example, in the screenshot for `MainActivity` the user has visited II - Paris, VI - Berlin, and IX - Amsterdam
-    * For the `SharedPreferences` the keys will be olympic games number associated with a host city and the values will be booleans
-      * True representing that a user has visited a city and false representing that a user has not
-      * If an id is not found in the `SharedPreferences` its value will be assumed to be false.
+  
+* `MyAdapter` corresponds to the RecyclerView class being used to populate the view with games information.
+  * When the name of a games is clicked the `DetailActivity` will be launched via an explicit `Intent`
+    * For example, in the screenshot for `MainActivity` the user has visited XV - Calgary, XVI - Albertville, and XVIII - Nagano
 
-## Todo
+* `LoadDataTask` is used to read in the details and updated the view using a separate thread
 
-Complete the TODOs in `MainActivity.java` and `DetailActivity.java`.
+## Lab Tasks
 
-Note that there are also TODOs related to the `SharedPreferences` which are labeled as `TODO: SharedPreferences`. I recommend you do the other TODOs first and then come back to these ones.
+Complete the TODOs in `MainActivity.java`, `DetailActivity.java`, `LoadDataTask.java`, and `MyAdapter.java`.
 
-**You may only modify `MainActivity.java` and `DetailActivity.java`. You must not make changes to any other
-files.**
+NOTES: 
+* There are also TODOs related to the `SharedPreferences` which are labeled as `TODO: SharedPreferences`
+* You will need to pass around an instance of a `SharedPreferences` object to be used throughout.  The keys will be olympic games number associated with a host city and the values will be booleans
+    * True representing that a user has visited a city and false representing that a user has not
+    * If an id is not found in the `SharedPreferences` its value will be assumed to be false
+
+**You may only modify `MainActivity.java` and `DetailActivity.java`, `LoadDataTask.java`, and `MyAdapter.java`. You must not make changes to any other files.**
 
 If you think you need to modify any other file, ask the
 instructor or TA.
 
 ## Hints
 
-Here are links to some documentation that might be helpful. All of
-these, except for the `AsyncTask` documentation, are also included
-in the skeleton at the point where they might be helpful.
+Here are links to some documentation that might be helpful. 
 
 ### MainActivity
-
-* <http://developer.android.com/reference/android/os/AsyncTask.html>
 
 * <https://developer.android.com/reference/android/widget/CheckBox.html>
 
