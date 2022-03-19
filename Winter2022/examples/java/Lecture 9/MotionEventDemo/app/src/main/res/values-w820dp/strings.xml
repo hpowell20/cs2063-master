@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="lbl_action_down">Action was DOWN</string>
+    <string name="lbl_action_move">Action was MOVE</string>
+    <string name="lbl_action_up">Action was UP</string>
+    <string name="lbl_action_cancel">Action was CANCEL</string>
+    <string name="lbl_out_of_bounds">Movement occurred outside bounds of current screen element</string>
+</resources>
