@@ -62,14 +62,12 @@ public class BubbleActivity extends Activity {
 
         // Set up user interface
         mFrame = findViewById(R.id.frame);
-        bubbleCountTextView = findViewById(R.id.bubbles_text);
-        //bubbleCountTextView = findViewById(R.id.count);
+        //bubbleCountTextView = findViewById(R.id.bubbles_text);
+        bubbleCountTextView = findViewById(R.id.count);
         updateNumBubblesTextView();
 
         // Initialize the number of bubbles
         //bubbleCountTextView.setText(0);
-
-        //bubbleCountTextView = findViewById(R.id.count);
 
         // Load basic bubble Bitmap
         mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.b64);
@@ -246,10 +244,10 @@ public class BubbleActivity extends Activity {
     }
 
     private void updateNumBubblesTextView() {
-        String text = getString(R.string.txt_number_of_bubbles, mFrame.getChildCount());
-        bubbleCountTextView.setText(text);
+        //String text = getString(R.string.txt_number_of_bubbles, mFrame.getChildCount());
+        //bubbleCountTextView.setText(text);
         //bubbleCountTextView.setText(mFrame.getChildCount());
-        //bubbleCountTextView.setText(Integer.toString(mFrame.getChildCount()));
+        bubbleCountTextView.setText(Integer.toString(mFrame.getChildCount()));
     }
 
     // BubbleView is a View that displays a bubble.
