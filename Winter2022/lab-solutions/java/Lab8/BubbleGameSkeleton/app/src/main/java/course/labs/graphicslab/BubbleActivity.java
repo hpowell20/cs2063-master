@@ -62,11 +62,11 @@ public class BubbleActivity extends Activity {
 
         // Set up user interface
         mFrame = findViewById(R.id.frame);
-        //bubbleCountTextView = findViewById(R.id.bubbles_text);
-        bubbleCountTextView = findViewById(R.id.count);
-        updateNumBubblesTextView();
+        bubbleCountTextView = findViewById(R.id.bubbles_text);
+        //bubbleCountTextView = findViewById(R.id.count);
 
         // Initialize the number of bubbles
+        updateNumBubblesTextView();
         //bubbleCountTextView.setText(0);
 
         // Load basic bubble Bitmap
@@ -162,8 +162,8 @@ public class BubbleActivity extends Activity {
                         //  HINT:
                         //   You can get all Views in mFrame one at a time
                         //   using the ViewGroup.getChildAt() method
-                        float x = event1.getRawX();
-                        float y = event1.getRawY();
+                        float x = event1.getX();
+                        float y = event1.getY();
                         int numBubbles = mFrame.getChildCount();
 
                         // Have a look into the methods available in the BubbleView class
@@ -244,10 +244,10 @@ public class BubbleActivity extends Activity {
     }
 
     private void updateNumBubblesTextView() {
-        //String text = getString(R.string.txt_number_of_bubbles, mFrame.getChildCount());
-        //bubbleCountTextView.setText(text);
+        String text = getString(R.string.txt_number_of_bubbles, mFrame.getChildCount());
+        bubbleCountTextView.setText(text);
         //bubbleCountTextView.setText(mFrame.getChildCount());
-        bubbleCountTextView.setText(Integer.toString(mFrame.getChildCount()));
+        //bubbleCountTextView.setText(Integer.toString(mFrame.getChildCount()));
     }
 
     // BubbleView is a View that displays a bubble.
@@ -366,7 +366,6 @@ public class BubbleActivity extends Activity {
             // TODO
             //  Return true if the BubbleView intersects position (x,y)
             return Math.sqrt(Math.pow(centerX - x, 2) + Math.pow(centerY - y, 2)) <= mRadius;
-
             // Remove this when you're done the above todo
             //return false;
         }
