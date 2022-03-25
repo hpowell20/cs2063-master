@@ -2,5 +2,4 @@
 <resources>
     <string name="app_name">Graphics Lab</string>
     <string name="txt_number_of_bubbles">Number of bubbles: %1$d</string>
-<!--    <string name="txt_number_of_bubbles">Number of bubbles: </string>-->
 </resources>

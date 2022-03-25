@@ -39,23 +39,24 @@ class BubbleActivity : Activity() {
 
     // Sound variables
     // SoundPool
-    private val soundPool: SoundPool? = null
+    private var soundPool: SoundPool? = null
 
     // ID for the bubble popping sound
-    private val soundID = 0
+    private var soundID = 0
 
     // Audio volume
     private var streamVolume = 0f
+
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main)
 
         // Set up user interface
         mFrame = findViewById(R.id.frame)
-        bubbleCountTextView = findViewById(R.id.count)
+        bubbleCountTextView = findViewById(R.id.bubbles_text)
 
         // Initialize the number of bubbles
-        bubbleCountTextView?.setText(0)
+        updateNumBubblesTextView()
 
         // Load basic bubble Bitmap
         bitmap = BitmapFactory.decodeResource(resources, R.drawable.b64)
@@ -67,7 +68,7 @@ class BubbleActivity : Activity() {
 
         // TODO
         //  Make a new SoundPool, allowing up to 10 streams
-        //  Store this as soundPool
+        //  Store this as mSoundPool
 
         // TODO
         //  Set a SoundPool OnLoadCompletedListener that calls setupGestureDetector()
@@ -84,6 +85,12 @@ class BubbleActivity : Activity() {
             displayWidth = mFrame!!.width
             displayHeight = mFrame!!.height
         }
+    }
+
+    // Method used to update the text view with the number of in view bubbles
+    private fun updateNumBubblesTextView() {
+        val text = getString(R.string.txt_number_of_bubbles, mFrame!!.childCount)
+        bubbleCountTextView!!.text = text
     }
 
     // Setup the stream volume
@@ -125,12 +132,13 @@ class BubbleActivity : Activity() {
                     // TODO
                     //  Implement onFling actions (See comment above for expected behaviour)
                     //  You can get all Views in mmFrame one at a time using the ViewGroup.getChildAt() method
+
                     return true
                 }
 
                 // If a single tap intersects a BubbleView, then pop the BubbleView
                 // Otherwise, create a new BubbleView at the tap's location and add
-                // it to mmFrame. Hint: Don't forget to start the movement of the
+                // it to mFrame. Hint: Don't forget to start the movement of the
                 // BubbleView.
                 // Also update the number of bubbles displayed in the appropriate TextView
                 override fun onSingleTapConfirmed(event: MotionEvent): Boolean {
@@ -138,6 +146,7 @@ class BubbleActivity : Activity() {
                     //  (See comment above for expected behaviour.)
                     //  You can get all Views in mmFrame using the
                     //  ViewGroup.getChildCount() method
+
                     return true
                 }
             })
@@ -147,8 +156,8 @@ class BubbleActivity : Activity() {
         // TODO
         //  Delegate the touch to the gestureDetector
 
-        // Remove this when you're done the above todo
-        return true || false
+        // Remove this when you're done the above TODO
+        return true
     }
 
     override fun onPause() {
@@ -165,21 +174,21 @@ class BubbleActivity : Activity() {
         View(context) {
         private val mPainter = Paint()
         private var mMoverFuture: ScheduledFuture<*>? = null
-        private val scaledBitmapSize = 0
-        private val scaledBitmap: Bitmap? = null
+        private var scaledBitmapSize = 0
+        private var scaledBitmap: Bitmap? = null
 
         // location and direction of the bubble
-        private val xPos: Float
-        private val yPos: Float
+        private var xPos: Float
+        private var yPos: Float
         private val radius: Float
 
         // Speed of bubble
-        private var dx = 0f
-        private var dy = 0f
+        private var mDx = 0f
+        private var mDy = 0f
 
         // Rotation and speed of rotation of the bubble
-        private val mRotate: Long = 0
-        private val mDRotate: Long = 0
+        private var mRotate: Long = 0
+        private var mDRotate: Long = 0
         private fun setRotation(r: Random) {
             // TODO
             //  Set rotation in range [1..5]
@@ -189,6 +198,18 @@ class BubbleActivity : Activity() {
             // TODO
             //  Set dx and dy to indicate movement direction and speed
             //  Limit speed in the x and y direction to [-3..3] pixels per movement
+            var x = r.nextInt(3) + 1
+            if (r.nextBoolean()) {
+                x = -x
+            }
+
+            var y = r.nextInt(3) + 1
+            if (r.nextBoolean()) {
+                y = -y
+            }
+
+            mDx = x.toFloat()
+            mDy = y.toFloat()
         }
 
         private fun createScaledBitmap(r: Random) {
@@ -200,7 +221,7 @@ class BubbleActivity : Activity() {
         }
 
         // Start moving the BubbleView & updating the display
-        private fun startMovement() {
+        fun startMovement() {
             // Creates a WorkerThread
             val executor = Executors.newScheduledThreadPool(1)
 
@@ -220,21 +241,21 @@ class BubbleActivity : Activity() {
 
         // Returns true if the BubbleView intersects position (x,y)
         @Synchronized
-        private fun intersects(x: Float, y: Float): Boolean {
+        fun intersects(x: Float, y: Float): Boolean {
             val centerX = xPos + radius
             val centerY = yPos + radius
 
             // TODO
             //  Return true if the BubbleView intersects position (x,y)
 
-            // Remove this when you're done the above todo
+            // Remove this when you're done the above TODO
             return false
         }
 
         // Cancel the Bubble's movement
         // Remove Bubble from mmFrame
         // Play pop sound if the BubbleView was popped
-        private fun stopMovement(wasPopped: Boolean) {
+        fun stopMovement(wasPopped: Boolean) {
             if (null != mMoverFuture) {
                 if (!mMoverFuture!!.isDone) {
                     mMoverFuture!!.cancel(true)
@@ -243,7 +264,7 @@ class BubbleActivity : Activity() {
                 // This work will be performed on the UI Thread
                 mFrame!!.post {
                     // TODO
-                    //  Remove the BubbleView from mmFrame
+                    //  Remove the BubbleView from mFrame
 
                     // TODO
                     //  Update the TextView displaying the number of bubbles
@@ -257,9 +278,9 @@ class BubbleActivity : Activity() {
 
         // Change the Bubble's speed and direction
         @Synchronized
-        private fun deflect(velocityX: Float, velocityY: Float) {
-            dx = velocityX / Companion.REFRESH_RATE
-            dy = velocityY / Companion.REFRESH_RATE
+        fun deflect(velocityX: Float, velocityY: Float) {
+            mDx = velocityX / Companion.REFRESH_RATE
+            mDy = velocityY / Companion.REFRESH_RATE
         }
 
         // Draw the Bubble at its current location
@@ -288,6 +309,7 @@ class BubbleActivity : Activity() {
         private fun moveWhileOnScreen(): Boolean {
             // TODO
             //  Move the BubbleView
+
             return isInView()
         }
 
@@ -297,7 +319,7 @@ class BubbleActivity : Activity() {
             //  the move operation
 
             // Remove this when you're done the above TODO
-            return false;
+            return false
         }
 
         init {
@@ -325,7 +347,9 @@ class BubbleActivity : Activity() {
     }
 
     companion object {
+        private const val TAG = "BubbleActivity"
         private const val STREAM_TYPE = AudioManager.STREAM_MUSIC
+        private const val SOUND_POOL_MAX_STREAMS = 10
         private const val BITMAP_SIZE = 64
         private const val REFRESH_RATE = 40
     }

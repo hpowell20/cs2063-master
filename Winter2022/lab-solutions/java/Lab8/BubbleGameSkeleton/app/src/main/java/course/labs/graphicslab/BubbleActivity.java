@@ -63,11 +63,9 @@ public class BubbleActivity extends Activity {
         // Set up user interface
         mFrame = findViewById(R.id.frame);
         bubbleCountTextView = findViewById(R.id.bubbles_text);
-        //bubbleCountTextView = findViewById(R.id.count);
 
         // Initialize the number of bubbles
         updateNumBubblesTextView();
-        //bubbleCountTextView.setText(0);
 
         // Load basic bubble Bitmap
         mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.b64);
@@ -224,9 +222,6 @@ public class BubbleActivity extends Activity {
         // TODO
         //  Delegate the touch to the gestureDetector
         return gestureDetector.onTouchEvent(event);
-
-        // Remove this when you're done the above todo
-        // return true || false;
     }
 
     @Override
@@ -246,8 +241,6 @@ public class BubbleActivity extends Activity {
     private void updateNumBubblesTextView() {
         String text = getString(R.string.txt_number_of_bubbles, mFrame.getChildCount());
         bubbleCountTextView.setText(text);
-        //bubbleCountTextView.setText(mFrame.getChildCount());
-        //bubbleCountTextView.setText(Integer.toString(mFrame.getChildCount()));
     }
 
     // BubbleView is a View that displays a bubble.
@@ -284,7 +277,6 @@ public class BubbleActivity extends Activity {
 
             // Radius of the Bitmap
             mRadius = scaledBitmapSize / 2.0f;
-            //mRadius = Math.round(scaledBitmapSize / 2.0) * 2;
 
             // Adjust position to center the bubble under user's finger
             mXPos = x - mRadius;
@@ -366,8 +358,6 @@ public class BubbleActivity extends Activity {
             // TODO
             //  Return true if the BubbleView intersects position (x,y)
             return Math.sqrt(Math.pow(centerX - x, 2) + Math.pow(centerY - y, 2)) <= mRadius;
-            // Remove this when you're done the above todo
-            //return false;
         }
 
         // Cancel the Bubble's movement
@@ -394,7 +384,6 @@ public class BubbleActivity extends Activity {
                     //  HINT: Use the mStreamVolume for left and right volume parameters
                     if (wasPopped) {
                         soundPool.play(soundID, streamVolume, streamVolume, 1, 0, 1.0f);
-                        //soundPool.play(soundID, 1, 1, 1, 0, 1.0f);
                     }
                 });
             }
@@ -452,9 +441,6 @@ public class BubbleActivity extends Activity {
                     mXPos + mRadius * 2 >= 0 &&
                     mYPos <= mDisplayHeight &&
                     mYPos + mRadius * 2 >= 0;
-
-            // Remove this when you're done the above TODO
-            // return false;
         }
     }
 }

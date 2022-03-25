@@ -22,6 +22,8 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 public class BubbleActivity extends Activity {
+    private static final String TAG = "BubbleActivity";
+    private static final int SOUND_POOL_MAX_STREAMS = 10;
     private static final int STREAM_TYPE = AudioManager.STREAM_MUSIC;
 
     // The Main view
@@ -56,10 +58,10 @@ public class BubbleActivity extends Activity {
 
         // Set up user interface
         mFrame = findViewById(R.id.frame);
-        bubbleCountTextView = findViewById(R.id.count);
+        bubbleCountTextView = findViewById(R.id.bubbles_text);
 
         // Initialize the number of bubbles
-        bubbleCountTextView.setText(0);
+        updateNumBubblesTextView();
 
         // Load basic bubble Bitmap
         bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.b64);
@@ -138,7 +140,7 @@ public class BubbleActivity extends Activity {
 
                     // If a single tap intersects a BubbleView, then pop the BubbleView
                     // Otherwise, create a new BubbleView at the tap's location and add
-                    // it to mmFrame. Hint: Don't forget to start the movement of the
+                    // it to mFrame. Hint: Don't forget to start the movement of the
                     // BubbleView.
                     // Also update the number of bubbles displayed in the appropriate TextView
 
@@ -146,7 +148,7 @@ public class BubbleActivity extends Activity {
                     public boolean onSingleTapConfirmed(MotionEvent event) {
                         // TODO - Implement onSingleTapConfirmed actions.
                         //  (See comment above for expected behaviour.)
-                        //  You can get all Views in mmFrame using the
+                        //  You can get all Views in mFrame using the
                         //  ViewGroup.getChildCount() method
 
                         return true;
@@ -159,8 +161,8 @@ public class BubbleActivity extends Activity {
         // TODO
         //  Delegate the touch to the gestureDetector
 
-        // Remove this when you're done the above todo
-        return true || false;
+        // Remove this when you're done the above TODO
+        return true;
     }
 
     @Override
@@ -169,6 +171,12 @@ public class BubbleActivity extends Activity {
 
         // TODO
         //  Release all SoundPool resources
+    }
+
+    // Method used to update the text view with the number of in view bubbles
+    private void updateNumBubblesTextView() {
+        String text = getString(R.string.txt_number_of_bubbles, mFrame.getChildCount());
+        bubbleCountTextView.setText(text);
     }
 
     // BubbleView is a View that displays a bubble.
@@ -272,7 +280,7 @@ public class BubbleActivity extends Activity {
         }
 
         // Cancel the Bubble's movement
-        // Remove Bubble from mmFrame
+        // Remove Bubble from mFrame
         // Play pop sound if the BubbleView was popped
         private void stopMovement(final boolean wasPopped) {
             if (null != mMoverFuture) {
@@ -285,11 +293,11 @@ public class BubbleActivity extends Activity {
                     @Override
                     public void run() {
                         // TODO
-                        //  Remove the BubbleView from mmFrame
+                        //  Remove the BubbleView from mFrame
 
                         // TODO
                         //  Update the TextView displaying the number of bubbles
-
+                        
                         // TODO
                         //  If the bubble was popped by user play the popping sound
                         //  HINT: Use the streamVolume for left and right volume parameters
