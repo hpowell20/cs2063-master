@@ -187,16 +187,19 @@ public class BubbleActivity extends Activity implements SensorEventListener {
 		private final Paint mPainter = new Paint();
 		private ScheduledFuture<?> mMoverFuture;
 		private static final int SCALED_BITMAP_SIZE = BITMAP_SIZE* 2;
-		private Bitmap mScaledBitmap;
+		private final Bitmap mScaledBitmap;
 
 		// location and direction of the bubble
-		private float mXPos, mYPos, mRadius;
+		private float mXPos;
+        private float mYPos;
+        private final float mRadius;
 
         // Speed of bubble
         public float mDx, mDy;
 
         // Rotation and speed of rotation of the bubble
-        private long mRotate, mDRotate;
+        private long mRotate;
+        private final long mDRotate;
 
 		BubbleView(Context context, float x, float y) {
 			super(context);
