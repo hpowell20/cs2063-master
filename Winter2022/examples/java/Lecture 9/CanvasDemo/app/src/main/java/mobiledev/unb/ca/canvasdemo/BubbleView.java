@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 
@@ -34,7 +35,7 @@ public class BubbleView extends View {
     public BubbleView(Context context, Bitmap bitmap, int displayWidth, int displayHeight) {
         super(context);
 
-        h = new Handler();
+        h = new Handler(Looper.getMainLooper());
         this.mBitmap = Bitmap.createScaledBitmap(bitmap,
                 BITMAP_SIZE, BITMAP_SIZE, false);
 
