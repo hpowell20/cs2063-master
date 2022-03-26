@@ -5,18 +5,23 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Insets;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowInsets;
+import android.view.WindowMetrics;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -93,14 +98,39 @@ public class BubbleActivity extends Activity implements SensorEventListener {
         }
 
         // Calculate display size
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
+        Pair<Integer, Integer> dimensions = getScreenDimensions(this);
 
         // Subtract diameter of the ball from width and height
-        mDisplayWidth = size.x - BubbleView.SCALED_BITMAP_SIZE;
-        mDisplayHeight = size.y - BubbleView.SCALED_BITMAP_SIZE;
+        mDisplayWidth = dimensions.getFirst() - BubbleView.SCALED_BITMAP_SIZE;
+        mDisplayHeight = dimensions.getSecond() - BubbleView.SCALED_BITMAP_SIZE;
 	}
+
+    private Pair<Integer, Integer> getScreenDimensions(Activity activity) {
+        int width;
+        int height;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            final WindowMetrics metrics = getWindowManager().getCurrentWindowMetrics();
+            final WindowInsets windowInsets = metrics.getWindowInsets();
+            Insets insets = windowInsets.getInsetsIgnoringVisibility(WindowInsets.Type.navigationBars()
+                    | WindowInsets.Type.displayCutout());
+
+            int insetsWidth = insets.right + insets.left;
+            int insetsHeight = insets.top + insets.bottom;
+
+            final Rect bounds = metrics.getBounds();
+            width = bounds.width() - insetsWidth;
+            height = bounds.height() - insetsHeight;
+        } else {
+            Display display = activity.getWindowManager().getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            width = size.x;
+            height = size.y;
+        }
+
+        return new Pair<>(width, height);
+    }
 
 	@Override
 	protected void onResume() {
@@ -312,8 +342,8 @@ public class BubbleActivity extends Activity implements SensorEventListener {
 
             // Example 2: Uncomment this to make the ball accelerate based on sensor
             // input. You can also scale the contribution of x and y.
-            mDx = mDx + y;
-            mDy = mDy + x;
+            mDx += y;
+            mDy += x;
         }
 
 		// Start moving the BubbleView & updating the display
@@ -356,7 +386,7 @@ public class BubbleActivity extends Activity implements SensorEventListener {
 		@Override
 		protected synchronized void onDraw(Canvas canvas) {
             canvas.save();
-            mRotate = mRotate + mDRotate;
+            mRotate += mDRotate;
             canvas.rotate(mRotate, mXPos + mRadius, mYPos + mRadius);
             canvas.drawBitmap(mScaledBitmap, mXPos, mYPos, mPainter);
             canvas.restore();
@@ -366,7 +396,7 @@ public class BubbleActivity extends Activity implements SensorEventListener {
         private synchronized void doMove() {
             // Don't let the bubble go beyond the edge of the screen
             // Set the speed to 0 if the bubble hits an edge.
-            mXPos = mXPos + mDx;
+            mXPos += mDx;
             if (mXPos >= mDisplayWidth) {
                 mXPos = mDisplayWidth;
                 mDx = 0;
@@ -375,7 +405,7 @@ public class BubbleActivity extends Activity implements SensorEventListener {
                 mDx = 0;
             }
 
-            mYPos = mYPos + mDy;
+            mYPos += mDy;
             if (mYPos >= mDisplayHeight) {
                 mYPos = mDisplayHeight;
                 mDy = 0;
