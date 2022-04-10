@@ -220,7 +220,6 @@ class BubbleActivity : Activity() {
         // TODO
         //  Release all SoundPool resources
         if (null != soundPool) {
-            assert(false)
             soundPool!!.unload(soundID)
             soundPool!!.release()
             soundPool = null
