@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView sensorListText = findViewById(R.id.sensors_list);
 
-        // Retrieve a list of the supported sensors on the device
+        // Retrieve a list of the supported sensors on the devi ce
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         List<Sensor> sensorList = sensorManager.getSensorList(Sensor.TYPE_ALL);
         for (Sensor currSensor : sensorList) {
