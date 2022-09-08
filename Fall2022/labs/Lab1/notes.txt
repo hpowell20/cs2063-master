@@ -1,0 +1,5 @@
+  README updates:
+  - How to find and install devices using the action button bar
+  - Clarify "Empty Activity"; perhaps include screenshot
+  - Deliverable 4 a little unclear?
+  - Creating language files through Android view
