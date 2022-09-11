@@ -8,11 +8,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class ActivityTwo : AppCompatActivity() {
-    private var onCreateCount = 0
-    private var onStartCount = 0
-    private var onResumeCount = 0
-    private var onRestartCount = 0
-
     private var createTextView: TextView? = null
     private var startTextView: TextView? = null
     private var resumeTextView: TextView? = null
@@ -28,7 +23,7 @@ class ActivityTwo : AppCompatActivity() {
         resumeTextView = findViewById(R.id.onResume)
         restartTextView = findViewById(R.id.onRestart)
 
-                if (savedInstanceState != null) {
+        if (savedInstanceState != null) {
             savedInstanceState.getInt(Constants.CREATE_VALUE).also { onCreateCount = it }
             savedInstanceState.getInt(Constants.START_VALUE).also { onStartCount = it }
             savedInstanceState.getInt(Constants.RESUME_VALUE).also { onResumeCount = it }
@@ -107,5 +102,11 @@ class ActivityTwo : AppCompatActivity() {
     companion object {
         // String for LogCat documentation
         private const val TAG = "Lab 2 - Activity Two"
+
+        // Values for tracking the counts
+        private var onCreateCount = 0
+        private var onStartCount = 0
+        private var onResumeCount = 0
+        private var onRestartCount = 0
     }
 }
