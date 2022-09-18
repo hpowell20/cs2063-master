@@ -80,7 +80,7 @@ Once the project has been imported open the ```MainActivity``` layout file.  You
 **Task 2**
 
 What's the second ```Activity``` class in the project?
-* Take note of the Java resource file name.
+* Take note of the Kotlin resource file name.
 
 **Task 3**
 
@@ -123,7 +123,7 @@ We can provide information to the ```Activity``` we intend to start. This inform
 http://developer.android.com/guide/components/intents-common.html#Email
 
 For this task we will be implementing your email ```Button```'s ```setOnClickListener()```.
-1. Build an email-only ```Intent``` that __does not__ include attachments
+1. Build an email-only ```Intent``` that __does__ include attachments and is to be used by email applications only 
    * For testing give your ```Intent``` three extras
         * One for the recipient email addresses (just have one recipient, and make it you)
         * One for the subject line “CS2063 Lab 3”
@@ -164,13 +164,16 @@ At this point we have saved the photo and we know where it has been saved (HINT:
 
 But where should we call ```galleryAddPic()```?
 * We launched our intent to take a photo using ```startActivityForResult()```
+  * NOTE: You will notice that startActivityForResult has been deprecated.  This has been replaced by the [Activity Result APIs](https://developer.android.com/training/basics/intents/result)
+  * For the purpose of this lab we will leave the code as is
 * When the activity that is started completes  Android will call our ```Acivity```'s ```onActivityResult``` method
   * Additional details can be found at http://developer.android.com/training/basics/intents/result.html#ReceiveResult
 
 2. Implement ```onActivityResult``` in your ```Activity``` and have it call ```galleryAddPic()``` if it receives the correct request code and result code
 
 **NOTE**
-* As of Android 10 the way storage is handled in apps is to use Scoped Storage; as such there is a known issue with the code from Task Gallery in which the image is not saved to the gallery when using devices running Android version 10 and higher
+* As of Android 10 the way storage is handled in apps is to use Scoped Storage.  
+  * This is a known issue with this lab and can be fixed as part of an optional task later on
 * Provided the camera is invoked from the application and a picture can be taken this is sufficient for the lab as we are concerned with intents functionality
 
 **Task 9**
@@ -193,6 +196,11 @@ Restart your application and perform the following steps:
 2. Click the Back button and then Start again
 3. Do this a few times
 4. Now begin using the device back button to traverse the task backstack.
+
+**OPTIONAL - Task 12**
+Should you feel like getting the photos to save across all different API levels see this [post](https://stackoverflow.com/questions/63776744/save-bitmap-image-to-specific-location-of-gallery-android-10)
+1. Modify the save code to use the different save methods
+  * This code will be provided in the starting code for the next lab should you not run out of time week.
 
 **Writeup Task**
 
