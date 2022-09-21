@@ -2,6 +2,10 @@
 
 Today’s lab will go deeper into Android Intents by demonstrating how to use explicit and implicit Intents between a couple of Activity classes.
 
+## Pair Programming
+
+We will again be doing pair programming for this lab.  Details on pair programming can be found at [Pair Programming](../docs/PAIR_PROGRAMMING.md).  You can again work with anybody of your choosing.
+
 #### Background
 
 For this lab you need to be familiar with how to build an Intent and how to construct and call new Activities:
@@ -146,7 +150,9 @@ With the required hardware feature to be used declared for the app you can wire 
 
 1. Using the example code from the [Take Photos](https://developer.android.com/training/camera/photobasics.html#TaskPath) documentation as a base implement the Intent used to take a picture and save the full-size photo.  Please note the following.
   * Use the name ```"mobiledev.unb.ca.lab3intents.provider"```  for the authority name in place of ```"com.example.android.fileprovider"``` in both the code and the AndroidManifest.xml file.
-  * Create a new resource file at _res/xml/file_paths.xml_ and add the following content:
+  * You will notice that ```startActivityForResult()``` has been deprecated.  We will look to fix this in a later step.
+
+2. Create a new resource file at _res/xml/file_paths.xml_ and add the following content:
   ```XML
   <?xml version="1.0" encoding="utf-8"?>
   <paths>
@@ -160,28 +166,49 @@ With the required hardware feature to be used declared for the app you can wire 
 
 At this point we have saved the photo and we know where it has been saved (HINT: String defined in Task 7 as part of saving the file).  The next step is to alert Android to add this file to the photos database so that other applications (i.e. - the Gallery app) know about it.
 
-1. Add the code for ```galleryAddPic()``` from the [Task Gallery](http://developer.android.com/training/camera/photobasics.html#TaskGallery) link to your code
+1. Add the code for ```galleryAddPic()``` from the [Task Gallery](http://developer.android.com/training/camera/photobasics.html#TaskGallery) link to your code.
 
-But where should we call ```galleryAddPic()```?
-* We launched our intent to take a photo using ```startActivityForResult()```
-  * NOTE: You will notice that startActivityForResult has been deprecated.  This has been replaced by the [Activity Result APIs](https://developer.android.com/training/basics/intents/result)
-  * For the purpose of this lab we will leave the code as is
-* When the activity that is started completes  Android will call our ```Acivity```'s ```onActivityResult``` method
+But where should we call ```galleryAddPic()```?  Let's look at that next.
+
+**Task 9** 
+Following up on the changes made for Task 7 we will now look to replace the deprecated ```startActivityForResult()``` functionality.  This has been replaced by the [Activity Result APIs](https://developer.android.com/training/basics/intents/result).  
+
+To help with this you will notice an attribute called cameraActivityResultLauncher near the top of the file.  We will be working with this object to register a listener for photo capture events.
+
+1. Replace the deprecated line 
+```kotlin
+startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+```
+with
+```kotlin
+cameraActivityResultLauncher!!.launch(takePictureIntent)
+```
+
+2. 
+We are now going to set the ```cameraActivityResultLauncher``` object to recieve the activity result and write the picture to the gallery.  We will do this by using the ```registerForActivityResult()``` function.  In the class code remove the TODO statement within the ```setCameraActivityResultLauncher``` and replace with the following.
+```kotlin
+cameraActivityResultLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result: ActivityResult ->
+            if (result.resultCode == RESULT_OK) {
+                galleryAddPic()
+            }
+        }
+```
+  * This will take the result of the activity intent action (in this case the action of taking a photo) and save the results to the gallery. ```startActivityForResult()```
   * Additional details can be found at http://developer.android.com/training/basics/intents/result.html#ReceiveResult
-
-2. Implement ```onActivityResult``` in your ```Activity``` and have it call ```galleryAddPic()``` if it receives the correct request code and result code
 
 **NOTE**
 * As of Android 10 the way storage is handled in apps is to use Scoped Storage.  
-  * This is a known issue with this lab and can be fixed as part of an optional task later on
-* Provided the camera is invoked from the application and a picture can be taken this is sufficient for the lab as we are concerned with intents functionality
+  * This is a known issue with this lab and can be fixed as part of an optional task later on.
+* Provided the camera is invoked from the application and a picture can be taken this is sufficient for the lab as we are concerned with intents functionality.
 
-**Task 9**
+**Task 10**
 
 With the email and camera intents in place we now have to make our back ```Button``` work by implementing an ```Intent``` to explicitly call our ```MainActivity```.
 * This is done similarly to how we built and started an ```Intent``` to get from our ```MainActivity``` to ```ExternalActivityCalls```
 
-**Task 10**
+**Task 11**
 
 With the Intents implemented run the application and perform the following steps:
 1. Take a photo
@@ -189,7 +216,7 @@ With the Intents implemented run the application and perform the following steps
 3. From within the email app attach the photo you just took as an attachment
 4. Open the email and take a screenshot of it
 
-**Task 11**
+**Task 12**
 
 Restart your application and perform the following steps:
 1. From the ```MainActivity``` click the Start ```Button```
@@ -197,7 +224,7 @@ Restart your application and perform the following steps:
 3. Do this a few times
 4. Now begin using the device back button to traverse the task backstack.
 
-**OPTIONAL - Task 12**
+**OPTIONAL - Task 13**
 Should you feel like getting the photos to save across all different API levels see this [post](https://stackoverflow.com/questions/63776744/save-bitmap-image-to-specific-location-of-gallery-android-10)
 1. Modify the save code to use the different save methods
   * This code will be provided in the starting code for the next lab should you not run out of time week.
@@ -210,5 +237,9 @@ Should you feel like getting the photos to save across all different API levels 
 
 **Deliverables**
 
-* Submit `MainActivity.kt`, `ExternalActivityCalls.kt`, and your answers to the writeup task to the Lab3 drop box folder on D2L
-* Keep a copy of your project work and answers for future reference
+* IN LAB: 
+  * Show the working app running on an emulator to the instructor or TA
+AT HOME: 
+  * Submit `MainActivity.kt`, `ExternalActivityCalls.kt`, and your answers to the writeup task to the Lab3 drop box folder on D2L
+ 
+* In either case keep a copy of your project work and answers for future reference
