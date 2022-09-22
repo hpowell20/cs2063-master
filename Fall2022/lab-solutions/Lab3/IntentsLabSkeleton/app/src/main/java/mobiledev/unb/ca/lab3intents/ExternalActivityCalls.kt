@@ -134,7 +134,7 @@ class ExternalActivityCalls : AppCompatActivity() {
     private fun createImageFile(): File {
         // Create an image file name
         val timeStamp = SimpleDateFormat(TIME_STAMP_FORMAT, Locale.getDefault()).format(Date())
-        val imageFileName = "IMG_" + timeStamp + "_"
+        imageFileName = "IMG_" + timeStamp + "_"
         val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile(
             imageFileName,  // prefix
