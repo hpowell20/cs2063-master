@@ -2,6 +2,10 @@
 
 Today’s lab will build off the camera integration code used in the last lab to go deeper into working with Broadcast Receivers, alarms, and notifications.  
 
+## Pair Programming
+
+We will again be doing pair programming for this lab.  Details on pair programming can be found at [Pair Programming](../docs/PAIR_PROGRAMMING.md).  You can again work with anybody of your choosing.
+
 #### Background
 
 * Make sure you are familiar with the following sections of the Android developer documentation:
@@ -39,7 +43,7 @@ First we'll add the functionality to have an alarm go off at regular intervals t
 
 Create a ```BroadcastReceiver``` to receive alarms.
 
-1. Add a new Java file called ```AlarmReceiver.java``` which extends ```BroadcastReceiver```
+1. Add a new Kotlin file called ```AlarmReceiver.kt``` which extends ```BroadcastReceiver```
 2. Override ```AlarmReceiver```'s ```onReceive``` method
 	* This method will be called when the ```BroadcastReceiver``` receives a broadcast
 	* Add a ```Log``` message in here for now
@@ -147,6 +151,9 @@ Create a document with the following items:
 
 **Lab Completion**
 
-* Take screenshots of the application in a either a low battery Show the working app running on an emulator to the instructor or TA
-* Submit `MainActivity.java`, `AlarmReceiver.java`, and your answers to the writeup task to the Lab3 drop box folder on D2L
+* In Lab
+	* Show the working app running on an emulator to the instructor or TA
+* At Home
+	* Take screenshots of the application in a either a low battery or power disconnected mode
+	* Submit `MainActivity.kt`, `AlarmReceiver.kt`, and your answers to the writeup task to the Lab3 drop box folder on D2L
 * Keep a copy of your project work and answers for future reference
