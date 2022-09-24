@@ -86,6 +86,8 @@ With the alarm in place we need to update the project to display a Toast notific
 			* Set [```setAutoCancel```](http://developer.android.com/reference/android/app/Notification.Builder.html#setAutoCancel%28boolean%29) to ```true``` so that when the user clicks on the notification it is dismissed
 			* Set the importance as IMPORTANCE_HIGH
 			* The notification channel creation code must be called regardless of the Android level being used; see Notes below
+			* String values for the notifications can be found in the __strings.xml__ resource file
+	* **TIP:** The methods to create the intents require a context.  For this have a look at the signature for onRecieve.
 
 **NOTES:**
 * Android 8.0 (API level 26) introduced a few updates to the way Notifications are handled were added:
@@ -107,12 +109,11 @@ In lecture we've seen how the Android will start killing processes when the batt
 Android sends an ```ACTION_BATTERY_LOW``` intent when the system changes to a low battery state and an ```ACTION_BATTERY_OKAY``` intent when the battery level is high enough again after previously being low. We will receive these intents to change the behavior of our app.
 
 1. In ```MainActivity``` create a new ```BroadcastReceiver``` called ```batteryInfoReceiver``` and ```@Override``` its ```onReceive``` method similar to the following
-```
-private BroadcastReceiver batteryInfoReceiver = new BroadcastReceiver() {
-    @Override
-    public void onReceive(Context context, Intent intent) {
-    }
-};
+```kotlin
+private val batteryInfoReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+		}
+}
 ```
 
 **Task 6**
@@ -155,5 +156,5 @@ Create a document with the following items:
 	* Show the working app running on an emulator to the instructor or TA
 * At Home
 	* Take screenshots of the application in a either a low battery or power disconnected mode
-	* Submit `MainActivity.kt`, `AlarmReceiver.kt`, and your answers to the writeup task to the Lab3 drop box folder on D2L
+	* Submit `MainActivity.kt`, `AlarmReceiver.kt`, and your document with screenshots to the Lab4 drop box folder on D2L
 * Keep a copy of your project work and answers for future reference
