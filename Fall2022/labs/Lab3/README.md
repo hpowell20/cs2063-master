@@ -240,6 +240,6 @@ Should you feel like getting the photos to save across all different API levels 
 * IN LAB: 
   * Show the working app running on an emulator to the instructor or TA
 * AT HOME: 
-  * Submit `MainActivity.kt`, `ExternalActivityCalls.kt`, and your answers to the writeup task to the Lab3 drop box folder on D2L
+  * Submit `MainActivity.kt`, `ExternalActivityCalls.kt`, `AndroidManifest.xml`, and your answers to the writeup task to the Lab3 drop box folder on D2L
  
 * In either case keep a copy of your project work and answers for future reference
