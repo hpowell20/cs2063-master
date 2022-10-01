@@ -35,8 +35,7 @@ class AlarmReceiver : BroadcastReceiver() {
         val pendingTapIntent: PendingIntent = PendingIntent.getActivity(context,
             0,
             tapIntent,
-            PendingIntent.FLAG_IMMUTABLE)
-        //  or PendingIntent.FLAG_UPDATE_CURRENT
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
 
         // Create the Notification
         val builder = NotificationCompat.Builder(context, channelId)
