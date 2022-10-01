@@ -1,7 +1,6 @@
 package mobiledev.unb.ca.recyclerviewlab.model
 
 class Course private constructor(
-    // Use val for immutable; var for mutable
     private val id: String?,
     private val name: String?,
     val description: String?,

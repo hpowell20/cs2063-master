@@ -14,8 +14,11 @@ class MainActivity : AppCompatActivity() {
         //  in the next lab. Today we're focusing on displaying scrolling lists.)
 
         // TODO 2
-        //  Get a reference to the RecyclerView and set its adapter
-        //  to be an instance of MyAdapter, which you will need to create
-        //  using the ArrayList of courses from above.
+        //  Get a reference to the RecyclerView
+
+        // TODO 3
+        //  Set its adapter to be an instance of MyAdapter, which you will need to create
+        //  using the ArrayList of courses from above
+        //  HINT: Take note of the constructor parameters; for parentActivity use this
     }
 }

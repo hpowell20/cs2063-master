@@ -8,9 +8,14 @@ import android.view.ViewGroup
 import android.view.LayoutInflater
 import java.util.ArrayList
 
-// The RecyclerView.Adapter class provides a layer of abstraction between the
-// RecyclerView's LayoutManager and the underlying data that is being displayed,
-// in this case the ArrayList of Course objects.
+/**
+ * The RecyclerView.Adapter class provides a layer of abstraction between the
+ * RecyclerView's LayoutManager and the underlying data that is being displayed,
+ * in this case the ArrayList of Course objects.
+ *
+ * @param mDataset The list of courses
+ * @param parentActivity The activity used to create intents for launching activities
+ */
 class MyAdapter(private val mDataset: ArrayList<Course>, private val parentActivity: Activity) :
     RecyclerView.Adapter<MyAdapter.ViewHolder>() {
     // ViewHolder represents an individual item to display. In this case
@@ -36,18 +41,20 @@ class MyAdapter(private val mDataset: ArrayList<Course>, private val parentActiv
     // onBindViewHolder binds a ViewHolder to the data at the specified
     // position in mDataset
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        // TODO 3
+        // TODO 1
         //  Get the Course at index position in mDataSet
         //  (Hint: you might need to declare this variable as final.)
 
-        // TODO 4
+        // TODO 2
         //  Set the TextView in the ViewHolder (holder) to be the title for this Course
 
-        // TODO 5
+        // TODO 3
         //  Set the onClickListener for the TextView in the ViewHolder (holder) such
         //  that when it is clicked, it creates an explicit intent to launch DetailActivity
+        //  from the parentActivity object passed into the class constructor
         //  HINT: You will need to put two extra pieces of information in this intent:
-        //      The Course title and it's description
+        //      The Course title
+        //      The Course description
     }
 
     override fun getItemCount(): Int {

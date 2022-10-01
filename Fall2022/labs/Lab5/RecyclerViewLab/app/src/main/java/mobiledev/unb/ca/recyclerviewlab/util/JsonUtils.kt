@@ -39,7 +39,11 @@ class JsonUtils(context: Context) {
         //  2. Open the CS_JSON_FILE from the assets folder
         //     (https://developer.android.com/reference/android/content/res/AssetManager)
         //  3. Process the file using an InputStream
-        return ""
+        //  HINT:
+        //   See step 4 in an example here
+        //   (https://www.tutorialspoint.com/how-to-read-files-from-assets-on-android-using-kotlin)
+        //   on how to read a file from the assets folder here
+        return null
     }
 
     // Getter method for courses ArrayList

@@ -42,8 +42,7 @@ There are two common ways to display a scrolling list of items in Android
     * It doesn't do much yet as you will be completing it during the lab
 
   * `MainActivity` presents the scrolling list of courses using a `RecyclerView`
-
-  * `MyAdapter` represents the custom adaptor class used by the RecyclerView which extends `RecyclerView.Adapter`
+  * This class also contains an inner class called `MyAdapter` represents the custom adaptor class used by the RecyclerView which extends `RecyclerView.Adapter`
     * The `RecyclerView.Adapter` class provides a layer of abstraction between the `RecyclerView`'s `LayoutManager` and the underlying data that is being displayed which in this case a list of `Course` objects
     * `MyAdapter` itself contains an inner class `ViewHolder` which represents an individual item to display in the scrolling list
       * `onCreateViewHolder` creates `ViewHolder` objects by inflating the corresponding XML layout resource file; it's already implemented for you
@@ -62,11 +61,10 @@ There are two common ways to display a scrolling list of items in Android
 
 **Task 2**
 
-Complete the TODOs in the `MainActivity`, `JsonUtils`, `MyAdaptor`, and `DetailActivity` files
+Complete the TODOs in the `MainActivity`, `JsonUtils`, and `DetailActivity` files
 
 NOTE:
 * The `ActionBar` corresponds to the text at the top of the detail activity in the screen shot above (i.e., "CS2063 Introduction to M...")
-  * This might help you -  [getSupportActionBar()](http://developer.android.com/reference/android/support/v7/app/AppCompatActivity.html#getSupportActionBar%28%29)
 
 **Task 3**
 
@@ -87,5 +85,5 @@ Create a document with the following items:
 * IN LAB: 
   * Show the working app running on an emulator and the document with the screenshots to the instructor or TA
 AT HOME: 
-  * Submit `MainActivity.kt`, `MyAdapter.kt`, `DetailActivity.kt`, `JsonUtils.kt`, and your answers to the writeup task to the Lab5 drop box folder on D2L 
+  * Submit `MainActivity.kt`, `DetailActivity.kt`, `JsonUtils.kt`, and your answers to the writeup task to the Lab5 drop box folder on D2L 
 * Keep a copy of your project work and answers for future reference

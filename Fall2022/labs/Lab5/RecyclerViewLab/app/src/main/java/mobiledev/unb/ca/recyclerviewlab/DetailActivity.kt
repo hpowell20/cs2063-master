@@ -2,7 +2,6 @@ package mobiledev.unb.ca.recyclerviewlab
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import mobiledev.unb.ca.recyclerviewlab.R
 
 class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,8 +17,11 @@ class DetailActivity : AppCompatActivity() {
 
         // TODO 3
         //  Make the TextView scrollable
+        //  HINT: Look at the movementMethod attribute for descTextView
 
         // TODO 4
         //  Set the title of the action bar to be the course title
+        //  HINT:
+        //   This might help you - http://developer.android.com/reference/android/support/v7/app/AppCompatActivity.html#getSupportActionBar%28%29
     }
 }
