@@ -4,15 +4,21 @@ import android.content.Context
 import mobiledev.unb.ca.recyclerviewlab.model.Course
 import org.json.JSONObject
 import org.json.JSONException
-import java.io.IOException
-import java.nio.charset.StandardCharsets
 import java.util.*
+import kotlin.collections.ArrayList
 
 class JsonUtils(context: Context) {
-    // Getter method for courses ArrayList
-    private var courses: ArrayList<Course>? = null
+    // TIP: lateinit is used to declare properties that
+    // are guaranteed to be initialized in the future
+    private lateinit var courses: ArrayList<Course>
+
+    // Initializer (constructor) to read our data source (JSON file) into an array of course objects
+    init {
+        processJSON(context)
+    }
 
     private fun processJSON(context: Context) {
+        // Initialize the lateinit value
         courses = ArrayList()
         try {
             // Create a JSON Object from file contents String
@@ -40,14 +46,14 @@ class JsonUtils(context: Context) {
         //     (https://developer.android.com/reference/android/content/res/AssetManager)
         //  3. Process the file using an InputStream
         //  HINT:
-        //   See step 4 in an example here
+        //   See step 4 here
         //   (https://www.tutorialspoint.com/how-to-read-files-from-assets-on-android-using-kotlin)
-        //   on how to read a file from the assets folder here
+        //   for an example on how to read a file from the assets folder
         return null
     }
 
     // Getter method for courses ArrayList
-    fun getCourses(): ArrayList<Course>? {
+    fun getCourses(): ArrayList<Course> {
         return courses
     }
 
@@ -57,10 +63,5 @@ class JsonUtils(context: Context) {
         private const val KEY_COURSE_ID = "courseID"
         private const val KEY_NAME = "name"
         private const val KEY_DESCRIPTION = "description"
-    }
-
-    // Initializer to read our data source (JSON file) into an array of course objects
-    init {
-        processJSON(context)
     }
 }

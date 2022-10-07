@@ -7,10 +7,10 @@ import org.json.JSONException
 import java.io.IOException
 import java.nio.charset.StandardCharsets
 import java.util.*
+import kotlin.collections.ArrayList
 
 class JsonUtils(context: Context) {
-    // Getter method for courses ArrayList
-    private var courses: ArrayList<Course>? = null
+    private lateinit var courses: ArrayList<Course>
 
     private fun processJSON(context: Context) {
         courses = ArrayList()
@@ -38,7 +38,7 @@ class JsonUtils(context: Context) {
                     .build()
 
                 // Add new Course to courses ArrayList
-                courses!!.add(course)
+                courses.add(course)
             }
         } catch (e: JSONException) {
             e.printStackTrace()
@@ -81,7 +81,7 @@ class JsonUtils(context: Context) {
     }
 
     // Getter method for courses ArrayList
-    fun getCourses(): ArrayList<Course>? {
+    fun getCourses(): ArrayList<Course> {
         return courses
     }
 

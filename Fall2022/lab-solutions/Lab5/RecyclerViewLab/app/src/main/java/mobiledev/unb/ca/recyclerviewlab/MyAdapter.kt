@@ -55,9 +55,10 @@ class MyAdapter(private val mDataset: ArrayList<Course>, private val parentActiv
         //      The Course title
         //      The Course description
         holder.mTextView.setOnClickListener {
-            val intent = Intent(parentActivity, DetailActivity::class.java)
-            intent.putExtra(Constants.INTENT_EXTRA_COURSE_TITLE, course.title)
-            intent.putExtra(Constants.INTENT_EXTRA_COURSE_DESCRIPTION, course.description)
+            val intent = Intent(parentActivity, DetailActivity::class.java).apply {
+                putExtra(Constants.INTENT_EXTRA_COURSE_TITLE, course.title)
+                putExtra(Constants.INTENT_EXTRA_COURSE_DESCRIPTION, course.description)
+            }
             try {
                 parentActivity.startActivity(intent)
             } catch (e: ActivityNotFoundException) {

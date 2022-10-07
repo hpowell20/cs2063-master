@@ -28,7 +28,7 @@ There are two common ways to display a scrolling list of items in Android
 
 **Task 1**
 
-1. Importing the Lab's skeleton project.  Note that there are five (5) Kotlin code classes for use:
+1. Importing the Lab's skeleton project.  Note that there are four (4) Kotlin code classes for use:
   * `Course` represents a course
     * Although there are no optional properties in the class new objects are created using the Builder pattern which helps to set immutability for the class data
     * As a result only getter methods to retrieve the course title and description are provided

@@ -1,13 +1,9 @@
 package mobiledev.unb.ca.lab4skeleton
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -18,10 +14,6 @@ class AlarmReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         // This method is called when the BroadcastReceiver is receiving an Intent broadcast.
-
-        // Create the notification channel
-        val channelId = context.packageName + ".channel_01"
-        createNotificationChannel(context, channelId)
 
         // Set the tap action
         // FLAG_ACTIVITY_NEW_TASK - This flag is used to create a new task and launch an activity into it
@@ -38,7 +30,7 @@ class AlarmReceiver : BroadcastReceiver() {
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
 
         // Create the Notification
-        val builder = NotificationCompat.Builder(context, channelId)
+        val builder = NotificationCompat.Builder(context, Constants.NOTIFICATION_CHANNEL_ID)
             .setSmallIcon(R.mipmap.ic_launcher)
             .setAutoCancel(true)
             .setContentIntent(pendingTapIntent)
@@ -58,35 +50,6 @@ class AlarmReceiver : BroadcastReceiver() {
                 DateFormat.getDateTimeInstance().format(Date())
             )
         )
-    }
-
-    private fun createNotificationChannel(context: Context, channelId: String) {
-        // Only create the NotificationChannel if the using API 26+
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Set the user visible channel name
-            val name: CharSequence = context.getString(R.string.channel_name)
-
-            // Set the user visible channel description
-            val description = context.getString(R.string.channel_description)
-
-            // Set the channel importance
-            val importance = NotificationManager.IMPORTANCE_HIGH
-
-            // Create the NotificationChannel object
-            val channel = NotificationChannel(channelId, name, importance)
-            channel.description = description
-            channel.enableLights(true)
-
-            // Sets the notification light color for notifications posted to this
-            // channel, if the device supports this feature.
-            channel.lightColor = Color.GREEN
-            channel.enableVibration(true)
-
-            // Register the channel with the system
-            val notificationManager: NotificationManager =
-                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
-        }
     }
 
     companion object {

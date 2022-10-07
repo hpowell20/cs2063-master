@@ -1,10 +1,13 @@
 package mobiledev.unb.ca.lab4skeleton
 
 import android.app.AlarmManager
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.*
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.media.MediaScannerConnection
 import android.os.Build
 import android.os.Bundle
@@ -47,6 +50,9 @@ class MainActivity : AppCompatActivity() {
         // Register the activity listener
         setCameraActivityResultLauncher()
 
+        // Create the notification channel
+        createNotificationChannel(applicationContext, Constants.NOTIFICATION_CHANNEL_ID)
+
         // Set the broadcast receiver alarm values
         initAlarmValues()
 
@@ -59,6 +65,36 @@ class MainActivity : AppCompatActivity() {
 
         // Unregister the battery receivers to avoid memory leaks
         removeBatteryIntentFilters()
+    }
+
+    // Notification methods
+    private fun createNotificationChannel(context: Context, channelId: String) {
+        // Only create the NotificationChannel if the using API 26+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // Set the user visible channel name
+            val name: CharSequence = context.getString(R.string.channel_name)
+
+            // Set the user visible channel description
+            val description = context.getString(R.string.channel_description)
+
+            // Set the channel importance
+            val importance = NotificationManager.IMPORTANCE_HIGH
+
+            // Create the NotificationChannel object
+            val channel = NotificationChannel(channelId, name, importance)
+            channel.description = description
+            channel.enableLights(true)
+
+            // Sets the notification light color for notifications posted to this
+            // channel, if the device supports this feature.
+            channel.lightColor = Color.GREEN
+            channel.enableVibration(true)
+
+            // Register the channel with the system
+            val notificationManager: NotificationManager =
+                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
     }
 
     // Battery check methods

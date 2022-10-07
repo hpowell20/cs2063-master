@@ -25,7 +25,8 @@ class MainActivity : AppCompatActivity() {
         // TODO 3
         //  Set its adapter to be an instance of MyAdapter, which you will need to create
         //  using the ArrayList of courses from above.
-        val adapter = coursesArray?.let { MyAdapter(it, this) }
-        recyclerView.adapter = adapter
+        recyclerView.adapter = MyAdapter(
+            coursesArray, this
+        )
     }
 }
