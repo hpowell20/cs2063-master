@@ -19,15 +19,17 @@ class MainActivityViewModel : ViewModel() {
             // Show the progress bar
             progressBar!!.visibility = ProgressBar.VISIBLE
 
-            val bitmap = doLoadFiles(appContext, progressBar)
+            val bitmap = doLoadBitmap(appContext, progressBar)
             imageView!!.setImageBitmap(bitmap)
 
             // Hide the progress bar
             progressBar.visibility = ProgressBar.INVISIBLE
         }
     }
-    private suspend fun doLoadFiles(appContext: Context,
+
+    private suspend fun doLoadBitmap(appContext: Context,
                                     progressBar: ProgressBar?): Bitmap? {
+        // Create a new coroutine to move the execution off the UI thread
         return withContext(Dispatchers.IO) {
             // Simulating long-running operation
             for (i in 1 until 10) {

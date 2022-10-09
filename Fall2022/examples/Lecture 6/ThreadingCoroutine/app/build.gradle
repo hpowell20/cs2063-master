@@ -2,12 +2,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId 'mobiledev.unb.ca.threadingcoroutines'
         minSdkVersion 21
-        targetSdkVersion 32
+        targetSdkVersion 33
     }
 
     buildTypes {
@@ -20,13 +20,11 @@ android {
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.5.1'
+
+    // Kotlin coroutine dependencies
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
-//    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
 
-//    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
-//    implementation 'androidx.lifecycle:lifecycle-extensions:2.5.1'
-//    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
-//    runtimeOnly 'androidx.lifecycle:lifecycle-viewmodel:2.6.0-alpha02'
+    // View models
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
 }
