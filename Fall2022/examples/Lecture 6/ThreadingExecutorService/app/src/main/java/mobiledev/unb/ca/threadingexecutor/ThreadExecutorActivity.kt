@@ -59,7 +59,7 @@ class ThreadExecutorActivity : AppCompatActivity(), OnFragmentInteractionListene
         outState.putInt(PROGRESS_BAR_PROGRESS_KEY, mProgressBar!!.progress)
     }
 
-    // Callbacks from AsyncTaskFragment
+    // Callbacks from ThreadExecutorFragment
     override fun setProgressBarVisibility(isVisible: Int) {
         mProgressBar!!.visibility = isVisible
     }
