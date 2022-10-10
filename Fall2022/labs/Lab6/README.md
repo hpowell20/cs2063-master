@@ -1,6 +1,6 @@
 # Lab 6 - Threading
 
-In class we have seen the importance of moving long-running operations off of the UI thread and into a worker thread. In this lab you will implement (portions of) this functionality using a runnable thread from the an `AsyncTask`.
+In class we have seen the importance of moving long-running operations off of the UI thread and into a worker thread. In this lab you will implement (portions of) this functionality using a runnable thread using an `Executor`.
 
 ## Understanding the skeleton code
 
