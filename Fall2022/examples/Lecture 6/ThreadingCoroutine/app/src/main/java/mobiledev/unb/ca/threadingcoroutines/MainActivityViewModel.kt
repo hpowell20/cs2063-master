@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.concurrent.TimeUnit
 
 class MainActivityViewModel : ViewModel() {
     private val mBitmapResID = R.drawable.painter
@@ -46,7 +47,7 @@ class MainActivityViewModel : ViewModel() {
     private fun sleep() {
         try {
             val mDelay = 500
-            Thread.sleep(mDelay.toLong())
+            TimeUnit.MILLISECONDS.sleep(mDelay.toLong())
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }

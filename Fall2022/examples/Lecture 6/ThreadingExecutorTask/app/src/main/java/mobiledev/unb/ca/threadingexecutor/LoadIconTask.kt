@@ -32,6 +32,7 @@ class LoadIconTask(activity: ThreadExecutorActivity) {
 
         // Perform background call to read the information from the URL
         Executors.newSingleThreadExecutor().execute {
+            // Here we are using a Runnable class
             val handler = Handler(Looper.getMainLooper())
 
             // Simulating long-running operation
