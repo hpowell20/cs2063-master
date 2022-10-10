@@ -37,7 +37,7 @@ internal class HttpGetTask(retainedFragment: RetainedFragment?) {
 
             // 3. This app does not use a request body.  4. Read the response
             val `in`: InputStream = BufferedInputStream(httpUrlConnection.inputStream)
-            return convertStreamToString(`in`)
+            convertStreamToString(`in`)
         } catch (exception: MalformedURLException) {
             Log.e(TAG, "MalformedURLException in loadJsonFromUrl; error: " + exception.localizedMessage)
             null

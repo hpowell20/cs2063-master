@@ -9,11 +9,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 
-class SimpleItemRecyclerViewAdapter(
+class ItemRecyclerViewAdapter(
     private val mValues: List<GeoData>,
     private val parentActivity: AppCompatActivity,
     private val isTwoPane: Boolean
-) : RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<ItemRecyclerViewAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.geodata_list_content, parent, false)
