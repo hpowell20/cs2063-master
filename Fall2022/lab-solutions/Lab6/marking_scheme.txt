@@ -1,0 +1,28 @@
+TOTAL: 20 marks
+
+SimpleItemRecyclerViewAdapter:
+  - Create an Intent to start GeoDataDetailActivity (1 mark)
+  - Add the extras to the intent (1 mark)
+
+GeoDataListActivity:
+  - Check the network connection (1 mark)
+  - Show toast if not connected (1 mark)
+  - Start the DownloaderTask with the extra setters (4 marks)
+
+DownLoaderTask:
+    - Disable the button so it can't be clicked 
+         again once a download has been started (1 mark)
+    - Set the progress bar's maximum to be DOWNLOAD_TIME, its
+         initial progress to be 0, and also make sure it's visible (3 marks)
+    - Create an instance of JsonUtils and get the data from it (1 mark)
+    - Store the data in mGeoDataList (1 mark)
+    - Update the progress bar; calculate an appropriate
+         value for the new progress using i (1 mark)
+    - Enable the button again (1 mark)
+    - Reset the progress bar, and make it disappear (2 marks)
+    - Setup the RecyclerView (1 mark)
+    - Create a Toast indicating that the download is complete (1 mark)
+    - Update the progress bar using values (1 mark)
+
+JsonUtils:
+  - Establish an HttpURLConnecion to REQUEST_URL (1 mark)

@@ -14,7 +14,7 @@ import java.util.ArrayList
 
 class JsonUtils {
     // Getter method for geoDataArray
-    private lateinit var geoDataArray: ArrayList<GeoData>
+    private var geoDataArray: ArrayList<GeoData>? = null
 
     private fun processJSON() {
         geoDataArray = ArrayList()
@@ -60,29 +60,31 @@ class JsonUtils {
         }
     }
 
-    fun getGeoData(): ArrayList<GeoData> {
+    fun getGeoData(): ArrayList<GeoData>? {
         return geoDataArray
     }
 
     private fun loadJSONFromURL(): String? {
         var connection: HttpURLConnection? = null
-        try {
-           // TODO
+        return try {
+            // TODO
             //  Establish an HttpURLConnection to REQUEST_URL (defined as a constant)
-            //  Hint: 
+            //  Hint:
             //    See https://github.com/hpowell20/cs2063-fall-2022-examples/tree/master/Lecture6/NetworkingURL
             //    for an example of how to do this
             //    Also see documentation here: http://developer.android.com/training/basics/network-ops/connecting.html
-            return null
+            connection = URL(REQUEST_URL).openConnection() as HttpURLConnection
+            val `in`: InputStream = BufferedInputStream(connection.inputStream)
+            convertStreamToString(`in`)
         } catch (exception: MalformedURLException) {
             Log.e(TAG, "MalformedURLException")
-            return null
+            null
         } catch (exception: IOException) {
             Log.e(TAG, "IOException")
-            return null
+            null
         } catch (e: Exception) {
             e.printStackTrace()
-            return null
+            null
         } finally {
             connection?.disconnect()
         }
