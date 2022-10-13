@@ -1,8 +1,8 @@
-package mobiledev.unb.ca.roompersistencetest.dao
+package mobiledev.unb.ca.roomcoroutinetest.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import mobiledev.unb.ca.roompersistencetest.entity.Item
+import mobiledev.unb.ca.roomcoroutinetest.entity.Item
 
 /**
  * This DAO object validates the SQL at compile-time and associates it with a method

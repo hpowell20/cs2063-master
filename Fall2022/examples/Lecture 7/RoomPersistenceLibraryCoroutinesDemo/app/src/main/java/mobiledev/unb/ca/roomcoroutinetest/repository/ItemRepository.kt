@@ -1,8 +1,8 @@
-package mobiledev.unb.ca.roompersistencetest.repository
+package mobiledev.unb.ca.roomcoroutinetest.repository
 
-import mobiledev.unb.ca.roompersistencetest.dao.ItemDao
+import mobiledev.unb.ca.roomcoroutinetest.dao.ItemDao
 import androidx.lifecycle.LiveData
-import mobiledev.unb.ca.roompersistencetest.entity.Item
+import mobiledev.unb.ca.roomcoroutinetest.entity.Item
 
 class ItemRepository(private val itemDao: ItemDao) {
     val allItems: LiveData<List<Item>> = itemDao.listAllRecords()

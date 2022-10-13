@@ -1,15 +1,15 @@
-package mobiledev.unb.ca.roompersistencetest.db
+package mobiledev.unb.ca.roomcoroutinetest.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import mobiledev.unb.ca.roompersistencetest.dao.ItemDao
+import mobiledev.unb.ca.roomcoroutinetest.dao.ItemDao
 import kotlin.jvm.Volatile
 import androidx.room.Room
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import mobiledev.unb.ca.roompersistencetest.entity.Item
+import mobiledev.unb.ca.roomcoroutinetest.entity.Item
 
 /**
  * Database layer in top of the SQLite database

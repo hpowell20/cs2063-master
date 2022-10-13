@@ -1,13 +1,13 @@
-package mobiledev.unb.ca.roompersistencetest.ui
+package mobiledev.unb.ca.roomcoroutinetest.ui
 
 import android.content.Context
 import android.widget.ArrayAdapter
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
-import mobiledev.unb.ca.roompersistencetest.R
+import mobiledev.unb.ca.roomcoroutinetest.R
 import android.widget.TextView
-import mobiledev.unb.ca.roompersistencetest.entity.Item
+import mobiledev.unb.ca.roomcoroutinetest.entity.Item
 
 class ItemsAdapter(context: Context, items: List<Item>) : ArrayAdapter<Item>(
     context, 0, items) {

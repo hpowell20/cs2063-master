@@ -1,4 +1,4 @@
-package mobiledev.unb.ca.roompersistencetest.entity
+package mobiledev.unb.ca.roomcoroutinetest.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

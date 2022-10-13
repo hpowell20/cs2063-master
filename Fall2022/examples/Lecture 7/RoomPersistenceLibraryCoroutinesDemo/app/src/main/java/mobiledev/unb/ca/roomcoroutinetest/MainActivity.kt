@@ -1,4 +1,4 @@
-package mobiledev.unb.ca.roompersistencetest
+package mobiledev.unb.ca.roomcoroutinetest
 
 import android.content.DialogInterface
 import android.os.Bundle
@@ -13,9 +13,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import mobiledev.unb.ca.roompersistencetest.entity.Item
-import mobiledev.unb.ca.roompersistencetest.ui.ItemsAdapter
-import mobiledev.unb.ca.roompersistencetest.ui.MainActivityViewModel
+import mobiledev.unb.ca.roomcoroutinetest.entity.Item
+import mobiledev.unb.ca.roomcoroutinetest.ui.ItemsAdapter
+import mobiledev.unb.ca.roomcoroutinetest.ui.MainActivityViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mainActivityViewModel: MainActivityViewModel

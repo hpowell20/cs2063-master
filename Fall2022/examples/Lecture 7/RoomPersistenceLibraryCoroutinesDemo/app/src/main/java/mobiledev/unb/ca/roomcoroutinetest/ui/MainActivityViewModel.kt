@@ -1,14 +1,14 @@
-package mobiledev.unb.ca.roompersistencetest.ui
+package mobiledev.unb.ca.roomcoroutinetest.ui
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import mobiledev.unb.ca.roompersistencetest.repository.ItemRepository
+import mobiledev.unb.ca.roomcoroutinetest.repository.ItemRepository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import mobiledev.unb.ca.roompersistencetest.db.ItemRoomDatabase
-import mobiledev.unb.ca.roompersistencetest.entity.Item
+import mobiledev.unb.ca.roomcoroutinetest.db.ItemRoomDatabase
+import mobiledev.unb.ca.roomcoroutinetest.entity.Item
 
 class MainActivityViewModel(application: Application) : AndroidViewModel(application) {
     private val itemRepository: ItemRepository
