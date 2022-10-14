@@ -16,5 +16,5 @@ interface ItemDao {
     fun insert(item: Item)
 
     @Delete
-    fun deleteItem(item: Item)
+    infix fun deleteItem(item: Item): Int
 }
