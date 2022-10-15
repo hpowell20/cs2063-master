@@ -2,6 +2,11 @@
 
 In class we have seen the importance of moving long-running operations off of the UI thread and into a worker thread. In this lab you will implement (portions of) this functionality using a runnable thread using an `Executor`.
 
+## Pair Programming
+
+We will again be doing pair programming for this lab.  Details on pair programming can be found at [Pair Programming](../docs/PAIR_PROGRAMMING.md).  You can again work with anybody of your choosing.
+
+
 ## Understanding the skeleton code
 
 The app will be used to present a list of recent earthquakes downloaded from the United States Geological Survey.
@@ -74,6 +79,6 @@ NOTES:
 
 * IN LAB: 
   * Show the working app to the instructor or TA
-AT HOME: 
+* AT HOME: 
   * Submit `GeoDataListActivity.kt`, `ItemRecyclerViewAdapter.kt`, `JsonUtils.kt`, and `DownloaderTask.kt` to the Lab6 drop box folder on D2L 
 * Keep a copy of your project work and answers for future reference

@@ -86,6 +86,6 @@ Create a document with the following items:
 
 * IN LAB: 
   * Show the working app running on an emulator and the document with the screenshots to the instructor or TA
-AT HOME: 
+* AT HOME: 
   * Submit `MainActivity.kt`, `MyAdapter.kt`, `DetailActivity.kt`, `JsonUtils.kt`, and your answers to the writeup task to the Lab5 drop box folder on D2L 
 * Keep a copy of your project work and answers for future reference

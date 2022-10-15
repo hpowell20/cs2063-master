@@ -17,7 +17,10 @@ class JsonUtils {
     private lateinit var geoDataArray: ArrayList<GeoData>
 
     private fun processJSON() {
+        // Initialize the data array
         geoDataArray = ArrayList()
+
+        // Process the JSON response from the URL
         val jsonString = loadJSONFromURL()
         try {
             val parser = Json.createParser(StringReader(jsonString))
@@ -36,16 +39,16 @@ class JsonUtils {
                     JsonParser.Event.VALUE_STRING -> if (titleTrigger && parser.string.startsWith("M")) {
                         val geoData = GeoData()
                         geoData.title = parser.string
-                        geoDataArray!!.add(geoData)
+                        geoDataArray.add(geoData)
                         titleTrigger = false
                     }
                     JsonParser.Event.VALUE_NUMBER -> {
                         if (coordinateTrigger && coordinateCount == 0) {
-                            val geoData = geoDataArray!![count]
+                            val geoData = geoDataArray[count]
                             geoData.longitude = parser.string
                             coordinateCount++
                         } else if (!coordinateTrigger && coordinateCount == 1) {
-                            val geoData = geoDataArray!![count]
+                            val geoData = geoDataArray[count]
                             geoData.latitude = parser.string
                             coordinateCount = 0
                             count++

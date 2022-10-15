@@ -49,8 +49,8 @@ class DownloaderTask(private val activity: GeoDataListActivity) {
             val handler = Handler(Looper.getMainLooper())
 
             // TODO
-            //  Create an instance of JsonUtils and get the data from it,
-            //  store the data in mGeoDataList
+            //  Get the ArrayList of GeoData objects from the JsonUtils class and store the
+            //  data in mGeoDataList
 
             // Simulating long-running operation
             for (i in 1 until DOWNLOAD_TIME) {
@@ -60,7 +60,7 @@ class DownloaderTask(private val activity: GeoDataListActivity) {
             }
 
             // TODO
-            //  Using the updateDisplay method update the UI with the results
+            //  Call the updateDisplay method update the UI with the results
         }
     }
 
@@ -84,7 +84,8 @@ class DownloaderTask(private val activity: GeoDataListActivity) {
         //  Setup the RecyclerView
 
         // TODO
-        //  Create a Toast indicating that the download is complete
+        //  Create a Toast message indicating that the download is complete
+        //  HINT: Use appContext for the context value
     }
 
     private fun setupRecyclerView(mGeoDataList: List<GeoData>) {

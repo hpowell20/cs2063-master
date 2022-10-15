@@ -31,11 +31,9 @@ class JsonUtils(context: Context) {
                 val elementObject = jsonArray.getJSONObject(i)
 
                 // Get data from individual JSON Object
-                val course = Course.Builder()
-                    .id(elementObject.getString(KEY_COURSE_ID))
-                    .name(elementObject.getString(KEY_NAME))
-                    .description(elementObject.getString(KEY_DESCRIPTION))
-                    .build()
+                val course = Course(elementObject.getString(KEY_COURSE_ID),
+                    elementObject.getString(KEY_NAME),
+                    elementObject.getString(KEY_DESCRIPTION))
 
                 // Add new Course to courses ArrayList
                 courses.add(course)
@@ -55,19 +53,6 @@ class JsonUtils(context: Context) {
         //  HINT:
         //   See step 4 in some sample code on how to read a file from the assets folder here -
         //   https://www.tutorialspoint.com/how-to-read-files-from-assets-on-android-using-kotlin
-
-//        try {
-//            val bufferReader = context.assets.open(CS_JSON_FILE).bufferedReader()
-//            val data = bufferReader.use {
-//                it.readText()
-//            }
-//            return data
-//        } catch (ex: IOException) {
-//            ex.printStackTrace()
-//        }
-
-        // return ""
-//        return String(data, StandardCharsets.UTF_8)
         return try {
             context.assets.open(CS_JSON_FILE).use { `is` ->
                 val buffer = ByteArray(`is`.available())

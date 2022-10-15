@@ -29,9 +29,11 @@ class JsonUtils(context: Context) {
             val jsonArray = jsonObject.getJSONArray(KEY_COURSES)
             for (i in 0 until jsonArray.length()) {
                 // TODO 1:
-                //  Using the JSON array update coursesArray
-                //  1. Retrieve the current object by index
-                //  2. Add new Course to courses ArrayList
+                //  Using the JSON array set the array of courses
+                //  1. Retrieve the current JSON object from the array by index
+                //  2. Using the JSON object create a Course object
+                //     NOTE: Creating a Course object makes use of the Builder pattern (https://www.baeldung.com/kotlin/builder-pattern)
+                //  3. Add the Course object to courses ArrayList
             }
         } catch (e: JSONException) {
             e.printStackTrace()
