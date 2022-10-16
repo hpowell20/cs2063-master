@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "ThreadingLabSolution"
+rootProject.name = "ThreadingLabSkeleton"
 include ':app'
