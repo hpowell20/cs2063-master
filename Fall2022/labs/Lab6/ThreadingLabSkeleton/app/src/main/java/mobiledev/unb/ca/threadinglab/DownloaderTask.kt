@@ -60,7 +60,7 @@ class DownloaderTask(private val activity: GeoDataListActivity) {
             }
 
             // TODO
-            //  Call the updateDisplay method update the UI with the results
+            //  Call the updateDisplay method to update the UI with the results
         }
     }
 
@@ -81,7 +81,7 @@ class DownloaderTask(private val activity: GeoDataListActivity) {
         //  Reset the progress bar, and make it disappear
 
         // TODO
-        //  Setup the RecyclerView
+        //  Call the setupRecyclerView method to setup the data adapter used by the RecyclerView
 
         // TODO
         //  Create a Toast message indicating that the download is complete

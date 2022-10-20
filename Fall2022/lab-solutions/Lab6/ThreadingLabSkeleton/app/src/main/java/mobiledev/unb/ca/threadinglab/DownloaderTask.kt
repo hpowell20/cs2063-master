@@ -56,6 +56,9 @@ class DownloaderTask(private val activity: GeoDataListActivity) {
             val handler = Handler(Looper.getMainLooper())
 
             // TODO
+            //  Using the initDisplay method set the UI elements to their default state
+
+            // TODO
             //  Create an instance of JsonUtils and get the data from it,
             //  store the data in mGeoDataList
             val jsonUtils = JsonUtils()
@@ -89,6 +92,24 @@ class DownloaderTask(private val activity: GeoDataListActivity) {
         }
     }
 
+    private fun initDisplay() {
+        // TODO
+        //  Disable the button so it can't be clicked again once a download has been started
+        //  Hint: Button is subclass of TextView. Read this document to see how to disable it.
+        //  http://developer.android.com/reference/android/widget/TextView.html
+        refreshButton!!.isEnabled = false
+
+        // TODO
+        //  Set the progress bar's maximum to be DOWNLOAD_TIME, its initial progress to be
+        //  0, and also make sure it's visible.
+        //  Hint: Read the documentation on ProgressBar
+        //  http://developer.android.com/reference/android/widget/ProgressBar.html
+        progressBar!!.isIndeterminate = false
+        progressBar!!.progress = 0
+        progressBar!!.max = DOWNLOAD_TIME
+        progressBar!!.visibility = ProgressBar.VISIBLE
+
+    }
     private fun updateDisplay(mGeoDataList: ArrayList<GeoData>) {
         // TODO
         //  With the download completed, enable the button again
@@ -100,7 +121,7 @@ class DownloaderTask(private val activity: GeoDataListActivity) {
         progressBar!!.visibility = ProgressBar.INVISIBLE
 
         // TODO
-        //  Setup the RecyclerView
+        //  Setup the RecyclerView using the setupRecyclerView method
         setupRecyclerView(mGeoDataList)
 
         // TODO
