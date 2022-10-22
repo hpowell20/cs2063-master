@@ -2,6 +2,10 @@
 
 In lecture we have explored different storage mechanisms available for app specific data.  One of the more used alternatives is to make use of a [SQLite database](https://www.sqlite.org/) which allows for more complex structured data to be stored.  We also learned that there are several issues and shortcomings with using SQLite directly.  As such, Google recommends the use of the Room Persistence Library framework to help solve these issues.  In this lab you will build a simple app that uses a SQLite database and Room for managing the data.
 
+## Pair Programming
+
+We will again be doing pair programming for this lab.  Details on pair programming can be found at [Pair Programming](../docs/PAIR_PROGRAMMING.md).  You can again work with anybody of your choosing.
+
 ## App Functionality
 
 Once completed the user will be able to use the app for the following:
@@ -28,24 +32,23 @@ This lab makes use of java.util.concurrent.ExecutorService asynchronous executio
   * In order to get a result from the task a Callable will need to be used
   * For example:
   ```java
-  AppDatabase.databaseWriterExecutor.execute(new Runnable() {
-    public void run() {
-        System.out.println("Asynchronous task");
-    }
-  });
+  AppDatabase.databaseWriterExecutor.execute { 
+    println("Asynchronous task") 
+  }
   ```
 * Submit Callable - Uses a Callable instead of a Runnable
   * The result of the operation can be obtained by the Java Future object returned by the submit call
   * This is used for operations when you need to return specific records or a list of records that do not need to have the LiveData lifecycle
   * For example:
   ```java
-  Future<T> future = AppDatabase.databaseWriterExecutor.submit(new Callable<T>(){
-      public T call() throws Exception {
-          System.out.println("Asynchronous Callable");
-          return "Callable Result";
-      }
-  });
-  System.out.println("future.get() = " + future.get());
+  var future: Future<T> = AppDatabase.databaseWriterExecutor.submit(object : Callable<T?>() {
+        @Throws(Exception::class)
+        fun call(): T? {
+            println("Asynchronous Callable")
+            return "Callable Result"
+        }
+    })
+  println("future.get() = " + future.get());
   ```
 
 The following documentation will be helpful in this lab.
@@ -90,8 +93,7 @@ The following documentation will be helpful in this lab.
         * You annotate the class to be a Room database with @Database and use the annotation parameters to declare the entities that belong in the database and set the version number
           * Each entity corresponds to a table that will be created in the database
         * A Singleton object is being created to prevent multiple instances of the database being opened at the same time
-        * To help with asynchronous access an `ExcecutorService` object is defined with a fixed thread pool
-        We've created an ExecutorService with a fixed thread pool that you will use to run database operations asynchronously on a background thread
+        * To help with asynchronous access an `ExcecutorService` object is defined with a fixed thread pool that can be used to run database operations asynchronously on a background thread
     * `ItemDao`
       * Interface class which contains the methods for accessing the database
       * The @Dao annotation identifies it as a DAO class for Room
@@ -123,5 +125,9 @@ With the database code in place you will now need to update the UI to work with 
 
 **Lab Completion**
 
-* Show the working app to the instructor or TA using the following scenarios
+* IN LAB: 
+  * Show the working app to the instructor or TA
+* AT HOME: 
+  * Submit `MainActivity.kt`, `Item.kt`, `ItemDao.kt`, `ItemRepository.kt`, `ItemViewModel.kt`, and `ItemsAdapter.kt` to the Lab7 drop box folder on D2L 
 * Keep a copy of your project work and answers for future reference
+
