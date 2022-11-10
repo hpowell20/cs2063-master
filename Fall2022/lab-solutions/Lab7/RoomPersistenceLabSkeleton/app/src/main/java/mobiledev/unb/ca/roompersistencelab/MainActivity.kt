@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
                 val text = v!!.text
                 if (!TextUtils.isEmpty(text)) {
                     hideKeyboard(this@MainActivity)
-                    searchRecords(text as String)
+                    searchRecords(text.toString())
                 }
 
                 // Show error message if no search field added

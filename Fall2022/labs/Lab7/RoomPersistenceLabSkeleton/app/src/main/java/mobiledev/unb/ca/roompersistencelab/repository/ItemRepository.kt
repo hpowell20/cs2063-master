@@ -15,6 +15,6 @@ class ItemRepository(application: Application) {
     //  HINT 3:
     //    LiveData does not work as well for this; consider using an object list to return the search results
     //  See the example project file at
-    //  https://github.com/hpowell20/cs2063-fall-2022-examples/blob/master/Lecture7/RoomPersistenceLibraryDemo/app/src/main/java/mobiledev/unb/ca/roompersistencetest/repository/ItemRepository.java
+    //  https://github.com/hpowell20/cs2063-fall-2022-examples/blob/master/Lecture7/RoomPersistenceLibraryDemo/app/src/main/java/mobiledev/unb/ca/roompersistencetest/repository/ItemRepository.kt
     //  to see examples of how to work with the Executor Service along with Runnables and Callables
 }
