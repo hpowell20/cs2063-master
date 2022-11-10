@@ -9,5 +9,5 @@ import androidx.room.Dao
 interface ItemDao {
     // TODO
     //  Add app specific queries in here
-    //  Additional details can be found at https://developer.android.com/reference/android/arch/persistence/room/Dao
+    //  Additional details can be found at https://developer.android.com/reference/kotlin/androidx/room/Query
 }
