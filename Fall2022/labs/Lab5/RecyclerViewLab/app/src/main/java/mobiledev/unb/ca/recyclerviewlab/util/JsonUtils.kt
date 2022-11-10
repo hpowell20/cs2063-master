@@ -10,7 +10,9 @@ import kotlin.collections.ArrayList
 class JsonUtils(context: Context) {
     // TIP: lateinit is used to declare properties that
     // are guaranteed to be initialized in the future
-    private lateinit var courses: ArrayList<Course>
+    // private lateinit var courses: ArrayList<Course>
+    lateinit var courses: ArrayList<Course>
+        private set
 
     // Initializer (constructor) to read our data source (JSON file) into an array of course objects
     init {
@@ -55,9 +57,9 @@ class JsonUtils(context: Context) {
     }
 
     // Getter method for courses ArrayList
-    fun getCourses(): ArrayList<Course> {
-        return courses
-    }
+    // fun getCourses(): ArrayList<Course> {
+    //     return courses
+    // }
 
     companion object {
         private const val CS_JSON_FILE = "CS.json"
