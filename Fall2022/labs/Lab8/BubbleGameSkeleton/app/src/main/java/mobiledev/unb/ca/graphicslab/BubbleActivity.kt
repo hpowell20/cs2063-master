@@ -15,9 +15,9 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.RelativeLayout
 import android.widget.TextView
-import java.util.*
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledFuture
+import java.util.concurrent.ThreadLocalRandom
 import java.util.concurrent.TimeUnit
 
 class BubbleActivity : Activity() {
@@ -68,7 +68,7 @@ class BubbleActivity : Activity() {
 
         // TODO
         //  Make a new SoundPool, allowing up to 10 streams
-        //  Store this as mSoundPool
+        //  Store this as soundPool
 
         // TODO
         //  Set a SoundPool OnLoadCompletedListener that calls setupGestureDetector()
@@ -131,7 +131,7 @@ class BubbleActivity : Activity() {
                 ): Boolean {
                     // TODO
                     //  Implement onFling actions (See comment above for expected behaviour)
-                    //  You can get all Views in mmFrame one at a time using the ViewGroup.getChildAt() method
+                    //  You can get all Views in mFrame one at a time using the ViewGroup.getChildAt() method
 
                     return true
                 }
@@ -144,7 +144,7 @@ class BubbleActivity : Activity() {
                 override fun onSingleTapConfirmed(event: MotionEvent): Boolean {
                     // TODO - Implement onSingleTapConfirmed actions.
                     //  (See comment above for expected behaviour.)
-                    //  You can get all Views in mmFrame using the
+                    //  You can get all Views in mFrame using the
                     //  ViewGroup.getChildCount() method
 
                     return true
@@ -154,10 +154,9 @@ class BubbleActivity : Activity() {
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         // TODO
-        //  1. Delegate the touch to the gestureDetector
+        //  Delegate the touch to the gestureDetector
 
-        // TODO
-        //  2. Remove this when you have completed step 1 above
+        // Remove this when you're done the above TODO
         return true
     }
 
@@ -190,32 +189,27 @@ class BubbleActivity : Activity() {
         // Rotation and speed of rotation of the bubble
         private var mRotate: Long = 0
         private var mDRotate: Long = 0
-        private fun setRotation(r: Random) {
+
+        private fun setRotation() {
             // TODO
             //  Set rotation in range [1..5]
+            //  HINT: There is a function called generateRandomNumberInRange
+            //        in this class which can be used
         }
 
-        private fun setSpeedAndDirection(r: Random) {
+        private fun setSpeedAndDirection() {
             // TODO
-            //  Set dx and dy to indicate movement direction and speed
+            //  Set mDx and mDy to indicate movement direction and speed
             //  Limit speed in the x and y direction to [-3..3] pixels per movement
-            var x = r.nextInt(3) + 1
-            if (r.nextBoolean()) {
-                x = -x
-            }
-
-            var y = r.nextInt(3) + 1
-            if (r.nextBoolean()) {
-                y = -y
-            }
-
-            mDx = x.toFloat()
-            mDy = y.toFloat()
+            //  HINT: There is a function called generateRandomNumberInRange
+            //        in this class which can be used
         }
 
-        private fun createScaledBitmap(r: Random) {
+        private fun createScaledBitmap() {
             // TODO
             //  Set scaled bitmap size (scaledBitmapSize) in range [2..4] * BITMAP_SIZE
+            //  HINT: There is a function called generateRandomNumberInRange
+            //        in this class which can be used
 
             // TODO
             //  Create the scaled bitmap (scaledBitmap) using size set above
@@ -254,7 +248,7 @@ class BubbleActivity : Activity() {
         }
 
         // Cancel the Bubble's movement
-        // Remove Bubble from mmFrame
+        // Remove Bubble from mFrame
         // Play pop sound if the BubbleView was popped
         fun stopMovement(wasPopped: Boolean) {
             if (null != mMoverFuture) {
@@ -323,13 +317,14 @@ class BubbleActivity : Activity() {
             return false
         }
 
-        init {
-            // Create a new random number generator to
-            // randomize size, rotation, speed and direction
-            val r = Random()
+        // Helper function used to generate a random number within a range inclusive of min and max
+        private fun generateRandomNumberInRange(min: Int, max: Int): Int {
+            return ThreadLocalRandom.current().nextInt(min, max + 1)
+        }
 
+        init {
             // Creates the bubble bitmap for this BubbleView
-            createScaledBitmap(r)
+            createScaledBitmap()
 
             // Radius of the Bitmap
             radius = (scaledBitmapSize / 2).toFloat()
@@ -339,10 +334,10 @@ class BubbleActivity : Activity() {
             yPos = y - radius
 
             // Set the BubbleView's speed and direction
-            setSpeedAndDirection(r)
+            setSpeedAndDirection()
 
             // Set the BubbleView's rotation
-            setRotation(r)
+            setRotation()
             mPainter.isAntiAlias = true
         }
     }
