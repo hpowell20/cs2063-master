@@ -37,6 +37,12 @@ class BubbleActivity : Activity(), SensorEventListener {
     private var mPlayerMessage: TextView? = null
 
     // TODO
+    //  Create member for storing the lastUpdate
+    
+    // TODO
+    //  Create members for the gravity and acceleration arrays
+    
+    // TODO
     //  Create members for a SensorManager and Sensor
 
     public override fun onCreate(savedInstanceState: Bundle?) {
@@ -295,11 +301,6 @@ class BubbleActivity : Activity(), SensorEventListener {
         }
 
         init {
-
-            // Creates the bubble bitmap for this BubbleView
-
-            // Radius of the Bitmap
-
             // Adjust position to center the bubble under user's finger
             mXPos = x - mRadius
             mYPos = y - mRadius
