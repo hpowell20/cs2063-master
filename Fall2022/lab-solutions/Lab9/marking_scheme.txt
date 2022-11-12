@@ -1,0 +1,9 @@
+TOTAL: 10 marks
+
+- Create members for a SensorManager and Sensor (2 marks)
+- Get a SensorManager, and then use it to get an accelerometer Sensor (1 marks)
+- If the device does not have an accelerometer, display a message indicating so and exit (1 mark)
+- Register a listener for the accelerometer (1 mark)
+- Apply a low- and high-pass filter to the raw sensor values (2 marks)
+- If there is a BubbleView, use its setSpeedAndDirection (3 marks - 1 for each filter)
+- Unregister the sensor event listener (1 mark)
