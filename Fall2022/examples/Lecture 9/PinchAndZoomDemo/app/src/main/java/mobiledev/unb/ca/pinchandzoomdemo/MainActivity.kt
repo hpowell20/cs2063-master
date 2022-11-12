@@ -1,6 +1,5 @@
 package mobiledev.unb.ca.pinchandzoomdemo
 
-import android.graphics.Matrix
 import androidx.appcompat.app.AppCompatActivity
 import android.view.ScaleGestureDetector
 import android.os.Bundle
@@ -11,17 +10,16 @@ import kotlin.math.max
 import kotlin.math.min
 
 class MainActivity : AppCompatActivity() {
-    private var iv: ImageView? = null
-    private val matrix = Matrix()
-    private var scale = 1f
+    private var imageView: ImageView? = null
 
     // ScaleGestureListener is used to handle pinch gestures
     private var scaleGestureDetector: ScaleGestureDetector? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        iv = findViewById(R.id.imageView)
-        scaleGestureDetector = ScaleGestureDetector(this, ScaleListener())
+        imageView = findViewById(R.id.imageView)
+        scaleGestureDetector = ScaleGestureDetector(this, ScaleListener(imageView!!))
     }
 
     override fun onTouchEvent(ev: MotionEvent): Boolean {
@@ -29,12 +27,14 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    private inner class ScaleListener : SimpleOnScaleGestureListener() {
+    inner class ScaleListener internal constructor(private var mImageView: ImageView): SimpleOnScaleGestureListener() {
+        private var scaleFactor = 1.0f
+
         override fun onScale(detector: ScaleGestureDetector): Boolean {
-            scale *= detector.scaleFactor
-            scale = max(0.1f, min(scale, 5.0f))
-            matrix.setScale(scale, scale)
-            iv!!.imageMatrix = matrix
+            scaleFactor *= scaleGestureDetector!!.scaleFactor
+            scaleFactor = max(0.1f, min(scaleFactor, 10.0f))
+            mImageView.scaleX = scaleFactor
+            mImageView.scaleY = scaleFactor
             return true
         }
     }
