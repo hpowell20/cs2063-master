@@ -84,6 +84,7 @@ class BubbleView (context: Context?, displayWidth: Int, displayHeight: Int) :
         mStepX = if (r.nextBoolean()) mStepX else -mStepX
         mStepY = if (r.nextBoolean()) mStepY else -mStepY
 
+        // Smooth out the edges
         mPainter.isAntiAlias = true
     }
 }
