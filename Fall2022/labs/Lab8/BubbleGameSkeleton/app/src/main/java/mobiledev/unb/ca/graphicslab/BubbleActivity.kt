@@ -17,8 +17,8 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledFuture
-import java.util.concurrent.ThreadLocalRandom
 import java.util.concurrent.TimeUnit
+import java.util.Random
 
 class BubbleActivity : Activity() {
     // The Main view
@@ -95,13 +95,11 @@ class BubbleActivity : Activity() {
 
     // Setup the stream volume
     private fun setStreamVolume() {
-        // Manage bubble popping sound
-        // Use AudioManager.STREAM_MUSIC as stream type
-
         // AudioManager audio settings for adjusting the volume
         val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
 
-        // Current volume Index of particular stream type
+        // Get the current volume Index of particular stream type
+        // Stream type is set to use AudioManager.STREAM_MUSIC
         val currentVolumeIndex = audioManager.getStreamVolume(STREAM_TYPE)
             .toFloat()
 
@@ -190,26 +188,21 @@ class BubbleActivity : Activity() {
         private var mRotate: Long = 0
         private var mDRotate: Long = 0
 
-        private fun setRotation() {
+        private fun setRotation(r: Random) {
             // TODO
             //  Set rotation in range [1..5]
-            //  HINT: There is a function called generateRandomNumberInRange
-            //        in this class which can be used
         }
 
-        private fun setSpeedAndDirection() {
+        private fun setSpeedAndDirection(r: Random) {
             // TODO
             //  Set mDx and mDy to indicate movement direction and speed
             //  Limit speed in the x and y direction to [-3..3] pixels per movement
-            //  HINT: There is a function called generateRandomNumberInRange
-            //        in this class which can be used
         }
 
-        private fun createScaledBitmap() {
+        private fun createScaledBitmap(r: Random) {
             // TODO
             //  Set scaled bitmap size (scaledBitmapSize) in range [2..4] * BITMAP_SIZE
-            //  HINT: There is a function called generateRandomNumberInRange
-            //        in this class which can be used
+
 
             // TODO
             //  Create the scaled bitmap (scaledBitmap) using size set above
@@ -317,14 +310,13 @@ class BubbleActivity : Activity() {
             return false
         }
 
-        // Helper function used to generate a random number within a range inclusive of min and max
-        private fun generateRandomNumberInRange(min: Int, max: Int): Int {
-            return ThreadLocalRandom.current().nextInt(min, max + 1)
-        }
-
         init {
+            // Create a new random number generator to
+            // randomize size, rotation, speed and direction
+            val r = Random()
+
             // Creates the bubble bitmap for this BubbleView
-            createScaledBitmap()
+            createScaledBitmap(r)
 
             // Radius of the Bitmap
             radius = (scaledBitmapSize / 2).toFloat()
@@ -334,10 +326,10 @@ class BubbleActivity : Activity() {
             yPos = y - radius
 
             // Set the BubbleView's speed and direction
-            setSpeedAndDirection()
+            setSpeedAndDirection(r)
 
             // Set the BubbleView's rotation
-            setRotation()
+            setRotation(r)
             mPainter.isAntiAlias = true
         }
     }
