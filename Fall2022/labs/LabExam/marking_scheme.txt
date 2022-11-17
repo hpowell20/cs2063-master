@@ -1,12 +1,14 @@
-TOTAL: 25 marks
+TOTAL: 27 marks
 
 Main Activity (2 marks):
   1 - Create instance of SharedPreferences
   1 - Invoke LoadDataTask
 
-LoadDataTask (2 marks):
+LoadDataTask (4 marks):
   1 - Load the data from the JSON assets file and return the list of cities
+  1 - Call updateDisplay from within the handler
   1 - Use result to set the adapter for the RecyclerView
+  1 - Create Toast message
 
 MyAdapter (8 marks):
   1 - Get item at position in mDataSet

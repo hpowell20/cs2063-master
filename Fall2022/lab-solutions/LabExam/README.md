@@ -4,14 +4,13 @@ This lab exam is open everything (Android documentation, labs and examples, Stac
 
 **You must not communicate with others (in person or online) during the exam.**
 
-# Winter Olympics Host Games app
+# FIFA World Cup Games App
 
-This year the latest installment of the [Winter Olympic Games](https://en.wikipedia.org/wiki/Winter_Olympic_Games) was held in Beijing, China.  We will celebrate this occasion by building an app that displays information about all of the summer games that have taken place in the past.
+For the first time in 36 years Canada has qualified for the FIFA World Cup.  This year's event kicks off on November 20 in [Qatar] (https://www.fifa.com/fifaplus/en/tournaments/mens/worldcup/qatar2022). We will celebrate this occasion by building an app that displays information about all of the summer games that have taken place in the past.
 
 This app will consist of two activities. The main activity will include a `RecyclerView` where the items are the Olympiad number and host city name along with checkboxes that the user can check when they have seen an item.
 
-Clicking on the name of a host city will take the user to a detail activity
-that shows the extra details about the particular games (Year of the games, dates) along with a button to view the Wikipedia entry for more information on the games themselves. Pressing back from the detail activity takes the user back to the main activity. See examples below.
+Clicking on the name of a host nation will take the user to a detail activity that shows the extra details about the particular games (Year of the games, dates) along with a button to view the Wikipedia entry for more information on the games themselves. Pressing back from the detail activity takes the user back to the main activity. See examples below.
 
 The instructor has Android devices with a sample solution installed. You can ask to briefly borrow one of these devices to see the intended functionality.
 
@@ -28,7 +27,7 @@ The instructor has Android devices with a sample solution installed. You can ask
 You have been provided with skeleton code. The structure of the app
 will be familiar to you from previous labs.
 
-* `GamesInfo` represents a summer games event
+* `EventInfo` represents a world cup event
   * Although there are no optional properties in the class new objects are created using the Builder pattern which helps to set immutability for the class data
   * As a result only getter methods to retrieve the course title and description are provided
 
@@ -38,12 +37,12 @@ will be familiar to you from previous labs.
 * `DetailActivity` corresponds to the second screenshot above, displaying information about a specific host city
   * It doesn't do much yet as you will be completing it
 
-* `MainActivity.kt` will display a list of names of host cities using a `RecyclerView`
+* `MainActivity` will display a list of names of host nations displayed in a `RecyclerView`
   * `MainActivity` will use `SharedPreferences` to store information about which games the user has visited
   
 * `MyAdapter` corresponds to the RecyclerView class being used to populate the view with games information.
   * When the name of a games is clicked the `DetailActivity` will be launched via an explicit `Intent`
-    * For example, in the screenshot for `MainActivity` the user has visited XV - Calgary, XVI - Albertville, and XVIII - Nagano
+    * For example, in the screenshot for `MainActivity` the user has visited IV - Brazil, and VIII - Chili
 
 * `LoadDataTask` is used to read in the details and updated the view using a separate thread
 
@@ -53,8 +52,8 @@ Complete the TODOs in `MainActivity.kt`, `DetailActivity.kt`, `LoadDataTask.kt`,
 
 NOTES: 
 * There are also TODOs related to the `SharedPreferences` which are labeled as `TODO: SharedPreferences`
-* You will need to pass around an instance of a `SharedPreferences` object to be used throughout.  The keys will be the olympic games number associated with a host city and the values will be booleans
-    * True representing that a user has visited a city and false representing that a user has not
+* You will need to pass around an instance of a `SharedPreferences` object to be used throughout.  The keys will be the world cup event number associated with a host nation and the values will be booleans
+    * True representing that a user has visited a nation and false representing that a user has not
     * If an id is not found in the `SharedPreferences` its value will be assumed to be false
 
 **You may only modify `MainActivity.kt` and `DetailActivity.kt`, `LoadDataTask.kt`, and `MyAdapter.kt`. You must not make changes to any other files.**

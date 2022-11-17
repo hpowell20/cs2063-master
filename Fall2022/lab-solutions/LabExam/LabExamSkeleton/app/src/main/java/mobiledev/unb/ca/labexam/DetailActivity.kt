@@ -60,7 +60,7 @@ class DetailActivity : AppCompatActivity() {
         val actionBar: ActionBar? = supportActionBar
         if (null != actionBar) {
             actionBar.setDisplayHomeAsUpEnabled(true)
-            actionBar.title = intent.getStringExtra(Constants.INTENT_KEY_HOST_CITY)
+            actionBar.title = intent.getStringExtra(Constants.INTENT_KEY_HOST_NATION)
         }
     }
 }

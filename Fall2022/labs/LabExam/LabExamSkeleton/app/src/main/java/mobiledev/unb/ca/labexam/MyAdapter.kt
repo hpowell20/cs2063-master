@@ -1,7 +1,7 @@
 package mobiledev.unb.ca.labexam
 
 import androidx.appcompat.app.AppCompatActivity
-import mobiledev.unb.ca.labexam.model.GamesInfo
+import mobiledev.unb.ca.labexam.model.EventInfo
 import android.content.SharedPreferences
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.LinearLayout
@@ -13,7 +13,7 @@ import android.widget.CompoundButton
 
 class MyAdapter(
     private val parentActivity: AppCompatActivity,
-    private val dataset: List<GamesInfo>,
+    private val dataset: List<EventInfo>,
     private val sharedPreferences: SharedPreferences
 ) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
     class ViewHolder(v: LinearLayout) : RecyclerView.ViewHolder(v) {
@@ -44,7 +44,7 @@ class MyAdapter(
 
         // TODO: SharedPreference
         //  Set the CheckBox in the ViewHolder (holder) to be checked if the
-        //  value stored in the shared preferences for the number for this GamesInfo is true, and to
+        //  value stored in the shared preferences for the number for this EventInfo is true, and to
         //  be not checked otherwise; if there is no value in the shared
         //  preferences for this id, then the checkbox should not be checked
         //  (i.e., assume a default value of false for anything not in
@@ -65,8 +65,7 @@ class MyAdapter(
             //  Hint: https://developer.android.com/reference/android/content/SharedPreferences.html#edit()
 
             // TODO: Shared Preferences
-            //  Set the value stored in SharedPreferences for the number for this GamesInfo to be
-            //  the value of isChecked
+            //  Set the value stored in SharedPreferences for the EventInfo number to be the value of isChecked
             //  Hint: https://developer.android.com/reference/android/content/SharedPreferences.Editor.html#putBoolean(java.lang.String,%20boolean)
 
             // TODO: SharedPreferences

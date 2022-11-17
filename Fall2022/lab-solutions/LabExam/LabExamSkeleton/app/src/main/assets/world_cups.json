@@ -1,0 +1,160 @@
+{
+  "host_nations": [
+    {
+      "year": "1930",
+      "number": "I",
+      "host_nation": "Uruguay",
+      "dates": "13 - 30 July",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/1930_FIFA_World_Cup"
+    },
+    {
+      "year": "1934",
+      "number": "II",
+      "host_nation": "Italy",
+      "dates": "27 May – 10 June",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/1934_FIFA_World_Cup"
+    },
+    {
+      "year": "1938",
+      "number": "III",
+      "host_nation": "France",
+      "dates": "4–15 February",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/1938_FIFA_World_Cup"
+    },
+    {
+      "year": "1950",
+      "number": "IV",
+      "host_nation": "Brazil",
+      "dates": "24 June – 16 July",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/1950_FIFA_World_Cup"
+    },
+    {
+      "year": "1954",
+      "number": "V",
+      "host_nation": "Switzerland",
+      "dates": "16 June – 4 July",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/1954_FIFA_World_Cup"
+    },
+    {
+      "year": "1958",
+      "number": "VI",
+      "host_nation": "Sweden",
+      "dates": "8–29 June",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/1958_FIFA_World_Cup"
+    },
+    {
+      "year": "1962",
+      "number": "VII",
+      "host_nation": "Chili",
+      "dates": "30 May – 17 June",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/1962_FIFA_World_Cup"
+    },
+    {
+      "year": "1966",
+      "number": "VIII",
+      "host_nation": "England",
+      "dates": "11–30 July",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/1966_FIFA_World_Cup"
+    },
+    {
+      "year": "1970",
+      "number": "IX",
+      "host_nation": "Mexico",
+      "dates": "31 May – 21 June",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/1970_FIFA_World_Cup"
+    },
+    {
+      "year": "1974",
+      "number": "X",
+      "host_nation": "West Germany",
+      "dates": "13 June – 7 July",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/1974_FIFA_World_Cup"
+    },
+    {
+      "year": "1978",
+      "number": "XI",
+      "host_nation": "Argentina",
+      "dates": "1–25 June",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/1978_FIFA_World_Cup"
+    },
+    {
+      "year": "1982",
+      "number": "XII",
+      "host_nation": "Spain",
+      "dates": "13 June – 11 July",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/1982_FIFA_World_Cup"
+    },
+    {
+      "year": "1986",
+      "number": "XIII",
+      "host_nation": "Mexico",
+      "dates": "31 May – 29 June",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/1986_FIFA_World_Cup"
+    },
+    {
+      "year": "1990",
+      "number": "XIV",
+      "host_nation": "Italy",
+      "dates": "8 June – 8 July",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/1990_FIFA_World_Cup"
+    },
+    {
+      "year": "1994",
+      "number": "XV",
+      "host_nation": "United States",
+      "dates": "June 17 – July 17",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/1994_FIFA_World_Cup"
+    },
+    {
+      "year": "1998",
+      "number": "XVI",
+      "host_nation": "France",
+      "dates": "10 June – 12 July",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/1998_FIFA_World_Cup"
+    },
+    {
+      "year": "2002",
+      "number": "XVII",
+      "host_nation": "Japan / South Korea",
+      "dates": "31 May – 30 June",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/2002_FIFA_World_Cup"
+    },
+    {
+      "year": "2006",
+      "number": "XVIII",
+      "host_nation": "Germany",
+      "dates": "9 June – 9 July",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/2006_FIFA_World_Cup"
+    },
+    {
+      "year": "2010",
+      "number": "XIX",
+      "host_nation": "SouthAfrica",
+      "dates": "11 June – 11 July",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/2010_FIFA_World_Cup"
+    },
+    {
+      "year": "2014",
+      "number": "XX",
+      "host_nation": "Brazil",
+      "dates": "12 June – 13 July",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/2014_FIFA_World_Cup"
+    },
+    {
+      "year": "2018",
+      "number": "XXI",
+      "host_nation": "Russia",
+      "dates": "14 June – 15 July",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/2018_FIFA_World_Cup"
+    },
+    {
+      "year": "2022",
+      "number": "XXII",
+      "host_nation": "Qatar",
+      "dates": "20 November – 18 December",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/2022_FIFA_World_Cup"
+    }
+  ]
+}
+
+

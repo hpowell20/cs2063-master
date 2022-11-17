@@ -25,6 +25,6 @@ class DetailActivity : AppCompatActivity() {
         // https://developer.android.com/reference/android/net/Uri.html#parse(java.lang.String)
 
         // TODO
-        //  Set the title of the action bar to be the host city name
+        //  Set the title of the action bar to be the host nation name
     }
 }

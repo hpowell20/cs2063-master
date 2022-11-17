@@ -5,7 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import android.os.Handler
 import android.os.Looper
-import mobiledev.unb.ca.labexam.model.GamesInfo
+import android.widget.Toast
+import mobiledev.unb.ca.labexam.model.EventInfo
 import mobiledev.unb.ca.labexam.MyAdapter
 import mobiledev.unb.ca.labexam.helper.SharedPreferencesHelper
 import java.util.concurrent.Executors
@@ -38,15 +39,36 @@ class LoadDataTask(private val activity: AppCompatActivity) {
                 // TODO
                 //  Load the data from the JSON assets file and return the list of cities
                 val jsonUtils = JsonUtils(appContext)
-                val gamesInfoList = jsonUtils.hostCities
+                val gamesInfoList = jsonUtils.hostNations
 
                 // TODO
                 //  Use result to set the adapter for the RecyclerView
-                mainHandler.post { setupRecyclerView(gamesInfoList!!) }
+                //mainHandler.post { setupRecyclerView(gamesInfoList!!) }
+                mainHandler.post { updateDisplay(gamesInfoList!!) }
+
+                // TODO
+                //  Create a toast message
+//                mainHandler.post {
+//                    Toast.makeText(appContext,
+//                        "Processing Complete",
+//                        Toast.LENGTH_SHORT).show()
+//                }
             }
     }
 
-    private fun setupRecyclerView(gamesInfoList: List<GamesInfo>) {
+    private fun updateDisplay(gamesInfoList: List<EventInfo>) {
+        // TODO
+        //  Setup the RecyclerView using the setupRecyclerView method
+        setupRecyclerView(gamesInfoList)
+
+        // TODO
+        //  Create a Toast indicating that the download is complete
+        Toast.makeText(appContext,
+            "Processing Complete",
+            Toast.LENGTH_SHORT).show()
+    }
+
+    private fun setupRecyclerView(gamesInfoList: List<EventInfo>) {
         recyclerView!!.adapter = MyAdapter(activity, gamesInfoList, sharedPreferencesHelper!!)
     }
 }

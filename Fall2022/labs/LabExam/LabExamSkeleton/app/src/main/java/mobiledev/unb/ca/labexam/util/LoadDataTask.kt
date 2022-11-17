@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.content.SharedPreferences
 import android.os.Handler
 import android.os.Looper
-import mobiledev.unb.ca.labexam.model.GamesInfo
+import mobiledev.unb.ca.labexam.model.EventInfo
 import mobiledev.unb.ca.labexam.MyAdapter
 import java.util.concurrent.Executors
 
@@ -30,14 +30,22 @@ class LoadDataTask(private val activity: AppCompatActivity) {
             .execute {
                 val mainHandler = Handler(Looper.getMainLooper())
                 // TODO
-                //  Load the data from the JSON assets file and return the list of cities
+                //  Load the data from the JSON assets file and return the list of host nations
 
                 // TODO
-                //  Use result to set the adapter for the RecyclerView}
+                //  Using the updateDisplay method update the UI with the results
             }
     }
 
-    private fun setupRecyclerView(gamesInfoList: List<GamesInfo>) {
-        recyclerView!!.adapter = MyAdapter(activity, gamesInfoList, sharedPreferences!!)
+    private fun updateDisplay(eventsInfoList: List<EventInfo>) {
+        // TODO
+        //  Setup the RecyclerView using the setupRecyclerView method
+
+        // TODO
+        //  Create a Toast indicating that the file has been loaded
+    }
+
+    private fun setupRecyclerView(eventsInfoList: List<EventInfo>) {
+        recyclerView!!.adapter = MyAdapter(activity, eventsInfoList, sharedPreferences!!)
     }
 }

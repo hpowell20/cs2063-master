@@ -3,7 +3,7 @@ package mobiledev.unb.ca.labexam
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
-import mobiledev.unb.ca.labexam.model.GamesInfo
+import mobiledev.unb.ca.labexam.model.EventInfo
 import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.LinearLayout
@@ -17,7 +17,7 @@ import mobiledev.unb.ca.labexam.helper.SharedPreferencesHelper
 
 class MyAdapter(
     private val parentActivity: AppCompatActivity,
-    private val dataset: List<GamesInfo>,
+    private val dataset: List<EventInfo>,
     private val sharedPreferencesHelper: SharedPreferencesHelper
 ) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
     class ViewHolder(v: LinearLayout) : RecyclerView.ViewHolder(v) {
@@ -53,7 +53,7 @@ class MyAdapter(
                 putExtra(Constants.INTENT_KEY_NUMBER, number)
                 putExtra(Constants.INTENT_KEY_YEAR, gamesInfo.year)
                 putExtra(Constants.INTENT_KEY_DATES, gamesInfo.dates)
-                putExtra(Constants.INTENT_KEY_HOST_CITY, gamesInfo.hostCity)
+                putExtra(Constants.INTENT_KEY_HOST_NATION, gamesInfo.hostNation)
                 putExtra(Constants.INTENT_KEY_WIKIPEDIA_LINK, gamesInfo.wikipediaLink)
             }
 

@@ -1,32 +1,32 @@
 package mobiledev.unb.ca.labexam.model
 
-class GamesInfo private constructor(builder: Builder) {
+class EventInfo private constructor(builder: Builder) {
     val year: String
     val number: String
-    val hostCity: String
+    val hostNation: String
     val dates: String
     val wikipediaLink: String
 
     // Only need to include getters
     val title: String
-        get() = "$number - $hostCity"
+        get() = "$number - $hostNation"
 
     class Builder(
         val year: String,
         val number: String,
-        val hostCity: String,
+        val hostNation: String,
         val dates: String,
         val wikipediaLink: String
     ) {
-        fun build(): GamesInfo {
-            return GamesInfo(this)
+        fun build(): EventInfo {
+            return EventInfo(this)
         }
     }
 
     init {
         year = builder.year
         number = builder.number
-        hostCity = builder.hostCity
+        hostNation = builder.hostNation
         dates = builder.dates
         wikipediaLink = builder.wikipediaLink
     }
