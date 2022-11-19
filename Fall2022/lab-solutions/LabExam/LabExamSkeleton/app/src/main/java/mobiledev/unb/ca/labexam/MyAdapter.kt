@@ -56,7 +56,7 @@ class MyAdapter(
                 putExtra(Constants.INTENT_KEY_HOST_NATION, gamesInfo.hostNation)
                 putExtra(Constants.INTENT_KEY_WIKIPEDIA_LINK, gamesInfo.wikipediaLink)
             }
-
+            
             try {
                 // Automatically set the check box to be selected
                 sharedPreferencesHelper.saveCheckedState(SharedPreferencesEntry(number, true))

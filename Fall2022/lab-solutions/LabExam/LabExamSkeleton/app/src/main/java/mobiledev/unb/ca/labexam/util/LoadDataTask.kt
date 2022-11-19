@@ -39,20 +39,11 @@ class LoadDataTask(private val activity: AppCompatActivity) {
                 // TODO
                 //  Load the data from the JSON assets file and return the list of cities
                 val jsonUtils = JsonUtils(appContext)
-                val gamesInfoList = jsonUtils.hostNations
+                val hostNationsList = jsonUtils.hostNations
 
                 // TODO
-                //  Use result to set the adapter for the RecyclerView
-                //mainHandler.post { setupRecyclerView(gamesInfoList!!) }
-                mainHandler.post { updateDisplay(gamesInfoList!!) }
-
-                // TODO
-                //  Create a toast message
-//                mainHandler.post {
-//                    Toast.makeText(appContext,
-//                        "Processing Complete",
-//                        Toast.LENGTH_SHORT).show()
-//                }
+                //  Call updateDisplay to refresh the UI
+                mainHandler.post { updateDisplay(hostNationsList!!) }
             }
     }
 
@@ -64,7 +55,7 @@ class LoadDataTask(private val activity: AppCompatActivity) {
         // TODO
         //  Create a Toast indicating that the download is complete
         Toast.makeText(appContext,
-            "Processing Complete",
+            "Host Nations List Processing Complete",
             Toast.LENGTH_SHORT).show()
     }
 

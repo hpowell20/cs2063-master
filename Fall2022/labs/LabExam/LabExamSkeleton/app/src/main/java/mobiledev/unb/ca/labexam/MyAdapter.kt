@@ -32,15 +32,19 @@ class MyAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // TODO
-        //  Get the item at index position in mDataSet
+        //  Get the item at index position in dataSet
 
         // TODO
         //  Set the TextView in the ViewHolder to be the title attribute
 
         // TODO
-        //  Set the onClickListener for the TextView in the ViewHolder such
+        //  Part 1: Set the onClickListener for the TextView in the ViewHolder such
         //  that when it is clicked, it creates an explicit intent to launch DetailActivity
         //  with extra pieces of information in this intent.
+        // Part 2: Update shared preferences to indicate this has been ViewHolder
+
+        // Enhancement - Perhaps remove the checkbox and show icon of seen /not seen?
+        // Use a custom view inside the recycler view?
 
         // TODO: SharedPreference
         //  Set the CheckBox in the ViewHolder (holder) to be checked if the
