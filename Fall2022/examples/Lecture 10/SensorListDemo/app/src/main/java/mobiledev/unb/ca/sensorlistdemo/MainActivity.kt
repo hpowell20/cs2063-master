@@ -1,13 +1,13 @@
 package mobiledev.unb.ca.sensorlistdemo
 
+import android.app.Activity
 import android.hardware.Sensor
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import android.hardware.SensorManager
 import android.view.View
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
