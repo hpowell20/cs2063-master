@@ -29,3 +29,6 @@ BubbleView:
   - Move the BubbleView (1 mark)
   - Return true if the BubbleView is still on the screen after
     the move operation (1 mark)
+
+
+Is it possible to pop bubbles if they come into contact with each other?

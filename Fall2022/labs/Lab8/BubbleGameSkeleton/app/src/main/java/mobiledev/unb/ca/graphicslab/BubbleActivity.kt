@@ -72,6 +72,19 @@ class BubbleActivity : Activity() {
 
         // TODO
         //  Set a SoundPool OnLoadCompletedListener that calls setupGestureDetector()
+        soundPool!!.setOnLoadCompleteListener { _: SoundPool?, _: Int, status: Int ->
+            // TODO Call setupGestureListener
+        }
+
+        //soundPool.setOnLoadCompleteListener(new OnLoadCompleteListener(){
+// @override
+// onLoadComplete(SoundPool soundPool, int sampleId, int status)
+// {
+// show button and play intro sound here
+// }});
+
+soundPool!!.setOnLoadCompleteListener { _: SoundPool?, _: Int, status: Int -> }
+
 
         // TODO
         //  Load the sound from res/raw/bubble_pop.wav
