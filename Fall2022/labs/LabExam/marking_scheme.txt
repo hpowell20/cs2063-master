@@ -1,4 +1,4 @@
-TOTAL: 27 marks
+TOTAL: 28 marks
 
 Main Activity (2 marks):
   1 - Create instance of SharedPreferences
@@ -10,9 +10,10 @@ LoadDataTask (4 marks):
   1 - Use result to set the adapter for the RecyclerView
   1 - Create Toast message
 
-MyAdapter (8 marks):
-  1 - Get item at position in mDataSet
+MyAdapter (9 marks):
+  1 - Get item at position in dataSet
   1 - Set TextView with the title
+  1 - Setting state of checkbox from Shared Preferences
   1 - Set onClickListener
   1 - Set Intent with extras
   1 - Set checkbox value based on SharedPreferences
