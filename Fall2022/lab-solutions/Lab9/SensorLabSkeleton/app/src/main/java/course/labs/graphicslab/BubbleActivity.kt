@@ -141,9 +141,9 @@ class BubbleActivity : Activity(), SensorEventListener {
                 gravity[2] = applyLowPassFilter(z, gravity[2])
 
                 // Remove the gravity contribution with the high-pass filter.
-                acceleration[0] = applyHighPassFilter(event.values[0], gravity[0])
-                acceleration[1] = applyHighPassFilter(event.values[1], gravity[1])
-                acceleration[2] = applyHighPassFilter(event.values[2], gravity[2])
+                acceleration[0] = applyHighPassFilter(x, gravity[0])
+                acceleration[1] = applyHighPassFilter(y, gravity[1])
+                acceleration[2] = applyHighPassFilter(z, gravity[2])
 
                 // TODO
                 //  If there is a BubbleView, use its setSpeedAndDirection() method
