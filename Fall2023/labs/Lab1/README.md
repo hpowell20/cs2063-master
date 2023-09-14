@@ -34,7 +34,7 @@ NOTES:
 
 ###### Start the Project
 
-With the project created start it for the first time using the auto generated code.  We will make a few changes later on; the intention here is to ensure you can run the code.  Let's try this now using either a device and/or and emulator.
+With the project created start it for the first time using the auto generated code.  We will make a few changes later on; the intention here is to ensure you can run the code.  Let's try this now using either a device and/or and emulator.  The options are listed below.
 
 _Using a Device_
 
@@ -66,6 +66,18 @@ Android Studio comes equipped with built-in device emulators and options for emu
 
 NOTE:
 * These can be managed using the Android Virtual Machine (AVD) Manager at any time
+
+_Using Android x86 Lab OS_
+
+The lab computers do not have an Android Emulator installed by default.  They can be accessed through another virtual machine.
+
+1. From the Linux machine select Applications → FCS VMs → Android OS VM
+2. Once the VM is launched follow the instructions as shown on the desktop of the Android Studio VM to connect to it
+3. You should be given the option to connect the debugger to the emulator
+
+NOTE:
+* This VM is slower than an Android Emulator but does allow us to simulate things like low battery state and receiving a text message, which this VM doesn't
+* It does, however, let us run apps and test some basic functionality
 
 **Deliverable 1**
 
