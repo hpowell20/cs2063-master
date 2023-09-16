@@ -219,10 +219,10 @@ Android uses Gradle for dependency management and build tasks.  By default two G
 
 Now that we’re familiar with the _strings.xml_ resource file, let’s take a look at how to add locale-specific string support.  
 
-1. Right click the app/src/main/res directory and select New → Values Resource File
+1. Right click the app/src/main/res/values directory and select New → Values Resource File
 	* Enter **strings** in the File Name field
 	* From the Available Qualifiers select Locale and select the **>>** button
-	* In the language filter search for Spanish; this will set the list of chosen qualifiers to **en** and directory name as **values-es**
+	* In the language filter search for Spanish; this will set the list of chosen qualifiers to **es** and directory name as **values-es**
 	* Click **OK** to save
 	* Repeat the same process for French (fr)
 
