@@ -245,9 +245,9 @@ In future labs we will investigate maintaining the state of an ```Activity``` ev
 
 **Lab Completion**
 
-* Upload the following to the D2L assignment drop box
-	* ActivityOne.kt
-	* ActivityTwo.kt
-	* Results of the number of method calls made when switching between orientations
-
+* IN LAB: 
+  * Show the working app running on an emulator to the instructor or TA
+* AT HOME: 
+  * Submit `ActivityOne.kt`, `ActivityTwo.kt` and the results of the number of method calls made when switching between orientations to the Lab2 drop box folder on D2L
+ 
 * Keep a copy of your project work and answers for future reference
