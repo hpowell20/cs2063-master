@@ -8,11 +8,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class ActivityTwo : AppCompatActivity() {
-    private var onCreateCount = 0
-    private var onStartCount = 0
-    private var onResumeCount = 0
-    private var onRestartCount = 0
-
     private var createTextView: TextView? = null
     private var startTextView: TextView? = null
     private var resumeTextView: TextView? = null
@@ -107,5 +102,10 @@ class ActivityTwo : AppCompatActivity() {
     companion object {
         // String for LogCat documentation
         private const val TAG = "Lab 2 - Activity Two"
+
+        private var onCreateCount = 0
+        private var onStartCount = 0
+        private var onResumeCount = 0
+        private var onRestartCount = 0
     }
 }

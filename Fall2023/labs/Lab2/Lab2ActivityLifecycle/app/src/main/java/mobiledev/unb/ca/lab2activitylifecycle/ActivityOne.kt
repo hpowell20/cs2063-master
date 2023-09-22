@@ -10,20 +10,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class ActivityOne : AppCompatActivity() {
-    // NOTE:
-    // To track the number of times activity lifecycle methods
-    // have been called for each respective Activity we will need
-    // to increment a counter inside the method each time it is
-    // called by the system. Below are the variables you will use
-    // to increment during each lifecycle method call. We will be
-    // tracking only these four lifecycle methods during this lab.
-    private var onCreateCount = 0
-    private var onStartCount = 0
-    private var onResumeCount = 0
-    private var onRestartCount = 0
-
     // TODO 2
-    //  Declare four private TextView Objects and initialize them to null.
+    //  Declare three additional private TextView Objects and initialize them to null.
     //  They will contain counts of the four lifecycle method calls indicated
     //  in the activity layout XML (create, start, resume, and restart).
     //  NOTE:
@@ -128,7 +116,7 @@ class ActivityOne : AppCompatActivity() {
 
     private fun updateCountsDisplay() {
         // TODO 7
-        //  Update all of the TextView resources to the correct counter
+        //  Update the TextView resources to the correct counter
         //  HINT:
         //   Follow the provided example where createTextView
         //   refers to any of the private TextView objects
@@ -154,6 +142,18 @@ class ActivityOne : AppCompatActivity() {
     companion object {
         // String for LogCat documentation
         private const val TAG = "Lab 2 - Activity One"
+
+        // NOTE:
+        // To track the number of times activity lifecycle methods
+        // have been called for each respective Activity we will need
+        // to increment a counter inside the method each time it is
+        // called by the system. Below are the variables you will use
+        // to increment during each lifecycle method call. We will be
+        // tracking only these four lifecycle methods during this lab.
+        private var onCreateCount = 0
+        private var onStartCount = 0
+        private var onResumeCount = 0
+        private var onRestartCount = 0
 
         // Strings will serve as keys when saving state between activities
         private const val CREATE_VALUE = "create"
