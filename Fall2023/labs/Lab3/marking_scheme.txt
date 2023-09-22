@@ -1,0 +1,17 @@
+TOTAL: 10 marks
+
+Completion of required TODOs in the code (7 marks)
+
+Add code to navigate from MainActivity to ExternalActivityCalls (1 mark)
+Add permissions to manifest for picture (1 mark)
+Add code to take picture (1 mark)
+Add code to save picture to gallery (1 mark)
+Add code to capture the signal the picture was captured (1 mark)
+Add code to send email (1 mark)
+Add code for Return button from ExternalActivityCalls to MainActivity (1 mark)
+
+Writeup (3 marks):
+
+Part 1 - Something to the extent that activities keep getting added and removed from the stack
+Part 2 - The implementation can be adjusted to use a call to finish()
+Part 3 - Include screenshot
