@@ -22,11 +22,7 @@
         <activity
             android:name=".ExternalActivityCalls"
             android:label="@string/title_activity_activity_two"
-            android:parentActivityName=".MainActivity"
             android:exported="true">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
         </activity>
     </application>
 

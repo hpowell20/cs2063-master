@@ -150,9 +150,8 @@ Certain requested components may require access to device hardware; for example:
 With the required hardware feature to be used declared for the app you can wire your camera ```Button```’s ```setOnClickListener()``` event to implicitly alert the operating system of your ```Activity```'s ```Intent``` to access to the camera functionality. Doing so will provide the user a list of applications to satisfy the request to take a photo.
 
 1. Using the example code from the [Save a full-size photo](https://developer.android.com/training/camera-deprecated/photobasics#TaskPath) documentation as a base implement the Intent used to take a picture and save the full-size photo.  Please note the following.
-  * The variable for ```currentPhotoPath``` is already defined.
   * Use the name ```"mobiledev.unb.ca.lab3intents.provider"```  for the authority name in place of ```"com.example.android.fileprovider"``` in both the code and the AndroidManifest.xml file.
-  * You will notice that ```startActivityForResult()``` has been deprecated.  We will look to fix this in the next task.
+  * You will notice that ```startActivityForResult()``` has been deprecated.  We will look to fix this in a later step.
 
 2. Create a new resource file at _res/xml/file_paths.xml_ and add the following content:
   ```XML
@@ -164,7 +163,15 @@ With the required hardware feature to be used declared for the app you can wire 
   ```
     * NOTE: The documentation specifies external-files-path, however, this throws an error.  The XML file contents as shown above have been known to work in an emulator and device.
 
-**Task 8** 
+**Task 8**
+
+At this point we have saved the photo and we know where it has been saved (HINT: String defined in Task 7 as part of saving the file).  The next step is to alert Android to add this file to the photos database so that other applications (i.e. - the Gallery app) know about it.
+
+1. Add the code for ```galleryAddPic()``` from the [Task Gallery](https://developer.android.com/training/camera-deprecated/photobasics#TaskGallery) link to your code.
+
+But where should we call ```galleryAddPic()```?  Let's look at that next.
+
+**Task 9** 
 Following up on the changes made for Task 7 we will now look to replace the deprecated ```startActivityForResult()``` functionality.  This has been replaced by the [Activity Result APIs](https://developer.android.com/training/basics/intents/result).  
 
 To help with this you will notice an attribute called ```cameraActivityResultLauncher``` near the top of the file.  We will be working with this object to register a listener for photo capture events.
@@ -178,16 +185,7 @@ with
 cameraActivityResultLauncher!!.launch(takePictureIntent)
 ```
 
-**Task 8**
-
-At this point we have saved the photo and we know where it has been saved (HINT: String defined in Task 7 as part of saving the file).  The next step is to alert Android to add this file to the photos database so that other applications (i.e. - the Gallery app) know about it.
-
-We are now going to set the ```cameraActivityResultLauncher``` object to recieve the activity result and write the picture to the gallery.  We will do this by using the ```registerForActivityResult()``` function.  
-
-1. Locate the ```galleryAddPic()``` function.  This contains the code used to save the picture depending on API level being used.
-  * We will cover storage in a later lecture, for now the purpose of this lab is to work with intents so this code is provided.
-
-2. In the class code remove the TODO statement from the ```setCameraActivityResultLauncher``` and replace with the following.
+2. We are now going to set the ```cameraActivityResultLauncher``` object to recieve the activity result and write the picture to the gallery.  We will do this by using the ```registerForActivityResult()``` function.  In the class code remove the TODO statement within the ```setCameraActivityResultLauncher``` and replace with the following.
 ```kotlin
 cameraActivityResultLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
@@ -200,6 +198,10 @@ cameraActivityResultLauncher = registerForActivityResult(
   * This will take the result of the activity intent action (in this case the action of taking a photo) and save the results to the gallery. ```startActivityForResult()```
   * Additional details can be found at http://developer.android.com/training/basics/intents/result.html#ReceiveResult
 
+**NOTE**
+* As of Android 10 the way storage is handled in apps is to use Scoped Storage.  
+  * This is a known issue with this lab and can be fixed as part of an optional task later on.
+* Provided the camera is invoked from the application and a picture can be taken this is sufficient for the lab as we are concerned with intents functionality.
 
 **Task 10**
 
@@ -221,6 +223,11 @@ Restart your application and perform the following steps:
 2. Click the Back button and then Start again
 3. Do this a few times
 4. Now begin using the device back button to traverse the task backstack.
+
+**OPTIONAL - Task 13**
+Should you feel like getting the photos to save across all different API levels see this [post](https://stackoverflow.com/questions/63776744/save-bitmap-image-to-specific-location-of-gallery-android-10)
+1. Modify the save code to use the different save methods
+  * This code will be provided in the starting code for the next lab should you not run out of time week.
 
 **Writeup Task**
 

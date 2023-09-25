@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="mobiledev.unb.ca.lab3intents">
 
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+
     <application
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -22,12 +28,19 @@
         <activity
             android:name=".ExternalActivityCalls"
             android:label="@string/title_activity_activity_two"
-            android:parentActivityName=".MainActivity"
             android:exported="true">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
         </activity>
+
+        <!-- Provider value for saving a file; required for API 24 and higher -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="mobiledev.unb.ca.lab3intents.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>
