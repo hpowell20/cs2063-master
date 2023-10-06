@@ -120,6 +120,8 @@ the ```Context``` of ```ActivityOne```
 Let's demonstrate this by announcing our application’s ```Intent``` to send an email.
 * We don't need to concern ourselves with the underlying method an email application implements to succeed at transferring our message to the recipient
 * We need only to announce our intention to send email to the Android operating system and it will inform the user what options are available.
+ A list of possible Actions and Extras available for communicating with email applications on the device as well as email ```Intent``` creation can be found
+[here](http://developer.android.com/guide/components/intents-common.html#Email)
 
 We can provide information to the ```Activity``` we intend to start. This information is sent along with the ```Intent``` as attached extras when we call ```startActivity()```with the ```Intent``` we created as a parameter.  This extra information is then usable within the component (eg. ```Activity```/```Service```/```Broadcast Receiver```) we started.
 
@@ -131,9 +133,6 @@ We can provide information to the ```Activity``` we intend to start. This inform
     * One for the body of the email “This is a test email!”
   * Call ```startActivity()``` with your new ```Intent``` as a parameter.
 3. Update the on click action for the email ```Button``` to call ```dispatchSendEmailIntent()```.
-
-* A list of possible Actions and Extras available for communicating with email applications on the device as well as email ```Intent``` creation can be found at
-[here](http://developer.android.com/guide/components/intents-common.html#Email)
 
 **Task 6**
 

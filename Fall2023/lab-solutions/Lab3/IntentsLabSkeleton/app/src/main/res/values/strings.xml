@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Lab 3 Intents</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_activity_two">Activity Two</string>
+    <string name="title_external_activity_calls">Activity Two</string>
     <string name="button_start">Start</string>
     <string name="button_camera">Camera</string>
     <string name="button_email">Email</string>

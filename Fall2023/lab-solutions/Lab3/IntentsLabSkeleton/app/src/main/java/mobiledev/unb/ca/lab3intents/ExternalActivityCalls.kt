@@ -8,7 +8,6 @@ import android.graphics.BitmapFactory
 import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -16,11 +15,11 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
-import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import java.io.File
 import java.io.IOException
@@ -111,12 +110,12 @@ class ExternalActivityCalls : AppCompatActivity() {
             // Ensure that there is a camera activity to handle the intent
             try {
                 // Set the File object used to save the photo
-                var photoFile: File? = null
-                try {
-                    photoFile = createImageFile()
+                val photoFile: File? = try {
+                    createImageFile()
                 } catch (ex: IOException) {
                     // Error occurred while creating the File
                     Log.e(TAG, "Exception found when creating the photo save file")
+                    null
                 }
 
                 // Continue only if the File was successfully created
@@ -198,7 +197,7 @@ class ExternalActivityCalls : AppCompatActivity() {
         try {
             outputStream?.let {
                 bitmap.compress(
-                    Bitmap.CompressFormat.PNG,
+                    Bitmap.CompressFormat.JPEG,
                     100,
                     it
                 )

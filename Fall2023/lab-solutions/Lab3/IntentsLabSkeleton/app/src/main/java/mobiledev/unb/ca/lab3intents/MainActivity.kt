@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         val startButton = findViewById<Button>(R.id.btnStart)
         startButton.setOnClickListener {
-            val intent = Intent(this@MainActivity, ExternalActivityCalls::class.java)
+            val intent = Intent(this, ExternalActivityCalls::class.java)
             try {
                 startActivity(intent)
             } catch (ex: ActivityNotFoundException) {

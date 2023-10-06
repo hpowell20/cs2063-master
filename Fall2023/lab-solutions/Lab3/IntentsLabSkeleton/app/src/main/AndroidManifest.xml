@@ -27,8 +27,12 @@
         </activity>
         <activity
             android:name=".ExternalActivityCalls"
-            android:label="@string/title_activity_activity_two"
+            android:label="@string/title_external_activity_calls"
+            android:parentActivityName=".MainActivity"
             android:exported="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         </activity>
 
         <!-- Provider value for saving a file; required for API 24 and higher -->

@@ -22,8 +22,7 @@ import java.io.OutputStream
 class ExternalActivityCalls : AppCompatActivity() {
     // Attributes for storing the file photo path
     private lateinit var currentPhotoPath: String
-    // private lateinit var imageFileName: String
-
+   
     // Activity listeners
     private var cameraActivityResultLauncher: ActivityResultLauncher<Intent>? = null
 
