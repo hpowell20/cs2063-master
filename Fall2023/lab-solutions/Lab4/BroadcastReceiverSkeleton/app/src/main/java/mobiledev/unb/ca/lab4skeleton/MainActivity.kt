@@ -1,6 +1,8 @@
 package mobiledev.unb.ca.lab4skeleton
 
 import android.Manifest
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.*
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -9,12 +11,14 @@ import android.media.MediaScannerConnection
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.os.SystemClock
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -25,10 +29,15 @@ import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 class MainActivity : AppCompatActivity() {
     // Attributes for storing the file photo path
     private lateinit var currentPhotoPath: String
     private lateinit var imageFileName: String
+
+    // Attributes for working with an alarm
+    private var alarmManager: AlarmManager? = null
+    private lateinit var alarmReceiverIntent: PendingIntent
 
     // Activity listeners
     private var cameraActivityResultLauncher: ActivityResultLauncher<Intent>? = null
@@ -40,12 +49,48 @@ class MainActivity : AppCompatActivity() {
         val cameraButton = findViewById<Button>(R.id.button)
         cameraButton.setOnClickListener { dispatchTakePhotoIntent() }
 
+        // Check for the appropriate notification permissions
+        checkNotificationPermissions()
+
         // Register the activity listener
         setCameraActivityResultLauncher()
 
-        // TODO: Ensure the permissions are set for posting notifications
-        // checkNotificationPermissions()
+        // Set the battery filter intents
+        setBatteryIntentFilters()
+
+        // Set the broadcast receiver alarm values
+        initAlarmValues()
    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        // Unregister the battery receivers to avoid memory leaks
+        removeBatteryIntentFilters()
+    }
+
+//    private fun checkNotificationPermission() {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//            val permission = Manifest.permission.POST_NOTIFICATIONS
+//            when (PackageManager.PERMISSION_GRANTED) {
+//                ActivityCompat.checkSelfPermission(this, permission) -> {
+//                    return
+//                }
+////                        shouldShowRequestPermissionRationale(permission) -> {
+////                            showPermissionRationaleDialog() // permission denied permanently
+////                        }
+//                else -> {
+//                    requestNotificationPermission.launch(permission)
+//                }
+//            }
+//        }
+//    }
+//
+//    private val requestNotificationPermission =
+//        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted->
+//            if (isGranted) // make your action here
+//            else Log.e(TAG, "Permission denied")
+//        }
 
     /**
      * Checks for the appropriate permissions
@@ -72,10 +117,105 @@ class MainActivity : AppCompatActivity() {
         ), Constants.NOTIFICATION_REQUEST_ID)
     }
 
-    // Private Helper Methods
+    // Alarm Methods
+    private fun initAlarmValues() {
+        alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmReceiverIntent = Intent(this@MainActivity, AlarmReceiver::class.java).let { intent ->
+            PendingIntent.getBroadcast(
+                this@MainActivity,
+                0,
+                intent,
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+            )
+        }
+
+        // Start the alarm
+        startAlarm()
+    }
+
+    private fun startAlarm() {
+        alarmManager?.setInexactRepeating(
+            AlarmManager.RTC_WAKEUP,
+            SystemClock.elapsedRealtime() + INTERVAL_SIXTY_SECONDS,
+            INTERVAL_SIXTY_SECONDS.toLong(),
+            alarmReceiverIntent
+        )
+        Log.i(TAG, "Alarm Started")
+    }
+
+    private fun cancelAlarm() {
+        // ? is for safe, !! is a non null assertion against a nullable receiver
+        alarmManager?.cancel(alarmReceiverIntent)
+        Log.i(TAG, "Alarm Cancelled")
+    }
+
+    // Battery check methods
+    private val batteryInfoReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            val intentAction = intent.action
+            if (Intent.ACTION_BATTERY_OKAY == intentAction) {
+                startAlarm()
+                Toast.makeText(
+                    this@MainActivity,
+                    "Battery level good; starting the alarm",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            if (Intent.ACTION_BATTERY_LOW == intentAction) {
+                cancelAlarm()
+                Toast.makeText(
+                    this@MainActivity,
+                    "Battery level low; cancelling the alarm",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
+
+    // Power Check Methods
+    private val powerInfoReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            val intentAction = intent.action
+            if (Intent.ACTION_POWER_CONNECTED == intentAction) {
+                startAlarm()
+                Toast.makeText(
+                    this@MainActivity,
+                    "Device plugged in; starting the alarm",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            if (Intent.ACTION_POWER_DISCONNECTED == intentAction) {
+                cancelAlarm()
+                Toast.makeText(
+                    this@MainActivity,
+                    "Device unplugged; cancelling the alarm",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
+
+    private fun setBatteryIntentFilters() {
+        val batteryIntentFilter = IntentFilter()
+        batteryIntentFilter.addAction(Intent.ACTION_BATTERY_OKAY)
+        batteryIntentFilter.addAction(Intent.ACTION_BATTERY_LOW)
+        registerReceiver(batteryInfoReceiver, batteryIntentFilter)
+
+        val powerIntentFilter = IntentFilter()
+        powerIntentFilter.addAction(Intent.ACTION_POWER_CONNECTED)
+        powerIntentFilter.addAction(Intent.ACTION_POWER_DISCONNECTED)
+        registerReceiver(powerInfoReceiver, powerIntentFilter)
+    }
+
+    private fun removeBatteryIntentFilters() {
+        unregisterReceiver(batteryInfoReceiver)
+        unregisterReceiver(powerInfoReceiver)
+    }
+
+    // Camera methods
     private fun setCameraActivityResultLauncher() {
         cameraActivityResultLauncher = registerForActivityResult(
-            StartActivityForResult()
+            ActivityResultContracts.StartActivityForResult()
         ) { result: ActivityResult ->
             if (result.resultCode == RESULT_OK) {
                 galleryAddPic()
@@ -83,7 +223,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Camera methods
     private fun dispatchTakePhotoIntent() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             // Ensure that there is a camera activity to handle the intent
@@ -183,5 +322,6 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "MainActivity"
         private const val TIME_STAMP_FORMAT = "yyyyMMdd_HHmmss"
+        private const val INTERVAL_SIXTY_SECONDS = 60 * 1000
     }
 }

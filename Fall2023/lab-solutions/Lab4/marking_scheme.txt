@@ -1,0 +1,12 @@
+TOTAL: 10 marks
+
+Screenshots attached of notifications and toast messages (1 mark)
+
+MainActivity:
+ - Addition of code to create the alarm manager (2 marks)
+ - Addition of code to set the alarm timer (1 mark)
+ - Addition of code to check the battery level and turn on / off alarm (3 marks)
+
+AlarmReceiver
+- Addition of code to create the notification channel (1 marks)
+- Addition of code to create the tap notification (2 marks)
