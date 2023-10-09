@@ -22,9 +22,8 @@ class LoadIconTask(activity: MainActivity) {
         return this
     }
 
-    @OptIn(DelicateCoroutinesApi::class)
     fun execute() {
-        GlobalScope.launch {
+        MainScope().launch {
             // Show the progress bar
             progressBar!!.visibility = ProgressBar.VISIBLE
 
