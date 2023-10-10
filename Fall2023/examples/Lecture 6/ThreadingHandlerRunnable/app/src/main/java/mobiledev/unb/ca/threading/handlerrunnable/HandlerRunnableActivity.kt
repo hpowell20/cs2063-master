@@ -7,6 +7,7 @@ import android.os.Parcelable
 import android.graphics.Bitmap
 import android.widget.Toast
 import android.graphics.drawable.BitmapDrawable
+import android.os.Build
 import android.view.View
 import android.widget.ImageView
 
@@ -24,7 +25,13 @@ class HandlerRunnableActivity : Activity() {
         if (null != savedInstanceState) {
             mProgressBar!!.visibility = savedInstanceState.getInt(PROGRESS_BAR_VISIBLE_KEY)
             mProgressBar!!.progress = savedInstanceState.getInt(PROGRESS_BAR_PROGRESS_KEY)
-            mImageView!!.setImageBitmap(savedInstanceState.getParcelable<Parcelable>(BITMAP_KEY) as Bitmap?)
+
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) // API 33
+                @Suppress("DEPRECATION")
+                mImageView!!.setImageBitmap(savedInstanceState.getParcelable<Parcelable>(BITMAP_KEY) as Bitmap?)
+            else
+                mImageView!!.setImageBitmap(savedInstanceState.getParcelable(BITMAP_KEY, Bitmap::class.java))
+
             mLoadIconTask = lastNonConfigurationInstance as LoadIconTask?
             if (null != mLoadIconTask) {
                 mLoadIconTask!!.setProgressBar(mProgressBar)
@@ -41,7 +48,7 @@ class HandlerRunnableActivity : Activity() {
         mLoadIconTask!!.start()
     }
 
-    fun onClickOtherButton(v: View?) {
+    fun onClickOtherButton() {
         Toast.makeText(this@HandlerRunnableActivity, "I'm Working",
             Toast.LENGTH_SHORT).show()
     }
