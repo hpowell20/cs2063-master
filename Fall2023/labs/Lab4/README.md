@@ -105,14 +105,16 @@ With the permissions in place let's add the app notifications.
 1. Open the ```AlarmReceiver``` class and complete the implementation for the ```onReceive``` method by adding a notification.
 	* Follow the _*Create a basic notification*_ section in the [guide](https://developer.android.com/develop/ui/views/notifications/build-notification#simple-notification) for this
 	* The tap action of this notification will be to start ```MainActivity``` (i.e. clicking on the notification takes the user back to the app)
-		* Additional details to watch when building your notification:
-			* Constant values for the channel ID and notification ID can be found in the ```Constants``` file
-			* Set the small icon to ```R.mipmap.ic_launcher```
+		* Constant values for the channel ID and notification ID can be found in the ```Constants``` file
+		* Additional details to watch when building the notification channel:
+			* Update ```getSystemService(Context.NOTIFICATION_SERVICE)``` _context.getSystemService(Context.NOTIFICATION_SERVICE)_ to fix compiler errors
 			* Set [```setAutoCancel```](http://developer.android.com/reference/android/app/Notification.Builder.html#setAutoCancel%28boolean%29) to ```true``` so that when the user clicks on the notification it is dismissed
 			* Set the importance as IMPORTANCE_HIGH
+			* The notification channel creation code must be called regardless of the Android level being used; see Notes below
+		* Additional details to watch when building the notification itself:
+			* Set the small icon to ```R.mipmap.ic_launcher```
 			* String values for the notifications can be found in the __strings.xml__ resource file
-		* The notification channel creation code must be called regardless of the Android level being used; see Notes below
-		* There may be some compiler errors when adding the code to [show the notification](https://developer.android.com/develop/ui/views/notifications/build-notification#notify); to resolve them use the tips provided by Android Studio
+			* There may be some compiler errors when adding the code to [show the notification](https://developer.android.com/develop/ui/views/notifications/build-notification#notify); to resolve them use the tips provided by Android Studio
 	* **TIP:** The methods to create the intents require a context.  For this have a look at the signature for onRecieve.
 
 
