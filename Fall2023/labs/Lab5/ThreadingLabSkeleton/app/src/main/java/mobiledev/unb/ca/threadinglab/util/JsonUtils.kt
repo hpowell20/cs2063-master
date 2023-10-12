@@ -4,8 +4,6 @@ import android.content.Context
 import mobiledev.unb.ca.threadinglab.model.Course
 import org.json.JSONObject
 import org.json.JSONException
-import java.io.IOException
-import java.nio.charset.StandardCharsets
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -43,16 +41,7 @@ class JsonUtils(context: Context) {
         //  HINT:
         //   See step 4 in some sample code on how to read a file from the assets folder here -
         //   https://www.tutorialspoint.com/how-to-read-files-from-assets-on-android-using-kotlin
-        return try {
-            context.assets.open(CS_JSON_FILE).use { `is` ->
-                val buffer = ByteArray(`is`.available())
-                `is`.read(buffer)
-                String(buffer, StandardCharsets.UTF_8)
-            }
-        } catch (ex: IOException) {
-            ex.printStackTrace()
-            null
-        }
+        TODO("Not yet implemented")
     }
 
     // Getter method for courses ArrayList
