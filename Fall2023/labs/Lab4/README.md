@@ -156,7 +156,7 @@ Now we will modify our app to conserve power when the battery is low by disablin
    - Have a look at [registerReceiver](https://developer.android.com/reference/android/content/Context.html#registerReceiver(android.content.BroadcastReceiver,%20android.content.IntentFilter)) for reference
 
 2. Update the  ```batteryInfoReceiver.onReceive()``` method
-   * If an ```ACTION_BATTERY_LOW``` intent is received cancel the alarm and show a ```Toast``` message
+   * If an ```ACTION_BATTERY_LOW``` intent is received cancel the alarm and show a [Toast](http://developer.android.com/guide/topics/ui/notifiers/toasts.html) message
 	 * If an ```ACTION_BATTERY_OKAY``` intent is received set the alarm just like you did previously and show a ```Toast``` indicating which intent was received
 
 3. We dynamically registered ```batteryInfoReceiver``` and so we also need to unregister it to avoid memory leaks

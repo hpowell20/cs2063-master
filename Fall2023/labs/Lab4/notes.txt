@@ -1,1 +1,6 @@
 See if it is possible to apply the permissions check to the receiver?
+
+Put in notes around the use of Context (good in activity, needed to be passed in for receiever)
+Add slide back in to Lecture 3 explaining the use of context
+
+lateinit vs regular?
