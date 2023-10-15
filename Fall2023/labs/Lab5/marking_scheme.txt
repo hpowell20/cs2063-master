@@ -1,13 +1,18 @@
-TOTAL: 12 marks
+TOTAL: 18 marks
 
 Completion of MainActivity TODOs (2 marks)
-  - Get the array list of courses (1 mark)
   - Set the recycler view object (1 mark)
+  - Invoke LoadDataTask (1 mark)
 
-Completion of MainActivity.MyAdaptor TODOs (3 marks)
-  - Get the course at the index position of the dataset (1 mark)
-  - Set the TextView in the ViewHolder (holder) to be the title for this Course (1 mark)
-  - Add the onClickListener code (1 mark)
+Completion of LoadDataTask TODOs (4 marks):
+    - Create an instance of JsonUtils and get the data from it (1 mark)
+    - Call updateDisplay within hander.post (1 mark)
+    - Setup the RecyclerView (1 mark)
+    - Create a Toast indicating that the download is complete (1 mark)
+
+Completion of JsonUtils TODOs (4 marks)
+  - Reading in the contents of the courses file (2 marks)
+  - Updating the array with Course objects (2 mark)
 
 Completion of DetailsActivity TODOs (4 marks)
   - Get the Intent and it's extras (1 mark)
@@ -15,9 +20,10 @@ Completion of DetailsActivity TODOs (4 marks)
   - Make the TextView scrollable (1 mark)
   - Set the title of the action bar to be the course title (1 mark)
 
-Completion of JsonUtils TODOs (2 marks)
-  - Reading in the contents of the courses file (1 mark)
-  - Updating the array with Course objects (1 mark)
+Completion of MyAdaptor TODOs (3 marks)
+  - Get the course at the index position of the dataset (1 mark)
+  - Set the TextView in the ViewHolder (holder) to be the title for this Course (1 mark)
+  - Add the onClickListener code (1 mark)
 
 Scrollable TextView (1 mark)
   - Addition of android:scrollbars="vertical" to the activity_detail.xml file
