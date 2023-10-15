@@ -1,0 +1,27 @@
+TOTAL: 24 marks
+
+MainActivity:
+  - onCreate() - Check for empty fields when adding (2 marks)
+  - onCreate() - Check for empty fields when searching (1 mark)
+  - addItem - call to view model (1 mark)
+  - addItem - clean up / hide keyboard (2 marks)
+  - searchItem - call to view model (1 mark)
+  - searchItem - show results / clean up / hide keyboard (3 marks)
+
+ItemViewModel:
+  - Add method for inserting a record (1 mark)
+  - Add method for searching (1 mark)
+
+ItemRepository:
+  - Add method for inserting a record (2 marks)
+  - Add method for searching for a record (3 marks)
+
+ItemDao:
+  - Add method for inserting a record (1 mark)
+  - Add method for searching (1 mark)
+
+ItemsAdapter:
+  - Set the text used by tvName and tvNum using the data object (2 marks)
+
+Item:
+  - Add fields for id, name, and num (3 marks)
