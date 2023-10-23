@@ -19,6 +19,9 @@ class MyAdapter(private val parentActivity: Activity, private val mDataset: Arra
     // it will just be a single TextView (displaying the title of a course)
     // but RecyclerView gives us the flexibility to do more complex things
     // (e.g., display an image and some text).
+    //  NOTE:
+    //    This syntax reads use a TextView as a class constructor parameter and
+    //    assign to mTextView to be used as a getter and setter
     class ViewHolder(var mTextView: TextView) : RecyclerView.ViewHolder(
         mTextView)
 
@@ -44,8 +47,7 @@ class MyAdapter(private val parentActivity: Activity, private val mDataset: Arra
 
         // TODO 2
         //  Set the TextView in the ViewHolder (holder) to be the title for this Course
-        val textView = holder.mTextView
-        textView.text = course.title
+        holder.mTextView.text = course.title
 
         // TODO 3
         //  Set the onClickListener for the TextView in the ViewHolder (holder) such

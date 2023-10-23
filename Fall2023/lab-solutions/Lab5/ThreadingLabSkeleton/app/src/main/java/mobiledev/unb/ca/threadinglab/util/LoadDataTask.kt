@@ -35,6 +35,9 @@ class LoadDataTask(private val activity: AppCompatActivity) {
 
                 // TODO
                 //  Using the updateDisplay method update the UI with the results
+                //  HINT:
+                //   This call must be made sending a post message through the
+                //   mainHandler to the UI thread
                 mainHandler.post { updateDisplay(coursesList) }
             }
     }

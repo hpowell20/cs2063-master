@@ -14,5 +14,6 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/description_textview"
+        android:scrollbars="vertical"
         />
 </LinearLayout>
