@@ -8,6 +8,8 @@ import androidx.room.Dao
 @Dao
 interface ItemDao {
     // TODO
-    //  Add app specific queries in here
+    //  Add app specific queries for:
+    //   1. Insert new record
+    //   2. Query for items by name
     //  Additional details can be found at https://developer.android.com/reference/kotlin/androidx/room/Query
 }
