@@ -1,0 +1,69 @@
+{
+  "host_nations": [
+    {
+      "year": "1991",
+      "number": "I",
+      "host_nation": "China",
+      "dates": "16–30 November",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/1991_FIFA_Women%27s_World_Cup"
+    },
+    {
+      "year": "1995",
+      "number": "II",
+      "host_nation": "Sweden",
+      "dates": "5-18 June",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/1995_FIFA_Women%27s_World_Cup"
+    },
+    {
+      "year": "1999",
+      "number": "III",
+      "host_nation": "United States",
+      "dates": "June 19 – July 10",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/1999_FIFA_Women%27s_World_Cup"
+    },
+    {
+      "year": "2003",
+      "number": "IV",
+      "host_nation": "United States",
+      "dates": "September 20 – October 12",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/2003_FIFA_Women%27s_World_Cup"
+    },
+    {
+      "year": "2007",
+      "number": "V",
+      "host_nation": "China",
+      "dates": "10–30 September",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/2007_FIFA_Women%27s_World_Cup"
+    },
+    {
+      "year": "2011",
+      "number": "VI",
+      "host_nation": "Germany",
+      "dates": "26 June – 17 July",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/2011_FIFA_Women%27s_World_Cup"
+    },
+    {
+      "year": "2015",
+      "number": "VII",
+      "host_nation": "Canada",
+      "dates": "6 June – 5 July",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/2015_FIFA_Women%27s_World_Cup"
+    },
+    {
+      "year": "2019",
+      "number": "VIII",
+      "host_nation": "France",
+      "dates": "7 June – 7 July",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/2019_FIFA_Women%27s_World_Cup"
+    },
+    {
+      "year": "2023",
+      "number": "IX",
+      "host_nation": "Australia & New Zealand",
+      "dates": "20 July – 20 August",
+      "wikipedia_link": "https://en.wikipedia.org/wiki/2023_FIFA_Women%27s_World_Cup"
+    }
+  ]
+}
+
+
