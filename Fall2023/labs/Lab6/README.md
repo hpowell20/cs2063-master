@@ -123,11 +123,21 @@ With the database code in place you will now need to update the UI to work with 
 2. Update the `ItemViewModel` class to create the methods used by the UI classes to work the data
 3. Complete the TODO items in the `MainActivity` class
 
+**Writeup Task - For At Home Completions Only**
+
+Create a document with the following items:
+	* A screenshot of the running application
+  * A screenshot of a new item added to the database
+	* Screenshot showing the following scenarios:
+    * No results
+    * Single result
+    * Mutliple results
+
 **Lab Completion**
 
 * IN LAB: 
-  * Show the working app to the instructor or TA
+  * Show the working app running on an emulator and the document with the screenshots to the instructor or TA
 * AT HOME: 
-  * Submit `MainActivity.kt`, `Item.kt`, `ItemDao.kt`, `ItemRepository.kt`, `ItemViewModel.kt`, and `ItemsAdapter.kt` to the Lab7 drop box folder on D2L 
+  * Submit `MainActivity.kt`, `Item.kt`, `ItemDao.kt`, `ItemRepository.kt`, `ItemViewModel.kt`, and `ItemsAdapter.kt`, and the answers to the writeup task to the Lab6 drop box folder on D2L 
 * Keep a copy of your project work and answers for future reference
 
