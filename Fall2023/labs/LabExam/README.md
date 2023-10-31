@@ -6,9 +6,9 @@ This lab exam is open everything (Android documentation, labs and examples, Stac
 
 # FIFA Womens World Cup Games App
 
-The ninth edition of the [FIFI Womens World Cup](https://en.wikipedia.org/wiki/Summer_Olympic_Games) were held in Australia and New Zealand earlier.  We will celebrate this occasion by building an app that displays information about all of the events that have taken place in the past.
+The ninth edition of the [FIFI Womens World Cup](https://www.fifa.com/fifaplus/en/tournaments/womens/womensworldcup) were held in Australia and New Zealand earlier.  We will celebrate this occasion by building an app that displays information about all of the events that have taken place in the past.
 
-This app will consist of two activities. The main activity will include a `RecyclerView` where the items are the Olympiad number and host city name along with checkboxes that the user can check when they have seen an item.
+This app will consist of two activities. The main activity will include a `RecyclerView` where the items are the event number and host city name along with checkboxes that the user can check when they have seen an item.
 
 Clicking on the name of a host nation will take the user to a detail activity that shows the extra details about the particular games (Year of the games, dates) along with a button to view the Wikipedia entry for more information on the games themselves. Pressing back from the detail activity takes the user back to the main activity. See examples below.
 
@@ -42,7 +42,6 @@ will be familiar to you from previous labs.
   
 * `MyAdapter` corresponds to the RecyclerView class being used to populate the view with games information.
   * When the name of a games is clicked the `DetailActivity` will be launched via an explicit `Intent`
-    * For example, in the screenshot for `MainActivity` the user has visited IV - Brazil, VII - Chili, and VIII - England
 
 * `LoadDataTask` is used to read in the details and updated the view using a separate thread
 
