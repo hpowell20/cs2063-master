@@ -10,6 +10,7 @@ interface ItemDao {
     // TODO
     //  Add app specific queries for:
     //   1. Insert new record
+    //  Additional details can be found at https://developer.android.com/reference/kotlin/androidx/room/Insert
     //   2. Query for items by name
     //  Additional details can be found at https://developer.android.com/reference/kotlin/androidx/room/Query
 }
