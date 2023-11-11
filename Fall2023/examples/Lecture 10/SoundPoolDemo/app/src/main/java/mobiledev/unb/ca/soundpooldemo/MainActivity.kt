@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun createSoundPool() {
         val audioAttributes = AudioAttributes.Builder()
-            .setUsage(AudioAttributes.USAGE_GAME)
+            .setUsage(AudioAttributes.USAGE_MEDIA)
             .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
             .build()
 

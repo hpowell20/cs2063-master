@@ -6,13 +6,16 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.Point
 import android.media.AudioManager
 import android.media.SoundPool
+import android.os.Build
 import android.os.Bundle
 import android.view.GestureDetector
 import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.MotionEvent
 import android.view.View
+import android.view.WindowInsets
 import android.widget.RelativeLayout
 import android.widget.TextView
 import java.util.concurrent.Executors
@@ -62,6 +65,15 @@ class BubbleActivity : Activity() {
         bitmap = BitmapFactory.decodeResource(resources, R.drawable.b64)
     }
 
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) {
+            // Determine the screen size
+            val (width, height) = getScreenDimensions(this)
+            displayWidth = width
+            displayHeight = height
+        }
+    }
     override fun onResume() {
         super.onResume()
         setStreamVolume()
@@ -81,19 +93,33 @@ class BubbleActivity : Activity() {
         //  Store this as soundID
     }
 
-    override fun onWindowFocusChanged(hasFocus: Boolean) {
-        super.onWindowFocusChanged(hasFocus)
-        if (hasFocus) {
-            // Get the size of the display so this View knows where borders are
-            displayWidth = mFrame!!.width
-            displayHeight = mFrame!!.height
-        }
-    }
-
     // Method used to update the text view with the number of in view bubbles
     private fun updateNumBubblesTextView() {
         val text = getString(R.string.txt_number_of_bubbles, mFrame!!.childCount)
         bubbleCountTextView!!.text = text
+    }
+
+    // Retrieves the screen dimensions
+    private fun getScreenDimensions(activity: Activity): Pair<Int, Int> {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val windowMetrics = activity.windowManager.currentWindowMetrics
+            val windowInsets: WindowInsets = windowMetrics.windowInsets
+            val insets = windowInsets.getInsetsIgnoringVisibility(
+                WindowInsets.Type.navigationBars() or WindowInsets.Type.displayCutout())
+
+            val insetsWidth = insets.right + insets.left
+            val insetsHeight = insets.top + insets.bottom
+
+            val b = windowMetrics.bounds
+            Pair(b.width() - insetsWidth, b.height() - insetsHeight)
+        } else {
+            val size = Point()
+            @Suppress("DEPRECATION")
+            val display = activity.windowManager.defaultDisplay // deprecated in API 30
+            @Suppress("DEPRECATION")
+            display?.getSize(size) // deprecated in API 30
+            Pair(size.x, size.y)
+        }
     }
 
     // Setup the stream volume
