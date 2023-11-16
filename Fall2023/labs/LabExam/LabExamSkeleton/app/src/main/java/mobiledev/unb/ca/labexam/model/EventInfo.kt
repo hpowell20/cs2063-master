@@ -4,16 +4,6 @@ package mobiledev.unb.ca.labexam.model
 /**
  * Data class used to hold Event information
  */
-//data class EventInfo(private val year: String?,
-//                     private val number: String?,
-//                     private val hostNation: String?,
-//                     private val dates: String?,
-//                     private val wikipediaLink: String?) {
-//    // Only need to include getter for the host location
-//    val hostLocation: String
-//        get() = "$number - $hostNation"
-//}
-
 class EventInfo private constructor(builder: Builder) {
     val year: String
     val number: String
