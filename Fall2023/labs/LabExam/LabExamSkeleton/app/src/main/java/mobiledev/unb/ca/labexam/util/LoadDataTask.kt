@@ -34,13 +34,14 @@ class LoadDataTask(private val activity: AppCompatActivity) {
     }
 
     fun execute() {
-        Executors.newSingleThreadExecutor()
-            // TODO
-            //  Show the progress bar
-            //  Hint:
-            //    Read the documentation on ProgressBar - http://developer.android.com/reference/android/widget/ProgressBar.html
-            //    Refer to examples from Lecture 6 should you need extra inspiration
+        // TODO
+        //  Show the progress bar
+        //  Hint:
+        //    Read the documentation on ProgressBar - http://developer.android.com/reference/android/widget/ProgressBar.html
+        //    Refer to examples from Lecture 6 should you need extra inspiration
 
+        // Update the display elements in a separate thread
+        Executors.newSingleThreadExecutor()
             .execute {
                 val mainHandler = Handler(Looper.getMainLooper())
                 // TODO
