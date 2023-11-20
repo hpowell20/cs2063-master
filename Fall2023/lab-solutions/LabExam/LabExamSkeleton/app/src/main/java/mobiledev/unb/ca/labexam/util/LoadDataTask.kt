@@ -47,12 +47,12 @@ class LoadDataTask(private val activity: AppCompatActivity) {
         //  Hint:
         //    Read the documentation on ProgressBar - http://developer.android.com/reference/android/widget/ProgressBar.html
         //    Refer to examples from Lecture 6 should you need extra inspiration
-        progressBar!!.visibility = ProgressBar.VISIBLE
-
-//        progressBar!!.isIndeterminate = false
-//        progressBar!!.progress = 0
-//        progressBar!!.max = DOWNLOAD_TIME
 //        progressBar!!.visibility = ProgressBar.VISIBLE
+
+        progressBar!!.isIndeterminate = false
+        progressBar!!.progress = 0
+        progressBar!!.max = DOWNLOAD_TIME
+        progressBar!!.visibility = ProgressBar.VISIBLE
 
         Executors.newSingleThreadExecutor()
             .execute {
@@ -60,7 +60,7 @@ class LoadDataTask(private val activity: AppCompatActivity) {
                 // TODO
                 //  Load the data from the JSON assets file and return the list of host nations
                 val jsonUtils = JsonUtils(appContext)
-                val hostNationsList = jsonUtils.getHostNations()
+                val hostNationsList = jsonUtils.hostNations
 
                 // Simulating long-running operation
                 for (i in 1 until DOWNLOAD_TIME) {
@@ -72,7 +72,11 @@ class LoadDataTask(private val activity: AppCompatActivity) {
 
                 // TODO
                 //  Using the updateDisplay method update the UI with the results
-                mainHandler.post { updateDisplay(hostNationsList) }
+                mainHandler.post {
+                    if (hostNationsList != null) {
+                        updateDisplay(hostNationsList)
+                    }
+                }
             }
     }
 
@@ -88,7 +92,7 @@ class LoadDataTask(private val activity: AppCompatActivity) {
     private fun updateDisplay(eventsInfoList: List<EventInfo>) {
         // TODO
         //  Reset the progress bar, and make it disappear
-//        progressBar!!.progress = 0
+        progressBar!!.progress = 0
         progressBar!!.visibility = ProgressBar.INVISIBLE
 
         // TODO

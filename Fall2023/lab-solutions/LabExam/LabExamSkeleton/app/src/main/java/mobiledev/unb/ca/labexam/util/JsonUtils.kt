@@ -9,9 +9,9 @@ import java.nio.charset.StandardCharsets
 import java.util.ArrayList
 
 class JsonUtils(context: Context) {
-//    var hostNations: ArrayList<EventInfo>? = null
-//        private set
-    private lateinit var hostNations: ArrayList<EventInfo>
+    var hostNations: ArrayList<EventInfo>? = null
+        private set
+//    private lateinit var hostNations: ArrayList<EventInfo>
 
     private fun processJSON(context: Context) {
         hostNations = ArrayList()
@@ -34,16 +34,16 @@ class JsonUtils(context: Context) {
                     .build()
 
                 // Add new EventInfo object to hostNations ArrayList
-                hostNations.add(nation)
+                hostNations!!.add(nation)
             }
         } catch (e: JSONException) {
             e.printStackTrace()
         }
     }
 
-    fun getHostNations(): ArrayList<EventInfo> {
-        return hostNations
-    }
+//    fun getHostNations(): ArrayList<EventInfo> {
+//        return hostNations
+//    }
 
     private fun loadJSONFromAssets(context: Context): String? {
         try {
