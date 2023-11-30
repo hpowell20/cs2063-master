@@ -1,12 +1,7 @@
 package mobiledev.unb.ca.graphicslab
 
 import android.app.Activity
-import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.Point
+import android.graphics.*
 import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.SoundPool
@@ -16,16 +11,9 @@ import android.util.Log
 import android.view.GestureDetector
 import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.MotionEvent
-import android.view.View
 import android.view.WindowInsets
 import android.widget.RelativeLayout
 import android.widget.TextView
-import java.util.concurrent.Executors
-import java.util.concurrent.ScheduledFuture
-import java.util.concurrent.TimeUnit
-import java.util.Random
-import kotlin.math.pow
-import kotlin.math.sqrt
 
 class BubbleActivity : Activity() {
     // The Main view
@@ -69,16 +57,6 @@ class BubbleActivity : Activity() {
         bitmap = BitmapFactory.decodeResource(resources, R.drawable.b64)
     }
 
-    override fun onWindowFocusChanged(hasFocus: Boolean) {
-        super.onWindowFocusChanged(hasFocus)
-        if (hasFocus) {
-            // Determine the screen size
-            val (width, height) = getScreenDimensions(this)
-            displayWidth = width
-            displayHeight = height
-        }
-    }
-
     override fun onResume() {
         super.onResume()
         setStreamVolume()
@@ -91,7 +69,6 @@ class BubbleActivity : Activity() {
         // TODO
         //  Set a SoundPool OnLoadCompletedListener that calls setupGestureDetector()
         soundPool!!.setOnLoadCompleteListener { _: SoundPool?, _: Int, status: Int ->
-            // TODO Call setupGestureListener
             if (0 == status) {
                 setupGestureDetector()
             } else {
@@ -106,7 +83,20 @@ class BubbleActivity : Activity() {
         soundID = soundPool!!.load(this, R.raw.bubble_pop, 1)
     }
 
-    // Retrieves the screen dimensions
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) {
+            // Determine the screen size
+            val (width, height) = getScreenDimensions(this)
+            displayWidth = width
+            displayHeight = height
+
+            // Get the size of the display so this View knows where borders are
+            //displayWidth = mFrame!!.width
+            //displayHeight = mFrame!!.height
+        }
+    }
+
     private fun getScreenDimensions(activity: Activity): Pair<Int, Int> {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             val windowMetrics = activity.windowManager.currentWindowMetrics
@@ -132,7 +122,7 @@ class BubbleActivity : Activity() {
     // Setup the SoundPool instance
     private fun createNewSoundPool() {
         val audioAttributes = AudioAttributes.Builder()
-            .setUsage(AudioAttributes.USAGE_MEDIA)
+            .setUsage(AudioAttributes.USAGE_GAME)
             .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
             .build()
 
@@ -150,11 +140,13 @@ class BubbleActivity : Activity() {
 
     // Setup the stream volume
     private fun setStreamVolume() {
+        // Manage bubble popping sound
+        // Use AudioManager.STREAM_MUSIC as stream type
+
         // AudioManager audio settings for adjusting the volume
         val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
 
-        // Get the current volume Index of particular stream type
-        // Stream type is set to use AudioManager.STREAM_MUSIC
+        // Current volume Index of particular stream type
         val currentVolumeIndex = audioManager.getStreamVolume(STREAM_TYPE)
             .toFloat()
 
@@ -184,7 +176,7 @@ class BubbleActivity : Activity() {
                 ): Boolean {
                     // TODO
                     //  Implement onFling actions (See comment above for expected behaviour)
-                    //  You can get all Views in mFrame one at a time using the ViewGroup.getChildAt() method
+                    //  You can get all Views in mmFrame one at a time using the ViewGroup.getChildAt() method
                     val x = event1?.x
                     val y = event1?.y
                     val numBubbles = mFrame!!.childCount
@@ -217,7 +209,8 @@ class BubbleActivity : Activity() {
                     for (i in 0 until numBubbles) {
                         val bubbleView = mFrame!!.getChildAt(i) as BubbleView
                         if (bubbleView.intersects(x, y)) {
-                            bubbleView.stopMovement(true)
+                            bubbleView.stopMovement(mFrame, bubbleCountTextView)
+                            //mFrame!!.removeView(bubbleView)
                             bubblePopped = true
                         }
                     }
@@ -225,12 +218,17 @@ class BubbleActivity : Activity() {
                     if (!bubblePopped) {
                         // Create a new bubble view instance
                         val context = mFrame!!.context
-                        val newBubbleView = BubbleView(context, x, y)
+                        val newBubbleView = BubbleView(context, displayWidth, displayHeight, x, y)
                         mFrame!!.addView(newBubbleView)
-                        newBubbleView.startMovement()
-                        updateNumBubblesTextView()
+                        newBubbleView.startMovement(mFrame, bubbleCountTextView)
+                    } else {
+                        // TODO
+                        //  If the bubble was popped by user play the popping sound
+                        //  HINT: Use the streamVolume for left and right volume parameters
+                        soundPool!!.play(soundID, streamVolume, streamVolume, 1, 0, 1.0f)
                     }
 
+                    updateNumBubblesTextView()
                     return true
                 }
             })
@@ -277,34 +275,24 @@ class BubbleActivity : Activity() {
 //        private var mRotate: Long = 0
 //        private var mDRotate: Long = 0
 //
-//        private fun setRotation(r: Random) {
+//        private fun setRotation() {
 //            // TODO
 //            //  Set rotation in range [1..5]
-//            mDRotate = (r.nextInt(5) + 1).toLong()
+//            mDRotate = generateRandomNumberInRange(1, 5).toLong()
 //        }
 //
-//        private fun setSpeedAndDirection(r: Random) {
+//        private fun setSpeedAndDirection() {
 //            // TODO
 //            //  Set mDx and mDy to indicate movement direction and speed
 //            //  Limit speed in the x and y direction to [-3..3] pixels per movement
-//            var x = r.nextInt(3) + 1
-//            if (r.nextBoolean()) {
-//                x = -x
-//            }
-//
-//            var y = r.nextInt(3) + 1
-//            if (r.nextBoolean()) {
-//                y = -y
-//            }
-//
-//            mDx = x.toFloat()
-//            mDy = y.toFloat()
+//            mDx = generateRandomNumberInRange(-3, 3).toFloat()
+//            mDy = generateRandomNumberInRange(-3, 3).toFloat()
 //        }
 //
-//        private fun createScaledBitmap(r: Random) {
+//        private fun createScaledBitmap() {
 //            // TODO
 //            //  Set scaled bitmap size (scaledBitmapSize) in range [2..4] * BITMAP_SIZE
-//            scaledBitmapSize = BITMAP_SIZE * (r.nextInt(3) + 2)
+//            scaledBitmapSize = BITMAP_SIZE * generateRandomNumberInRange(2, 4)
 //
 //            // TODO
 //            //  Create the scaled bitmap (scaledBitmap) using size set above
@@ -338,17 +326,17 @@ class BubbleActivity : Activity() {
 //
 //        // Returns true if the BubbleView intersects position (x,y)
 //        @Synchronized
-//        fun intersects(x: Float?, y: Float?): Boolean {
+//        fun intersects(x: Float, y: Float): Boolean {
 //            val centerX = xPos + radius
 //            val centerY = yPos + radius
 //
 //            // TODO
 //            //  Return true if the BubbleView intersects position (x,y)
-//            return sqrt((centerX - x!!).toDouble().pow(2.0) + (centerY - y!!).toDouble().pow(2.0)) <= radius
+//            return sqrt((centerX - x).toDouble().pow(2.0) + (centerY - y).toDouble().pow(2.0)) <= radius
 //        }
 //
 //        // Cancel the Bubble's movement
-//        // Remove Bubble from mFrame
+//        // Remove Bubble from mmFrame
 //        // Play pop sound if the BubbleView was popped
 //        fun stopMovement(wasPopped: Boolean) {
 //            if (null != mMoverFuture) {
@@ -424,21 +412,19 @@ class BubbleActivity : Activity() {
 //            // TODO
 //            //  Return true if the BubbleView is still on the screen after
 //            //  the move operation
-//
-//            // Remove this when you're done the above TODO
 //            return xPos <= displayWidth &&
 //                    xPos + radius * 2 >= 0 &&
 //                    yPos <= displayHeight &&
 //                    yPos + radius * 2 >= 0
 //        }
 //
-//        init {
-//            // Create a new random number generator to
-//            // randomize size, rotation, speed and direction
-//            val r = Random()
+//        private fun generateRandomNumberInRange(min: Int, max: Int): Int {
+//            return ThreadLocalRandom.current().nextInt(min, max + 1)
+//        }
 //
+//        init {
 //            // Creates the bubble bitmap for this BubbleView
-//            createScaledBitmap(r)
+//            createScaledBitmap()
 //
 //            // Radius of the Bitmap
 //            radius = (scaledBitmapSize / 2).toFloat()
@@ -448,19 +434,19 @@ class BubbleActivity : Activity() {
 //            yPos = y - radius
 //
 //            // Set the BubbleView's speed and direction
-//            setSpeedAndDirection(r)
+//            setSpeedAndDirection()
 //
 //            // Set the BubbleView's rotation
-//            setRotation(r)
+//            setRotation()
 //            mPainter.isAntiAlias = true
 //        }
 //    }
 
     companion object {
         private const val TAG = "BubbleActivity"
-        private const val BITMAP_SIZE = 64
         private const val STREAM_TYPE = AudioManager.STREAM_MUSIC
         private const val SOUND_POOL_MAX_STREAMS = 10
-        private const val REFRESH_RATE = 40
+//        private const val BITMAP_SIZE = 64
+//        private const val REFRESH_RATE = 40
     }
 }

@@ -38,5 +38,8 @@ Complete the TODOs **by pair programming**.
 
 **Lab Completion**
 
-* Show the working app to the instructor or TA using the following scenarios
+* IN LAB: 
+  * Show the working app to the instructor or TA
+* AT HOME: 
+  * Submit `BubbleActivity.kt` to the Lab8 drop box folder on D2L 
 * Keep a copy of your project work and answers for future reference
