@@ -4,13 +4,13 @@ plugins {
 }
 
 android {
-    compileSdk 33
+    compileSdk 34
     namespace "course.examples.maplocation"
 
     defaultConfig {
         applicationId "course.examples.maplocation"
-        minSdkVersion 21
-        targetSdkVersion 33
+        minSdk 21
+        targetSdk 33
     }
 
     buildTypes {
@@ -30,6 +30,6 @@ android {
     }
 }
 dependencies {
-    implementation "androidx.core:core-ktx:1.9.0"
-    implementation 'com.google.android.material:material:1.6.1'
+    implementation "androidx.core:core-ktx:1.13.1"
+    implementation 'com.google.android.material:material:1.12.0'
 }
