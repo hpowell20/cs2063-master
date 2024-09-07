@@ -11,8 +11,8 @@ We will be doing pair programming for this lab.  Details on pair programming can
 developer documentation:
 	* https://developer.android.com/guide/components/activities/activity-lifecycle.html
 
-* Make sure you have access to the 3 button navigation system
-	* Starting from Android 10 the default behaviour is to use full-screen navigational gestures
+* Starting from Android 10 the default behaviour is to use full-screen navigational gestures.  Make sure you have access to the 3 button navigation system
+	* Additional information can be found [here](https://support.google.com/android/answer/9079644?hl=en)
 	* We will look at ways to implement the device's soft-key back button in the next lab
 	
 #### Objectives
@@ -56,7 +56,7 @@ From the pre-lab reading regarding managing the ```Activity``` lifecycle you lea
 
 #### Activity States and Their Meaning
 
-![](http://i.imgur.com/ok4PARv.png)
+![Activity Life Cycle](activity_lifecycle.png)
 
 **Fig. 1** https://developer.android.com/guide/components/activities/activity-lifecycle.html
 
@@ -82,7 +82,7 @@ There are 7 states within the lifecycle, and each can be overridden. In this lab
 
 NOTE:
 * Kotlin functions are defined by the ```fun``` keyword
-* The uses of the ```override``` keyword ahead of ```fun``` is used to override the base function
+* The ```override``` keyword ahead of ```fun``` is used to override the base function
 	* This is the equivalent of ```@Override``` in Java
 
 #### Procedure
@@ -113,7 +113,7 @@ NOTES:
 
 **Task 2**
 
-Complete TODO 2.  To help you the declaration for ```createTextView``` has been created using a nullable type declaration.
+Complete TODO 2.  To help you the declaration for ```createTextView``` has been created using a nullable type declaration as this attribute is used in different class functions.
 * Refer to the Basics section [here](https://kt.academy/Kotlin_Cheat_Sheet.pdf) which outlines the usage of variables with nullable types.
 
 With programmatic placeholders for Android resources now ready to be used, we can start capturing references from the layout we looked at when we first opened this project.  
@@ -127,21 +127,33 @@ Take note of ```ActivityOne.kt```’s ```onCreate()``` method; it makes a call t
 * These unique numbers are assigned and handled by the Android SDK via Android Studio and get passed along as a reference by using the name of the resource file containing the item they are interested in
 * Here, the .XML layout file activity_one is passed as a resource ID, and its contents get used to describe the layout we saw in the editor
 * _Hint 4_ in the Skeleton project source code shows how these references to resources are obtained programmatically
-* You can also see that Android Button Objects have listeners attached to them very similarly to that of classic Java GUI Buttons
+* The Android Button Objects also have listeners attached to them
 
 **Task 3**
 
-Complete TODO 3.
-* See the documentation for [intents](https://developer.android.com/reference/android/app/Activity.html#startActivity(android.content.Intent)) for help.
+Complete TODO 3.  See the documentation for [startActivity](https://developer.android.com/reference/android/app/Activity.html#startActivity(android.content.Intent)) for help in defining the intent.
 
-Great! But we don’t have a second activity class yet, as we can see from the red ActivityTwo in our Intent statement.
-
-To fix this:
-1. Right click _mobiledev.unb.ca.lab2activitylifecycle_ under the Java project structure folder
-2. Select New → Kotlin Class/File and name it ActivityTwo
+However, at this stage we don’t have a second activity class yet (as indicated by the red ActivityTwo in our Intent statement) to use.  To fix this:
+1. Right click _mobiledev.unb.ca.lab2activitylifecycle_ under the kotlin_+java app project structure folder
+2. Select New → Activity -> Empty Views Activity
+	* For the class name use __ActivityTwo__
+	* Unselect the option _Generate a Layout File_ (a sample layout file is already included in the project skeleton) 
 	* Just leave this class empty for now. We'll finish it later.
 	* Notice the red problem statement is now resolved.
 
+Now that the second activity open the has been added we want to confirm that it has been included in the ```AndroidManifest.xml``` file.  
+
+1. Open ```AndroidManifest.xml``` and locate the ```<application>``` and ```<activity>``` tags
+* Notice how your application is defined as having ```ActivityOne``` as the application’s MAIN ```<intent-filter>``` with a Category ```LAUNCHER```
+* This allows the defined activity to be the first to run when your application is started.
+
+2. There should also be a second ```</activity>``` entry for ```ActivityTwo``` as shown below.
+	```XML
+	<activity
+            android:name=".ActivityTwo"
+            android:exported="false" />
+	```
+	
 **Task 4**
 
 Complete TODO 4 in ```ActivityOne```.
@@ -188,19 +200,11 @@ At this point the entire application is almost entirely wired for two activities
 
 **Task 10**
 
-Now all that's missing is defining the existence of ```ActivityTwo.kt``` (which itself is the programmatic instance of ```ActivityTwo```) in the ```AndroidManifest.xml```
+Your application is finally ready to run! On an emulator or device, run the application.
 
-1. Open ```AndroidManifest.xml``` and locate the ```<application>``` and ```<activity>``` tags
-* Notice how your application is defined as having ```ActivityOne``` as the application’s MAIN ```<intent-filter>``` with a Category ```LAUNCHER```
-* This allows the defined activity to be the first to run when your application is started.
-
-2. After the declaration of this first activity is ended ```</activity>```, create a new ```<activity>``` tag and use ```android:name=”.ActivityTwo”```.
-
-3. Your application is finally ready to run! On an emulator or device, run the application.
-
-4. Take note of the initial values for ```ActivityOne```
+1. Take note of the initial values for ```ActivityOne```
 * Click the ```Button``` to access ```ActivityTwo``` and you’ll see the same values
-* Use the back ```Button``` to navigate to ```ActivityOne``` again; notice that the values have changed!
+* Navigate back to ```ActivityOne``` again; notice that the values have changed!
 * Rotate your device to the left, back to vertical, and then to the right; notice the values change with each successive rotation
 * Once again access ```ActivityTwo```
 	* The values are still the initial values!
