@@ -93,7 +93,7 @@ Take a screenshot of your app running (on any device or emulator).
 
 ###### Layout Editor
 
-1.Using the folder view along the far left side of Android Studio, navigate to and open the res/layout/_activity_main.xml_ file.
+1. Using the folder view along the far left side of Android Studio, navigate to and open the res/layout/_activity_main.xml_ file.
 2. Click the ‘Hello world!’ text in the application window preview. The text field, which is an Android object called TextView that we’ll learn more about later, is highlighted.
 	* Take note of the _Attributes_ window that populates to the right
 	* This toolbar shows the Android View objects that can be customized.
@@ -143,33 +143,36 @@ We will now take a look at what every Android Studio project structure has in co
 → Gradle Scripts
 ```
 
-More information about the project structure can be found at [ProjectFiles](https://developer.android.com/studio/projects/index.html#ProjectFiles)
+More information about the project structure can be found [here](https://developer.android.com/studio/projects/index.html#ProjectFiles).
 
 
 #### manifests Directory
 
-This directory contains the AndroidManifest.xml file. This file contains information that pertains to how your application should run, what activities within your project it depends on, and of those which is to run when the application is first launched, as well as any device/account access permissions users must agree to before being able to download your application if placed on the Google Play Store.
+This directory contains the AndroidManifest.xml file which contains information that pertains to how your application should run, what activities within your project it depends on, and of those which is to run when the application is first launched, as well as any device/account access permissions users must agree to before being able to download your application if placed on the Google Play Store.
 
 Additional information on the  AndroidManifest.xml can be found [here](https://developer.android.com/guide/topics/manifest/manifest-intro.html)
-
-**Deliverable 2**
-
-The application theme is also described in this AndroidManifest file; provide the attribute tag that describes this.
 
 NOTE:
 * The _*android:label*_ attribute tag contains the application name we gave to our project
 * If you click this an @string resource named app_name will be revealed in as being the source of this text
-	* We’ll explore the strings.xml resource below
+	* We’ll explore the strings.xml resource file later in the lab
+
+**Deliverable 2**
+
+In addition to the label tag there are many different attributes defined the the AndroidManifest file.  Which tag is used to describes the theme being used?
+
 
 #### kotlin+java Directory
 
 This java folder contains a sub-directory for your application code ```mobiledev.unb.ca.lab1``` and sub-directories for testing. We'll focus on the non-test folder for now.  These test folders will be covered later in the semester.
 
 As no additional content has been added to the project the only class file is the **MainActivity** file.  This is the first activity to run when the application is launched.  Looking at the code in the file will reveal some familiar syntax used in Java; recall that Kotlin has roots based off Java and uses the same runtime engine.
-	* A class named MainActivity is declared and the file contains some imports and the package under which this file belongs is denoted
-		* This class extends the base class ```AppCompatActivity```
-		* Note the Kotlin syntax is ```class_name : base_class``` and does not use the ```extends``` keyword  
-	* There is an ```onCreate()``` method which takes a ```Bundle``` parameter which is passed up to the superclass from which we are overriding
+
+* A class named MainActivity is declared and the file contains some imports and the package under which this file belongs is denoted
+	* This class extends the base class ```AppCompatActivity```
+	* Note the Kotlin syntax is ```class_name : base_class``` and does not use the ```extends``` keyword  
+* There is an ```onCreate()``` method which takes a ```Bundle``` parameter which is passed up to the superclass from which we are overriding
+
 * Look through the [Activity documentation](http://developer.android.com/reference/android/app/Activity.html) to find the method ```setContentView()``` that is used inside the ```onCreate()``` method
 	* Be sure to find the method which takes the proper parameter type; in this case a layout resource ID
 
@@ -194,7 +197,7 @@ This directory contains many different types of resources that get used inside a
 
 **Deliverable 4**
 
-1. What are the three common layout types?  
+1. What are some of the common layout types used in Android projects?  
 2. Why is it important to define IDs for view objects especially when using RelativeLayout?
 
 * The mipmap directory contains icons used for launch deck icons for the application
@@ -216,13 +219,13 @@ This directory contains many different types of resources that get used inside a
 #### Gradle Directory
 
 Android uses Gradle for dependency management and build tasks.  By default two Gradle files are created.  
-	* The ```build.gradle (Project: Lab_1_Hello_World)``` script is used to define where to find project specific dependencies and configuration options
-	* The ```build.gradle (Module: app)``` script is used to establish build requirements to ensure the proper syntax are being met for your target SDK choice
-		* The _compileSdk_ value specifies the API level being used to compile the project (not the same as runtime targets)
-		* Notice there is a _minSdk_, _targetSdk_, and _versionCode_ value
-			* The _minSdk_ indicates what the lowest SDK that is supported by your application
-			* The _targetSdk_ is the optimized version you have in mind for your device
-			* If the _versionCode_ value is changed users will have updates triggered on their device
+* The ```build.gradle (Project: Lab_1_Hello_World)``` script is used to define where to find project specific dependencies and configuration options
+* The ```build.gradle (Module: app)``` script is used to establish build requirements to ensure the proper syntax are being met for your target SDK choice
+	* The _compileSdk_ value specifies the API level being used to compile the project (not the same as runtime targets)
+	* Notice there is a _minSdk_, _targetSdk_, and _versionCode_ value
+		* The _minSdk_ indicates what the lowest SDK that is supported by your application
+		* The _targetSdk_ is the optimized version you have in mind for your device
+		* If the _versionCode_ value is changed users will have updates triggered on their device
 
 ### Locale Language Support
 
