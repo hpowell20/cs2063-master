@@ -1,0 +1,1 @@
+Jetpack Compose uses ui.theme folder next to the activity file
