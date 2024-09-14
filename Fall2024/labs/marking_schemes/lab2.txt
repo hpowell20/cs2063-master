@@ -1,3 +1,5 @@
+LAB 2
+
 TOTAL: 10 marks
 
 Completion of required TODOs in the code (9 marks)
