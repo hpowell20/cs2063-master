@@ -125,7 +125,7 @@ We can provide information to the ```Activity``` we intend to start. This inform
   * Call ```startActivity()``` with your new ```Intent``` as a parameter.
 3. Update the on click action for the email ```Button``` to call ```dispatchSendEmailIntent()```.
 
-**Task 6**
+**Task 5**
 
 Certain requested components may require access to device hardware; for example: the camera. If your application requests use of a component that in turn will make use of such hardware you must announce that in your application’s manifest file.
 
@@ -135,7 +135,7 @@ Certain requested components may require access to device hardware; for example:
   * A [<uses-permission>](https://developer.android.com/training/data-storage/files.html#GetWritePermission) tag to enable writing to external storage (on-device storage that will be used to store photos that have been taken)
     *  Specific details can be found [here](https://developer.android.com/training/camera-deprecated/photobasics#TaskPath)
 
-**Task 7**
+**Task 6**
 
 With the required hardware feature to be used declared for the app you can wire your camera ```Button```’s ```setOnClickListener()``` event to implicitly alert the operating system of your ```Activity```'s ```Intent``` to access to the camera functionality. Doing so will provide the user a list of applications to satisfy the request to take a photo.
 
@@ -143,13 +143,13 @@ With the required hardware feature to be used declared for the app you can wire 
   * The variable for ```currentPhotoPath``` is already defined.
   * Use the name ```"mobiledev.unb.ca.lab3intents.provider"```  for the authority name in place of ```"com.example.android.fileprovider"``` in both the code and the AndroidManifest.xml file.
   * You will notice that ```startActivityForResult()``` has been deprecated.  We will look to fix this in the next task.
-
+  
 2. Right click the app/src/main/res directory and select New → Values Resource File
-	* Enter **file_paths** in the File Name field
-  * Select **XML** from the Resource Type drop down 
+  * Enter **file_paths** in the File Name field
+  * Select **XML** from the Resource Type drop down
   * Enter **paths** in the Root Element field
   * Enter **xml** for the directory name
-	* Click **OK** to save
+  * Click **OK** to save
 
 3. Update the file to include the following content:
   ```XML
@@ -159,9 +159,10 @@ With the required hardware feature to be used declared for the app you can wire 
       path="Android/data/mobiledev.unb.ca.lab3intents/files/Pictures" />
   </paths>
   ```
-    * NOTE: The documentation specifies external-files-path, however, this throws an error.  The XML file contents as shown above have been known to work in an emulator and device.
+  * NOTE: The documentation specifies external-files-path, however, this throws an error.  The XML file contents as shown above have been known to work in an emulator and device.
 
-**Task 8** 
+**Task 7**
+
 Following up on the changes made for Task 7 we will now look to replace the deprecated ```startActivityForResult()``` functionality.  This has been replaced by the [Activity Result APIs](https://developer.android.com/training/basics/intents/result).  
 
 To help with this you will notice an attribute called ```cameraActivityResultLauncher``` near the top of the file.  We will be working with this object to register a listener for photo capture events.
@@ -184,7 +185,7 @@ We are now going to set the ```cameraActivityResultLauncher``` object to recieve
 1. Locate the ```galleryAddPic()``` function.  This contains the code used to save the picture depending on API level being used.
   * We will cover storage in a later lecture, for now the purpose of this lab is to work with intents so this code is provided.
 
-2. In the class code remove the TODO statement from the ```setCameraActivityResultLauncher``` and replace with the following.
+2. In the class code add the following code to the ```setCameraActivityResultLauncher``` function.
 ```kotlin
 cameraActivityResultLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
@@ -195,15 +196,15 @@ cameraActivityResultLauncher = registerForActivityResult(
         }
 ```
   * This will take the result of the activity intent action (in this case the action of taking a photo) and save the results to the gallery. ```startActivityForResult()```
-  * Additional details can be found at http://developer.android.com/training/basics/intents/result.html#ReceiveResult
+  * Additional details can be found [here](http://developer.android.com/training/basics/intents/result.html#ReceiveResult).
 
 
-**Task 10**
+**Task 9**
 
 With the email and camera intents in place we now have to make our back ```Button``` work by implementing an ```Intent``` to explicitly call our ```MainActivity```.
 * This is done similarly to how we built and started an ```Intent``` to get from our ```MainActivity``` to ```ExternalActivityCalls```
 
-**Task 11**
+**Task 10**
 
 With the Intents implemented run the application and perform the following steps:
 1. Take a photo
@@ -211,7 +212,7 @@ With the Intents implemented run the application and perform the following steps
 3. From within the email app attach the photo you just took as an attachment
 4. Open the email and take a screenshot of it
 
-**Task 12**
+**Task 111**
 
 Restart your application and perform the following steps:
 1. From the ```MainActivity``` click the Start ```Button```
