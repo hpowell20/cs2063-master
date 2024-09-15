@@ -2,7 +2,7 @@ TOTAL: 10 marks
 
 Completion of required TODOs in the code (7 marks)
 
-Add code to navigate from MainActivity to ExternalActivityCalls (1 mark)
+Add the explicit intent to navigate from ExternalActivityCalls to MainActivity (1 mark)
 Add permissions to manifest for picture (1 mark)
 Add code to take picture (1 mark)
 Add code to save picture to gallery (1 mark)

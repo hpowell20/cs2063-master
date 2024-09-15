@@ -1,31 +1,25 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin"
-                android:paddingBottom="@dimen/activity_vertical_margin"
-                tools:context=".ExternalActivityCalls">
+<LinearLayout style="?android:attr/buttonBarStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <Button
+        style="?android:attr/buttonBarButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_camera"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"/>
+        android:text="@string/button_camera" />
 
     <Button
+        style="?android:attr/buttonBarButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_email"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"/>
+        android:text="@string/button_email" />
 
     <Button
+        style="?android:attr/buttonBarButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_back"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"/>
-</RelativeLayout>
+        android:text="@string/button_back"/>
+</LinearLayout>

@@ -10,10 +10,8 @@ We will again be doing pair programming for this lab.  Details on pair programmi
 
 For this lab you need to be familiar with how to build an Intent and how to construct and call new Activities:
 
-* http://developer.android.com/training/basics/firstapp/starting-activity.html#BuildIntent
-* http://developer.android.com/training/basics/firstapp/starting-activity.html#CreateActivity
-* http://developer.android.com/guide/components/intents-common.html
-  * This link contains a list of common intents
+* [Intents and Intent Filters](https://developer.android.com/guide/components/intents-filters)
+* [Common Intents](http://developer.android.com/guide/components/intents-common.html)
   * This isn't necessary for pre-lab reading, however, you may find it valuable during this course and any future Android development
 
 #### Objectives
@@ -56,7 +54,7 @@ _Implicit Intent_
 * By providing such filters, their application can make certain activities available to satisfy some request from other applications. This creates even more modularity in creating application services
 * If multiple applications on the device satisfy some request (e.g., to take a photo), a list of possible choices is presented to the user; users can then choose, or not, to have their choice set as default behavior
 
-Investigate the constructors available for building ```Intent``` objects at http://developer.android.com/reference/android/content/Intent.html#lfields.
+Investigate the constructors available for building ```Intent``` objects [here](http://developer.android.com/reference/android/content/Intent.html#lfields).
 * Take a look at some of the public methods available to Intents
   * Note in particular the various ```putExtra()``` methods
   * The option to attach extra information to an ```Intent``` provides a great way to send data between two Activities
@@ -73,34 +71,24 @@ Investigate the constructors available for building ```Intent``` objects at http
 1. Open Android Studio
 2. Import the Lab 3 Skeleton project
 
+Note the following information about the starting project code:
+  * `MainActivity` represents the start activity.
+  * It has already been setup to make an explicit intent call to the 
+  * `ExternalActivityCalls` class.
+  * This is similar to what you have seen in Lab 2 when we executed an explicit ```Intent``` to start ```ActivityTwo``` from the ```Context``` of ```ActivityOne```
+
 **Task 1**
 
-Once the project has been imported open the ```MainActivity``` layout file.  You will notice that the “Start” ```Button``` has not been assigned an ID.
-
-1. Using either the Attributes panel in the Design view or by editing the XML in the Code view assign an ID to the button
-2. Programmatically capture a reference to this Start ```Button``` layout component from ```MainActivity``` by assigning it a [setOnClickListener()](http://developer.android.com/reference/android/widget/Button.html) event inside the ```Activity```’s ```onCreate()``` method
-   * Take a look at the linked documentation or back to ```ActivityOne``` in Lab 2 if you forget this procedure
+1. Once the project has been imported open the layout file for the the ```ExternalActivityCalls``` class to view the associated elements being used.
+   * There are three buttons: one representing ```Camera``` access, one representing Email access, and one representing a Back ```Button```.
+2. Using either the Attributes panel in the Design view or by editing the XML in the Code view assign IDs to each button.
 
 **Task 2**
-
-What's the second ```Activity``` class in the project?
-* Take note of the Kotlin resource file name.
-
-**Task 3**
-
-With the "Start" button action listener in place we need to give it some Intent functionality.
-
-1. Construct an [Intent](http://developer.android.com/guide/components/intents-filters.html#ExampleExplicit) inside the ```setOnClickListener()``` and use it to start the second ```Activity```
-2. View the layout associated with this second ```Activity```
-   * There are three buttons: one representing ```Camera``` access, one representing Email access, and one representing a Back ```Button```
-  * Give each ```Button``` an ID.
-
-**Task 4**
 
 With the buttons assigned ID values, the next step is to capture references to these buttons.
 
 1. For each button define an
-empty ```setOnClickListener()``` which will be used later on
+empty ```setOnClickListener()``` which will be used later on.
   * The Camera ```Button``` is going to send out an implicit ```Intent``` requesting a ```Camera``` application ```Activity``` that can handle taking photos
   * The Email ```Button``` is going to send out an implicit ```Intent``` requesting an Email ```Activity``` with which to send email
   * The Return ```Button``` will execute an explicit ```Intent``` requesting ```Main Activity```
@@ -109,13 +97,16 @@ empty ```setOnClickListener()``` which will be used later on
 Next we will define our application's ```Intent``` to have some function performed on its behalf using implicit intents.
 
 NOTES:
-* In Lab 2 we executed an explicit ```Intent``` to start ```ActivityTwo``` from
-the ```Context``` of ```ActivityOne```
 * When implicitly defining an ```Intent``` we need to pass along an ```Action Constant```
   *  This tells the device how to locate applications that contain an ```Activity``` which is capable of responding to your application's request
   * If a default application ```Activity``` has been set to satisfy that function on the device, it will generally be the ```Activity``` started
 
-**Task 5**
+**Task 3**
+
+1. Programmatically capture a reference to the back ```Button``` layout component from ```ExtrernalActivityCalls``` by assigning it a [setOnClickListener()](http://developer.android.com/reference/android/widget/Button.html) event inside the ```onCreate()``` method.
+   * Take a look at the linked documentation or how the intent was defined in ```MainActivity``` for reference.
+
+**Task 4**
 
 Let's demonstrate this by announcing our application’s ```Intent``` to send an email.
 * We don't need to concern ourselves with the underlying method an email application implements to succeed at transferring our message to the recipient
@@ -153,7 +144,14 @@ With the required hardware feature to be used declared for the app you can wire 
   * Use the name ```"mobiledev.unb.ca.lab3intents.provider"```  for the authority name in place of ```"com.example.android.fileprovider"``` in both the code and the AndroidManifest.xml file.
   * You will notice that ```startActivityForResult()``` has been deprecated.  We will look to fix this in the next task.
 
-2. Create a new resource file at _res/xml/file_paths.xml_ and add the following content:
+2. Right click the app/src/main/res directory and select New → Values Resource File
+	* Enter **file_paths** in the File Name field
+  * Select **XML** from the Resource Type drop down 
+  * Enter **paths** in the Root Element field
+  * Enter **xml** for the directory name
+	* Click **OK** to save
+
+3. Update the file to include the following content:
   ```XML
   <?xml version="1.0" encoding="utf-8"?>
   <paths>

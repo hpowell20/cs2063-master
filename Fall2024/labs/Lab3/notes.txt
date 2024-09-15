@@ -11,3 +11,10 @@ https://developer.android.com/training/camerax/take-photo for newer styles
 https://developer.android.com/codelabs/camerax-getting-started#0 
 
 https://stackoverflow.com/questions/36624756/how-to-save-bitmap-to-android-gallery 
+
+
+
+Links for Compose and intents
+
+http://developer.android.com/training/basics/firstapp/starting-activity.html#BuildIntent
+* http://developer.android.com/training/basics/firstapp/starting-activity.html#CreateActivity

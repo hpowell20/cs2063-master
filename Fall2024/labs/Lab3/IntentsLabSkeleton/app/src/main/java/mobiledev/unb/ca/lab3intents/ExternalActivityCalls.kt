@@ -22,7 +22,7 @@ import java.io.OutputStream
 class ExternalActivityCalls : AppCompatActivity() {
     // Attributes for storing the file photo path
     private lateinit var currentPhotoPath: String
-   
+    
     // Activity listeners
     private var cameraActivityResultLauncher: ActivityResultLauncher<Intent>? = null
 
@@ -36,7 +36,7 @@ class ExternalActivityCalls : AppCompatActivity() {
 
     private fun setCameraActivityResultLauncher() {
         // Handle the image capture result
-        TODO("Not yet implemented")
+        // TODO - Implement later
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -69,11 +69,9 @@ class ExternalActivityCalls : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.Q)
     private fun mediaStoreAddPicToGallery() {
-        // val name = imageFileName
         val bitmap = BitmapFactory.decodeFile(currentPhotoPath)
 
         val contentValues = getContentValues()
-        // contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, "$name.jpg")
         contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
         contentValues.put(MediaStore.Images.Media.IS_PENDING, true)
 
@@ -89,8 +87,8 @@ class ExternalActivityCalls : AppCompatActivity() {
     private fun getContentValues() : ContentValues {
         val values = ContentValues()
         values.put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
-        values.put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis() / 1000);
-        values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
+        values.put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis() / 1000)
+        values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis())
         return values
     }
 

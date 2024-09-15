@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace "mobiledev.unb.ca.lab3intents"
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "mobiledev.unb.ca.lab3intents"
