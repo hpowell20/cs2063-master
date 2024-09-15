@@ -1,0 +1,13 @@
+The instructions need to be updated to reflect the new style of startActivityForResult
+Include steps for working with Android 10+
+
+Add manifest file permissons?
+
+https://www.tutorialspoint.com/android/android_sending_email.htm
+
+Existing documentation for taking photos is deprecated - see
+https://developer.android.com/training/camerax/take-photo for newer styles
+
+https://developer.android.com/codelabs/camerax-getting-started#0 
+
+https://stackoverflow.com/questions/36624756/how-to-save-bitmap-to-android-gallery 
