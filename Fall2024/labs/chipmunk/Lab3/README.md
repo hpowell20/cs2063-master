@@ -103,9 +103,11 @@ NOTES:
 
 **Task 3**
 
-1. Programmatically capture a reference to the back ```Button``` layout component from ```ExtrernalActivityCalls``` by assigning it a [setOnClickListener()](http://developer.android.com/reference/android/widget/Button.html) event inside the ```onCreate()``` method.
-   * Take a look at the linked documentation or how the intent was defined in ```MainActivity``` for reference.
+With the "Return" button action listener in place we need to give it some Intent functionality.
 
+1. Construct an [Intent](http://developer.android.com/guide/components/intents-filters.html#ExampleExplicit) inside the ```setOnClickListener()``` and use it to start the ```MainActivity```
+  * Take a look at the linked documentation or how the intent was defined in ```MainActivity``` for reference.
+  
 **Task 4**
 
 Let's demonstrate this by announcing our application’s ```Intent``` to send an email.
@@ -118,21 +120,21 @@ We can provide information to the ```Activity``` we intend to start. This inform
 
 1. Create a new function called ```dispatchSendEmailIntent``` which will perform the email action.
 2. Build an email-only ```Intent``` that __does not__ include attachments and is to be used by email applications only inside this function.
-  * For testing give your ```Intent``` three extras
-    * One for the recipient email addresses (just have one recipient, and make it you)
-    * One for the subject line “CS2063 Lab 3”
-    * One for the body of the email “This is a test email!”
-  * Call ```startActivity()``` with your new ```Intent``` as a parameter.
+    * For testing give your ```Intent``` three extras
+      * One for the recipient email addresses (just have one recipient, and make it you)
+      * One for the subject line “CS2063 Lab 3”
+      * One for the body of the email “This is a test email!”
+    * Call ```startActivity()``` with your new ```Intent``` as a parameter.
 3. Update the on click action for the email ```Button``` to call ```dispatchSendEmailIntent()```.
 
 **Task 5**
 
 Certain requested components may require access to device hardware; for example: the camera. If your application requests use of a component that in turn will make use of such hardware you must announce that in your application’s manifest file.
 
-1. Edit [AndroidManifest.xml](http://developer.android.com/guide/topics/manifest/manifest-intro.html) to include the following:
-  * A [<uses-feature>](https://developer.android.com/training/camera-deprecated/photobasics#TaskManifest) tag for the camera
+For this you will be updating the [AndroidManifest.xml](http://developer.android.com/guide/topics/manifest/manifest-intro.html) file to include the following:
+  * A [uses-feature](https://developer.android.com/training/camera-deprecated/photobasics#TaskManifest) tag for the camera
     * Specific details for using the camera can be found [here](https://developer.android.com/training/camera-deprecated/photobasics#TaskManifest)
-  * A [<uses-permission>](https://developer.android.com/training/data-storage/files.html#GetWritePermission) tag to enable writing to external storage (on-device storage that will be used to store photos that have been taken)
+  * A [uses-permission](https://developer.android.com/training/data-storage/files.html#GetWritePermission) tag to enable writing to external storage (on-device storage that will be used to store photos that have been taken)
     *  Specific details can be found [here](https://developer.android.com/training/camera-deprecated/photobasics#TaskPath)
 
 **Task 6**
@@ -140,26 +142,11 @@ Certain requested components may require access to device hardware; for example:
 With the required hardware feature to be used declared for the app you can wire your camera ```Button```’s ```setOnClickListener()``` event to implicitly alert the operating system of your ```Activity```'s ```Intent``` to access to the camera functionality. Doing so will provide the user a list of applications to satisfy the request to take a photo.
 
 1. Using the example code from the [Save a full-size photo](https://developer.android.com/training/camera-deprecated/photobasics#TaskPath) documentation as a base implement the Intent used to take a picture and save the full-size photo.  Please note the following.
-  * The variable for ```currentPhotoPath``` is already defined.
-  * Use the name ```"mobiledev.unb.ca.lab3intents.provider"```  for the authority name in place of ```"com.example.android.fileprovider"``` in both the code and the AndroidManifest.xml file.
-  * You will notice that ```startActivityForResult()``` has been deprecated.  We will look to fix this in the next task.
-  
-2. Right click the app/src/main/res directory and select New → Values Resource File
-  * Enter **file_paths** in the File Name field
-  * Select **XML** from the Resource Type drop down
-  * Enter **paths** in the Root Element field
-  * Enter **xml** for the directory name
-  * Click **OK** to save
+    * The variable for ```currentPhotoPath``` is already defined.
+    * The file **file_paths.xml** has already been included in the project at _**app/src/main/res/xml**_.  You do not need to create it.
+    * You will notice that ```startActivityForResult()``` has been deprecated.  We will look to fix this in the next task.
 
-3. Update the file to include the following content:
-  ```XML
-  <?xml version="1.0" encoding="utf-8"?>
-  <paths>
-    <external-path name="my_images"
-      path="Android/data/mobiledev.unb.ca.lab3intents/files/Pictures" />
-  </paths>
-  ```
-  * NOTE: The documentation specifies external-files-path, however, this throws an error.  The XML file contents as shown above have been known to work in an emulator and device.
+3. Replace ```"com.example.android.fileprovider"``` with ```"mobiledev.unb.ca.lab3intents.provider"```  for the authority name in the code. 
 
 **Task 7**
 
@@ -197,7 +184,8 @@ cameraActivityResultLauncher = registerForActivityResult(
 ```
   * This will take the result of the activity intent action (in this case the action of taking a photo) and save the results to the gallery. ```startActivityForResult()```
   * Additional details can be found [here](http://developer.android.com/training/basics/intents/result.html#ReceiveResult).
-
+  * You may also find the photo gets saved to the file system outside of the gallery; this is fine for the purposes of the lab.
+  
 
 **Task 9**
 
@@ -212,19 +200,24 @@ With the Intents implemented run the application and perform the following steps
 3. From within the email app attach the photo you just took as an attachment
 4. Open the email and take a screenshot of it
 
-**Task 111**
+**Task 11**
 
 Restart your application and perform the following steps:
 1. From the ```MainActivity``` click the Start ```Button```
 2. Click the Back button and then Start again
 3. Do this a few times
 4. Now begin using the device back button to traverse the task backstack.
+5. Write a short description of your observations and relate this to what you learned about the task backstack in the previous lab
+
+**Task 12**
+
+1. Modify the implementation of the ```ExternalActivityCalls```'s back button to behave similarly to the device's soft-key back button
+2. Retry the steps in task 11
 
 **Writeup Task**
 
-1. Write a short description of your observations and relate this to what you learned about the task backstack in the previous lab
-2. Describe how you could modify the implementation of your ```Activity```'s back button to behave similarly to the device's soft-key back button
-3. Add the screenshot of the email sent by your app
+1. Include details of the observations from Task 11
+2. Add the screenshot of the email sent by your app
 
 **Deliverables**
 
