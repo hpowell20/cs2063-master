@@ -18,3 +18,6 @@ Links for Compose and intents
 
 http://developer.android.com/training/basics/firstapp/starting-activity.html#BuildIntent
 * http://developer.android.com/training/basics/firstapp/starting-activity.html#CreateActivity
+
+What about Android 14?  May need specific permissions.
+Intent flag filters instead of finish()?

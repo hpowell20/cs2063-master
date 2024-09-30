@@ -100,15 +100,8 @@ NOTES:
 * When implicitly defining an ```Intent``` we need to pass along an ```Action Constant```
   *  This tells the device how to locate applications that contain an ```Activity``` which is capable of responding to your application's request
   * If a default application ```Activity``` has been set to satisfy that function on the device, it will generally be the ```Activity``` started
-
-**Task 3**
-
-With the "Return" button action listener in place we need to give it some Intent functionality.
-
-1. Construct an [Intent](http://developer.android.com/guide/components/intents-filters.html#ExampleExplicit) inside the ```setOnClickListener()``` and use it to start the ```MainActivity```
-  * Take a look at the linked documentation or how the intent was defined in ```MainActivity``` for reference.
   
-**Task 4**
+**Task 3**
 
 Let's demonstrate this by announcing our application’s ```Intent``` to send an email.
 * We don't need to concern ourselves with the underlying method an email application implements to succeed at transferring our message to the recipient
@@ -127,7 +120,7 @@ We can provide information to the ```Activity``` we intend to start. This inform
     * Call ```startActivity()``` with your new ```Intent``` as a parameter.
 3. Update the on click action for the email ```Button``` to call ```dispatchSendEmailIntent()```.
 
-**Task 5**
+**Task 4**
 
 Certain requested components may require access to device hardware; for example: the camera. If your application requests use of a component that in turn will make use of such hardware you must announce that in your application’s manifest file.
 
@@ -137,7 +130,7 @@ For this you will be updating the [AndroidManifest.xml](http://developer.android
   * A [uses-permission](https://developer.android.com/training/data-storage/files.html#GetWritePermission) tag to enable writing to external storage (on-device storage that will be used to store photos that have been taken)
     *  Specific details can be found [here](https://developer.android.com/training/camera-deprecated/photobasics#TaskPath)
 
-**Task 6**
+**Task 5**
 
 With the required hardware feature to be used declared for the app you can wire your camera ```Button```’s ```setOnClickListener()``` event to implicitly alert the operating system of your ```Activity```'s ```Intent``` to access to the camera functionality. Doing so will provide the user a list of applications to satisfy the request to take a photo.
 
@@ -148,7 +141,7 @@ With the required hardware feature to be used declared for the app you can wire 
 
 3. Replace ```"com.example.android.fileprovider"``` with ```"mobiledev.unb.ca.lab3intents.provider"```  for the authority name in the code. 
 
-**Task 7**
+**Task 6**
 
 Following up on the changes made for Task 7 we will now look to replace the deprecated ```startActivityForResult()``` functionality.  This has been replaced by the [Activity Result APIs](https://developer.android.com/training/basics/intents/result).  
 
@@ -163,7 +156,7 @@ with
 cameraActivityResultLauncher!!.launch(takePictureIntent)
 ```
 
-**Task 8**
+**Task 7**
 
 At this point we have saved the photo and we know where it has been saved (HINT: String defined in Task 7 as part of saving the file).  The next step is to alert Android to add this file to the photos database so that other applications (i.e. - the Gallery app) know about it.
 
@@ -187,12 +180,12 @@ cameraActivityResultLauncher = registerForActivityResult(
   * You may also find the photo gets saved to the file system outside of the gallery; this is fine for the purposes of the lab.
   
 
-**Task 9**
+**Task 8**
 
 With the email and camera intents in place we now have to make our back ```Button``` work by implementing an ```Intent``` to explicitly call our ```MainActivity```.
 * This is done similarly to how we built and started an ```Intent``` to get from our ```MainActivity``` to ```ExternalActivityCalls```
 
-**Task 10**
+**Task 9**
 
 With the Intents implemented run the application and perform the following steps:
 1. Take a photo
@@ -200,7 +193,7 @@ With the Intents implemented run the application and perform the following steps
 3. From within the email app attach the photo you just took as an attachment
 4. Open the email and take a screenshot of it
 
-**Task 11**
+**Task 10**
 
 Restart your application and perform the following steps:
 1. From the ```MainActivity``` click the Start ```Button```
@@ -209,14 +202,14 @@ Restart your application and perform the following steps:
 4. Now begin using the device back button to traverse the task backstack.
 5. Write a short description of your observations and relate this to what you learned about the task backstack in the previous lab
 
-**Task 12**
+**Task 11**
 
 1. Modify the implementation of the ```ExternalActivityCalls```'s back button to behave similarly to the device's soft-key back button
-2. Retry the steps in task 11
+2. Retry the steps in task 10
 
 **Writeup Task**
 
-1. Include details of the observations from Task 11
+1. Include details of the observations from Task 10
 2. Add the screenshot of the email sent by your app
 
 **Deliverables**

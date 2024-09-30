@@ -53,12 +53,18 @@ class ExternalActivityCalls : AppCompatActivity() {
 
         val backButton = findViewById<Button>(R.id.btnBack)
         backButton.setOnClickListener {
-            /* val intent = Intent(this, MainActivity::class.java)
-            try {
-                startActivity(intent)
-            } catch (ex: ActivityNotFoundException) {
-                Log.e(TAG, "Unable to start the activity")
-            } */
+//            val intent = Intent(this, MainActivity::class.java).apply {
+//                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+//            }
+////            val intent = Intent(this, MainActivity::class.java)
+////            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or
+////                    Intent.FLAG_ACTIVITY_CLEAR_TASK)
+//            try {
+//                startActivity(intent)
+//            } catch (ex: ActivityNotFoundException) {
+//                Log.e(TAG, "Unable to start the activity")
+//            }
+            setResult(RESULT_OK)
             finish()
         }
 
