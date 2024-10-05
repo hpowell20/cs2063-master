@@ -41,35 +41,38 @@ First we'll add the functionality to have an alarm go off at regular intervals t
 
 **Task 1**
 
-Create a ```BroadcastReceiver``` to receive alarms.
+We will need a ```BroadcastReceiver``` class to receive alarms.
 
-1. Add a new Kotlin file called ```AlarmReceiver.kt``` which extends ```BroadcastReceiver```
-	* Form the Android view right click on _mobiledev.unb.ca.lab4skeleton_
-	* Select New -> Other -> Broadcast Receiver
-2. This will also add an entry into the ```AndroidManifest.xml``` file
-	* You can find this you will notice the ```receiver``` element inside of the ```application``` element of the file as shown below
+1. From the Android view right click on _mobiledev.unb.ca.lab4skeleton_
+2. Select New -> Other -> Broadcast Receiver
+	* For the class name use __AlarmReceiver__
+	* Leave the _Exported_ checkbox option selected
+	* Uncheck the _Enabled_ checkbox option 
+
+NOTE:
+* This will also add an entry into the ```AndroidManifest.xml``` file
+	* You should see the ```receiver``` element inside of the ```application``` element of the file as shown below
 		```
 			<receiver
 				android:name=".AlarmReceiver"
 				android:enabled="true"
-				android:exported="true" />
+				android:exported="false" />
 		```
-	* No action needed if this entry exists
 
 **Task 2**
 
 With the Broadcast Receiver in place let's go back and set an alarm.  The alarm should be set to repeat roughly every 60 seconds and should wake the device.
 
-1. Override ```AlarmReceiver```'s ```onReceive``` method
+1. Replace the _TODO_ statement in the ```AlarmReceiver```'s ```onReceive``` method with a ```Log``` message in here for now
 	* This method will be called when the ```BroadcastReceiver``` receives a broadcast
-	* Add a ```Log``` message in here for now
+	* NOTE: Leaving a _TODO_ in code will throw an error when you attempt to run the app
 
 3. Edit the ```AndroidManifest.xml``` file to declare the [appropriate exact alarm permission](https://developer.android.com/training/scheduling/alarms.html#exact-permission-declare)
-  * For this lab exercise ```android.permission.SCHEDULE_EXACT_ALARM``` should be sufficient
+  * For this lab exercise ```android.permission.SCHEDULE_EXACT_ALARM``` will be sufficient
 
 3. Update the ```MainActivity.onCreate``` method to set an alarm
 	* The action of the alarm should be to start ```AlarmReceiver```
-	* The following documentation shoule help here
+	* The following documentation should help here
 		* [Alarms](https://developer.android.com/training/scheduling/alarms.html#type) 
 		* [PendingIntent](http://developer.android.com/reference/android/app/PendingIntent.html)
 	* NOTE:
@@ -103,11 +106,10 @@ The first step will be to ensure that the correct permissions are in place.
 With the permissions in place let's add the app notifications.
 
 1. Open the ```AlarmReceiver``` class and complete the implementation for the ```onReceive``` method by adding a notification.
-	* Follow the _*Create a basic notification*_ section in the [guide](https://developer.android.com/develop/ui/views/notifications/build-notification#simple-notification) for this
+	* Follow the _*Create a basic notification*_ section in the [simple notification guide](https://developer.android.com/develop/ui/views/notifications/build-notification#simple-notification) for this
 	* The tap action of this notification will be to start ```MainActivity``` (i.e. clicking on the notification takes the user back to the app)
 		* Constant values for the channel ID and notification ID can be found in the ```Constants``` file
-		* Additional details to watch when building the notification channel:
-			* Update ```getSystemService(Context.NOTIFICATION_SERVICE)``` _context.getSystemService(Context.NOTIFICATION_SERVICE)_ to fix compiler errors
+		* Additional notes for building the notification channel:
 			* Set [```setAutoCancel```](http://developer.android.com/reference/android/app/Notification.Builder.html#setAutoCancel%28boolean%29) to ```true``` so that when the user clicks on the notification it is dismissed
 			* Set the importance as IMPORTANCE_HIGH
 			* The notification channel creation code must be called regardless of the Android level being used; see Notes below
@@ -115,15 +117,14 @@ With the permissions in place let's add the app notifications.
 			* Set the small icon to ```R.mipmap.ic_launcher```
 			* String values for the notifications can be found in the __strings.xml__ resource file
 			* There may be some compiler errors when adding the code to [show the notification](https://developer.android.com/develop/ui/views/notifications/build-notification#notify); to resolve them use the tips provided by Android Studio
-	* **TIP:** The methods to create the intents require a context.  For this have a look at the signature for onRecieve.
-
+	* **TIP:** The methods to create the intents require a context.  Recall that broadcast receivers do not have direct access to the context.  For this have a look at the signature for the _onRecieve_ function.
 
 **NOTES:**
 * Android 8.0 (API level 26) introduced a few updates to the way Notifications are handled were added:
-		*A channel ID is required for the notification channel.  If you are running against an older version this value will be ignored.
-		* The app's notification channel must be registered with the system by passing an instance of ```NotificationChannel``` to ```createNotificationChannel```.
-			* The notification channel must be created prior to posting any notifications
-			* Best practice is to execute this code as soon as the app starts
+	* A channel ID is required for the notification channel.  If you are running against an older version this value will be ignored.
+	* The app's notification channel must be registered with the system by passing an instance of ```NotificationChannel``` to ```createNotificationChannel```.
+	* The notification channel must be created prior to posting any notifications
+	* Best practice is to execute this code as soon as the app starts
 
 2. Run the app again
 	* When the alarm fires, you should see the notifications that you have created
@@ -159,9 +160,14 @@ Now we will modify our app to conserve power when the battery is low by disablin
    * If an ```ACTION_BATTERY_LOW``` intent is received cancel the alarm and show a [Toast](http://developer.android.com/guide/topics/ui/notifiers/toasts.html) message
 	 * If an ```ACTION_BATTERY_OKAY``` intent is received set the alarm just like you did previously and show a ```Toast``` indicating which intent was received
 
-3. We dynamically registered ```batteryInfoReceiver``` and so we also need to unregister it to avoid memory leaks
-   * Create an ```@Override``` ```MainActivity.onDestroy()``` method
-	 * Unregister ```batteryInfoReceiver``` here
+4. We dynamically registered ```batteryInfoReceiver``` and so we also need to unregister it to avoid memory leaks.
+
+	* Create a method in ```MainActivity``` called ```onDestroy()``` by including the following code directly after the ```onCreate()``` function.
+		```kotlin
+		override fun onDestroy() {
+				super.onDestroy()
+			}
+	* Update the function to unregister ```batteryInfoReceiver``` here
 
 #### Note About Testing
 
