@@ -122,9 +122,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun startAlarm() {
         alarmManager?.setInexactRepeating(
-            AlarmManager.RTC_WAKEUP,
-            SystemClock.elapsedRealtime() + INTERVAL_SIXTY_SECONDS,
-            INTERVAL_SIXTY_SECONDS.toLong(),
+            AlarmManager.ELAPSED_REALTIME_WAKEUP,
+            INTERVAL_SIXTY_SECONDS,
+            INTERVAL_SIXTY_SECONDS,
             alarmReceiverIntent
         )
         Log.i(TAG, "Alarm Started")
@@ -299,6 +299,6 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "MainActivity"
         private const val TIME_STAMP_FORMAT = "yyyyMMdd_HHmmss"
-        private const val INTERVAL_SIXTY_SECONDS = 60 * 1000
+        private const val INTERVAL_SIXTY_SECONDS = 60L * 1000
     }
 }
