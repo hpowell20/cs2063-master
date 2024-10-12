@@ -107,8 +107,7 @@ The first step will be to ensure that the correct permissions are in place.
 	NOTE:
 	* This will prompt the user to allow notifications for Android vesesion 13+ ONLY
 
-2. Open the ```MainActivity``` class and uncomment the call to the function call _checkNotificationPermissions()_
-	* Look for a TODO comment inside the ```onCreate``` method
+2. Open the ```MainActivity``` class and uncomment the line to call the  _checkNotificationPermissions()_ function inside ```onCreate```
 
 **Task 4**
 
