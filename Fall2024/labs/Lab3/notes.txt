@@ -21,3 +21,5 @@ http://developer.android.com/training/basics/firstapp/starting-activity.html#Bui
 
 What about Android 14?  May need specific permissions.
 Intent flag filters instead of finish()?
+
+Do we still need to include the permission in the manifest file?
