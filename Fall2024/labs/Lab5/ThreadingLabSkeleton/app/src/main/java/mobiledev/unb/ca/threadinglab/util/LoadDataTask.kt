@@ -49,7 +49,7 @@ class LoadDataTask(private val activity: AppCompatActivity) {
 
     private fun updateDisplay(courseList: ArrayList<Course>) {
         // TODO 3
-        //  Setup the RecyclerView using the setupRecyclerView method
+        //  Pass in the course list to the setupRecyclerView method
 
         // TODO 4
         //  Create a Toast indicating that the file has been loaded

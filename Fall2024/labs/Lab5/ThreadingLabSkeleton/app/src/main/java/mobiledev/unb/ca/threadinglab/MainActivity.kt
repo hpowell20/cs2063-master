@@ -12,7 +12,8 @@ class MainActivity : AppCompatActivity() {
         //  Get a reference to the RecyclerView
 
         // TODO 2
-        //  Create an instance of LoadDataTask using this activity in the constructor
-        //  and use the setters to pass in the objects needed during execution
+        //  Create an instance of LoadDataTask using this activity in the
+        //  constructor and use the setters to pass in the
+        //  recycler view object needed during execution
     }
 }

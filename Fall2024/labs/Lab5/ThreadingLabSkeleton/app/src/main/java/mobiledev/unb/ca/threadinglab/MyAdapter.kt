@@ -40,13 +40,15 @@ class MyAdapter(private val parentActivity: Activity, private val mDataset: Arra
         // TODO 2
         //  Set the TextView in the ViewHolder (holder) to be the title for this Course
 
-        // TODO 3
-        //  Set the onClickListener for the TextView in the ViewHolder (holder) such
-        //  that when it is clicked, it creates an explicit intent to launch DetailActivity
-        //  from the parentActivity object passed into the class constructor
-        //  HINT: You will need to put two extra pieces of information in this intent:
-        //      The Course title
-        //      The Course description
+        holder.mTextView.setOnClickListener {
+            // TODO 3
+            //  Set the onClickListener for the TextView in the ViewHolder (holder) such
+            //  that when it is clicked, it creates an explicit intent to launch DetailActivity
+            //  from the parentActivity object passed into the class constructor
+            //  HINT: You will need to put two extra pieces of information in this intent:
+            //      The Course title
+            //      The Course description
+        }
     }
 
     override fun getItemCount(): Int {

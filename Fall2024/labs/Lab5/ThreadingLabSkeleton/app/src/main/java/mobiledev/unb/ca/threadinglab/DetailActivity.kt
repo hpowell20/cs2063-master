@@ -17,7 +17,7 @@ class DetailActivity : AppCompatActivity() {
 
         // TODO 3
         //  Make the TextView scrollable
-        //  HINT: Look at the movementMethod attribute for descTextView
+        //  HINT: Set the movementMethod attribute for descTextView
 
         // TODO 4
         //  Set the title of the action bar to be the course title
