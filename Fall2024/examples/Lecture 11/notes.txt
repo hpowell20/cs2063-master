@@ -28,5 +28,6 @@ Alternate read implementation
 
                     return stringBuilder.toString()
                 }
-            }
-        }
+
+// Additional details
+https://www.delasign.com/blog/android-studio-kotlin-read-json/
