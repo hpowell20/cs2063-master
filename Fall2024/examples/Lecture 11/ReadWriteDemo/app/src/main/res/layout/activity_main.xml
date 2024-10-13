@@ -49,8 +49,8 @@
         android:layout_alignBottom="@+id/textView2"
         android:layout_alignStart="@+id/editFile"
         android:ems="10"
+        android:inputType="textCapSentences|textAutoCorrect|textImeMultiLine"
         android:lines="5"
-        android:hint="@string/lbl_enter_data_hint"
         android:autofillHints="" />
 
     <Button

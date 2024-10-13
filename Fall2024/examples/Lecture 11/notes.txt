@@ -1,0 +1,32 @@
+ReadWriteDemo:
+
+Alternate write implementation
+try {
+            appContext.openFileOutput(fileName, Context.MODE_PRIVATE).use {
+                it.write(fileData.toByteArray())
+            }
+        } catch (e: Exception) {
+            when (e) {
+                is FileNotFoundException -> Log.e(TAG, "File not found: " + e.message)
+                is IOException -> Log.e(TAG, "IO Exception: " + e.message)
+                else -> e.printStackTrace()
+            }
+        }
+
+Alternate read implementation
+
+ BufferedReader(isr).use{ br ->
+                    val stringBuilder: StringBuilder = StringBuilder()
+
+                    var text: String?
+                    while (run {
+                            text = br.readLine()
+                            text
+                        } != null) {
+                        stringBuilder.append(text)
+                    }
+
+                    return stringBuilder.toString()
+                }
+            }
+        }
