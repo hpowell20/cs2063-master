@@ -5,13 +5,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import android.os.Handler
 import android.os.Looper
+import android.widget.ProgressBar
 import android.widget.Toast
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import mobiledev.unb.ca.threadinglab.MyAdapter
+import mobiledev.unb.ca.threadinglab.R
 import mobiledev.unb.ca.threadinglab.model.Course
 import java.util.concurrent.Executors
 
 class LoadDataTask(private val activity: AppCompatActivity) {
     private val appContext: Context = activity.applicationContext
+    private var circularProgressIndicator: CircularProgressIndicator = activity.findViewById(R.id.circularProgressIndicator)
     private var recyclerView: RecyclerView? = null
 
     fun setRecyclerView(recyclerView: RecyclerView?): LoadDataTask {
@@ -23,6 +27,10 @@ class LoadDataTask(private val activity: AppCompatActivity) {
         Executors.newSingleThreadExecutor()
             .execute {
                 val mainHandler = Handler(Looper.getMainLooper())
+
+                // Show the circular progress bar
+                circularProgressIndicator.visibility = ProgressBar.VISIBLE
+
                 // TODO 1
                 //  Load the data from the JSON assets file and return the list of courses
                 val jsonUtils = JsonUtils(appContext)
@@ -55,6 +63,9 @@ class LoadDataTask(private val activity: AppCompatActivity) {
         // TODO 3
         //  Pass in the course list to the setupRecyclerView method
         setupRecyclerView(courseList)
+
+        // Hide the circular progress bar
+        circularProgressIndicator.visibility = ProgressBar.INVISIBLE
 
         // TODO 4
         //  Create a Toast indicating that the file has been loaded

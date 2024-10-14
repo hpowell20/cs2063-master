@@ -49,15 +49,15 @@ The `RecyclerView` provides greater flexibility and will be the focus today
 
     * `MainActivity` presents the scrolling list of courses using a `RecyclerView`
 
-  * `MyAdapter` corresponds to the RecyclerView class being used to populate the view with course information.
-    * This class also contains an inner class called `MyAdapter` represents the custom adaptor class used by the RecyclerView which extends `RecyclerView.Adapter`
-      * The `RecyclerView.Adapter` class provides a layer of abstraction between the `RecyclerView`'s `LayoutManager` and the underlying data that is being displayed which in this case a list of `Course` objects
-      * `MyAdapter` itself contains an inner class `ViewHolder` which represents an individual item to display in the scrolling list
-        * `onCreateViewHolder` creates `ViewHolder` objects by inflating the corresponding XML layout resource file; it's already implemented for you
-        * `onBindViewHolder` will be called when a particular item in the dataset needs to be displayed in the scrolling list, i.e., the user has scrolled and a new item comes into view
-        * This method sets up the `ViewHolder` to display the corresponding item in the dataset.
-          * It is incomplete; you will finish it below.
-    * When the name of a course is clicked the `DetailActivity` will be launched via an explicit `Intent`
+    * `MyAdapter` corresponds to the RecyclerView class being used to populate the view with course information.
+      * This class also contains an inner class called `MyAdapter` represents the custom adaptor class used by the RecyclerView which extends `RecyclerView.Adapter`
+        * The `RecyclerView.Adapter` class provides a layer of abstraction between the `RecyclerView`'s `LayoutManager` and the underlying data that is being displayed which in this case a list of `Course` objects
+        * `MyAdapter` itself contains an inner class `ViewHolder` which represents an individual item to display in the scrolling list
+          * `onCreateViewHolder` creates `ViewHolder` objects by inflating the corresponding XML layout resource file; it's already implemented for you
+          * `onBindViewHolder` will be called when a particular item in the dataset needs to be displayed in the scrolling list, i.e., the user has scrolled and a new item comes into view
+          * This method sets up the `ViewHolder` to display the corresponding item in the dataset.
+            * It is incomplete; you will finish it below.
+      * When the name of a course is clicked the `DetailActivity` will be launched via an explicit `Intent`
 
 
 2. Take note of the layout files  
