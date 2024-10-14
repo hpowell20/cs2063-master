@@ -48,6 +48,7 @@ The `RecyclerView` provides greater flexibility and will be the focus today
       * It doesn't do much yet as you will be completing it during the lab
 
     * `MainActivity` presents the scrolling list of courses using a `RecyclerView`
+      * NOTE: For this lab we will be using an indefinite circular progress bar meaning it does not need have its progress updated.  We will look at using a different style progress bar in a later lab.
 
     * `MyAdapter` corresponds to the RecyclerView class being used to populate the view with course information.
       * This class also contains an inner class called `MyAdapter` represents the custom adaptor class used by the RecyclerView which extends `RecyclerView.Adapter`
@@ -95,5 +96,5 @@ Create a document with the following items:
 * IN LAB: 
   * Show the working app running on an emulator and the document with the screenshots to the instructor or TA
 * AT HOME: 
-  * Submit `MainActivity.kt`, `DetailActivity.kt`, `JsonUtils.kt`, `LoadDataTask.kt`, `myAdapter.kt`, and your answers to the writeup task to the Lab5 drop box folder on D2L 
+  * Submit `MainActivity.kt`, `DetailActivity.kt`, `JsonUtils.kt`, `LoadDataTask.kt`, `MyAdapter.kt`, and your answers to the writeup task to the Lab5 drop box folder on D2L 
 * Keep a copy of your project work and answers for future reference

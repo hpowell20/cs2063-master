@@ -15,11 +15,16 @@ import java.util.concurrent.Executors
 
 class LoadDataTask(private val activity: AppCompatActivity) {
     private val appContext: Context = activity.applicationContext
-    private var circularProgressIndicator: CircularProgressIndicator = activity.findViewById(R.id.circularProgressIndicator)
-    private var recyclerView: RecyclerView? = null
+    private lateinit var circularProgressIndicator: CircularProgressIndicator
+    private lateinit var recyclerView: RecyclerView
 
-    fun setRecyclerView(recyclerView: RecyclerView?): LoadDataTask {
+    fun setRecyclerView(recyclerView: RecyclerView): LoadDataTask {
         this.recyclerView = recyclerView
+        return this
+    }
+
+    fun setCircularProgressIndicator(circularProgressIndicator: CircularProgressIndicator): LoadDataTask {
+        this.circularProgressIndicator = circularProgressIndicator
         return this
     }
 
@@ -77,7 +82,7 @@ class LoadDataTask(private val activity: AppCompatActivity) {
     }
 
     private fun setupRecyclerView(courseList: ArrayList<Course>) {
-        recyclerView!!.adapter = MyAdapter(activity, courseList)
+        recyclerView.adapter = MyAdapter(activity, courseList)
     }
 
     companion object {

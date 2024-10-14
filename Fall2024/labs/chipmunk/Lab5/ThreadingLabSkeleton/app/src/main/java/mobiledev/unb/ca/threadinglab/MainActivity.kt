@@ -12,7 +12,11 @@ class MainActivity : AppCompatActivity() {
         //  Get a reference to the RecyclerView
 
         // TODO 2
-        //  Create an instance of LoadDataTask using this activity in the constructor
-        //  and use the setters to pass in the objects needed during execution
+        //   Get a reference to the circular progress bar
+
+        // TODO 3
+        //  Create an instance of LoadDataTask using this activity in the
+        //  constructor and use the setters to pass in the
+        //  recycler view and progress bar objects needed during execution
     }
 }

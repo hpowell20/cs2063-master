@@ -1,8 +1,8 @@
 TOTAL: 18 marks
 
 Completion of MainActivity TODOs (2 marks)
-  - Set the recycler view object (1 mark)
-  - Invoke LoadDataTask (1 mark)
+  - Invoke LoadDataTask with the recycler view and circular 
+  progress indicator objects(2 marks)
 
 Completion of LoadDataTask TODOs (4 marks):
     - Create an instance of JsonUtils and get the data from it (1 mark)
@@ -11,8 +11,8 @@ Completion of LoadDataTask TODOs (4 marks):
     - Create a Toast indicating that the download is complete (1 mark)
 
 Completion of JsonUtils TODOs (4 marks)
-  - Reading in the contents of the courses file (2 marks)
-  - Updating the array with Course objects (2 mark)
+  - Read the contents of the courses file (2 marks)
+  - Updating the array with Course objects (2 marks)
 
 Completion of DetailsActivity TODOs (4 marks)
   - Get the Intent and it's extras (1 mark)

@@ -6,8 +6,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="mobiledev.unb.ca.threadinglab.MainActivity">
 
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/circularProgressIndicator"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:indeterminate="true"
+        app:indicatorColor="#000000"
+        app:indicatorSize="90dp"
+        app:trackColor="@color/colorPrimary"
+        app:trackThickness="5dp" />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>

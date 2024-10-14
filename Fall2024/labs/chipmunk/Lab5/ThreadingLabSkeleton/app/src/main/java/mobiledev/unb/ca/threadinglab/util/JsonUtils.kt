@@ -37,10 +37,11 @@ class JsonUtils(context: Context) {
         //    (https://developer.android.com/reference/android/content/Context#getAssets())
         //  2. Open the CS_JSON_FILE from the assets folder
         //     (https://developer.android.com/reference/android/content/res/AssetManager)
-        //  3. Process the file using an InputStream
+        //  3. Read the file contents into a string
         //  HINT:
-        //   See step 4 in some sample code on how to read a file from the assets folder here -
-        //   https://www.tutorialspoint.com/how-to-read-files-from-assets-on-android-using-kotlin
+        //   A BufferedReader (https://www.geeksforgeeks.org/read-from-files-using-bufferedreader-in-kotlin/)
+        //   or InputStream (https://www.baeldung.com/kotlin/inputstream-to-string) 
+        //   works well in this case
         TODO("Not yet implemented")
     }
 

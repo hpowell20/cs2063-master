@@ -5,16 +5,24 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import android.os.Handler
 import android.os.Looper
+import android.widget.ProgressBar
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import mobiledev.unb.ca.threadinglab.MyAdapter
 import mobiledev.unb.ca.threadinglab.model.Course
 import java.util.concurrent.Executors
 
 class LoadDataTask(private val activity: AppCompatActivity) {
     private val appContext: Context = activity.applicationContext
-    private var recyclerView: RecyclerView? = null
+    private lateinit var circularProgressIndicator: CircularProgressIndicator
+    private lateinit var recyclerView: RecyclerView
 
-    fun setRecyclerView(recyclerView: RecyclerView?): LoadDataTask {
+    fun setRecyclerView(recyclerView: RecyclerView): LoadDataTask {
         this.recyclerView = recyclerView
+        return this
+    }
+
+    fun setCircularProgressIndicator(circularProgressIndicator: CircularProgressIndicator): LoadDataTask {
+        this.circularProgressIndicator = circularProgressIndicator
         return this
     }
 
@@ -22,6 +30,10 @@ class LoadDataTask(private val activity: AppCompatActivity) {
         Executors.newSingleThreadExecutor()
             .execute {
                 val mainHandler = Handler(Looper.getMainLooper())
+
+                // Show the circular progress indicator
+                circularProgressIndicator.visibility = ProgressBar.VISIBLE
+
                 // TODO 1
                 //  Load the data from the JSON assets file and return the list of courses
 
@@ -32,9 +44,9 @@ class LoadDataTask(private val activity: AppCompatActivity) {
 
                 // TODO 2
                 //  Using the updateDisplay method update the UI with the results
-                // HINT:
-                //  This call must be made sending a post message through the
-                //  mainHandler to the UI thread
+                //  HINT:
+                //   This call must be made sending a post message through the
+                //   mainHandler to the UI thread
             }
     }
 
@@ -49,7 +61,10 @@ class LoadDataTask(private val activity: AppCompatActivity) {
 
     private fun updateDisplay(courseList: ArrayList<Course>) {
         // TODO 3
-        //  Setup the RecyclerView using the setupRecyclerView method
+        //  Pass in the course list to the setupRecyclerView method
+
+        // Hide the circular progress indicator
+        circularProgressIndicator.visibility = ProgressBar.INVISIBLE
 
         // TODO 4
         //  Create a Toast indicating that the file has been loaded
@@ -58,7 +73,7 @@ class LoadDataTask(private val activity: AppCompatActivity) {
     }
 
     private fun setupRecyclerView(courseList: ArrayList<Course>) {
-        recyclerView!!.adapter = MyAdapter(activity, courseList)
+        recyclerView.adapter = MyAdapter(activity, courseList)
     }
 
     companion object {
