@@ -1,4 +1,4 @@
-package course.examples.maplocation
+package mobiledev.unb.ca.mapgeointentdemo
 
 import android.app.Activity
 import android.os.Bundle
@@ -43,6 +43,6 @@ class MapLocation : Activity() {
     }
 
     companion object {
-        private const val TAG = "MapLocation"
+        private const val TAG = "MapGeoIntentDemo"
     }
 }
