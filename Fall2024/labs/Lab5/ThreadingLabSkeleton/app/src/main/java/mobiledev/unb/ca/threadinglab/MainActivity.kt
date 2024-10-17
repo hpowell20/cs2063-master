@@ -12,7 +12,9 @@ class MainActivity : AppCompatActivity() {
         //  Get a reference to the RecyclerView
 
         // TODO 2
-        //   Get a reference to the circular progress bar
+        //  Get a reference to the progress indicator
+        //  HINT: The class type to be used can be found 
+        //        in the activity_main.xml layout file
 
         // TODO 3
         //  Create an instance of LoadDataTask using this activity in the

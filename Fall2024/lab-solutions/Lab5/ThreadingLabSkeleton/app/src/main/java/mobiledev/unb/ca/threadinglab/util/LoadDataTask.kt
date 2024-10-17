@@ -13,10 +13,13 @@ import mobiledev.unb.ca.threadinglab.R
 import mobiledev.unb.ca.threadinglab.model.Course
 import java.util.concurrent.Executors
 
+//class LoadDataTask(private val activity: AppCompatActivity,
+//                   private val recyclerView: RecyclerView,
+//                   private val circularProgressIndicator: CircularProgressIndicator) {
 class LoadDataTask(private val activity: AppCompatActivity) {
     private val appContext: Context = activity.applicationContext
-    private lateinit var circularProgressIndicator: CircularProgressIndicator
     private lateinit var recyclerView: RecyclerView
+    private lateinit var circularProgressIndicator: CircularProgressIndicator
 
     fun setRecyclerView(recyclerView: RecyclerView): LoadDataTask {
         this.recyclerView = recyclerView
