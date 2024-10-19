@@ -18,7 +18,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionContext
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -26,7 +25,6 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import mobiledev.unb.ca.composelistlab.models.Course
-import mobiledev.unb.ca.composelistlab.models.dummyData
 import mobiledev.unb.ca.composelistlab.ui.theme.ComposeListLabSkeletonTheme
 import mobiledev.unb.ca.composelistlab.utils.JsonUtils
 
@@ -45,48 +43,11 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-
-//    fun goToDetailActivity(course: Course) {
-//        val intent = Intent(this, DetailActivity::class.java).apply {
-//            putExtra(Constants.INTENT_EXTRA_COURSE_TITLE, course.title)
-//            putExtra(Constants.INTENT_EXTRA_COURSE_DESCRIPTION, course.description)
-//        }
-//        try {
-//            startActivity(intent)
-//        } catch (e: ActivityNotFoundException) {
-//            Log.e(TAG, "Unable to start activity", e)
-//        }
-//    }
 }
-
-//@Composable
-//fun Greeting(name: String) {
-//    Text(text = "Hello $name!")
-//}
-
-// Creating a composable function to display the Top Bar
-//@Composable
-//fun AppTopBar() {
-//    val context = LocalContext.current
-//    TopAppBar(
-//        title = {
-//            Text(
-//                context.getString(R.string.app_name),
-//                color = Color.White
-//            )
-//        },
-//        backgroundColor = Color.Blue
-//    )
-//}
 
 @Composable
 fun MainContent() {
     val context = LocalContext.current
-//    Scaffold(modifier = Modifier.fillMaxSize()) {
-//        AppTopBar()
-//        MainActivityContent(context)
-//    }
-
     Scaffold(
         topBar = {
             TopAppBar(
@@ -121,17 +82,7 @@ fun RecyclerView(courseListing: List<Course>) {
     }
 }
 
-//return   ClickableText(onClick = {
-//    goNext(course)
-//
-//},
-//text = AnnotatedString(course.title),
-//modifier = Modifier.padding(Dp(15F))
-//)
-
-//@Composable
 private fun goToDetailActivity(course: Course, context: Context) {
-//    val context = LocalContext.current
     val intent = Intent(context, DetailActivity::class.java).apply {
         putExtra(Constants.INTENT_EXTRA_COURSE_TITLE, course.title)
         putExtra(Constants.INTENT_EXTRA_COURSE_DESCRIPTION, course.description)
@@ -164,15 +115,6 @@ fun CourseItem(course: Course) {
                 modifier = Modifier.padding(5.dp),
                 ) {
                     goToDetailActivity(course, context)
-//                    val intent = Intent(context, DetailActivity::class.java).apply {
-//                        putExtra(Constants.INTENT_EXTRA_COURSE_TITLE, course.title)
-//                        putExtra(Constants.INTENT_EXTRA_COURSE_DESCRIPTION, course.description)
-//                    }
-//                    try {
-//                        context.startActivity(intent)
-//                    } catch (e: ActivityNotFoundException) {
-//                        Log.e("MainActivity", "Unable to start activity", e)
-//                    }
             }
         }
 
@@ -198,26 +140,6 @@ fun CourseItem(course: Course) {
 //        }
     }
 }
-
-//@Composable
-//fun MyContent() {
-//    // ..
-//    Button(
-//        text = "Go Home",
-//        onClick = actionStartActivity<MyActivity>()
-//    )
-//}
-//
-//fun T actionStartActivity<T>() {
-//
-//}
-
-//@Composable
-//fun CourseItem(course: Course, modifier: Modifier = Modifier) {
-//    Row(modifier = Modifier.padding(5.dp)) {
-//        Text(text = course.title, modifier = Modifier.padding(5.dp))
-//    }
-//}
 
 @Preview(showBackground = true)
 @Composable
