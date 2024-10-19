@@ -106,7 +106,7 @@ fun CourseItem(course: Course) {
         elevation = 4.dp
     ) {
         // Start with the row; add in the card and image
-        Row(modifier = Modifier.padding(5.dp)) {
+        Row(modifier = Modifier.padding(10.dp)) {
             // Step 1 - Show the text
             // Text(text = course.title, modifier = Modifier.padding(5.dp))
             // Step 2 - Make the text area clickable
