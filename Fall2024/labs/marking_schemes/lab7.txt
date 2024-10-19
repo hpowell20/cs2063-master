@@ -1,0 +1,34 @@
+TOTAL: 29 marks
+
+onResume:
+  - Create the soundpool (2 marks)
+  - Add code for OnLoadCompletedListener and call to
+    setupGestureDetector (2 marks)
+  - Load the bubble pop sound (1 mark)
+
+setupGestureDetector():
+  - Implement onFling actions (2 marks - one for if condition and one for
+                               changing velocity)
+  - Implement onSingleTapConfirmed actions (3 marks - see expected behavior comment)
+
+onTouchEvent():
+  - Delegate the touch to the gestureDetector (1 mark)
+
+onPause():
+  - Release sound pool resources (1 mark)
+
+BubbleView:
+  - Set rotation in range (1 mark)
+  - Set dx and dy to indicate movement direction and speed (1 mark)
+  - Set scaled bitmap size (scaledBitmapSize) in range [2..4] * BITMAP_SIZE (1 mark)
+  - Create the scaled bitmap (scaledBitmap) using size set above (1 mark)
+  - Implement movement logic (2 marks)
+  - Return true if the BubbleView intersects position (x,y) (1 mark)
+  - stopMovement (3 marks - 1 for each TODO)
+  - onDraw (5 marks - 1 for each TODO)
+  - Move the BubbleView (1 mark)
+  - Return true if the BubbleView is still on the screen after
+    the move operation (1 mark)
+
+
+Is it possible to pop bubbles if they come into contact with each other?
