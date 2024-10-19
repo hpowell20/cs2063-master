@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         //        is of type CircularProgressIndicator.
         //        The class import has already been added.
         val circularProgressIndicator = findViewById<CircularProgressIndicator>(R.id.circularProgressIndicator)
+        //val progressBar = findViewById<ProgressBar>(R.id.progressBar)
 
         // TODO 3
         //  Create an instance of LoadDataTask using this activity in the constructor
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         LoadDataTask(this).
             setRecyclerView(recyclerView).
             setCircularProgressIndicator(circularProgressIndicator).
+            //setProgressBar(progressBar).
             execute()
     }
 }

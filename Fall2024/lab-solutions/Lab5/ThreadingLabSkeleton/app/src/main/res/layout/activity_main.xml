@@ -6,6 +6,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="mobiledev.unb.ca.threadinglab.MainActivity">
 
+<!--    <ProgressBar-->
+<!--        android:id="@+id/progressBar"-->
+<!--        style="?android:attr/progressBarStyleHorizontal"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="100dp"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:background="@drawable/circular_shape"-->
+<!--        android:indeterminate="false"-->
+<!--        android:progressDrawable="@drawable/circular_progress_bar"/>-->
+
     <!--Circular progress bar-->
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/circularProgressIndicator"

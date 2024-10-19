@@ -20,6 +20,7 @@ class LoadDataTask(private val activity: AppCompatActivity) {
     private val appContext: Context = activity.applicationContext
     private lateinit var recyclerView: RecyclerView
     private lateinit var circularProgressIndicator: CircularProgressIndicator
+    private lateinit var progressBar: ProgressBar
 
     fun setRecyclerView(recyclerView: RecyclerView): LoadDataTask {
         this.recyclerView = recyclerView
@@ -31,6 +32,11 @@ class LoadDataTask(private val activity: AppCompatActivity) {
         return this
     }
 
+    fun setProgressBar(progressBar: ProgressBar): LoadDataTask {
+        this.progressBar = progressBar
+        return this
+    }
+
     fun execute() {
         Executors.newSingleThreadExecutor()
             .execute {
@@ -38,6 +44,7 @@ class LoadDataTask(private val activity: AppCompatActivity) {
 
                 // Show the circular progress bar
                 circularProgressIndicator.visibility = ProgressBar.VISIBLE
+                // progressBar.visibility = ProgressBar.VISIBLE
 
                 // TODO 1
                 //  Load the data from the JSON assets file and return the list of courses
@@ -74,6 +81,7 @@ class LoadDataTask(private val activity: AppCompatActivity) {
 
         // Hide the circular progress bar
         circularProgressIndicator.visibility = ProgressBar.INVISIBLE
+        //progressBar.visibility =  ProgressBar.INVISIBLE
 
         // TODO 4
         //  Create a Toast indicating that the file has been loaded
