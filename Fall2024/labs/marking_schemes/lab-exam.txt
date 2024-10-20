@@ -1,0 +1,35 @@
+TOTAL: 28 marks
+
+Main Activity (2 marks):
+  1 - Create instance of SharedPreferences
+  1 - Invoke LoadDataTask
+
+LoadDataTask (7 marks):
+  1 - Show the progress bar
+  1 - Load the data from the JSON assets file and return the list of cities
+  1 - Update the progress bar
+  1 - Call updateDisplay from within the handler
+  1 - Reset the progress bar, and make it disappear
+  1 - Use result to set the adapter for the RecyclerView
+  1 - Create Toast message
+
+MyAdapter (7 marks):
+  1 - Get item at position in dataSet
+  1 - Set TextView with the title
+  1 - Set onClickListener to start intent
+  1 - Setting state of checkbox from Shared Preferences
+  3 - Save checkbox state in SharedPreferences
+
+Detail Activity (7 marks):
+  1 - Get intent
+  3 - Set view text (1 per textview)
+  1 - onClickListener for Wiki button
+  1 - Toast indicating no suitable web app found
+  1 - Set action bar title
+
+Testing (5 marks)
+  1 - Data Loads into App
+  1 - Detail Activity loads accurately
+  1 - Wikipedia link works
+  1 - Works without network access (except Wikipedia link)
+  1 - Checkbox storage
