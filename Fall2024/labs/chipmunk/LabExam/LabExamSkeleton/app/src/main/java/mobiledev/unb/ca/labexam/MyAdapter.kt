@@ -35,12 +35,7 @@ class MyAdapter(
         //  Get the item at index position in dataSet
 
         // TODO
-        //  Set the TextView in the ViewHolder to be the title attribute
-
-        // TODO
-        //  Set the onClickListener for the TextView in the ViewHolder such
-        //  that when it is clicked, it creates an explicit intent to launch DetailActivity
-        //  with extra pieces of information in this intent.
+        //  Set the TextView in the ViewHolder to be the eventTitle attribute
 
         // TODO
         //  Part 1 - Set the onClickListener for the TextView in the ViewHolder such
@@ -74,7 +69,7 @@ class MyAdapter(
         }
     }
 
-    private fun updateSharedPreferences(key: String, value: Boolean) {
+    private fun updateSharedPreferences(prefsKey: String, prefsValue: Boolean) {
         // TODO: SharedPreferences
         //  Get a SharedPreferences.Editor for SharedPreferences
         //  Hint: https://developer.android.com/reference/android/content/SharedPreferences.html#edit()
